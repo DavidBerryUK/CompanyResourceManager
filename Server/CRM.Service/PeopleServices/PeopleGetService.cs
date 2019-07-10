@@ -15,18 +15,18 @@ namespace CRM.Service.PeopleServices
 {
     public class PeopleGetService : IPeopleGetService
     {
-        private readonly PsmDatabaseContext _psmDatabaseContext;
+        private readonly CrmDatabaseContext _crmDatabaseContext;
 
-        public PeopleGetService(PsmDatabaseContext psmDatabaseContext)
+        public PeopleGetService(CrmDatabaseContext crmDatabaseContext)
         {
-            _psmDatabaseContext = psmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext;
         }
 
         public async Task<BaseCollectionResponse<PersonExtended>> GetAllAsync()
         {
             var response = new BaseCollectionResponse<PersonExtended>();
 
-            var data = await _psmDatabaseContext
+            var data = await _crmDatabaseContext
                 .People
                 .Include(inc => inc.NavJobRole)
                 .OrderBy(order=> order.Surname)
@@ -42,7 +42,7 @@ namespace CRM.Service.PeopleServices
         {
             var response = new BaseCollectionResponse<PersonExtended>();
 
-            var query  = _psmDatabaseContext
+            var query  = _crmDatabaseContext
                 .People
                 .Include(inc => inc.NavJobRole)
                 .AsQueryable();
@@ -72,7 +72,7 @@ namespace CRM.Service.PeopleServices
         public async Task<BaseItemResponse<PersonExtended>> GetByIdAsync(Guid personId)
         {
             var response = new BaseItemResponse<PersonExtended>();
-            var data = await _psmDatabaseContext
+            var data = await _crmDatabaseContext
                 .People
                 .Include(inc => inc.NavJobRole)
                 .FirstOrDefaultAsync(o=> o.PersonId == personId);
@@ -86,7 +86,7 @@ namespace CRM.Service.PeopleServices
         {
             var response = new BaseCollectionResponse<PersonExtended>();
 
-            var data = await _psmDatabaseContext
+            var data = await _crmDatabaseContext
                 .People
                 .Include(inc => inc.NavJobRole)
                 .Where(o => o.JobRoleId == jobRoleId)

@@ -11,8 +11,8 @@ namespace CRM.Api.StartupServices
             //
             // Add Dependency Injection for the database context
             //
-            const string connection = @"Data Source=.;Initial Catalog=PSM;Integrated Security=True;";
-            services.AddDbContext<PsmDatabaseContext>(options => options.UseSqlServer(connection));
+            const string connection = @"Data Source=.;Initial Catalog=CRM;Integrated Security=True;";
+            services.AddDbContext<CrmDatabaseContext>(options => options.UseSqlServer(connection));
         }
     }
 }

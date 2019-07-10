@@ -15,18 +15,18 @@ namespace CRM.Service.AssetServices
 {
     public class AssetGetService : IAssetGetService
     {
-        private readonly PsmDatabaseContext _psmDatabaseContext;
+        private readonly CrmDatabaseContext _crmDatabaseContext;
 
-        public AssetGetService(PsmDatabaseContext psmDatabaseContext)
+        public AssetGetService(CrmDatabaseContext crmDatabaseContext)
         {
-            _psmDatabaseContext = psmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext;
         }
 
         public async Task<BaseCollectionResponse<AssetSummary>> GetAllAsync()
         {
             var response = new BaseCollectionResponse<AssetSummary>();
 
-            var data = await _psmDatabaseContext
+            var data = await _crmDatabaseContext
                 .Assets
                 .Include(o=> o.NavAssetType)
                 .ToListAsync();
@@ -39,7 +39,7 @@ namespace CRM.Service.AssetServices
         public async Task<BaseCollectionResponse<AssetSummary>> GetFilteredAsync(AssetFilteredListRequest filter)
         {
             var response = new BaseCollectionResponse<AssetSummary>();
-            var query =  _psmDatabaseContext
+            var query =  _crmDatabaseContext
                 .Assets
                 .Include(o => o.NavAssetType)
                 .AsQueryable();
@@ -70,7 +70,7 @@ namespace CRM.Service.AssetServices
             {
                 var response = new BaseItemResponse<AssetSummary>();
 
-                var data = await _psmDatabaseContext
+                var data = await _crmDatabaseContext
                     .Assets
                     .Include(o => o.NavAssetType)
                     .FirstOrDefaultAsync(o => o.AssetId == assetId);

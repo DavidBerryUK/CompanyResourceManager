@@ -1,4 +1,4 @@
-﻿USE [PSM]
+﻿USE [CRM]
 GO
 
 INSERT INTO AssetType

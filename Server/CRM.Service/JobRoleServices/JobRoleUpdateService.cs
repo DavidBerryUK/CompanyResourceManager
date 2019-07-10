@@ -11,11 +11,11 @@ namespace CRM.Service.JobRoleServices
 {
     public class JobRoleUpdateService : IJobRoleUpdateService
     {
-        private readonly PsmDatabaseContext _psmDatabaseContext;
+        private readonly CrmDatabaseContext _crmDatabaseContext;
 
-        public JobRoleUpdateService(PsmDatabaseContext psmDatabaseContext)
+        public JobRoleUpdateService(CrmDatabaseContext crmDatabaseContext)
         {
-            _psmDatabaseContext = psmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext;
         }
 
         public async Task<BaseItemResponse<JobRole>> Create(JobRole jobRole)
@@ -26,8 +26,8 @@ namespace CRM.Service.JobRoleServices
             entity.JobRoleId = Guid.NewGuid();
             entity.IsActive = true;
 
-            await _psmDatabaseContext.AddAsync(entity);
-            await _psmDatabaseContext.SaveChangesAsync();
+            await _crmDatabaseContext.AddAsync(entity);
+            await _crmDatabaseContext.SaveChangesAsync();
 
             response.Entity = Mapper.Map<JobRole>(entity);
 
@@ -37,7 +37,7 @@ namespace CRM.Service.JobRoleServices
         public async Task<BaseItemResponse<JobRole>> Update(Guid jobRoleId, JobRole jobRole)
         {
             var response = new BaseItemResponse<JobRole>();
-            var data = await _psmDatabaseContext.JobRoles.FirstOrDefaultAsync(o => o.JobRoleId == jobRoleId);
+            var data = await _crmDatabaseContext.JobRoles.FirstOrDefaultAsync(o => o.JobRoleId == jobRoleId);
 
             if (data == null)
             {
@@ -46,7 +46,7 @@ namespace CRM.Service.JobRoleServices
             else
             {
                 Mapper.Map(jobRole, data);
-                await _psmDatabaseContext.SaveChangesAsync();
+                await _crmDatabaseContext.SaveChangesAsync();
                 response.Entity = Mapper.Map<JobRole>(data);
             }
 
@@ -66,7 +66,7 @@ namespace CRM.Service.JobRoleServices
         private async Task<BaseItemResponse<JobRole>> AmendActiveStatus(Guid jobRoleId, bool isActive)
         {
             var response = new BaseItemResponse<JobRole>();
-            var data = await _psmDatabaseContext.JobRoles.FirstOrDefaultAsync(o => o.JobRoleId == jobRoleId);
+            var data = await _crmDatabaseContext.JobRoles.FirstOrDefaultAsync(o => o.JobRoleId == jobRoleId);
 
             if (data == null)
             {
@@ -75,7 +75,7 @@ namespace CRM.Service.JobRoleServices
             else
             {
                 data.IsActive = isActive;
-                await _psmDatabaseContext.SaveChangesAsync();
+                await _crmDatabaseContext.SaveChangesAsync();
                 response.Entity = Mapper.Map<JobRole>(data);
             }
 

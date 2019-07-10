@@ -11,11 +11,11 @@ namespace CRM.Service.PeopleServices
 {
     public class PeopleUpdateService : IPeopleUpdateService
     {
-        private readonly PsmDatabaseContext _psmDatabaseContext;
+        private readonly CrmDatabaseContext _crmDatabaseContext;
 
-        public PeopleUpdateService(PsmDatabaseContext psmDatabaseContext)
+        public PeopleUpdateService(CrmDatabaseContext crmDatabaseContext)
         {
-            _psmDatabaseContext = psmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext;
         }
 
         public async Task<BaseItemResponse<Person>> Create(Person person)
@@ -26,8 +26,8 @@ namespace CRM.Service.PeopleServices
             entity.PersonId = Guid.NewGuid();
             entity.IsActive = true;
 
-            await _psmDatabaseContext.AddAsync(entity);
-            await _psmDatabaseContext.SaveChangesAsync();
+            await _crmDatabaseContext.AddAsync(entity);
+            await _crmDatabaseContext.SaveChangesAsync();
 
             response.Entity = Mapper.Map<Person>(entity);
 
@@ -37,7 +37,7 @@ namespace CRM.Service.PeopleServices
         public async Task<BaseItemResponse<Person>> Update(Guid personId, Person person)
         {
             var response = new BaseItemResponse<Person>();
-            var data = await _psmDatabaseContext.People.FirstOrDefaultAsync(o=> o.PersonId == personId);
+            var data = await _crmDatabaseContext.People.FirstOrDefaultAsync(o=> o.PersonId == personId);
 
             if (data == null)
             {
@@ -46,7 +46,7 @@ namespace CRM.Service.PeopleServices
             else
             {
                 Mapper.Map(person, data);
-                await _psmDatabaseContext.SaveChangesAsync();
+                await _crmDatabaseContext.SaveChangesAsync();
                 response.Entity = Mapper.Map<Person>(data);
             } 
 
@@ -66,7 +66,7 @@ namespace CRM.Service.PeopleServices
         private async Task<BaseItemResponse<Person>> AmendPersonActiveStatus(Guid personId, bool isActive)
         {
             var response = new BaseItemResponse<Person>();
-            var data = await _psmDatabaseContext.People.FirstOrDefaultAsync(o => o.PersonId == personId);
+            var data = await _crmDatabaseContext.People.FirstOrDefaultAsync(o => o.PersonId == personId);
 
             if (data == null)
             {
@@ -75,7 +75,7 @@ namespace CRM.Service.PeopleServices
             else
             {
                 data.IsActive = isActive;
-                await _psmDatabaseContext.SaveChangesAsync();
+                await _crmDatabaseContext.SaveChangesAsync();
                 response.Entity = Mapper.Map<Person>(data);
             }
 

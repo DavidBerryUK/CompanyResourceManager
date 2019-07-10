@@ -16,18 +16,18 @@ namespace CRM.Service.AssetTypeServices
 {
     public class AssetTypeGetService : IAssetTypeGetService
     {
-        private readonly PsmDatabaseContext _psmDatabaseContext;
+        private readonly CrmDatabaseContext _crmDatabaseContext;
 
-        public AssetTypeGetService(PsmDatabaseContext psmDatabaseContext)
+        public AssetTypeGetService(CrmDatabaseContext crmDatabaseContext)
         {
-            _psmDatabaseContext = psmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext;
         }
 
         public async Task<BaseCollectionResponse<AssetType>> GetAllAsync()
         {
             var response = new BaseCollectionResponse<AssetType>();
 
-            var data = await _psmDatabaseContext
+            var data = await _crmDatabaseContext
                 .AssetTypes
                 .OrderBy(o => o.Name)
                 .ToListAsync();
@@ -41,7 +41,7 @@ namespace CRM.Service.AssetTypeServices
         {
             var response = new BaseCollectionResponse<ListItem>();
 
-            var data = await _psmDatabaseContext
+            var data = await _crmDatabaseContext
                 .AssetTypes
                 .Where(o=> o.IsActive)
                 .OrderBy(o=> o.Name)
@@ -56,7 +56,7 @@ namespace CRM.Service.AssetTypeServices
         {
             var response = new BaseCollectionResponse<AssetType>();
 
-            var query = _psmDatabaseContext
+            var query = _crmDatabaseContext
                 .AssetTypes
                 .AsQueryable();
 
@@ -85,7 +85,7 @@ namespace CRM.Service.AssetTypeServices
         {
             var response = new BaseItemResponse<AssetType>();
 
-            var data = await _psmDatabaseContext
+            var data = await _crmDatabaseContext
                 .AssetTypes
                 .FirstOrDefaultAsync(o => o.AssetTypeId == assetTypeId);
 

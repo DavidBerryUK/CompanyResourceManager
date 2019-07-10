@@ -16,18 +16,18 @@ namespace CRM.Service.JobRoleServices
 {
     public class JobRoleGetService : IJobRoleGetService
     {
-        private readonly PsmDatabaseContext _psmDatabaseContext;
+        private readonly CrmDatabaseContext _crmDatabaseContext;
 
-        public JobRoleGetService(PsmDatabaseContext psmDatabaseContext)
+        public JobRoleGetService(CrmDatabaseContext crmDatabaseContext)
         {
-            _psmDatabaseContext = psmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext;
         }
 
         public async Task<BaseCollectionResponse<JobRole>> GetAllAsync()
         {
             var response = new BaseCollectionResponse<JobRole>();
 
-            var data = await _psmDatabaseContext
+            var data = await _crmDatabaseContext
                 .JobRoles
                 .OrderBy(o => o.Name)
                 .ToListAsync();
@@ -41,7 +41,7 @@ namespace CRM.Service.JobRoleServices
         {
             var response = new BaseCollectionResponse<ListItem>();
 
-            var data = await _psmDatabaseContext
+            var data = await _crmDatabaseContext
                 .JobRoles
                 .Where(o=> o.IsActive)
                 .OrderBy(o=> o.Name)
@@ -56,7 +56,7 @@ namespace CRM.Service.JobRoleServices
         {
             var response = new BaseCollectionResponse<JobRole>();
 
-            var query = _psmDatabaseContext
+            var query = _crmDatabaseContext
                 .JobRoles
                 .AsQueryable();
 
@@ -85,7 +85,7 @@ namespace CRM.Service.JobRoleServices
         {
             var response = new BaseItemResponse<JobRole>();
 
-            var data = await _psmDatabaseContext
+            var data = await _crmDatabaseContext
                 .JobRoles
                 .FirstOrDefaultAsync(o => o.JobRoleId== jobRoleId);
 

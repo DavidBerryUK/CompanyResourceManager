@@ -1,4 +1,4 @@
-﻿USE [PSM]
+﻿USE [CRM]
 GO
 
 SET NOCOUNT ON
@@ -25,7 +25,7 @@ BEGIN
 	
 	IF EXISTS (SELECT * from INFORMATION_SCHEMA.TABLES t WHERE t.TABLE_NAME = @Name 
 				AND t.TABLE_SCHEMA = 'dbo' 
-				AND t.TABLE_CATALOG = 'PSM' 
+				AND t.TABLE_CATALOG = 'CRM' 
 				AND TABLE_TYPE = 'BASE TABLE')
 		BEGIN		
 			PRINT ('Dropping Table [' + @Name + ']')		

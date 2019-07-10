@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Database.Context
 {
-    public class PsmDatabaseContext : DbContext
+    public class CrmDatabaseContext : DbContext
     {
-        public PsmDatabaseContext(DbContextOptions options)
+        public CrmDatabaseContext(DbContextOptions options)
             : base(options)
         { }
 
-        public PsmDatabaseContext()
+        public CrmDatabaseContext()
         { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

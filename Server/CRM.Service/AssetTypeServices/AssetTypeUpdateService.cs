@@ -11,11 +11,11 @@ namespace CRM.Service.AssetTypeServices
 {
     public class AssetTypeUpdateService : IAssetTypeUpdateService
     {
-        private readonly PsmDatabaseContext _psmDatabaseContext;
+        private readonly CrmDatabaseContext _crmDatabaseContext;
 
-        public AssetTypeUpdateService(PsmDatabaseContext psmDatabaseContext)
+        public AssetTypeUpdateService(CrmDatabaseContext crmDatabaseContext)
         {
-            _psmDatabaseContext = psmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext;
         }
 
         public async Task<BaseItemResponse<AssetType>> Create(AssetType assetType)
@@ -26,8 +26,8 @@ namespace CRM.Service.AssetTypeServices
             entity.AssetTypeId = Guid.NewGuid();
             entity.IsActive = true;
 
-            await _psmDatabaseContext.AddAsync(entity);
-            await _psmDatabaseContext.SaveChangesAsync();
+            await _crmDatabaseContext.AddAsync(entity);
+            await _crmDatabaseContext.SaveChangesAsync();
 
             response.Entity = Mapper.Map<AssetType>(entity);
 
@@ -37,7 +37,7 @@ namespace CRM.Service.AssetTypeServices
         public async Task<BaseItemResponse<AssetType>> Update(Guid assetTypeId, AssetType assetType)
         {
             var response = new BaseItemResponse<AssetType>();
-            var data = await _psmDatabaseContext.AssetTypes.FirstOrDefaultAsync(o => o.AssetTypeId == assetTypeId);
+            var data = await _crmDatabaseContext.AssetTypes.FirstOrDefaultAsync(o => o.AssetTypeId == assetTypeId);
 
             if (data == null)
             {
@@ -46,7 +46,7 @@ namespace CRM.Service.AssetTypeServices
             else
             {
                 Mapper.Map(assetType, data);
-                await _psmDatabaseContext.SaveChangesAsync();
+                await _crmDatabaseContext.SaveChangesAsync();
                 response.Entity = Mapper.Map<AssetType>(data);
             }
 
@@ -66,7 +66,7 @@ namespace CRM.Service.AssetTypeServices
         private async Task<BaseItemResponse<AssetType>> AmendActiveStatus(Guid assetTypeId, bool isActive)
         {
             var response = new BaseItemResponse<AssetType>();
-            var data = await _psmDatabaseContext.AssetTypes.FirstOrDefaultAsync(o => o.AssetTypeId == assetTypeId);
+            var data = await _crmDatabaseContext.AssetTypes.FirstOrDefaultAsync(o => o.AssetTypeId == assetTypeId);
 
             if (data == null)
             {
@@ -75,7 +75,7 @@ namespace CRM.Service.AssetTypeServices
             else
             {
                 data.IsActive = isActive;
-                await _psmDatabaseContext.SaveChangesAsync();
+                await _crmDatabaseContext.SaveChangesAsync();
                 response.Entity = Mapper.Map<AssetType>(data);
             }
 
