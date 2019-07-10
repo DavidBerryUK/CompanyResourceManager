@@ -2,8 +2,8 @@ import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 import Component                                from 'vue-class-component';
 import HeaderComponent                          from '../componentsCommonGui/header/HeaderComponent.vue';
 import MenuComponent                            from "../componentsCommonGui/menuComponent/MenuComponent.vue";
-import Vue                                      from 'vue';
 import VeeValidate                              from 'vee-validate';
+import Vue                                      from 'vue';
 
 Vue.use(VeeValidate);
 

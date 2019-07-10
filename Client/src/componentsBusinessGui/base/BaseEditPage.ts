@@ -20,6 +20,7 @@ export default class BaseEditPage<T> extends BasePage implements IComponentMetaD
   // to navigate away from this screen
   //
   canCloseComponentBeforeNavigation(): boolean {
+    console.log("BaseEditPage:canCloseComponentBeforeNavigation()");
     if (this.modelChangeTracker != null) {
       return this.modelChangeTracker.isObjectSameAsOriginal;
     }

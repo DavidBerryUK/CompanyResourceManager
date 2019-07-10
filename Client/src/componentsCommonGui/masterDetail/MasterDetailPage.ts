@@ -31,8 +31,8 @@ export default class MasterDetailPage extends Vue {
     }
 
     beforeRouteEnter(from: any, to: any, next: any) {
-      // console.log("Navigation Detail:beforeRouter     Enter");
-      // console.log("------------------------------------");
+       console.log("Navigation Detail:beforeRouter     Enter");
+       console.log("----------------------------------------");
        if (this)
        {
          this.doAllTheChecking(next);
@@ -65,7 +65,7 @@ export default class MasterDetailPage extends Vue {
    
      private doAllTheChecking(next: any) {
    
-       // console.log("LAYOUT - DO NAVIGATION CHECKING");
+      console.log("MasterDetailPage - do All the Checking");
    
    
        var doNeedToAskForPermission = false;

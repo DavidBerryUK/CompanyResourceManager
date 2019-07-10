@@ -17,14 +17,17 @@ export default class BaseListPage extends BasePage implements IComponentMetaData
   // Navigation checks, required to enable events to reach the parent layout
   //
   beforeRouteEnter(from: any, to: any, next: any) {
+    console.log("BaseListPage:beforeRouteEnter()");
     next();
   }
 
   beforeRouteUpdate(from: any, to: any, next: any) {
+    console.log("BaseListPage:beforeRouteUpdate()");
     return next();
   }
 
   beforeRouteLeave(from: any, to: any, next: any) {
+    console.log("BaseListPage:beforeRouteLeave()");
     next();
   }
 }
