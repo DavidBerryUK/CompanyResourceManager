@@ -1,0 +1,44 @@
+.scrollable-list {
+
+    header-height = 64px;
+    search-height = 52px;
+
+    position :absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+
+    .scroll-header {
+        position :absolute;
+        left:0;
+        right:0;
+        height:header-height;
+        }
+
+    .scroll-search-header {
+        position :absolute;
+        left:0;
+        right:0;
+        height:search-height;
+        top:header-height;                
+        padding-left:8px;
+        padding-right:8px;
+        padding-top:0px;
+        padding-bottom:4px;
+        }
+
+    .scroll-content {
+        position :absolute;
+        top:header-height;
+        left:0;
+        right:0;
+        bottom:0;
+        overflow-y: auto;
+
+        &.with-search-header {
+            top:header-height + search-height;
+            }
+
+        }
+}

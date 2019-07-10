@@ -1,0 +1,20 @@
+ //
+ // used for the filter icon,
+ // When unselected, the icon is partially transparent, and no background
+ // When selected it is solid, and a partially transparent background
+ //
+ .icon-button-border {
+        transition: all 0.5s;
+        margin-top: 2px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        padding-top: 12px;
+        opacity: 0.4;
+
+        &.selected {
+            opacity : 1.0;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+    }

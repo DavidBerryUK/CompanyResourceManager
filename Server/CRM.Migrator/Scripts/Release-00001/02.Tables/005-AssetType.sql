@@ -1,0 +1,24 @@
+﻿USE [PSM]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[AssetType] (
+	[AssetTypeId]			[UNIQUEIDENTIFIER]	NOT NULL,
+	[Name]					[nvarchar](200)		NOT NULL,
+	[HasAssetBadge]			[bit]				NOT NULL,	
+	[HasOperatingSystem]	[bit]				NOT NULL,
+	[IsActive]				[bit]				NOT NULL,
+
+ CONSTRAINT [PK_AssetType] PRIMARY KEY CLUSTERED 
+(
+	[AssetTypeId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO

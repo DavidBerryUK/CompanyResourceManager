@@ -1,0 +1,37 @@
+.title-wrapper-container {
+    $colour = #fff;
+    $startShade = 30;
+    $shadeIncrement = 10;
+    background-color:teal;
+    padding: 4px;
+    padding-left: 20px;
+    padding-bottom: 16px;
+    border-radius: 10px;
+
+    .title-icon {
+        width: 80px;
+        font-size: 40px;
+        padding-top: 10px;
+        text-align: center;
+        color: white;
+        text-shadow:    0 1px 0 darken($colour, $startShade), 
+                        0 2px 0 darken($colour, $startShade + (1 * $shadeIncrement)), 
+                        0 6px 1px rgba(0, 0, 0, 0.1), 
+                        0 0 5px rgba(0, 0, 0, 0.1), 
+                        0 1px 3px rgba(0, 0, 0, 0.3);
+        float: left;
+    }
+
+    .text {
+        padding-top: 5px;
+        font-family: arial;
+        font-size: 32px;
+        font-weight: bolder;
+        color: $colour;
+        text-shadow:    0 1px 0 darken($colour, $startShade),
+                        0 2px 0 darken($colour, $startShade + (1 * $shadeIncrement)), 
+                        0 6px 1px rgba(0, 0, 0, 0.1), 
+                        0 0 5px rgba(0, 0, 0, 0.1), 
+                        0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+}

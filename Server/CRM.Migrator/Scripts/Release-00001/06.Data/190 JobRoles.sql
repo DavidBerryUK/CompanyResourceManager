@@ -1,0 +1,22 @@
+﻿USE [PSM]
+GO
+
+SET NOCOUNT ON
+
+INSERT INTO JobRole
+(JobRoleId										,Name						,IsActive)						VALUES
+('96914202-DD26-4774-B9FF-FF628DBFB08E'			,'Managing Director'		,1),
+('5DBE338B-9BF7-482E-A4C9-AC3D621C7E46'			,'Managing Principal'		,1),
+('B82945CD-76FD-46EF-BF25-8E8372F13E49'			,'Principal'				,1),
+('6836B0A6-7648-48F0-8E79-0BC72DCE07BE'			,'Senior'					,1),
+('C20DDE81-9430-4E33-B410-9856409935E3'			,'Employee'					,1),
+('673A1DD7-80D2-493F-A265-4F6E58DE32A2'			,'Tester'					,1),
+('6AE02874-6BC4-46C0-BCAE-16B54814764D'			,'Automated Tester'			,1),
+('8DA63FAA-DA87-4FAF-BFCE-80F24FA2A29C'			,'Project Manager'			,1),
+('3D46C86A-EBEB-4AB2-BE38-2E413A81D515'			,'Employee'					,1),
+('F2110FD1-079B-4E42-A514-E9597E2BA1D5'			,'Academy - .Net'			,1),
+('30B97569-B3F1-4C6B-B074-F7E467669B7F'			,'Academy - Java'			,1),
+('C8C719BC-0D32-49B1-A8CE-2CCF176A5D12'			,'Academy - Test'			,1),
+('0CE32D25-FE8C-4F8B-8B24-2F5D10D5B1DB'			,'Xperience Design'			,1)
+
+GO
