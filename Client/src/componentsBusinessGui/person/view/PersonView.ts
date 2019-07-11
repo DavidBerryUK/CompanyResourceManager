@@ -36,5 +36,5 @@ export default class PersonView extends BaseViewPage<PersonModel> implements ICo
   onRestore() {
     super.onRestore();
   }
-
+  
 }
