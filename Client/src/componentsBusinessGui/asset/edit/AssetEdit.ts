@@ -80,7 +80,7 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
     // ask the user to confirm they with to delete the asset
     //
     var dialog = new CommonAppDialogController(this);
-    dialog.createWithParameters(`Archive ${this.model.name} ?`,
+    dialog.createWithParameters(`Archive ${this.model.entityValue} ?`,
       "Are you sure you wish to Archive this Asset?",
       EnumModalIcon.Question,
       EnumModalButton.YesNo,
@@ -92,7 +92,7 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
         //
         var apiPersonRepository = AssetRepositoryFactory.getRepository();
 
-        apiPersonRepository.deactivate(this.model.assetId)
+        apiPersonRepository.deactivate(this.model.entityKey)
           .onSuccess((data: AssetSummaryModel | null) => {
             this.navigationHandler.gotoViewPage(this, this.model.entityKey);
           }).onFailed((message: string) => {
@@ -111,11 +111,7 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
       }).show();
   }
 
-  // the cancel button has been pressed by the user
-  //
-  onCancel() {
-    this.navigationHandler.gotoViewPage(this, this.model.entityKey);
-  }
+ 
 
   // the save button has been pressed by the users
   //

@@ -1,10 +1,11 @@
+import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IComponentMetaData }                   from './../../components/interfaces/ComponentMetaDataInterfaces';
 import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
 import BasePage                                 from "./BasePage";
 import DeepObjectComparator                     from "../../services/objectComparison/DeepObjectComparator"
 
 
-export default class BaseEditPage<T> extends BasePage implements IComponentMetaData {
+export default class BaseEditPage<T extends IApiModel> extends BasePage implements IComponentMetaData {
   //IComponentMetaData
   public componentName: string = "BaseEditPage";
   public componentDescription: string = "BaseEditPage";
@@ -35,5 +36,11 @@ export default class BaseEditPage<T> extends BasePage implements IComponentMetaD
     return false
   }
   // IRouteBeforeNavigationCheck
+
+   // the cancel button has been pressed by the user
+  //
+  onCancel() {
+    this.navigationHandler.gotoViewPage(this, this.model.entityKey);
+  }
 
 }

@@ -103,12 +103,6 @@ export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel> implemen
       }).show();
   }
 
-  // the cancel button has been pressed by the user
-  //
-  onCancel() {
-    new NavigationCrudAssetType().gotoViewPage(this, this.model.assetTypeId);
-  }
-
   // the save button has been pressed by the users
   //
   onSave() {

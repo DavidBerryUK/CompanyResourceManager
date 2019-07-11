@@ -104,12 +104,6 @@ export default class JobRoleEdit extends BaseEditPage<JobRoleModel> implements I
       }).show();
   }
 
-  // the cancel button has been pressed by the user
-  //
-  onCancel() {
-    this.navigationHandler.gotoViewPage(this, this.model.entityKey);
-  }
-
   // the save button has been pressed by the users
   //
   onSave() {
