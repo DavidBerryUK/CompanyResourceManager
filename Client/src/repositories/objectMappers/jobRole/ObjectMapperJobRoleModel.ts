@@ -1,7 +1,7 @@
 import { IObjectMapper }                        from "../interfaces/IObjectMapper";
 import JobRoleModel                             from '@/repositories/models/jobRole/JobRoleModel';
 
-export default class ObjectMapperJobRole implements IObjectMapper<JobRoleModel> {
+export default class ObjectMapperJobRoleModel implements IObjectMapper<JobRoleModel> {
     
     map(item: any): JobRoleModel {
                         

@@ -11,12 +11,13 @@ import Component                                from "vue-class-component";
 import FilterAssetTypeService                   from '@/services/filters/assetTypeFilterService/FilterAssetTypeService';
 import FilterButton                             from '@/componentsCommonGui/filterButton/FilterButton';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
-import ListFilterDialogState                    from '@/componentsCommonGui/listFilterDialog/ListFilterDialogState';
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
+import ObjectArrayMapperAssetTypeModel          from '@/repositories/objectMappers/assetType/ObjectArrayMapperAssetTypeModel';
+import ObjectMapperAssetTypeModel               from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeModel';
 
 /**
  * Presents a list of categories to the user that can be filtered
@@ -35,30 +36,20 @@ import NotificationFactory                      from '@/services/notifications/N
     FilterButton
   }
 })
-export default class AssetTypeList extends BaseListPage implements IComponentMetaData {
+export default class AssetTypeList extends BaseListPage<AssetTypeModel> implements IComponentMetaData {
 
   //IComponentMetaData
   componentName: string = "Asset Type List";
   componentDescription: string = "Displays a list of asset types";
   //IComponentMetaData
 
-  // if variables are to be tracked by VueJs they must
-  // have an initial value on initialization
-  //
-
   constructor() {
-    super(new NavigationCrudAssetType)
+    super(  new NavigationCrudAssetType(), 
+            new ObjectMapperAssetTypeModel(),
+            new ObjectArrayMapperAssetTypeModel())
   }
 
 
-  // records the selected values in the filter dialog page
-  dataListState: ListFilterDialogState = new ListFilterDialogState();
-
-  // list of asset typee returned by ApiAssetTypeRepository
-  dataList: GenericCollectionModel<AssetTypeModel> = new GenericCollectionModel<AssetTypeModel>();
-
-  // the currently selected asset Type
-  selectedItem: AssetTypeModel = new AssetTypeModel();
   filterModel : AssetTypeListFilterParametersModel =  new AssetTypeListFilterParametersModel();
 
 
@@ -74,15 +65,6 @@ export default class AssetTypeList extends BaseListPage implements IComponentMet
   // any notifications
   beforeDestroy() {
     NotificationFactory.unsubscribeFromAll(this);
-  }
-
-  // function used to style items in the list, the currently
-  // selected item will have a different coloured background
-  itemStyle(item: AssetTypeModel): string {
-    if (item.assetTypeId == this.selectedItem.assetTypeId) {
-      return "teal accent-1";
-    }
-    return "";
   }
 
   /**

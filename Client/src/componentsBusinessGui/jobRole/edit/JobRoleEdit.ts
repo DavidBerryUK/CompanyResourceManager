@@ -7,7 +7,7 @@ import JobRoleModel                             from '@/repositories/models/jobR
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
-import ObjectMapperJobRole                      from '@/repositories/objectMappers/jobRole/ObjectMapperJobRole';
+import ObjectMapperJobRoleModel                      from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleModel';
 
 //
 // attribute indicates this is a component, 
@@ -32,7 +32,7 @@ export default class JobRoleEdit extends BaseEditPage<JobRoleModel> implements I
   constructor() {
     super(  new NavigationCrudJobRole(),
             JobRoleRepositoryFactory.getRepository(),
-            new ObjectMapperJobRole());    
+            new ObjectMapperJobRoleModel());    
   }
 
   mounted() {

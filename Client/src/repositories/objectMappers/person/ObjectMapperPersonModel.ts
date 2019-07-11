@@ -1,7 +1,7 @@
 import { IObjectMapper }                        from "../interfaces/IObjectMapper";
 import PersonModel                              from '@/repositories/models/person/PersonModel';
 
-export default class ObjectMapperPerson implements IObjectMapper<PersonModel> {
+export default class ObjectMapperPersonModel implements IObjectMapper<PersonModel> {
     
     map(item: any): PersonModel {
                         

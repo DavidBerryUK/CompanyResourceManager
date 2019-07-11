@@ -8,12 +8,13 @@ import Component                                from "vue-class-component";
 import FilterButton                             from '@/componentsCommonGui/filterButton/FilterButton';
 import FilterPersonSummaryService               from '@/services/filters/personFilterService/FilterPersonSummaryService';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
-import ListFilterDialogState                    from '@/componentsCommonGui/listFilterDialog/ListFilterDialogState';
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
+import ObjectArrayMapperPersonSummaryModel      from '@/repositories/objectMappers/person/ObjectArrayMapperPersonSummary';
+import ObjectMapperPersonSummaryModel           from '@/repositories/objectMappers/person/ObjectMapperPersonSummeryModel';
 import PersonListFilterParametersModel          from '@/repositories/models/person/PersonListFilterParametersModal';
 import PersonModel                              from '@/repositories/models/person/PersonModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
@@ -36,31 +37,19 @@ import PersonSummaryModel                       from '@/repositories/models/pers
     FilterButton
   }
 })
-export default class PersonList extends BaseListPage implements IComponentMetaData {
+export default class PersonList extends BaseListPage<PersonSummaryModel> implements IComponentMetaData {
 
   //IComponentMetaData
   componentName: string = "Person List";
   componentDescription: string = "Displays of list people";
   //IComponentMetaData
-
-  // if variables are to be tracked by VueJs they must
-  // have an initial value on initialization
-  //
-
-
-
-  // records the selected values in the filter dialog page
-  dataListState: ListFilterDialogState = new ListFilterDialogState();
-
-  // list of branches returned by ApiCategoryRepository
-  dataList: GenericCollectionModel<PersonSummaryModel> = new GenericCollectionModel<PersonSummaryModel>();
-
-  // the currently selected person
-  selectedItem: PersonSummaryModel = new PersonSummaryModel();
+ 
   filterModel : PersonListFilterParametersModel =  new PersonListFilterParametersModel();
 
   constructor() {
-    super(new NavigationCrudPerson());
+    super(  new NavigationCrudPerson(), 
+            new ObjectMapperPersonSummaryModel(),
+            new ObjectArrayMapperPersonSummaryModel() );
   }
 
   //
@@ -75,15 +64,6 @@ export default class PersonList extends BaseListPage implements IComponentMetaDa
   // any notifications
   beforeDestroy() {
     NotificationFactory.unsubscribeFromAll(this);
-  }
-
-  // function used to style items in the list, the currently
-  // selected item will have a different coloured background
-  itemStyle(item: PersonModel): string {
-    if (item.personId == this.selectedItem.personId) {
-      return "teal accent-1";
-    }
-    return "";
   }
 
   /**

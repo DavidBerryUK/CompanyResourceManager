@@ -2,7 +2,7 @@ import { IObjectMapper }                        from "../interfaces/IObjectMappe
 import AssetTypeModel                           from '../../models/assetType/AssetTypeModel';
 
 
-export default class ObjectMapperAssetType implements IObjectMapper<AssetTypeModel> {
+export default class ObjectMapperAssetTypeModel implements IObjectMapper<AssetTypeModel> {
     
     map(item: any): AssetTypeModel {
                         

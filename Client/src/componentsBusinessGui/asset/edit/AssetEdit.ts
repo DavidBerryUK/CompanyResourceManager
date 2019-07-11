@@ -11,7 +11,7 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
-import ObjectMapperAssetSummary                 from '@/repositories/objectMappers/asset/ObjectMapperAssetSummary';
+import ObjectMapperAssetSummaryModel                 from '@/repositories/objectMappers/asset/ObjectMapperAssetSummaryModel';
 
 
 //
@@ -39,7 +39,7 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
   constructor() {
     super(  new NavigationCrudAsset(), 
             AssetRepositoryFactory.getRepository(),
-            new ObjectMapperAssetSummary());        
+            new ObjectMapperAssetSummaryModel());        
   }
 
   mounted() {
@@ -66,7 +66,7 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
 
    // load additional data,
   //
-  retrieveSecondaryData(constractListener: ContractListener) {
+  retrieveSecondaryData(contractListener: ContractListener) {
 
     var assetTypeRepository = AssetTypeRepositoryFactory.getRepository();
 
@@ -75,7 +75,7 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
     .onSuccess((list:GenericCollectionModel<ListItemModel> ) => {
       this.assetTypesList = list
     })
-    .contractListener(constractListener);
+    .contractListener(contractListener);
   }
  
 }

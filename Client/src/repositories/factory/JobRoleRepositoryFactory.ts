@@ -1,8 +1,8 @@
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import JobRoleListFilterParametersModel         from '@/repositories/models/jobRole/JobRoleListFilterParametersModal';
 import JobRoleModel                             from '@/repositories/models/jobRole/JobRoleModel';
-import ObjectArrayMapperJobRoleModel            from '@/repositories/objectMappers/jobRole/ObjectArrayMapperJobRole';
-import ObjectMapperJobRole                      from '@/repositories/objectMappers/jobRole/ObjectMapperJobRole';
+import ObjectArrayMapperJobRoleModel            from '@/repositories/objectMappers/jobRole/ObjectArrayMapperJobRoleModel';
+import ObjectMapperJobRoleModel                      from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleModel';
 
 export default class JobRoleRepositoryFactory {
 
@@ -10,7 +10,7 @@ export default class JobRoleRepositoryFactory {
         var repository = new GenericApiRepository<JobRoleModel, JobRoleModel, JobRoleListFilterParametersModel>(
             new JobRoleModel().entityName,
             "api/jobrole",
-            new ObjectMapperJobRole(),
+            new ObjectMapperJobRoleModel(),
             new ObjectArrayMapperJobRoleModel()
         )
         return repository;

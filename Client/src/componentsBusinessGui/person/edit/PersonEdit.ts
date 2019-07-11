@@ -9,7 +9,7 @@ import JobRoleRepositoryFactory                 from '@/repositories/factory/Job
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
-import ObjectMapperPerson                       from '@/repositories/objectMappers/person/ObjectMapperPerson';
+import ObjectMapperPersonModel                       from '@/repositories/objectMappers/person/ObjectMapperPersonModel';
 import PersonModel                              from '@/repositories/models/person/PersonModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 
@@ -37,7 +37,7 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
   constructor() {
     super(new NavigationCrudPerson(),
       PersonRepositoryFactory.getRepository(),
-      new ObjectMapperPerson());
+      new ObjectMapperPersonModel());
   }
 
   // the component has mounted into the HTML DOM,
@@ -65,7 +65,7 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
 
   // load additional data,
   //
-  retrieveSecondaryData(constractListener: ContractListener) {
+  retrieveSecondaryData(contractListener: ContractListener) {
 
     var jobRoleRepository = JobRoleRepositoryFactory.getRepository();
     jobRoleRepository
@@ -73,6 +73,6 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
       .onSuccess((list: GenericCollectionModel<ListItemModel>) => {
         this.jobRoleList = list
       })
-      .contractListener(constractListener);
+      .contractListener(contractListener);
   }
 }

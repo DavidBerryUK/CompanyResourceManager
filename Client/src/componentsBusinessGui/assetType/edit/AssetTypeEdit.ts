@@ -7,7 +7,7 @@ import Component                                from "vue-class-component";
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
-import ObjectMapperAssetType                    from '@/repositories/objectMappers/assetType/ObjectMapperAssetType';
+import ObjectMapperAssetTypeModel                    from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeModel';
 
 //
 // attribute indicates this is a component, 
@@ -31,7 +31,7 @@ export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel> implemen
   constructor() {
     super(  new NavigationCrudAssetType(), 
             AssetTypeRepositoryFactory.getRepository(),
-            new ObjectMapperAssetType());    
+            new ObjectMapperAssetTypeModel());    
   }
 
   mounted() {
