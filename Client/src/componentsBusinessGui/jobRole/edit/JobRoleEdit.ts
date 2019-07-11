@@ -3,7 +3,6 @@ import { EnumModalIcon }                        from '../../../componentsCommonG
 import { EnumModalWidth }                       from '../../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IComponentMetaData }                   from '../../../components/interfaces/ComponentMetaDataInterfaces';
 import { IRouteBeforeNavigationCheck }          from '../../../router/interfaces/NavigationCheckInterfaces';
-import { Prop, Watch }                          from "vue-property-decorator";
 import { ValidationMessage }                    from '../../../repositories/contracts/ApiResponseContract';
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
@@ -34,126 +33,41 @@ export default class JobRoleEdit extends BaseEditPage<JobRoleModel> implements I
   public componentDescription: string = "Enables the user to edit an Asset Type";
   //IComponentMetaData
 
-  @Prop() id!: string;
-
   // list of different asset types types, 
   //
 
   constructor() {
-    super(new NavigationCrudJobRole());    
+    super(new NavigationCrudJobRole(),JobRoleRepositoryFactory.getRepository() );    
     this.model = new JobRoleModel();
     this.modelChangeTracker = new DeepObjectComparator(this.model);
   }
 
-  // the component has mounted into the HTML DOM,
-  //  load the data required for the page
-  mounted() {    
-    this.loadModel();
-  }
-  //
-  // Do a Deep watch on the asset type model to see if any
-  // property has been updated
-  // (watch does not work when moved to base class)
-  @Watch("model", { deep: true })
-  onModelChanged(newValue: JobRoleModel, oldValue: JobRoleModel) {
-    // check to see if the object has returned to its original value
-    //    
-    this.modelChangeTracker.evaluateHasObjectChanged(this.model);
+  mounted() {
+    super.mounted();
   }
 
-  @Watch("id")
-  onIdChanged(value: string, oldValue: string) {    
-    this.loadModel();
+  // the cancel button has been pressed
+  onCancel() {
+    super.onCancel();
   }
 
   // the delete button has been pressed
   //
   onDelete() {
-
-    //
-    // ask the user to confirm they with to delete the asset type
-    //
-    var dialog = new CommonAppDialogController(this);
-    dialog.createWithParameters(`Archive ${this.model.name} ?`,
-      "Are you sure you wish to Archive this Job Role?",
-      EnumModalIcon.Question,
-      EnumModalButton.YesNo,
-      EnumModalWidth.FixedMedium)
-      .yesPressed(() => {
-
-        //
-        // call api to deactivate the asset Type , on success display the read only version
-        //
-        var apiPersonRepository = JobRoleRepositoryFactory.getRepository();
-        apiPersonRepository.deactivate(this.model.jobRoleId)
-          .onSuccess((data: JobRoleModel | null) => {
-            this.navigationHandler.gotoViewPage(this, this.model.entityKey);
-          }).onFailed((message: string) => {
-            //
-            // if failed, show user why
-            //
-            var dialog = new CommonAppDialogController(this);
-            dialog.createWithParameters(
-              `Delete ${this.model.entityValue}`,
-              `Failed to archive Job Role:${message}`,
-              EnumModalIcon.Error,
-              EnumModalButton.Ok,
-              EnumModalWidth.FixedMedium).show();
-          });
-
-      }).show();
+    super.onDelete();
   }
 
   // the save button has been pressed by the users
   //
   onSave() {
-    //
-    // validate the page, is all is valid then save, otherwise
-    // do nothing and wait for the user to correct the 
-    // validation issues
-    //
-    this.$validator.validateAll().then((result) => {
-
-      if (result) {
-        // save data to server
-        //
-        var assetTypeRepository = JobRoleRepositoryFactory.getRepository();
-
-        assetTypeRepository.save(this.model)
-          .onSuccess((data: JobRoleModel) => {
-
-            // reset the model change tracker, this will 
-            // disable the save button
-
-            this.modelChangeTracker.reset(data);
-            new NavigationCrudJobRole().gotoViewPage(this, data.entityKey);
-          })
-
-          .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
-            this.addValidationErrors(validationMessages);
-          })
-
-          .onFailed((message: string) => {            
-            // public generic dialog
-            //  letting the user know the
-            //  save failed
-            var dialog = new CommonAppDialogController(this);
-            dialog.createWithParameters(
-              `Save Job Role ${this.model.entityValue}`,
-              `Failed to save :${message}`,
-              EnumModalIcon.Error,
-              EnumModalButton.Ok,
-              EnumModalWidth.FixedMedium).show();
-          })
-      }
-    });
+    super.onSave();
   }
 
   //
   // model code away from logic / navigation code, 
   //  this allows re-use and prevents duplication
   //
-  private loadModel() {    
+  retrieveData() {    
     var assetTypeRepository = JobRoleRepositoryFactory.getRepository();
 
     //

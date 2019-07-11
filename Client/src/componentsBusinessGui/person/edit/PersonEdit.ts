@@ -3,9 +3,7 @@ import { EnumModalIcon }                        from '../../../componentsCommonG
 import { EnumModalWidth }                       from '../../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IComponentMetaData }                   from '../../../components/interfaces/ComponentMetaDataInterfaces';
 import { IRouteBeforeNavigationCheck }          from '../../../router/interfaces/NavigationCheckInterfaces';
-import { Prop }                                 from "vue-property-decorator";
 import { ValidationMessage }                    from '../../../repositories/contracts/ApiResponseContract';
-import { Watch }                                from "vue-property-decorator";
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import Component                                from "vue-class-component";
@@ -37,14 +35,12 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
   public componentDescription: string = "Enables the user to edit a Person";
   //IComponentMetaData
 
-  @Prop() id!: string;
-
   jobRoleList: GenericCollectionModel<ListItemModel> = new GenericCollectionModel<ListItemModel>()
   // list of different person types, e.g. filling Stations, Superstore, Home goods
   //
 
   constructor() {
-    super(new NavigationCrudPerson());
+    super(new NavigationCrudPerson(), PersonRepositoryFactory.getRepository());
     this.model = new PersonModel();
     this.modelChangeTracker = new DeepObjectComparator(this.model);
   }
@@ -52,114 +48,32 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
   // the component has mounted into the HTML DOM,
   //  load the data required for the page
   mounted() {
-    this.loadModel();
-  }
-  //
-  // Do a Deep watch on the person model to see if any
-  // property has been updated
-  // (watch does not work when moved to base class)
-  @Watch("model", { deep: true })
-  onModelChanged(newValue: PersonModel, oldValue: PersonModel) {
-    // check to see if the object has returned to its original value
-    //    
-    this.modelChangeTracker.evaluateHasObjectChanged(this.model);
+    super.mounted();
   }
 
-  @Watch("id")
-  onIdChanged(value: string, oldValue: string) {
-    this.loadModel();
+  // the cancel button has been pressed
+  onCancel() {
+    super.onCancel();
   }
 
   // the delete button has been pressed
   //
   onDelete() {
-
-    //
-    // ask the user to confirm they with to delete the person
-    //
-    var dialog = new CommonAppDialogController(this);
-    dialog.createWithParameters(`Delete ${this.model.forename} ${this.model.surname}?`,
-      "Are you sure you wish to Archive this Person?",
-      EnumModalIcon.Question,
-      EnumModalButton.YesNo,
-      EnumModalWidth.FixedMedium)
-      .yesPressed(() => {
-
-        //
-        // call api to deactivate the person , on success display the read only version
-        //
-        var apiPersonRepository = PersonRepositoryFactory.getRepository();
-        apiPersonRepository.deactivate(this.model.personId)
-          .onSuccess((data: PersonModel | null) => {
-            this.navigationHandler.gotoViewPage(this, this.model.entityKey);
-          }).onFailed((message: string) => {
-            //
-            // if failed, show user why
-            //
-            var dialog = new CommonAppDialogController(this);
-            dialog.createWithParameters(
-              `Delete ${this.model.entityValue}`,
-              `Failed to delete person:${message}`,
-              EnumModalIcon.Error,
-              EnumModalButton.Ok,
-              EnumModalWidth.FixedMedium).show();
-          });
-
-      }).show();
+    super.onDelete();
   }
 
   // the save button has been pressed by the users
   //
   onSave() {
-    //
-    // validate the page, is all is valid then save, otherwise
-    // do nothing and wait for the user to correct the 
-    // validation issues
-    //
-    this.$validator.validateAll().then((result) => {
-
-      if (result) {
-        // save data to server
-        //
-        var personRepository = PersonRepositoryFactory.getRepository();
-
-        personRepository.save(this.model)
-          .onSuccess((data: PersonModel) => {
-
-            // reset the model change tracker, this will 
-            // disable the save button
-
-            this.modelChangeTracker.reset(data);
-            this.navigationHandler.gotoViewPage(this, data.entityKey);
-          })
-
-          .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
-            this.addValidationErrors(validationMessages);
-          })
-
-          .onFailed((message: string) => {
-            // public generic dialog
-            //  letting the user know the
-            //  save failed
-            var dialog = new CommonAppDialogController(this);
-            dialog.createWithParameters(
-              `Save Product ${this.model.entityValue}`,
-              `Failed to save :${message}`,
-              EnumModalIcon.Error,
-              EnumModalButton.Ok,
-              EnumModalWidth.FixedMedium).show();
-          })
-      }
-    });
+   super.onSave();
   }
 
   //
   // model code away from logic / navigation code, 
   //  this allows re-use and prevents duplication
   //
-  private loadModel() {
-
-    var personRepository = PersonRepositoryFactory.getRepository();
+  retrieveData() {
+    
     var jobRoleRepository = JobRoleRepositoryFactory.getRepository();
 
     //
@@ -195,7 +109,7 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
         })
         .contractListener(listener);
 
-      personRepository
+      this.repository
         .getById(this.id)
         .onSuccess((data: PersonModel | null) => {
           if (data != null) {
