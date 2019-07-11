@@ -6,6 +6,10 @@ import ObjectMapperAssetType                    from '@/repositories/objectMappe
 
 export default class AssetTypeRepositoryFactory {
 
+    //
+    // create a Asset Type Respository using the generic base repository class
+    //  this repository supports all the basic CRUD operations as well
+    //  as providing a filtered object list ( providing the server supports the functionality )
     static getRepository() : GenericApiRepository<AssetTypeModel, AssetTypeModel, AssetTypeListFilterParametersModel> {
         var repository = new GenericApiRepository<AssetTypeModel, AssetTypeModel, AssetTypeListFilterParametersModel>(
             new AssetTypeModel().entityName,

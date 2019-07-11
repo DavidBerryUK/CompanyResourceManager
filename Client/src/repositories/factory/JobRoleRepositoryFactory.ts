@@ -6,6 +6,10 @@ import ObjectMapperJobRole                      from '@/repositories/objectMappe
 
 export default class JobRoleRepositoryFactory {
 
+    //
+    // create a Job Role Respository using the generic base repository class
+    //  this repository supports all the basic CRUD operations as well
+    //  as providing a filtered object list ( providing the server supports the functionality )
     static getRepository() : GenericApiRepository<JobRoleModel, JobRoleModel, JobRoleListFilterParametersModel> {
         var repository = new GenericApiRepository<JobRoleModel, JobRoleModel, JobRoleListFilterParametersModel>(
             new JobRoleModel().entityName,

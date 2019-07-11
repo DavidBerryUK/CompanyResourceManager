@@ -7,6 +7,10 @@ import PersonSummaryModel                       from '@/repositories/models/pers
 
 export default class PersonRepositoryFactory {
 
+    //
+    // create a Person Respository using the generic base repository class
+    //  this repository supports all the basic CRUD operations as well
+    //  as providing a filtered object list ( providing the server supports the functionality )
     static getRepository() : GenericApiRepository<PersonModel, PersonSummaryModel, PersonListFilterParametersModel> {
         var repository = new GenericApiRepository<PersonModel, PersonSummaryModel, PersonListFilterParametersModel>(
             new PersonModel().entityName,

@@ -6,7 +6,7 @@ import { IObjectMapper }                        from '@/repositories/objectMappe
 import ApiBase                                  from "./ApiBase";
 import ApiBasePostWithCollectionResult          from "./lowlevel/ApiBasePostWithCollectionResult";
 import BaseApiConfig                            from "./lowlevel/ApiBaseConfig";
-import GenericCollectionModel                   from '../models/shared/collections/GenericCollectionModel';
+import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import ObjectArrayMapperListItem                from '../objectMappers/list/ObjectArrayMapperListItem';
