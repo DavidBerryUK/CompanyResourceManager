@@ -3,6 +3,7 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import { MaterialDesignColor }                  from '@/services/colors/materialDesign/constants/MaterialDesignColors';
 import AssetTypeListFilterParametersModel       from '@/repositories/models/assetType/AssetTypeListFilterParametersModal';
 import AssetTypeModel                           from '@/repositories/models/assetType/AssetTypeModel';
+import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 import BaseListPage                             from '@/componentsBusinessGui/base/BaseListPage';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import CommonAppDialogOptions                   from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
@@ -14,9 +15,8 @@ import ListFilterDialogState                    from '@/componentsCommonGui/list
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
-import NavigationAssetType                      from '@/router/navigationHelpers/NavigationAssetType';
+import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
-import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 
 /**
  * Presents a list of categories to the user that can be filtered
@@ -46,6 +46,9 @@ export default class AssetTypeList extends BaseListPage implements IComponentMet
   // have an initial value on initialization
   //
 
+  constructor() {
+    super(new NavigationCrudAssetType)
+  }
 
 
   // records the selected values in the filter dialog page
@@ -136,7 +139,7 @@ export default class AssetTypeList extends BaseListPage implements IComponentMet
   // user pressed the add button to create a new asset type
   //
   onAddClicked() {
-    NavigationAssetType.gotoNewPage(this);
+    this.navigationHandler.gotoNewPage(this);
   }
 
   //
@@ -144,7 +147,7 @@ export default class AssetTypeList extends BaseListPage implements IComponentMet
   //
   onSelectItem(item: AssetTypeModel) {
     this.selectedItem = item;
-    NavigationAssetType.gotoViewPage(this,item.assetTypeId)    
+    this.navigationHandler.gotoViewPage(this,item.assetTypeId)    
   }
 
   //

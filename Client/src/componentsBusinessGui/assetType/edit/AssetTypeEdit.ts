@@ -1,21 +1,20 @@
-import { EnumModalButton }                    from '../../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
-import { EnumModalIcon }                      from '../../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
-import { EnumModalWidth }                     from '../../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
-import { IComponentMetaData }                 from '../../../components/interfaces/ComponentMetaDataInterfaces';
-import { IRouteBeforeNavigationCheck }        from '../../../router/interfaces/NavigationCheckInterfaces';
-import { Prop, Watch }                        from "vue-property-decorator";
-import { ValidationMessage }                  from '../../../repositories/contracts/ApiResponseContract';
-import AssetTypeModel                         from '@/repositories/models/assetType/AssetTypeModel';
-import BaseEditPage                           from '@/componentsBusinessGui/base/BaseEditPage';
-import CommonAppDialogController              from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
-import Component                              from "vue-class-component";
-import ContractListener                       from '@/repositories/contracts/ContractListener';
-import DeepObjectComparator                   from '@/services/objectComparison/DeepObjectComparator';
-import FormEditHeader                         from '@/componentsCommonGui/formEditHeader/FormEditHeader';
-import LabelDataReadOnly                      from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
-import NavigationAssetType                    from '@/router/navigationHelpers/NavigationAssetType';
-import NavigationPerson                       from '@/router/navigationHelpers/NavigationPerson';
-import AssetTypeRepositoryFactory from '@/repositories/factory/AssetTypeRepositoryFactory';
+import { EnumModalButton }                      from '../../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
+import { EnumModalIcon }                        from '../../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
+import { EnumModalWidth }                       from '../../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
+import { IComponentMetaData }                   from '../../../components/interfaces/ComponentMetaDataInterfaces';
+import { IRouteBeforeNavigationCheck }          from '../../../router/interfaces/NavigationCheckInterfaces';
+import { Prop, Watch }                          from "vue-property-decorator";
+import { ValidationMessage }                    from '../../../repositories/contracts/ApiResponseContract';
+import AssetTypeModel                           from '@/repositories/models/assetType/AssetTypeModel';
+import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
+import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
+import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
+import Component                                from "vue-class-component";
+import ContractListener                         from '@/repositories/contracts/ContractListener';
+import DeepObjectComparator                     from '@/services/objectComparison/DeepObjectComparator';
+import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
+import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
+import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 
 //
 // attribute indicates this is a component, 
@@ -40,7 +39,7 @@ export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel> implemen
   //
 
   constructor() {
-    super();    
+    super(new NavigationCrudAssetType());    
     this.model = new AssetTypeModel();
     this.modelChangeTracker = new DeepObjectComparator(this.model);
   }
@@ -87,7 +86,7 @@ export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel> implemen
         var apiPersonRepository = AssetTypeRepositoryFactory.getRepository();
         apiPersonRepository.deactivate(this.model.assetTypeId)
           .onSuccess((data: AssetTypeModel | null) => {
-            NavigationAssetType.gotoViewPage(this, this.model.assetTypeId);
+            new NavigationCrudAssetType().gotoViewPage(this, this.model.assetTypeId);
           }).onFailed((message: string) => {
             //
             // if failed, show user why
@@ -107,7 +106,7 @@ export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel> implemen
   // the cancel button has been pressed by the user
   //
   onCancel() {
-    NavigationAssetType.gotoViewPage(this, this.model.assetTypeId);
+    new NavigationCrudAssetType().gotoViewPage(this, this.model.assetTypeId);
   }
 
   // the save button has been pressed by the users
@@ -132,7 +131,7 @@ export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel> implemen
             // disable the save button
 
             this.modelChangeTracker.reset(data);
-            NavigationAssetType.gotoViewPage(this, data.assetTypeId);
+            new NavigationCrudAssetType().gotoViewPage(this, data.assetTypeId);
           })
 
           .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {

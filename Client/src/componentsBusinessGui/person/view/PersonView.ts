@@ -10,9 +10,9 @@ import CommonAppDialogController                from '@/componentsCommonGui/dial
 import Component                                from "vue-class-component";
 import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
-import NavigationPerson                         from '@/router/navigationHelpers/NavigationPerson';
+import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import PersonModel                              from '@/repositories/models/person/PersonModel';
-import PersonRepositoryFactory from '@/repositories/factory/PersonRepositoryFactory';
+import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 
 @Component({
   components: {
@@ -31,7 +31,7 @@ export default class PersonView extends BaseViewPage implements IComponentMetaDa
   model: PersonModel = new PersonModel();
   
   constructor() {
-    super();   
+    super(new NavigationCrudPerson());   
   }
 
   mounted() {
@@ -44,7 +44,7 @@ export default class PersonView extends BaseViewPage implements IComponentMetaDa
   }
 
   onEdit() {
-    NavigationPerson.gotoEditPage(this,this.model.personId);
+    this.navigationHandler.gotoEditPage(this,this.model.entityKey);
   }  
 
   onRestore() {

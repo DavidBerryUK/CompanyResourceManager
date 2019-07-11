@@ -1,4 +1,5 @@
 import { IComponentMetaData }                   from './../../components/interfaces/ComponentMetaDataInterfaces';
+import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
 import BasePage                                 from "./BasePage";
 import ThemeSettings                            from '@/componentsCommonGui/theme/ThemeSettings';
 
@@ -11,7 +12,14 @@ export default class BaseListPage extends BasePage implements IComponentMetaData
 
   listFilterText: string = "";
 
+  navigationHandler : INavigationCrud;
+
   theme: ThemeSettings = new ThemeSettings();
+
+  constructor( navigationHandler : INavigationCrud) {
+    super();
+    this.navigationHandler = navigationHandler;
+  }
 
   //
   // Navigation checks, required to enable events to reach the parent layout

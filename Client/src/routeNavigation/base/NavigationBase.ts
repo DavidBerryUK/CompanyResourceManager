@@ -1,11 +1,11 @@
 import { Location }                             from "vue-router";
 import Vue                                      from "vue";
 
-export default class NavigationBase {
+export default class NavigationBaseCrud {
 
-    static navigateTo(instance: Vue, name : string, id: string)
+    navigateTo(instance: Vue, name : string, entityId: string)
     {
-        var location: Location = {name: name,params: { id: id }};
+        var location: Location = {name: name,params: { id: entityId }};
         instance.$router.push(location);
     }
 

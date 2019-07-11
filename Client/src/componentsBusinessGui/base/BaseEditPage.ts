@@ -1,4 +1,5 @@
 import { IComponentMetaData }                   from './../../components/interfaces/ComponentMetaDataInterfaces';
+import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
 import BasePage                                 from "./BasePage";
 import DeepObjectComparator                     from "../../services/objectComparison/DeepObjectComparator"
 
@@ -14,6 +15,13 @@ export default class BaseEditPage<T> extends BasePage implements IComponentMetaD
   public modelChangeTracker!: DeepObjectComparator;
   public model!: T;
 
+  navigationHandler : INavigationCrud;
+
+  constructor( navigationHandler : INavigationCrud) {
+    super();
+    this.navigationHandler = navigationHandler;
+  }
+  
   // IRouteBeforeNavigationCheck
   //
   // this is called by the router before navigation to ensure its ok

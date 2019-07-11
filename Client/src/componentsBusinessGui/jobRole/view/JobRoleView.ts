@@ -1,4 +1,3 @@
-import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import { EnumModalButton }                      from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
 import { EnumModalIcon }                        from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
 import { EnumModalWidth }                       from '@/componentsCommonGui/dialogs/constants/StandardDialogWidth';
@@ -11,8 +10,9 @@ import CommonAppDialogController                from '@/componentsCommonGui/dial
 import Component                                from "vue-class-component";
 import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
 import JobRoleModel                             from '@/repositories/models/jobRole/JobRoleModel';
+import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
-import NavigationJobRole                        from '@/router/navigationHelpers/NavigationJobRole';
+import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
 
 @Component({
   components: {
@@ -31,7 +31,7 @@ export default class JobRoleView extends BaseViewPage implements IComponentMetaD
   model: JobRoleModel = new JobRoleModel();
   
   constructor() {
-    super();   
+    super(new NavigationCrudJobRole());   
   }
 
   mounted() {
@@ -44,7 +44,7 @@ export default class JobRoleView extends BaseViewPage implements IComponentMetaD
   }
 
   onEdit() {
-    NavigationJobRole.gotoEditPage(this,this.model.jobRoleId);
+    this.navigationHandler.gotoEditPage(this,this.model.entityKey);
   }  
 
   onRestore() {

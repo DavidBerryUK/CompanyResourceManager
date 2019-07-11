@@ -15,7 +15,7 @@ import ListFilterDialogState                    from '@/componentsCommonGui/list
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
-import NavigationAsset                          from '@/router/navigationHelpers/NavigationAsset';
+import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 
 /**
@@ -58,6 +58,10 @@ export default class AssetList extends BaseListPage implements IComponentMetaDat
   selectedItem: AssetSummaryModel = new AssetSummaryModel();
   filterModel : AssetSummaryListFilterParametersModel =  new AssetSummaryListFilterParametersModel();
 
+
+  constructor() {
+    super(new NavigationCrudAsset())
+  }
 
   //
   // View has been mounted
@@ -136,7 +140,7 @@ export default class AssetList extends BaseListPage implements IComponentMetaDat
   // user pressed the add button to create a new asset 
   //
   onAddClicked() {
-    NavigationAsset.gotoNewPage(this);    
+    this.navigationHandler.gotoNewPage(this);    
   }
 
   //
@@ -144,7 +148,7 @@ export default class AssetList extends BaseListPage implements IComponentMetaDat
   //
   onSelectItem(item: AssetSummaryModel) {
     this.selectedItem = item;
-    NavigationAsset.gotoViewPage(this,item.assetId)    
+    this.navigationHandler.gotoViewPage(this,item.assetId)    
   }
 
   //

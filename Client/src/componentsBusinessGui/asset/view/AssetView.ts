@@ -5,14 +5,14 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import { Prop }                                 from "vue-property-decorator";
 import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
 import { Watch }                                from "vue-property-decorator";
+import AssetRepositoryFactory                   from '@/repositories/factory/AssetRepositoryFactory';
 import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import Component                                from "vue-class-component";
 import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
-import NavigationAsset                          from '@/router/navigationHelpers/NavigationAsset';
-import AssetRepositoryFactory from '@/repositories/factory/AssetRepositoryFactory';
+import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 
 @Component({
   components: {
@@ -31,7 +31,7 @@ export default class AssetView extends BaseViewPage implements IComponentMetaDat
   model: AssetSummaryModel = new AssetSummaryModel();
   
   constructor() {
-    super();   
+    super(new NavigationCrudAsset());   
   }
 
   mounted() {
@@ -44,7 +44,7 @@ export default class AssetView extends BaseViewPage implements IComponentMetaDat
   }
 
   onEdit() {
-    NavigationAsset.gotoEditPage(this,this.model.assetId);
+    this.navigationHandler.gotoEditPage(this,this.model.entityKey);
   }  
 
   onRestore() {

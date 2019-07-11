@@ -13,12 +13,12 @@ import ContractListener                         from '@/repositories/contracts/C
 import DeepObjectComparator                     from '@/services/objectComparison/DeepObjectComparator';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
+import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
-import NavigationPerson                         from '@/router/navigationHelpers/NavigationPerson';
+import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import PersonModel                              from '@/repositories/models/person/PersonModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
-import JobRoleRepositoryFactory from '@/repositories/factory/JobRoleRepositoryFactory';
 
 //
 // attribute indicates this is a component, 
@@ -44,7 +44,7 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
   //
 
   constructor() {
-    super();
+    super(new NavigationCrudPerson());
     this.model = new PersonModel();
     this.modelChangeTracker = new DeepObjectComparator(this.model);
   }
@@ -91,7 +91,7 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
         var apiPersonRepository = PersonRepositoryFactory.getRepository();
         apiPersonRepository.deactivate(this.model.personId)
           .onSuccess((data: PersonModel | null) => {
-            NavigationPerson.gotoViewPage(this, this.model.personId);
+            this.navigationHandler.gotoViewPage(this, this.model.entityKey);
           }).onFailed((message: string) => {
             //
             // if failed, show user why
@@ -111,7 +111,7 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
   // the cancel button has been pressed by the user
   //
   onCancel() {
-    NavigationPerson.gotoViewPage(this, this.model.personId);
+    this.navigationHandler.gotoViewPage(this, this.model.entityKey);
   }
 
   // the save button has been pressed by the users
@@ -136,7 +136,7 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
             // disable the save button
 
             this.modelChangeTracker.reset(data);
-            NavigationPerson.gotoViewPage(this, data.personId);
+            this.navigationHandler.gotoViewPage(this, data.entityKey);
           })
 
           .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {

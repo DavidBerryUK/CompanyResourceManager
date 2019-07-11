@@ -12,7 +12,7 @@ import ListFilterDialogState                    from '@/componentsCommonGui/list
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
-import NavigationPerson                         from '@/router/navigationHelpers/NavigationPerson';
+import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import PersonListFilterParametersModel          from '@/repositories/models/person/PersonListFilterParametersModal';
 import PersonModel                              from '@/repositories/models/person/PersonModel';
@@ -59,6 +59,9 @@ export default class PersonList extends BaseListPage implements IComponentMetaDa
   selectedItem: PersonSummaryModel = new PersonSummaryModel();
   filterModel : PersonListFilterParametersModel =  new PersonListFilterParametersModel();
 
+  constructor() {
+    super(new NavigationCrudPerson());
+  }
 
   //
   // View has been mounted
@@ -137,7 +140,7 @@ export default class PersonList extends BaseListPage implements IComponentMetaDa
   // user pressed the add button to create a new person
   //
   onAddClicked() {
-    NavigationPerson.gotoNewPage(this);
+    this.navigationHandler.gotoNewPage(this);
   }
 
   //
@@ -145,7 +148,7 @@ export default class PersonList extends BaseListPage implements IComponentMetaDa
   //
   onSelectItem(item: PersonModel) {
     this.selectedItem = item;
-    NavigationPerson.gotoViewPage(this,item.personId)    
+    this.navigationHandler.gotoViewPage(this,item.personId)    
   }
 
   //

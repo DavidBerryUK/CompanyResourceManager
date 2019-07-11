@@ -15,7 +15,7 @@ import ListFilterDialogState                    from '@/componentsCommonGui/list
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
-import NavigationJobRole                        from '@/router/navigationHelpers/NavigationJobRole';
+import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 
 /**
@@ -55,6 +55,10 @@ export default class JobRoleList extends BaseListPage implements IComponentMetaD
   // the currently selected asset Type
   selectedItem: JobRoleModel = new JobRoleModel();
   filterModel : JobRoleListFilterParametersModel =  new JobRoleListFilterParametersModel();
+
+  constructor() {
+    super(new NavigationCrudJobRole())
+  }
 
   //
   // View has been mounted
@@ -133,7 +137,7 @@ export default class JobRoleList extends BaseListPage implements IComponentMetaD
   // user pressed the add button to create a new job role
   //
   onAddClicked() {
-    NavigationJobRole.gotoNewPage(this);
+    this.navigationHandler.gotoNewPage(this);
   }
 
   //
@@ -141,7 +145,7 @@ export default class JobRoleList extends BaseListPage implements IComponentMetaD
   //
   onSelectItem(item: JobRoleModel) {
     this.selectedItem = item;
-    NavigationJobRole.gotoViewPage(this,item.jobRoleId)    
+    this.navigationHandler.gotoViewPage(this,item.jobRoleId)    
   }
 
   //

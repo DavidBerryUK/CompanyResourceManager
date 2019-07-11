@@ -12,7 +12,7 @@ import CommonAppDialogController                from '@/componentsCommonGui/dial
 import Component                                from "vue-class-component";
 import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
-import NavigationAssetType                      from '@/router/navigationHelpers/NavigationAssetType';
+import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 
 @Component({
   components: {
@@ -31,7 +31,7 @@ export default class AssetTypeView extends BaseViewPage implements IComponentMet
   model: AssetTypeModel = new AssetTypeModel();
   
   constructor() {
-    super();   
+    super(new NavigationCrudAssetType());   
   }
 
   mounted() {
@@ -44,7 +44,7 @@ export default class AssetTypeView extends BaseViewPage implements IComponentMet
   }
 
   onEdit() {
-    NavigationAssetType.gotoEditPage(this,this.model.assetTypeId);
+    this.navigationHandler.gotoEditPage(this,this.model.entityKey);
   }  
 
   onRestore() {
