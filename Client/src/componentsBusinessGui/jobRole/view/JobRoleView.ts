@@ -20,18 +20,18 @@ import NavigationCrudJobRole                    from '@/routeNavigation/Navigati
     LabelDataReadOnly
   }
 })
-export default class JobRoleView extends BaseViewPage implements IComponentMetaData {
+export default class JobRoleView extends BaseViewPage<JobRoleModel> implements IComponentMetaData {
 
   //IComponentMetaData
   public componentName : string = "Asset Type View";
   public componentDescription : string = "Enables the user to view an Asset Type";
   //IComponentMetaData
 
-  @Prop() id!: string;
-  model: JobRoleModel = new JobRoleModel();
+  @Prop() id!: string;  
   
   constructor() {
     super(new NavigationCrudJobRole());   
+    this.model = new JobRoleModel();
   }
 
   mounted() {

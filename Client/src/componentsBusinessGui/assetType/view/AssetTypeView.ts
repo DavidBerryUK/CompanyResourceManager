@@ -20,18 +20,18 @@ import NavigationCrudAssetType                  from '@/routeNavigation/Navigati
     LabelDataReadOnly
   }
 })
-export default class AssetTypeView extends BaseViewPage implements IComponentMetaData {
+export default class AssetTypeView extends BaseViewPage<AssetTypeModel> implements IComponentMetaData {
 
   //IComponentMetaData
   public componentName : string = "Asset Type View";
   public componentDescription : string = "Enables the user to view an Asset Type";
   //IComponentMetaData
 
-  @Prop() id!: string;
-  model: AssetTypeModel = new AssetTypeModel();
+  @Prop() id!: string;  
   
   constructor() {
     super(new NavigationCrudAssetType());   
+    this.model = new AssetTypeModel();
   }
 
   mounted() {

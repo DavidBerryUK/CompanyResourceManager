@@ -1,8 +1,12 @@
+import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IComponentMetaData }                   from './../../components/interfaces/ComponentMetaDataInterfaces';
 import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
 import BasePage                                 from "./BasePage";
 
-export default class BaseViewPage extends BasePage implements IComponentMetaData {
+export default class BaseViewPage<T extends IApiModel> extends BasePage implements IComponentMetaData {
+
+
+  public model!: T;
 
   //IComponentMetaData
   componentName: string = "BaseViewPage";

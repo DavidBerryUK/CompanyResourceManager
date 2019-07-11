@@ -20,18 +20,18 @@ import PersonRepositoryFactory                  from '@/repositories/factory/Per
     LabelDataReadOnly
   }
 })
-export default class PersonView extends BaseViewPage implements IComponentMetaData {
+export default class PersonView extends BaseViewPage<PersonModel> implements IComponentMetaData {
 
   //IComponentMetaData
   public componentName : string = "Person View";
   public componentDescription : string = "Enables the user to view a Person";
   //IComponentMetaData
 
-  @Prop() id!: string;
-  model: PersonModel = new PersonModel();
+  @Prop() id!: string;  
   
   constructor() {
     super(new NavigationCrudPerson());   
+    this.model = new PersonModel();
   }
 
   mounted() {
