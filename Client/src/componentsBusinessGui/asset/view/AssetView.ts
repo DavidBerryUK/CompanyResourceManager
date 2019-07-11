@@ -2,9 +2,7 @@ import { EnumModalButton }                      from '@/componentsCommonGui/dial
 import { EnumModalIcon }                        from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
 import { EnumModalWidth }                       from '@/componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
-import { Prop }                                 from "vue-property-decorator";
 import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
-import { Watch }                                from "vue-property-decorator";
 import AssetRepositoryFactory                   from '@/repositories/factory/AssetRepositoryFactory';
 import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
@@ -26,8 +24,6 @@ export default class AssetView extends BaseViewPage<AssetSummaryModel> implement
   public componentName : string = "Asset View";
   public componentDescription : string = "Enables the user to view an Asset";
   //IComponentMetaData
-
-  @Prop() id!: string;  
   
   constructor() {
     super(new NavigationCrudAsset());   
@@ -35,17 +31,8 @@ export default class AssetView extends BaseViewPage<AssetSummaryModel> implement
   }
 
   mounted() {
-    this.showItemDetails();    
+    super.mounted()
   }
-
-  @Watch("id")
-  onIdChanged(value: string, oldValue: string) {
-    this.showItemDetails();
-  }
-
-  onEdit() {
-    this.navigationHandler.gotoEditPage(this,this.model.entityKey);
-  }  
 
   onRestore() {
 
@@ -92,7 +79,7 @@ export default class AssetView extends BaseViewPage<AssetSummaryModel> implement
       }).show();
   }
 
-  private showItemDetails() {
+  retrieveData() {
     var repository = AssetRepositoryFactory.getRepository();
 
     repository

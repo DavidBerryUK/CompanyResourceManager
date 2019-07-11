@@ -2,9 +2,7 @@ import { EnumModalButton }                      from '@/componentsCommonGui/dial
 import { EnumModalIcon }                        from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
 import { EnumModalWidth }                       from '@/componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
-import { Prop }                                 from "vue-property-decorator";
 import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
-import { Watch }                                from "vue-property-decorator";
 import AssetTypeModel                           from '@/repositories/models/assetType/AssetTypeModel';
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
@@ -26,8 +24,6 @@ export default class AssetTypeView extends BaseViewPage<AssetTypeModel> implemen
   public componentName : string = "Asset Type View";
   public componentDescription : string = "Enables the user to view an Asset Type";
   //IComponentMetaData
-
-  @Prop() id!: string;  
   
   constructor() {
     super(new NavigationCrudAssetType());   
@@ -35,17 +31,8 @@ export default class AssetTypeView extends BaseViewPage<AssetTypeModel> implemen
   }
 
   mounted() {
-    this.showItemDetails();    
+    super.mounted()
   }
-
-  @Watch("id")
-  onIdChanged(value: string, oldValue: string) {
-    this.showItemDetails();
-  }
-
-  onEdit() {
-    this.navigationHandler.gotoEditPage(this,this.model.entityKey);
-  }  
 
   onRestore() {
 
@@ -92,7 +79,7 @@ export default class AssetTypeView extends BaseViewPage<AssetTypeModel> implemen
       }).show();
   }
 
-  private showItemDetails() {
+  retrieveData() {
     var repository = AssetTypeRepositoryFactory.getRepository();
 
     repository

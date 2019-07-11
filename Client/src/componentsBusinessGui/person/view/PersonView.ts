@@ -2,9 +2,7 @@ import { EnumModalButton }                      from '@/componentsCommonGui/dial
 import { EnumModalIcon }                        from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
 import { EnumModalWidth }                       from '@/componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
-import { Prop }                                 from "vue-property-decorator";
 import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
-import { Watch }                                from "vue-property-decorator";
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import Component                                from "vue-class-component";
@@ -26,8 +24,6 @@ export default class PersonView extends BaseViewPage<PersonModel> implements ICo
   public componentName : string = "Person View";
   public componentDescription : string = "Enables the user to view a Person";
   //IComponentMetaData
-
-  @Prop() id!: string;  
   
   constructor() {
     super(new NavigationCrudPerson());   
@@ -35,17 +31,8 @@ export default class PersonView extends BaseViewPage<PersonModel> implements ICo
   }
 
   mounted() {
-    this.showItemDetails();    
+    super.mounted()
   }
-
-  @Watch("id")
-  onIdChanged(value: string, oldValue: string) {
-    this.showItemDetails();
-  }
-
-  onEdit() {
-    this.navigationHandler.gotoEditPage(this,this.model.entityKey);
-  }  
 
   onRestore() {
 
@@ -92,7 +79,7 @@ export default class PersonView extends BaseViewPage<PersonModel> implements ICo
       }).show();
   }
 
-  private showItemDetails() {
+  retrieveData() {
     var repository = PersonRepositoryFactory.getRepository();
 
     repository
@@ -104,6 +91,5 @@ export default class PersonView extends BaseViewPage<PersonModel> implements ICo
         }
         this.$forceUpdate();
       });
-
   }
 }
