@@ -7,10 +7,10 @@ import Component                                from "vue-class-component";
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
-import ObjectMapperAssetTypeModel                    from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeModel';
+import ObjectMapperAssetTypeModel               from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeModel';
 
 //
-// attribute indicates this is a component, 
+// attribute indicates this is a component,
 //  this is where any sub components are also registered
 @Component({
   components: {
@@ -18,20 +18,22 @@ import ObjectMapperAssetTypeModel                    from '@/repositories/object
     FormEditHeader
   }
 })
-
-export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel> implements IRouteBeforeNavigationCheck, IComponentMetaData {
-
+export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel>
+  implements IRouteBeforeNavigationCheck, IComponentMetaData {
   //IComponentMetaData
   public componentName: string = "Asset Type Edit";
-  public componentDescription: string = "Enables the user to edit an Asset Type";
+  public componentDescription: string =
+    "Enables the user to edit an Asset Type";
   //IComponentMetaData
 
-  // list of different asset types types, 
+  // list of different asset types types,
   //
   constructor() {
-    super(  new NavigationCrudAssetType(), 
-            AssetTypeRepositoryFactory.getRepository(),
-            new ObjectMapperAssetTypeModel());    
+    super(
+      new NavigationCrudAssetType(),
+      AssetTypeRepositoryFactory.getRepository(),
+      new ObjectMapperAssetTypeModel()
+    );
   }
 
   mounted() {

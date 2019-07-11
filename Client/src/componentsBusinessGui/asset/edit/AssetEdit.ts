@@ -11,8 +11,7 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
-import ObjectMapperAssetSummaryModel                 from '@/repositories/objectMappers/asset/ObjectMapperAssetSummaryModel';
-
+import ObjectMapperAssetSummaryModel            from '@/repositories/objectMappers/asset/ObjectMapperAssetSummaryModel';
 
 //
 // attribute indicates this is a component, 
@@ -37,9 +36,10 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
   //
 
   constructor() {
-    super(  new NavigationCrudAsset(), 
-            AssetRepositoryFactory.getRepository(),
-            new ObjectMapperAssetSummaryModel());        
+    super(
+      new NavigationCrudAsset(), 
+      AssetRepositoryFactory.getRepository(),
+      new ObjectMapperAssetSummaryModel() );        
   }
 
   mounted() {

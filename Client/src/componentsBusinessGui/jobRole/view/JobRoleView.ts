@@ -21,7 +21,10 @@ export default class JobRoleView extends BaseViewPage<JobRoleModel> implements I
   //IComponentMetaData
   
   constructor() {
-    super(new NavigationCrudJobRole(), JobRoleRepositoryFactory.getRepository());   
+    super(
+      new NavigationCrudJobRole(), 
+      JobRoleRepositoryFactory.getRepository());
+
     this.model = new JobRoleModel();
   }
 

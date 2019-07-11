@@ -21,7 +21,10 @@ export default class PersonView extends BaseViewPage<PersonModel> implements ICo
   //IComponentMetaData
   
   constructor() {
-    super(new NavigationCrudPerson(), PersonRepositoryFactory.getRepository());   
+    super(
+      new NavigationCrudPerson(), 
+      PersonRepositoryFactory.getRepository());
+
     this.model = new PersonModel();
   }
 

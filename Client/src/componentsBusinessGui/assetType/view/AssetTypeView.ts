@@ -21,7 +21,10 @@ export default class AssetTypeView extends BaseViewPage<AssetTypeModel> implemen
   //IComponentMetaData
   
   constructor() {
-    super(new NavigationCrudAssetType(), AssetTypeRepositoryFactory.getRepository() );   
+    super(
+      new NavigationCrudAssetType(), 
+      AssetTypeRepositoryFactory.getRepository() );
+
     this.model = new AssetTypeModel();
   }
 

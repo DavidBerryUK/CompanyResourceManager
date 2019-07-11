@@ -9,12 +9,12 @@ import JobRoleRepositoryFactory                 from '@/repositories/factory/Job
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
-import ObjectMapperPersonModel                       from '@/repositories/objectMappers/person/ObjectMapperPersonModel';
+import ObjectMapperPersonModel                  from '@/repositories/objectMappers/person/ObjectMapperPersonModel';
 import PersonModel                              from '@/repositories/models/person/PersonModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 
 //
-// attribute indicates this is a component, 
+// attribute indicates this is a component,
 //  this is where any sub components are also registered
 @Component({
   components: {
@@ -22,22 +22,25 @@ import PersonRepositoryFactory                  from '@/repositories/factory/Per
     FormEditHeader
   }
 })
-
-export default class PersonEdit extends BaseEditPage<PersonModel> implements IRouteBeforeNavigationCheck, IComponentMetaData {
-
+export default class PersonEdit extends BaseEditPage<PersonModel>
+  implements IRouteBeforeNavigationCheck, IComponentMetaData {
   //IComponentMetaData
   public componentName: string = "Person Edit";
   public componentDescription: string = "Enables the user to edit a Person";
   //IComponentMetaData
 
-  jobRoleList: GenericCollectionModel<ListItemModel> = new GenericCollectionModel<ListItemModel>()
+  jobRoleList: GenericCollectionModel<
+    ListItemModel
+  > = new GenericCollectionModel<ListItemModel>();
   // list of different person types, e.g. filling Stations, Superstore, Home goods
   //
 
   constructor() {
-    super(new NavigationCrudPerson(),
+    super(
+      new NavigationCrudPerson(),
       PersonRepositoryFactory.getRepository(),
-      new ObjectMapperPersonModel());
+      new ObjectMapperPersonModel()
+    );
   }
 
   // the component has mounted into the HTML DOM,
@@ -66,12 +69,11 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
   // load additional data,
   //
   retrieveSecondaryData(contractListener: ContractListener) {
-
     var jobRoleRepository = JobRoleRepositoryFactory.getRepository();
     jobRoleRepository
       .getActiveList()
       .onSuccess((list: GenericCollectionModel<ListItemModel>) => {
-        this.jobRoleList = list
+        this.jobRoleList = list;
       })
       .contractListener(contractListener);
   }

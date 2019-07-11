@@ -21,7 +21,10 @@ export default class AssetView extends BaseViewPage<AssetSummaryModel> implement
   //IComponentMetaData
   
   constructor() {
-    super(new NavigationCrudAsset(), AssetRepositoryFactory.getRepository())
+    super(
+      new NavigationCrudAsset(), 
+      AssetRepositoryFactory.getRepository())
+
     this.model = new AssetSummaryModel();
   }
 

@@ -1,3 +1,21 @@
+//
+// Custom contract, used to help coordinate
+// multiple long running tasks that can be initiated 
+// in different areas of the application.
+//
+// This was developed to simplify Api Repositories, to enable strongly
+// typed methods and ease of coordinating multiple data retrievals
+//
+// various callbacks are available to report the status of all 
+// process assigned to the contract,
+//
+// * onAllSucceeded
+// * onAllFailed
+// * onAllResponded
+// * onSingleSuccessResponse
+// * onSingleFailResponse
+// * onStatusChange
+//
 type ICallBackNoParameters = () => void;
 type ICallBackStatusChange = (
     contractsTotal: number,
