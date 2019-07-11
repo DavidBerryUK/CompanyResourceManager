@@ -1,10 +1,15 @@
-import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
+import { EnumModalButton }                      from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
+import { EnumModalIcon }                        from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
+import { EnumModalWidth }                       from '@/componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
-import { IComponentMetaData }                   from './../../components/interfaces/ComponentMetaDataInterfaces';
+import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
 import { Prop }                                 from 'vue-property-decorator';
+import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
 import { Watch }                                from 'vue-property-decorator';
 import BasePage                                 from "./BasePage";
+import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
+import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 
 export default class BaseViewPage<T extends IApiModel> extends BasePage implements IComponentMetaData {
 
@@ -39,7 +44,49 @@ export default class BaseViewPage<T extends IApiModel> extends BasePage implemen
     this.retrieveData();
   }
 
-  
+  onRestore() {
+
+    //
+    // ask the user to confirm they with to restore the asset type
+    //
+    var dialog = new CommonAppDialogController(this);
+    dialog.createWithParameters(`Restore ${this.model.entityName} ?`,
+                                `Are you sure you wish to make ${this.model.entityValue} active again?`,
+                                EnumModalIcon.Question,
+                                EnumModalButton.YesNo,
+                                EnumModalWidth.FixedMedium)
+      .yesPressed(() => {
+
+        //
+        // call api to restore the asset type, on success display the read only version
+        //        
+        this.repository
+          .activate(this.model.entityKey)
+          .onSuccess((data: T | null) => {
+            if ( data)
+            {
+              this.model = data;
+            }
+            
+          })
+          .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
+            this.addValidationErrors(validationMessages);
+          })
+          .onFailed((message: string) => {
+            //
+            // if failed, show user why
+            //
+            var dialog = new CommonAppDialogController(this);
+            dialog.createWithParameters(`Restore ${this.model.entityName}`,
+                                        `Failed to restore ${this.model.entityName} :${message}`,
+                                        EnumModalIcon.Error,
+                                        EnumModalButton.Ok,
+                                        EnumModalWidth.FixedMedium)
+                    .show();
+          });
+
+      }).show();
+  }  
     
   public retrieveData() {
   
