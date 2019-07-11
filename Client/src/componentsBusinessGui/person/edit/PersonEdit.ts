@@ -1,20 +1,15 @@
-import { EnumModalButton }                      from '../../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
-import { EnumModalIcon }                        from '../../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
-import { EnumModalWidth }                       from '../../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IComponentMetaData }                   from '../../../components/interfaces/ComponentMetaDataInterfaces';
 import { IRouteBeforeNavigationCheck }          from '../../../router/interfaces/NavigationCheckInterfaces';
-import { ValidationMessage }                    from '../../../repositories/contracts/ApiResponseContract';
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
-import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import Component                                from "vue-class-component";
 import ContractListener                         from '@/repositories/contracts/ContractListener';
-import DeepObjectComparator                     from '@/services/objectComparison/DeepObjectComparator';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
+import ObjectMapperPerson                       from '@/repositories/objectMappers/person/ObjectMapperPerson';
 import PersonModel                              from '@/repositories/models/person/PersonModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 
@@ -40,9 +35,9 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
   //
 
   constructor() {
-    super(new NavigationCrudPerson(), PersonRepositoryFactory.getRepository());
-    this.model = new PersonModel();
-    this.modelChangeTracker = new DeepObjectComparator(this.model);
+    super(new NavigationCrudPerson(),
+      PersonRepositoryFactory.getRepository(),
+      new ObjectMapperPerson());
   }
 
   // the component has mounted into the HTML DOM,
@@ -58,66 +53,26 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
 
   // the delete button has been pressed
   //
-  onDelete() {
-    super.onDelete();
+  onArchive() {
+    super.onArchive();
   }
 
   // the save button has been pressed by the users
   //
   onSave() {
-   super.onSave();
+    super.onSave();
   }
 
+  // load additional data,
   //
-  // model code away from logic / navigation code, 
-  //  this allows re-use and prevents duplication
-  //
-  retrieveData() {
-    
+  retrieveSecondaryData(constractListener: ContractListener) {
+
     var jobRoleRepository = JobRoleRepositoryFactory.getRepository();
-
-    //
-    // when all the trailing repositories have finished then do this.
-    //
-
-
-    //
-    // load the person for id
-    //
-    if (this.id == 'new') {
-      //
-      // if this is a create page, then just create a new person model, otherwise
-      //  get a person via the API
-      //
-      this.model = new PersonModel();
-      this.modelChangeTracker = new DeepObjectComparator(this.model);
-      this.isLoading = false;
-    }
-    else {
-      var listener = new ContractListener();
-
-      listener.monitor()
-        .onAllResponded(() => {
-          this.isLoading = false;
-        });
-
-
-      jobRoleRepository
-        .getActiveList()
-        .onSuccess((list: GenericCollectionModel<ListItemModel>) => {
-          this.jobRoleList = list
-        })
-        .contractListener(listener);
-
-      this.repository
-        .getById(this.id)
-        .onSuccess((data: PersonModel | null) => {
-          if (data != null) {
-            this.model = data;
-            this.modelChangeTracker = new DeepObjectComparator(this.model);
-          }
-        })
-        .contractListener(listener);
-    }
+    jobRoleRepository
+      .getActiveList()
+      .onSuccess((list: GenericCollectionModel<ListItemModel>) => {
+        this.jobRoleList = list
+      })
+      .contractListener(constractListener);
   }
 }

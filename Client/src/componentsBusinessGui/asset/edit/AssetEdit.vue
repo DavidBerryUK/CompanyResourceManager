@@ -47,11 +47,10 @@
                           :error-messages="errors.collect('Asset Type')"
                           v-model="model.assetTypeId"></v-select>
               </v-flex>
-
+              <v-flex xs4>
                 <v-text-field
                   label="Name"
-                  v-model="model.assetTypeName"                  
-                ></v-text-field>
+                  v-model="model.assetTypeName"></v-text-field>
               </v-flex>
               <v-flex xs4>
                 <v-text-field

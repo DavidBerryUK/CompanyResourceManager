@@ -6,7 +6,7 @@
       :isActive="model.isActive"
       @onSave="onSave"
       @onCancel="onCancel"
-      @onDelete="onDelete"
+      @onArchive="onArchive"
     ></custom-form-edit-header>
 
     <custom-loader v-if="isLoading" key="panel-loading"></custom-loader>

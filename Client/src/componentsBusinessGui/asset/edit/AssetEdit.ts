@@ -6,12 +6,12 @@ import AssetTypeRepositoryFactory               from '@/repositories/factory/Ass
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
 import Component                                from "vue-class-component";
 import ContractListener                         from '@/repositories/contracts/ContractListener';
-import DeepObjectComparator                     from '@/services/objectComparison/DeepObjectComparator';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
+import ObjectMapperAssetSummary                 from '@/repositories/objectMappers/asset/ObjectMapperAssetSummary';
 
 
 //
@@ -37,9 +37,9 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
   //
 
   constructor() {
-    super(new NavigationCrudAsset(), AssetRepositoryFactory.getRepository() );    
-    this.model = new AssetSummaryModel();
-    this.modelChangeTracker = new DeepObjectComparator(this.model);
+    super(  new NavigationCrudAsset(), 
+            AssetRepositoryFactory.getRepository(),
+            new ObjectMapperAssetSummary());        
   }
 
   mounted() {
@@ -53,8 +53,8 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
 
   // the delete button has been pressed
   //
-  onDelete() {
-    super.onDelete();
+  onArchive() {
+    super.onArchive();
   }
 
 
@@ -64,55 +64,18 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
       super.onSave();
   }
 
+   // load additional data,
   //
-  // model code away from logic / navigation code, 
-  //  this allows re-use and prevents duplication
-  //
-  retrieveData() {    
-    
+  retrieveSecondaryData(constractListener: ContractListener) {
+
     var assetTypeRepository = AssetTypeRepositoryFactory.getRepository();
 
-    //
-    // when all the trailing repositories have finished then do this.
-    //
-
-
-    //
-    // load the asset for id
-    //
-    if (this.id == 'new') {
-      //
-      // if this is a create page, then just create a new asset model, otherwise
-      //  get a asset via the API
-      //
-      this.model = new AssetSummaryModel();
-      this.modelChangeTracker = new DeepObjectComparator(this.model);
-      this.isLoading = false;
-    }
-    else {
-      var listener = new ContractListener();
-
-      listener.monitor()
-        .onAllResponded(() => {
-          this.isLoading = false;
-        });
-
-        assetTypeRepository
-        .getActiveList()
-        .onSuccess((list:GenericCollectionModel<ListItemModel> ) => {
-          this.assetTypesList = list
-        })
-        .contractListener(listener);
-
-        this.repository
-        .getById(this.id)
-        .onSuccess((data: AssetSummaryModel | null) => {
-          if (data != null) {
-            this.model = data;
-            this.modelChangeTracker = new DeepObjectComparator(this.model);
-          }
-        })        
-        .contractListener(listener);
-    }
+    assetTypeRepository
+    .getActiveList()
+    .onSuccess((list:GenericCollectionModel<ListItemModel> ) => {
+      this.assetTypesList = list
+    })
+    .contractListener(constractListener);
   }
+ 
 }

@@ -4,13 +4,15 @@ import { EnumModalWidth }                       from '../../componentsCommonGui/
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IComponentMetaData }                   from './../../components/interfaces/ComponentMetaDataInterfaces';
 import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
+import { IObjectMapper }                        from '@/repositories/objectMappers/interfaces/IObjectMapper';
 import { Prop }                                 from 'vue-property-decorator';
+import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
 import { Watch }                                from 'vue-property-decorator';
 import BasePage                                 from "./BasePage";
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
+import ContractListener                         from '@/repositories/contracts/ContractListener';
 import DeepObjectComparator                     from "../../services/objectComparison/DeepObjectComparator"
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
-import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
 
 export default class BaseEditPage<T extends IApiModel> extends BasePage implements IComponentMetaData {
   //IComponentMetaData
@@ -24,16 +26,23 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
   //
   public modelChangeTracker!: DeepObjectComparator;
   public model!: T;
+  public objectMapper: IObjectMapper<T>;
   
 
   @Prop() id!: string;
 
   navigationHandler : INavigationCrud;
 
-  constructor( navigationHandler : INavigationCrud, repository : GenericApiRepository<T, any, any>) {
+  constructor(  navigationHandler : INavigationCrud, 
+                repository : GenericApiRepository<T, any, any>,
+                objectMapper: IObjectMapper<T>) {
     super();
     this.navigationHandler = navigationHandler;
     this.repository = repository;
+    this.objectMapper = objectMapper;
+    
+    this.model = this.objectMapper.map({})
+    this.modelChangeTracker = new DeepObjectComparator(this.model);
   }
 
   @Watch("id")
@@ -77,19 +86,63 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
   }
 
   retrieveData() {
+  
+
+    //
+    // load the person for id
+    //
+    if (this.id == 'new') {
+      //
+      // if this is a create page, then just create a new person model, otherwise
+      //  get a person via the API
+      //  
+
+      this.model = this.objectMapper.map({})
+      this.modelChangeTracker = new DeepObjectComparator(this.model);
+      this.isLoading = false;
+    }
+    else {
+
+      //
+      // when all the trailing repositories have finished then do this.
+      //
+      var listener = new ContractListener();
+
+      listener.monitor()
+        .onAllResponded(() => {
+          this.isLoading = false;
+        });
+
+
+      this.retrieveSecondaryData(listener);
+
+      this.repository
+        .getById(this.id)
+        .onSuccess((data: T | null) => {
+          if (data != null) {
+            this.model = data;
+            this.modelChangeTracker = new DeepObjectComparator(this.model);
+          }
+        })
+        .contractListener(listener);
+    }
+  }
+  
+  retrieveSecondaryData(constractListener: ContractListener) {
 
   }
 
   // the delete button has been pressed
   //
-  onDelete() {
+  onArchive() {
 
     //
     // ask the user to confirm they with to delete the asset
     //
     var dialog = new CommonAppDialogController(this);
-    dialog.createWithParameters(`Archive ${this.model.entityName} ?`,
-      `Are you sure you wish to Archive this ${this.model.entityValue}`,
+
+    dialog.createWithParameters(`Archive ${this.model.entityName}?`,
+      `Are you sure you wish to Archive this ${this.model.entityValue}?`,
       EnumModalIcon.Question,
       EnumModalButton.YesNo,
       EnumModalWidth.FixedMedium)
@@ -153,7 +206,7 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
             //  save failed
             var dialog = new CommonAppDialogController(this);
             dialog.createWithParameters(
-              `Save Asset ${this.model.entityValue}`,
+              `Save ${this.model.entityName} ${this.model.entityValue}`,
               `Failed to save :${message}`,
               EnumModalIcon.Error,
               EnumModalButton.Ok,

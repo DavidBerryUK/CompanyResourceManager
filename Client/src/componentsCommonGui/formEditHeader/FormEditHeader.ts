@@ -26,8 +26,8 @@ export default class FormEditHeader extends Vue {
         return {};
     }
 
-    onDelete() {
-        this.$emit("onDelete");
+    onArchive() {
+        this.$emit("onArchive");
     }
 
     onSave() {
