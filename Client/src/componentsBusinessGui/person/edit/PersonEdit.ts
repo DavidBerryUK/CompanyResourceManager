@@ -30,10 +30,9 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
   public componentDescription: string = "Enables the user to edit a Person";
   //IComponentMetaData
 
+  // reference data, each person has a job role
   jobRoleList: GenericCollectionModel<ListItemModel> = new GenericCollectionModel<ListItemModel>()
-  // list of different person types, e.g. filling Stations, Superstore, Home goods
-  //
-
+  
   constructor() {
     super(new NavigationCrudPerson(),
       PersonRepositoryFactory.getRepository(),
@@ -41,7 +40,6 @@ export default class PersonEdit extends BaseEditPage<PersonModel> implements IRo
   }
 
   // the component has mounted into the HTML DOM,
-  //  load the data required for the page
   mounted() {
     super.mounted();
   }

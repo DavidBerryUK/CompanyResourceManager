@@ -26,14 +26,13 @@ export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel> implemen
   public componentDescription: string = "Enables the user to edit an Asset Type";
   //IComponentMetaData
 
-  // list of different asset types types, 
-  //
   constructor() {
     super(  new NavigationCrudAssetType(), 
             AssetTypeRepositoryFactory.getRepository(),
             new ObjectMapperAssetType());    
   }
 
+  // the form has been mounted into the DOM
   mounted() {
     super.mounted();
   }

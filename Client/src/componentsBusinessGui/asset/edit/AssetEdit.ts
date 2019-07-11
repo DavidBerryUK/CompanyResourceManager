@@ -31,10 +31,9 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
   public componentDescription: string = "Enables the user to edit an Asset";
   //IComponentMetaData
 
+  // reference data - each asset has an asset type
   public assetTypesList : GenericCollectionModel<ListItemModel> = new GenericCollectionModel<ListItemModel>();
 
-  // list of different asset, 
-  //
 
   constructor() {
     super(  new NavigationCrudAsset(), 
@@ -42,6 +41,7 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
             new ObjectMapperAssetSummary());        
   }
 
+  // the form has been mounted into the DOM
   mounted() {
     super.mounted();
   }
