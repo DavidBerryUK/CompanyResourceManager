@@ -26,12 +26,16 @@ export default class JobRoleView extends BaseViewPage<JobRoleModel> implements I
   //IComponentMetaData
   
   constructor() {
-    super(new NavigationCrudJobRole());   
+    super(new NavigationCrudJobRole(), JobRoleRepositoryFactory.getRepository());   
     this.model = new JobRoleModel();
   }
 
   mounted() {
     super.mounted()
+  }
+
+  onEdit() {
+    super.onEdit()
   }
 
   onRestore() {
@@ -77,20 +81,5 @@ export default class JobRoleView extends BaseViewPage<JobRoleModel> implements I
           });
 
       }).show();
-  }
-
-  retrieveData() {
-    var repository = JobRoleRepositoryFactory.getRepository();
-
-    repository
-      .getById(this.id)
-      .onSuccess((data: JobRoleModel | null) => {
-
-        if (data !== null) {
-          this.model = data as JobRoleModel;
-        }
-        this.$forceUpdate();
-      });
-
-  }
+  }  
 }

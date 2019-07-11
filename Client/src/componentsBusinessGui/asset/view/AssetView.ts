@@ -26,12 +26,16 @@ export default class AssetView extends BaseViewPage<AssetSummaryModel> implement
   //IComponentMetaData
   
   constructor() {
-    super(new NavigationCrudAsset());   
+    super(new NavigationCrudAsset(), AssetRepositoryFactory.getRepository())
     this.model = new AssetSummaryModel();
   }
 
   mounted() {
     super.mounted()
+  }
+
+  onEdit() {
+    super.onEdit()
   }
 
   onRestore() {
@@ -77,20 +81,5 @@ export default class AssetView extends BaseViewPage<AssetSummaryModel> implement
           });
 
       }).show();
-  }
-
-  retrieveData() {
-    var repository = AssetRepositoryFactory.getRepository();
-
-    repository
-      .getById(this.id)
-      .onSuccess((data: AssetSummaryModel | null) => {
-
-        if (data !== null) {
-          this.model = data as AssetSummaryModel;
-        }
-        this.$forceUpdate();
-      });
-
   }
 }

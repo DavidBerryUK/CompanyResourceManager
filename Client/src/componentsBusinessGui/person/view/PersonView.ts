@@ -26,12 +26,16 @@ export default class PersonView extends BaseViewPage<PersonModel> implements ICo
   //IComponentMetaData
   
   constructor() {
-    super(new NavigationCrudPerson());   
+    super(new NavigationCrudPerson(), PersonRepositoryFactory.getRepository());   
     this.model = new PersonModel();
   }
 
   mounted() {
     super.mounted()
+  }
+
+  onEdit() {
+    super.onEdit()
   }
 
   onRestore() {
@@ -79,17 +83,4 @@ export default class PersonView extends BaseViewPage<PersonModel> implements ICo
       }).show();
   }
 
-  retrieveData() {
-    var repository = PersonRepositoryFactory.getRepository();
-
-    repository
-      .getById(this.id)
-      .onSuccess((data: PersonModel | null) => {
-
-        if (data !== null) {
-          this.model = data as PersonModel;
-        }
-        this.$forceUpdate();
-      });
-  }
 }
