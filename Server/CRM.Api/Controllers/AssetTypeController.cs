@@ -55,16 +55,16 @@ namespace CRM.Api.Controllers
 
 
         [HttpPut("{assetTypeId}")]
-        public async Task<ActionResult<AssetTypeExtended>> Update(Guid assetTypeId, [FromBody] AssetTypeSummary assetTypeSummary)
+        public async Task<ActionResult<AssetTypeExtended>> Update(Guid assetTypeId, [FromBody] AssetTypeExtended assetType)
         {
-            var data = await _assetTypeUpdateService.Update(assetTypeId, assetTypeSummary);
+            var data = await _assetTypeUpdateService.Update(assetTypeId, assetType);
             return Ok(data);
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<AssetTypeExtended>> Create([FromBody] AssetTypeExtended assetTypeSummary)
+        public async Task<ActionResult<AssetTypeExtended>> Create([FromBody] AssetTypeExtended assetType)
         {
-            var data = await _assetTypeUpdateService.Create(assetTypeSummary);
+            var data = await _assetTypeUpdateService.Create(assetType);
             return Ok(data);
         }
 
