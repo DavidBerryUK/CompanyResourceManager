@@ -1,6 +1,10 @@
 import { AxiosRequestConfig }               from 'axios';
 import ConfigurationService                 from '../../../services/configuration/ConfigurationService';
 
+//
+// Configuration helper, 
+//  strongly maps data from the "appConfig.json" in the root directory
+//
 export default class BaseApiConfig {
 
     private static staticConfig: AxiosRequestConfig | null = null;

@@ -6,7 +6,9 @@ import axios                                from 'axios';
 import BaseApiConfig                        from './ApiBaseConfig';
 import GenericCollectionModel               from '@/repositories/models/shared/collections/GenericCollectionModel';
 
-
+/**
+ * Post message to api endpoint and accept collection
+ */
 export default class ApiBasePostWithCollectionResult {
 
     /**
