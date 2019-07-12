@@ -37,37 +37,37 @@
     <None Update="Scripts\Release-00001\01.Cleardown\010-CleardownTables.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\025-Skill.sql">
+    <None Update="Scripts\Release-00001\02.Tables\040-Skill.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\020-Team.sql">
+    <None Update="Scripts\Release-00001\02.Tables\030-Team.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\040-JobRole.sql">
+    <None Update="Scripts\Release-00001\02.Tables\050-JobRole.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\005-AssetType.sql">
+    <None Update="Scripts\Release-00001\02.Tables\010-AssetType.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\010-Asset.sql">
+    <None Update="Scripts\Release-00001\02.Tables\020-Asset.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\050-Person.sql">
+    <None Update="Scripts\Release-00001\02.Tables\060-Person.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\052-PersonTeam.sql">
+    <None Update="Scripts\Release-00001\02.Tables\070-PersonTeam.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\054-PersonAsset.sql">
+    <None Update="Scripts\Release-00001\02.Tables\080-PersonAsset.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\056-PersonSkill.sql">
+    <None Update="Scripts\Release-00001\02.Tables\090-PersonSkill.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\06.Data\030 Skill.sql">
+    <None Update="Scripts\Release-00001\06.Data\040 Skill.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\06.Data\025 Team.sql">
+    <None Update="Scripts\Release-00001\06.Data\030 Team.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scripts\Release-00001\06.Data\020 Asset.sql">
@@ -76,10 +76,10 @@
     <None Update="Scripts\Release-00001\06.Data\010 AssetType.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\06.Data\190 JobRoles.sql">
+    <None Update="Scripts\Release-00001\06.Data\050 JobRoles.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\06.Data\200 Person.sql">
+    <None Update="Scripts\Release-00001\06.Data\060 Person.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

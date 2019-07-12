@@ -1,7 +1,6 @@
 ﻿USE [CRM]
 GO
 
-
 SET ANSI_NULLS ON
 GO
 
@@ -10,39 +9,39 @@ GO
 
 -- Create Table
 --
-CREATE TABLE dbo.PersonTeam
+CREATE TABLE dbo.PersonSkill
 	(
 		PersonId uniqueidentifier NOT NULL,
-		TeamId uniqueidentifier NOT NULL
+		SkillId uniqueidentifier NOT NULL
 	)  ON [PRIMARY]
 GO
 
 -- Create Primary Key
 --
-ALTER TABLE dbo.PersonTeam ADD CONSTRAINT
-	PK_PersonTeam PRIMARY KEY CLUSTERED 
+ALTER TABLE dbo.PersonSkill ADD CONSTRAINT
+	PK_PersonSkill PRIMARY KEY CLUSTERED 
 	(
 	PersonId,
-	TeamId
+	SkillId
 	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 
 GO
 
 -- Add foreign keys
 --
-ALTER TABLE dbo.PersonTeam ADD CONSTRAINT
-	FK_PersonTeam_Skill FOREIGN KEY
+ALTER TABLE dbo.PersonSkill ADD CONSTRAINT
+	FK_PersonSkill_Skill FOREIGN KEY
 	(
-	TeamId
-	) REFERENCES dbo.Team
+	SkillId
+	) REFERENCES dbo.Skill
 	(
-	TeamId
+	SkillId
 	) ON UPDATE  NO ACTION 
 	 ON DELETE  NO ACTION 
 	
 GO
-ALTER TABLE dbo.PersonTeam ADD CONSTRAINT
-	FK_PersonTeam_Person FOREIGN KEY
+ALTER TABLE dbo.PersonSkill ADD CONSTRAINT
+	FK_PersonSkill_Person FOREIGN KEY
 	(
 	PersonId
 	) REFERENCES dbo.Person
@@ -50,3 +49,5 @@ ALTER TABLE dbo.PersonTeam ADD CONSTRAINT
 	PersonId
 	) ON UPDATE  NO ACTION 
 	 ON DELETE  NO ACTION 
+
+GO

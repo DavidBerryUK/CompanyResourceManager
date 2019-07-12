@@ -15,3 +15,5 @@ INSERT INTO Skill
 ('2E14EB81-B1DF-44D0-8BA2-0FAFCEED0CBA'	,'JQuery'			,'Front-end JQuery'					,1),
 ('664D040E-BDB9-4318-965A-9E7300FFFC29'	,'IOS'				,'IOS Mobile'						,1),
 ('44063F9C-D2AD-44BA-ADA8-9F022C44D743'	,'Web Design'		,'Web Design'						,1)
+
+GO

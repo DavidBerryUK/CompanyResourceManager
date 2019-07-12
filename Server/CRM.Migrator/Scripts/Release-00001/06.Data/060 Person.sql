@@ -69,6 +69,4 @@ INSERT INTO Person
 ('3493922f-6e41-4768-8071-e09fe34f3900 ','Will'		,'Manning'		,'will.manning@axium.co.uk'			,'C20DDE81-9430-4E33-B410-9856409935E3'		,1),
 ('43531ac0-4ccf-4f35-8f4a-e1b52d12c97d ','Yorke'	,'Bean'			,'yorke.bean@axium.co.uk'			,'C20DDE81-9430-4E33-B410-9856409935E3'		,1)
 
-
-
-
+GO

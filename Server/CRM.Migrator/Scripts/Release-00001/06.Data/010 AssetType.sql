@@ -14,14 +14,4 @@ INSERT INTO AssetType
 ( '60BBA399-5D88-4168-8E33-C576E73B3317'	,'Laptop Bag'		,0					,0						,1),
 ( '51D61411-1DB3-42AE-A860-5A040D193343'	,'Display Adaptor'	,0					,0						,1)
 
-
 GO
-
-
-
-
-
-
-
-
-

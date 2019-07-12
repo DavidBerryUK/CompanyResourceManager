@@ -15,4 +15,5 @@ INSERT INTO Team
 ('AF51748C-09B8-4E18-9E0F-E6B4EB068C82'	,',Net Academy'	,'Answer Academy - .Net'			,1),
 ('381919E7-664E-40D8-9F16-96B4CC90285B'	,'Java Academy'	,'Answer Academy - Java'			,1),
 ('F4289862-51E0-49EE-A636-03F84FE1A548'	,'Test Academy'	,'Answer Academy - Testers'			,1)
-G
+
+GO
