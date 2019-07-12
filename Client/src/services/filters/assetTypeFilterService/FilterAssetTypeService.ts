@@ -1,21 +1,21 @@
 import { IFilterModelService }                  from '@/services/interfaces/IFilterModelService';
-import AssetTypeModel                           from '@/repositories/models/assetType/AssetTypeModel';
+import AssetTypeSummmaryModel                           from '@/repositories/models/assetType/AssetTypeSummaryModel';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 
 export default class FilterAssetTypeService implements IFilterModelService {
 
     filterWithRankings( filterText : string , 
-                        list : GenericCollectionModel<AssetTypeModel>) : GenericCollectionModel<AssetTypeModel> {
+                        list : GenericCollectionModel<AssetTypeSummmaryModel>) : GenericCollectionModel<AssetTypeSummmaryModel> {
                     
-        var rankingListA = new Array<AssetTypeModel>();
-        var rankingListB = new Array<AssetTypeModel>();
+        var rankingListA = new Array<AssetTypeSummmaryModel>();
+        var rankingListB = new Array<AssetTypeSummmaryModel>();
 
 
         var filterTextLowerCase = filterText.toLowerCase();
 
-        var castList = list.items as Array<AssetTypeModel>;
+        var castList = list.items as Array<AssetTypeSummmaryModel>;
         
-        castList.forEach((item: AssetTypeModel) => {
+        castList.forEach((item: AssetTypeSummmaryModel) => {
             var indexOfName = item.name.toLowerCase().indexOf(filterTextLowerCase);
         
             if ( indexOfName == 0) {
@@ -27,7 +27,7 @@ export default class FilterAssetTypeService implements IFilterModelService {
             }
         });
 
-        var filteredDataList = new GenericCollectionModel<AssetTypeModel>();
+        var filteredDataList = new GenericCollectionModel<AssetTypeSummmaryModel>();
         filteredDataList.items = rankingListA
           .concat(rankingListB);
 

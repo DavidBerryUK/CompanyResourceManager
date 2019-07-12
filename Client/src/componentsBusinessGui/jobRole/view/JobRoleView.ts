@@ -2,7 +2,7 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
 import Component                                from "vue-class-component";
 import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
-import JobRoleModel                             from '@/repositories/models/jobRole/JobRoleModel';
+import JobRoleSummaryModel                             from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
@@ -13,7 +13,7 @@ import NavigationCrudJobRole                    from '@/routeNavigation/Navigati
     LabelDataReadOnly
   }
 })
-export default class JobRoleView extends BaseViewPage<JobRoleModel> implements IComponentMetaData {
+export default class JobRoleView extends BaseViewPage<JobRoleSummaryModel> implements IComponentMetaData {
 
   //IComponentMetaData
   public componentName : string = "Asset Type View";
@@ -25,7 +25,7 @@ export default class JobRoleView extends BaseViewPage<JobRoleModel> implements I
       new NavigationCrudJobRole(), 
       JobRoleRepositoryFactory.getRepository());
 
-    this.model = new JobRoleModel();
+    this.model = new JobRoleSummaryModel();
   }
 
   mounted() {

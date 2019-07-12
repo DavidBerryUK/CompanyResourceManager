@@ -2,8 +2,8 @@ import { EnumModalWidth }                       from '@/componentsCommonGui/dial
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import { MaterialDesignColor }                  from '@/services/colors/materialDesign/constants/MaterialDesignColors';
 import AssetTypeListFilterParametersModel       from '@/repositories/models/assetType/AssetTypeListFilterParametersModal';
-import AssetTypeModel                           from '@/repositories/models/assetType/AssetTypeModel';
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
+import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
 import BaseListPage                             from '@/componentsBusinessGui/base/BaseListPage';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import CommonAppDialogOptions                   from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
@@ -17,7 +17,7 @@ import Loader                                   from '@/componentsCommonGui/load
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import ObjectArrayMapperAssetTypeModel          from '@/repositories/objectMappers/assetType/ObjectArrayMapperAssetTypeModel';
-import ObjectMapperAssetTypeModel               from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeModel';
+import ObjectMapperAssetTypeSummaryModel        from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeSummaryModel';
 
 /**
  * Presents a list of categories to the user that can be filtered
@@ -36,7 +36,7 @@ import ObjectMapperAssetTypeModel               from '@/repositories/objectMappe
     FilterButton
   }
 })
-export default class AssetTypeList extends BaseListPage<AssetTypeModel> implements IComponentMetaData {
+export default class AssetTypeList extends BaseListPage<AssetTypeSummmaryModel> implements IComponentMetaData {
 
   //IComponentMetaData
   componentName: string = "Asset Type List";
@@ -45,7 +45,7 @@ export default class AssetTypeList extends BaseListPage<AssetTypeModel> implemen
 
   constructor() {
     super(  new NavigationCrudAssetType(), 
-            new ObjectMapperAssetTypeModel(),
+            new ObjectMapperAssetTypeSummaryModel(),
             new ObjectArrayMapperAssetTypeModel())
   }
 
@@ -127,7 +127,7 @@ export default class AssetTypeList extends BaseListPage<AssetTypeModel> implemen
   //
   // a list item has been selected, navigate to the asset type view screen
   //
-  onSelectItem(item: AssetTypeModel) {
+  onSelectItem(item: AssetTypeSummmaryModel) {
     this.selectedItem = item;
     this.navigationHandler.gotoViewPage(this,item.assetTypeId)    
   }
@@ -137,20 +137,20 @@ export default class AssetTypeList extends BaseListPage<AssetTypeModel> implemen
   //
   private listenToModelUpdates() {
 
-    NotificationFactory.instance.getNotificationInstance<AssetTypeModel>(new AssetTypeModel().entityName)
-      .onItemCreated(this, (model: AssetTypeModel) => {
+    NotificationFactory.instance.getNotificationInstance<AssetTypeSummmaryModel>(new AssetTypeSummmaryModel().entityName)
+      .onItemCreated(this, (model: AssetTypeSummmaryModel) => {
         this.updateList(model, true);
       })
-      .onItemUpdated(this, (model: AssetTypeModel) => {
+      .onItemUpdated(this, (model: AssetTypeSummmaryModel) => {
         this.updateList(model, false);
       })
-      .onItemDeleted(this, (model: AssetTypeModel) => {
+      .onItemDeleted(this, (model: AssetTypeSummmaryModel) => {
         this.updateList(model, false);
       })
-      .onItemActivated(this, (model: AssetTypeModel) => {
+      .onItemActivated(this, (model: AssetTypeSummmaryModel) => {
         this.updateList(model, false);
       })
-      .onItemDeactivated(this, (model: AssetTypeModel) => {
+      .onItemDeactivated(this, (model: AssetTypeSummmaryModel) => {
         this.updateList(model, false);
       });
   }
@@ -163,7 +163,7 @@ export default class AssetTypeList extends BaseListPage<AssetTypeModel> implemen
    * @param {boolean} isNew - if this is a new item, it is injected into the list array
    * @memberof PersonList
    */
-  private updateList(model: AssetTypeModel, isNew: boolean) {
+  private updateList(model: AssetTypeSummmaryModel, isNew: boolean) {
     if (isNew) {
       this.dataList.addItem(model);
       this.selectedItem = model;
@@ -186,7 +186,7 @@ export default class AssetTypeList extends BaseListPage<AssetTypeModel> implemen
     this.isLoading = true;
 
     repository.getFilteredList(this.filterModel)
-      .onSuccess((itemList: GenericCollectionModel<AssetTypeModel>) => {        
+      .onSuccess((itemList: GenericCollectionModel<AssetTypeSummmaryModel>) => {        
         this.dataList = itemList;
         this.isLoading = false;
       })
@@ -205,7 +205,7 @@ export default class AssetTypeList extends BaseListPage<AssetTypeModel> implemen
   // 2) allows reuse of some nice code
   // 3) filtering is more business logic than display logic
   //
-  get filteredList(): GenericCollectionModel<AssetTypeModel> {
+  get filteredList(): GenericCollectionModel<AssetTypeSummmaryModel> {
      var filterListService = new FilterAssetTypeService();
      return filterListService.filterWithRankings("",this.dataList)
   }

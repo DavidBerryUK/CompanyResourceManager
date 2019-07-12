@@ -2,12 +2,11 @@ import { Dictionary }                           from 'vue-router/types/router';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IComponentMetaData }                   from "../../components/interfaces/ComponentMetaDataInterfaces";
 import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
-import AssetTypeModel                           from '@/repositories/models/assetType/AssetTypeModel';
+import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
 import GenericNotifications                     from './GenericNotifications';
-import JobRoleModel                             from '@/repositories/models/jobRole/JobRoleModel';
+import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import ModelUpdateNotifications                 from './ModelUpdateNotifications';
-import PersonModel                              from '@/repositories/models/person/PersonModel';
-
+import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 
 export default class NotificationFactory {
 
@@ -30,9 +29,9 @@ export default class NotificationFactory {
         if (this.factoryInstance == null) {            
             this.factoryInstance = new NotificationFactory();
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetSummaryModel>(new AssetSummaryModel().entityName))
-            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetTypeModel>(new AssetTypeModel().entityName))
-            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<JobRoleModel>(new JobRoleModel().entityName))
-            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<PersonModel>(new PersonModel().entityName))            
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetTypeSummmaryModel>(new AssetTypeSummmaryModel().entityName))
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<JobRoleSummaryModel>(new JobRoleSummaryModel().entityName))
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<PersonSummaryModel>(new PersonSummaryModel().entityName))            
         }
         return this.factoryInstance;
     }

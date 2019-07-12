@@ -9,8 +9,8 @@ import JobRoleRepositoryFactory                 from '@/repositories/factory/Job
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
-import ObjectMapperPersonModel                  from '@/repositories/objectMappers/person/ObjectMapperPersonModel';
-import PersonModel                              from '@/repositories/models/person/PersonModel';
+import ObjectMapperPersonExtendedModel          from '@/repositories/objectMappers/person/ObjectMapperPersonExtendedModel';
+import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 
 //
@@ -22,7 +22,7 @@ import PersonRepositoryFactory                  from '@/repositories/factory/Per
     FormEditHeader
   }
 })
-export default class PersonEdit extends BaseEditPage<PersonModel>
+export default class PersonEdit extends BaseEditPage<PersonExtendedModel>
   implements IRouteBeforeNavigationCheck, IComponentMetaData {
   //IComponentMetaData
   public componentName: string = "Person Edit";
@@ -39,7 +39,7 @@ export default class PersonEdit extends BaseEditPage<PersonModel>
     super(
       new NavigationCrudPerson(),
       PersonRepositoryFactory.getRepository(),
-      new ObjectMapperPersonModel()
+      new ObjectMapperPersonExtendedModel()
     );
   }
 

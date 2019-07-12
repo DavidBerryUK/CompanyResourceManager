@@ -1,7 +1,7 @@
 import { IComponentMetaData }                   from '../../../components/interfaces/ComponentMetaDataInterfaces';
 import { IRouteBeforeNavigationCheck }          from '../../../router/interfaces/NavigationCheckInterfaces';
+import AssetExtendedModel                       from '@/repositories/models/asset/AssetExtendedModel';
 import AssetRepositoryFactory                   from '@/repositories/factory/AssetRepositoryFactory';
-import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
 import Component                                from "vue-class-component";
@@ -11,7 +11,7 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
-import ObjectMapperAssetSummaryModel            from '@/repositories/objectMappers/asset/ObjectMapperAssetSummaryModel';
+import ObjectMapperAssetExtendedModel           from '@/repositories/objectMappers/asset/ObjectMapperAssetExtendedModel';
 
 //
 // attribute indicates this is a component, 
@@ -23,7 +23,7 @@ import ObjectMapperAssetSummaryModel            from '@/repositories/objectMappe
   }
 })
 
-export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implements IRouteBeforeNavigationCheck, IComponentMetaData {
+export default class AssetEdit extends BaseEditPage<AssetExtendedModel> implements IRouteBeforeNavigationCheck, IComponentMetaData {
 
   //IComponentMetaData
   public componentName: string = "Asset Edit";
@@ -38,7 +38,7 @@ export default class AssetEdit extends BaseEditPage<AssetSummaryModel> implement
     super(
       new NavigationCrudAsset(), 
       AssetRepositoryFactory.getRepository(),
-      new ObjectMapperAssetSummaryModel() );        
+      new ObjectMapperAssetExtendedModel() );        
   }
 
   // the form has been mounted into the DOM

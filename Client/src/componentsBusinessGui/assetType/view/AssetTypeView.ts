@@ -1,5 +1,6 @@
+import AssetTypeExtendedModel                   from '@/repositories/models/assetType/AssetTypeExtendedModel';
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
-import AssetTypeModel                           from '@/repositories/models/assetType/AssetTypeModel';
+import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
 import Component                                from "vue-class-component";
@@ -13,7 +14,7 @@ import NavigationCrudAssetType                  from '@/routeNavigation/Navigati
     LabelDataReadOnly
   }
 })
-export default class AssetTypeView extends BaseViewPage<AssetTypeModel> implements IComponentMetaData {
+export default class AssetTypeView extends BaseViewPage<AssetTypeExtendedModel> implements IComponentMetaData {
 
   //IComponentMetaData
   public componentName : string = "Asset Type View";
@@ -25,7 +26,7 @@ export default class AssetTypeView extends BaseViewPage<AssetTypeModel> implemen
       new NavigationCrudAssetType(), 
       AssetTypeRepositoryFactory.getRepository() );
 
-    this.model = new AssetTypeModel();
+    this.model = new AssetTypeExtendedModel();
   }
 
   mounted() {

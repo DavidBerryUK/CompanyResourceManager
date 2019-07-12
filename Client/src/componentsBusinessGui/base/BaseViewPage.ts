@@ -17,7 +17,7 @@ export default class BaseViewPage<T extends IApiModel> extends BasePage implemen
 
   public model!: T;
 
-  public repository : GenericApiRepository<T, any, any>
+  public repository : GenericApiRepository<any, T, any>
 
   //IComponentMetaData
   componentName: string = "BaseViewPage";
@@ -26,7 +26,7 @@ export default class BaseViewPage<T extends IApiModel> extends BasePage implemen
 
   navigationHandler : INavigationCrud;
 
-  constructor( navigationHandler : INavigationCrud, repository : GenericApiRepository<T, any, any>) {
+  constructor( navigationHandler : INavigationCrud, repository : GenericApiRepository<any, T, any>) {
     super();
     this.navigationHandler = navigationHandler;
     this.repository = repository;

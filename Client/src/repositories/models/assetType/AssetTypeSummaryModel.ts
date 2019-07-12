@@ -1,6 +1,6 @@
 import { IApiModel }                            from "../interfaces/IApiModel";
 
-export default class AssetTypeModel implements IApiModel{
+export default class AssetTypeSummmaryModel implements IApiModel{
 
     public assetTypeId : string
     public name : string    

@@ -1,8 +1,9 @@
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
-import ObjectArrayMapperPersonSummaryModel      from '@/repositories/objectMappers/person/ObjectArrayMapperPersonSummary';
-import ObjectMapperPersonModel                       from '@/repositories/objectMappers/person/ObjectMapperPersonModel';
+import ObjectArrayMapperPersonSummaryModel      from '@/repositories/objectMappers/person/ObjectArrayMapperPersonSummaryModel';
+import ObjectMapperPersonExtendedModel          from '../objectMappers/person/ObjectMapperPersonExtendedModel';
+import ObjectMapperPersonSummaryModel           from '@/repositories/objectMappers/person/ObjectMapperPersonSummaryModel';
+import PersonExtendedModel                      from '../models/person/PersonExtendedModel';
 import PersonListFilterParametersModel          from '@/repositories/models/person/PersonListFilterParametersModal';
-import PersonModel                              from '@/repositories/models/person/PersonModel';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 
 export default class PersonRepositoryFactory {
@@ -11,11 +12,12 @@ export default class PersonRepositoryFactory {
     // create a Person Respository using the generic base repository class
     //  this repository supports all the basic CRUD operations as well
     //  as providing a filtered object list ( providing the server supports the functionality )
-    static getRepository() : GenericApiRepository<PersonModel, PersonSummaryModel, PersonListFilterParametersModel> {
-        var repository = new GenericApiRepository<PersonModel, PersonSummaryModel, PersonListFilterParametersModel>(
-            new PersonModel().entityName,
+    static getRepository() : GenericApiRepository<PersonSummaryModel, PersonExtendedModel, PersonListFilterParametersModel> {
+        var repository = new GenericApiRepository<PersonSummaryModel, PersonExtendedModel, PersonListFilterParametersModel>(
+            new PersonSummaryModel().entityName,
             "api/people",
-            new ObjectMapperPersonModel(),
+            new ObjectMapperPersonSummaryModel(),
+            new ObjectMapperPersonExtendedModel(),
             new ObjectArrayMapperPersonSummaryModel()
         )
         return repository;

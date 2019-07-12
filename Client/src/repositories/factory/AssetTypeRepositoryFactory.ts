@@ -1,8 +1,9 @@
 import AssetTypeListFilterParametersModel       from '@/repositories/models/assetType/AssetTypeListFilterParametersModal';
-import AssetTypeModel                           from '@/repositories/models/assetType/AssetTypeModel';
+import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ObjectArrayMapperAssetTypeModel          from '@/repositories/objectMappers/assetType/ObjectArrayMapperAssetTypeModel';
-import ObjectMapperAssetTypeModel                    from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeModel';
+import ObjectMapperAssetTypeExtendedModel       from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeExtendedModel';
+import ObjectMapperAssetTypeSummaryModel        from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeSummaryModel';
 
 export default class AssetTypeRepositoryFactory {
 
@@ -10,11 +11,12 @@ export default class AssetTypeRepositoryFactory {
     // create a Asset Type Respository using the generic base repository class
     //  this repository supports all the basic CRUD operations as well
     //  as providing a filtered object list ( providing the server supports the functionality )
-    static getRepository() : GenericApiRepository<AssetTypeModel, AssetTypeModel, AssetTypeListFilterParametersModel> {
-        var repository = new GenericApiRepository<AssetTypeModel, AssetTypeModel, AssetTypeListFilterParametersModel>(
-            new AssetTypeModel().entityName,
+    static getRepository() : GenericApiRepository<AssetTypeSummmaryModel, AssetTypeSummmaryModel, AssetTypeListFilterParametersModel> {
+        var repository = new GenericApiRepository<AssetTypeSummmaryModel, AssetTypeSummmaryModel, AssetTypeListFilterParametersModel>(
+            new AssetTypeSummmaryModel().entityName,
             "api/assettype",
-            new ObjectMapperAssetTypeModel(),
+            new ObjectMapperAssetTypeSummaryModel(),
+            new ObjectMapperAssetTypeExtendedModel(),
             new ObjectArrayMapperAssetTypeModel()
         )
         return repository;

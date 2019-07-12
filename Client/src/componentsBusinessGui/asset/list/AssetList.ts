@@ -17,7 +17,7 @@ import Loader                                   from '@/componentsCommonGui/load
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import ObjectArrayMapperAssetSummaryModel       from '@/repositories/objectMappers/asset/ObjectArrayMapperAssetSummaryModel';
-import ObjectMapperAssetSummaryModel            from '@/repositories/objectMappers/asset/ObjectMapperAssetSummaryModel';
+import ObjectMapperAssetExtendedModel            from '@/repositories/objectMappers/asset/ObjectMapperAssetExtendedModel';
 
 /**
  * Presents a list of categories to the user that can be filtered
@@ -48,7 +48,7 @@ export default class AssetList extends BaseListPage<AssetSummaryModel> implement
 
   constructor() {
     super(  new NavigationCrudAsset(), 
-            new ObjectMapperAssetSummaryModel(),
+            new ObjectMapperAssetExtendedModel(),
             new ObjectArrayMapperAssetSummaryModel())
   }
 

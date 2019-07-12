@@ -16,31 +16,38 @@ import SuccessCallbackHelper                    from "../helpers/SuccessCallback
 /// E = Entity model        :IApiModel
 /// F = List Filter Model
 
-export default class GenericApiRepository<E extends IApiModel, S, F> extends ApiBase {
+export default class GenericApiRepository<S extends IApiModel, E extends IApiModel, F> extends ApiBase {
 
   private baseUrl: string = "";
-  private entityObjectMapper: IObjectMapper<E>;
+  private summaryObjectMapper: IObjectMapper<S>;
+  private extendedObjectMapper: IObjectMapper<E>;
   private summaryListObjectMapper: IObjectArrayMapper<S>;  
   public entityName : string;
 
   public constructor(
     entityName: string,
     endpoint: string,
-    entityObjectMapper: IObjectMapper<E>,
+    summaryObjectMapper: IObjectMapper<S>,
+    extendedObjectMapper: IObjectMapper<E>,
     summaryListObjectMapper: IObjectArrayMapper<S>) {
     super();
 
     this.entityName = entityName;
 
-    if ( entityObjectMapper == null || entityObjectMapper == undefined ) {
-      throw new Error('Can not create GenericApiRepository without an entityObjectMapper');
+    if ( summaryObjectMapper == null || summaryObjectMapper == undefined ) {
+      throw new Error('Can not create GenericApiRepository without an summaryObjectMapper');
+    }
+
+    if ( extendedObjectMapper == null || extendedObjectMapper == undefined ) {
+      throw new Error('Can not create GenericApiRepository without an extendedObjectMapper');
     }
 
     if ( summaryListObjectMapper == null || summaryListObjectMapper == undefined ) {
       throw new Error('Can not create GenericApiRepository without an summaryListObjectMapper');
     }
 
-    this.entityObjectMapper = entityObjectMapper;
+    this.summaryObjectMapper = summaryObjectMapper;
+    this.extendedObjectMapper = extendedObjectMapper;
     this.summaryListObjectMapper = summaryListObjectMapper;
     this.baseUrl = `${BaseApiConfig.baseEndpoint}${endpoint}`;
   }
@@ -82,7 +89,7 @@ export default class GenericApiRepository<E extends IApiModel, S, F> extends Api
 
     return this.baseGetById(
       this.baseUrl + "/" + id,
-      this.entityObjectMapper);
+      this.extendedObjectMapper);
 
   }
 
@@ -94,32 +101,36 @@ export default class GenericApiRepository<E extends IApiModel, S, F> extends Api
     return this.baseSave(
       this.baseUrl,
       model,
-      this.entityObjectMapper,
-      (model, successType) => {this.savedModel(this.entityName, model, successType)})
+      this.extendedObjectMapper,
+      (model, successType) => {
+        this.savedModel(this.entityName,model, successType)
+      });
 
   }
 
-  deactivate(id: string): ApiResponse<E> {
+  deactivate(id: string): ApiResponse<S> {
         
     return this.basePutWithNoModel(
       `${this.baseUrl}/${id}/deactivate`,
-      this.entityObjectMapper,
+      this.summaryObjectMapper,
       EnumSuccessType.DeActivatedOk,
-      (model, successType) => {this.savedModel(this.entityName, model, successType)})
+      (model, successType) => {
+        this.savedModel(this.entityName, model, successType)
+      })
 
   }
 
-  activate(id: string): ApiResponse<E> {
+  activate(id: string): ApiResponse<S> {
 
     return this.basePutWithNoModel(
       `${this.baseUrl}/${id}/activate`,
-      this.entityObjectMapper,
+      this.summaryObjectMapper,
       EnumSuccessType.ActivatedOk,
       (model, successType) => {this.savedModel(this.entityName, model, successType)})
 
   }
 
-  private savedModel(entityName: string, model: E, successType: EnumSuccessType) {
+  private savedModel(entityName: string, model: S | E, successType: EnumSuccessType) {
     
     var notificationHandler = NotificationFactory.instance.getNotificationInstance(entityName);
 

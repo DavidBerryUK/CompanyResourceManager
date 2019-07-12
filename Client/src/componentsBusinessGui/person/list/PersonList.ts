@@ -1,3 +1,4 @@
+import ObjectMapperPersonSummaryModel           from '@/repositories/objectMappers/person/ObjectMapperPersonSummaryModel';
 import { EnumModalWidth }                       from '@/componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import { MaterialDesignColor }                  from '@/services/colors/materialDesign/constants/MaterialDesignColors';
@@ -13,10 +14,8 @@ import ListFiltersDialogCode                    from '@/componentsCommonGui/list
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
-import ObjectArrayMapperPersonSummaryModel      from '@/repositories/objectMappers/person/ObjectArrayMapperPersonSummary';
-import ObjectMapperPersonSummaryModel           from '@/repositories/objectMappers/person/ObjectMapperPersonSummeryModel';
+import ObjectArrayMapperPersonSummaryModel      from '@/repositories/objectMappers/person/ObjectArrayMapperPersonSummaryModel';
 import PersonListFilterParametersModel          from '@/repositories/models/person/PersonListFilterParametersModal';
-import PersonModel                              from '@/repositories/models/person/PersonModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 
@@ -126,7 +125,7 @@ export default class PersonList extends BaseListPage<PersonSummaryModel> impleme
   //
   // a list item has been selected, navigate to the person view screen
   //
-  onSelectItem(item: PersonModel) {
+  onSelectItem(item: PersonSummaryModel) {
     this.selectedItem = item;
     this.navigationHandler.gotoViewPage(this,item.personId)    
   }
@@ -136,20 +135,20 @@ export default class PersonList extends BaseListPage<PersonSummaryModel> impleme
   //
   private listenToModelUpdates() {
 
-    NotificationFactory.instance.getNotificationInstance<PersonModel>(new PersonModel().entityName)
-      .onItemCreated(this, (model: PersonModel) => {
+    NotificationFactory.instance.getNotificationInstance<PersonSummaryModel>(new PersonSummaryModel().entityName)
+      .onItemCreated(this, (model: PersonSummaryModel) => {
         this.updateList(model, true);
       })
-      .onItemUpdated(this, (model: PersonModel) => {
+      .onItemUpdated(this, (model: PersonSummaryModel) => {
         this.updateList(model, false);
       })
-      .onItemDeleted(this, (model: PersonModel) => {
+      .onItemDeleted(this, (model: PersonSummaryModel) => {
         this.updateList(model, false);
       })
-      .onItemActivated(this, (model: PersonModel) => {
+      .onItemActivated(this, (model: PersonSummaryModel) => {
         this.updateList(model, false);
       })
-      .onItemDeactivated(this, (model: PersonModel) => {
+      .onItemDeactivated(this, (model: PersonSummaryModel) => {
         this.updateList(model, false);
       });
   }

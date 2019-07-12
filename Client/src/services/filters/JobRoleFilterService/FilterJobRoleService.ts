@@ -1,21 +1,21 @@
-import JobRoleModel                             from '@/repositories/models/jobRole/JobRoleModel';
+import JobRoleSummaryModel                             from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import { IFilterModelService }                  from '@/services/interfaces/IFilterModelService';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 
 export default class FilterJobRoleService implements IFilterModelService {
 
     filterWithRankings( filterText : string , 
-                        list : GenericCollectionModel<JobRoleModel>) : GenericCollectionModel<JobRoleModel> {
+                        list : GenericCollectionModel<JobRoleSummaryModel>) : GenericCollectionModel<JobRoleSummaryModel> {
                     
-        var rankingListA = new Array<JobRoleModel>();
-        var rankingListB = new Array<JobRoleModel>();
+        var rankingListA = new Array<JobRoleSummaryModel>();
+        var rankingListB = new Array<JobRoleSummaryModel>();
 
 
         var filterTextLowerCase = filterText.toLowerCase();
 
-        var castList = list.items as Array<JobRoleModel>;
+        var castList = list.items as Array<JobRoleSummaryModel>;
         
-        castList.forEach((item: JobRoleModel) => {
+        castList.forEach((item: JobRoleSummaryModel) => {
             var indexOfName = item.name.toLowerCase().indexOf(filterTextLowerCase);
         
             if ( indexOfName == 0) {
@@ -27,7 +27,7 @@ export default class FilterJobRoleService implements IFilterModelService {
             }
         });
 
-        var filteredDataList = new GenericCollectionModel<JobRoleModel>();
+        var filteredDataList = new GenericCollectionModel<JobRoleSummaryModel>();
         filteredDataList.items = rankingListA
           .concat(rankingListB);
 

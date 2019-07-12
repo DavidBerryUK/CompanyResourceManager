@@ -1,6 +1,6 @@
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
+import AssetExtendedModel                       from '@/repositories/models/asset/AssetExtendedModel';
 import AssetRepositoryFactory                   from '@/repositories/factory/AssetRepositoryFactory';
-import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
 import Component                                from "vue-class-component";
 import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
@@ -13,7 +13,7 @@ import NavigationCrudAsset                      from '@/routeNavigation/Navigati
     LabelDataReadOnly
   }
 })
-export default class AssetView extends BaseViewPage<AssetSummaryModel> implements IComponentMetaData {
+export default class AssetView extends BaseViewPage<AssetExtendedModel> implements IComponentMetaData {
 
   //IComponentMetaData
   public componentName : string = "Asset View";
@@ -25,7 +25,7 @@ export default class AssetView extends BaseViewPage<AssetSummaryModel> implement
       new NavigationCrudAsset(), 
       AssetRepositoryFactory.getRepository())
 
-    this.model = new AssetSummaryModel();
+    this.model = new AssetExtendedModel();
   }
 
   mounted() {

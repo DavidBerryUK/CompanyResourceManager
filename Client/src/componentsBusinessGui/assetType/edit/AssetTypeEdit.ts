@@ -1,13 +1,13 @@
 import { IComponentMetaData }                   from '../../../components/interfaces/ComponentMetaDataInterfaces';
 import { IRouteBeforeNavigationCheck }          from '../../../router/interfaces/NavigationCheckInterfaces';
-import AssetTypeModel                           from '@/repositories/models/assetType/AssetTypeModel';
+import AssetTypeExtendedModel                   from '@/repositories/models/assetType/AssetTypeExtendedModel';
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
 import Component                                from "vue-class-component";
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
-import ObjectMapperAssetTypeModel               from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeModel';
+import ObjectMapperAssetTypeExtendedModel       from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeExtendedModel';
 
 //
 // attribute indicates this is a component,
@@ -18,7 +18,7 @@ import ObjectMapperAssetTypeModel               from '@/repositories/objectMappe
     FormEditHeader
   }
 })
-export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel>
+export default class AssetTypeEdit extends BaseEditPage<AssetTypeExtendedModel>
   implements IRouteBeforeNavigationCheck, IComponentMetaData {
   //IComponentMetaData
   public componentName: string = "Asset Type Edit";
@@ -32,7 +32,7 @@ export default class AssetTypeEdit extends BaseEditPage<AssetTypeModel>
     super(
       new NavigationCrudAssetType(),
       AssetTypeRepositoryFactory.getRepository(),
-      new ObjectMapperAssetTypeModel()
+      new ObjectMapperAssetTypeExtendedModel()
     );
   }
 

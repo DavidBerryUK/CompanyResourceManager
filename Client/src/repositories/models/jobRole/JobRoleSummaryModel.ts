@@ -1,6 +1,6 @@
 import { IApiModel }                            from "../interfaces/IApiModel";
 
-export default class JobRoleModel implements IApiModel{
+export default class JobRoleSummaryModel implements IApiModel{
 
     public jobRoleId : string
     public name : string        

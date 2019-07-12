@@ -1,15 +1,15 @@
 import { IObjectArrayMapper }                   from "../interfaces/IObjectArrayMapper";
-import AssetTypeModel                           from '../../models/assetType/AssetTypeModel';
+import AssetTypeSummmaryModel                           from '../../models/assetType/AssetTypeSummaryModel';
 
 // object mappers transform plain java objects
 // into strongly typed typescript objects
-export default class ObjectArrayMapperAssetTypeModel implements IObjectArrayMapper<AssetTypeModel> {
+export default class ObjectArrayMapperAssetTypeModel implements IObjectArrayMapper<AssetTypeSummmaryModel> {
     
-    map(dataArray: any[]): Array<AssetTypeModel> {
+    map(dataArray: any[]): Array<AssetTypeSummmaryModel> {
         
-        var response = new Array<AssetTypeModel>();
+        var response = new Array<AssetTypeSummmaryModel>();
         
-        response = dataArray.map((item) => { return  Object.assign(new AssetTypeModel(), item) });
+        response = dataArray.map((item) => { return  Object.assign(new AssetTypeSummmaryModel(), item) });
 
         return response;
     }

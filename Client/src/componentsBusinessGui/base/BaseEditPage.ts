@@ -20,7 +20,7 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
   public componentDescription: string = "BaseEditPage";
   //IComponentMetaData
 
-  public repository : GenericApiRepository<T, any, any>
+  public repository : GenericApiRepository<any, T, any>
 
   // track changes in the branch object
   //
@@ -34,7 +34,7 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
   navigationHandler : INavigationCrud;
 
   constructor(  navigationHandler : INavigationCrud, 
-                repository : GenericApiRepository<T, any, any>,
+                repository : GenericApiRepository<any, T, any>,
                 objectMapper: IObjectMapper<T>) {
     super();
     this.navigationHandler = navigationHandler;

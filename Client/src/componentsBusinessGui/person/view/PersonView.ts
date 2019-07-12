@@ -4,7 +4,7 @@ import Component                                from "vue-class-component";
 import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
-import PersonModel                              from '@/repositories/models/person/PersonModel';
+import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 
 @Component({
@@ -13,7 +13,7 @@ import PersonRepositoryFactory                  from '@/repositories/factory/Per
     LabelDataReadOnly
   }
 })
-export default class PersonView extends BaseViewPage<PersonModel> implements IComponentMetaData {
+export default class PersonView extends BaseViewPage<PersonExtendedModel> implements IComponentMetaData {
 
   //IComponentMetaData
   public componentName : string = "Person View";
@@ -25,7 +25,7 @@ export default class PersonView extends BaseViewPage<PersonModel> implements ICo
       new NavigationCrudPerson(), 
       PersonRepositoryFactory.getRepository());
 
-    this.model = new PersonModel();
+    this.model = new PersonExtendedModel();
   }
 
   mounted() {

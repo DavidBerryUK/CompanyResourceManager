@@ -3,11 +3,11 @@ import { IRouteBeforeNavigationCheck }          from '../../../router/interfaces
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
 import Component                                from "vue-class-component";
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
-import JobRoleModel                             from '@/repositories/models/jobRole/JobRoleModel';
+import JobRoleSummaryModel                             from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
-import ObjectMapperJobRoleModel                 from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleModel';
+import ObjectMapperJobRoleExtendedModel                 from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleExtendedModel';
 
 //
 // attribute indicates this is a component,
@@ -18,7 +18,7 @@ import ObjectMapperJobRoleModel                 from '@/repositories/objectMappe
     FormEditHeader
   }
 })
-export default class JobRoleEdit extends BaseEditPage<JobRoleModel>
+export default class JobRoleEdit extends BaseEditPage<JobRoleSummaryModel>
   implements IRouteBeforeNavigationCheck, IComponentMetaData {
   //IComponentMetaData
   public componentName: string = "Asset Type Edit";
@@ -33,7 +33,7 @@ export default class JobRoleEdit extends BaseEditPage<JobRoleModel>
     super(
       new NavigationCrudJobRole(),
       JobRoleRepositoryFactory.getRepository(),
-      new ObjectMapperJobRoleModel()
+      new ObjectMapperJobRoleExtendedModel()
     );
   }
 
