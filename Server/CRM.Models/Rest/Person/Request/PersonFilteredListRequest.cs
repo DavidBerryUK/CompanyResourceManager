@@ -1,6 +1,6 @@
 ﻿using CRM.Models.Rest.Enums;
 
-namespace CRM.Models.Rest.People.Request
+namespace CRM.Models.Rest.Person.Request
 {
     public class PersonFilteredListRequest
     {

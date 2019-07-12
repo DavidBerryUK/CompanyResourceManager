@@ -1,4 +1,4 @@
-﻿namespace CRM.Models.Rest.People.Response
+﻿namespace CRM.Models.Rest.Person.Response
 {
     /// <summary>
     /// Extended models are used to display the full information for an entity,

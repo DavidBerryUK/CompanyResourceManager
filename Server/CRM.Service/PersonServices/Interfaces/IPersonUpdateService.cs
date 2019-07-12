@@ -1,11 +1,11 @@
-﻿using CRM.Models.Rest.BaseResponse;
-using CRM.Models.Rest.People.Response;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using CRM.Models.Rest.BaseResponse;
+using CRM.Models.Rest.Person.Response;
 
-namespace CRM.Service.PeopleServices.Interfaces
+namespace CRM.Service.PersonServices.Interfaces
 {
-    public interface IPeopleUpdateService
+    public interface IPersonUpdateService
     {
         Task<BaseItemResponse<PersonExtended>> Create(PersonExtended person);
         Task<BaseItemResponse<PersonExtended>> Update(Guid personId, PersonExtended person);

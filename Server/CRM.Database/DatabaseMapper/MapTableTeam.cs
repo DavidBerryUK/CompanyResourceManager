@@ -4,22 +4,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Database.DatabaseMapper
 {
-    public class MapTableAsset : IDatabaseTableMapperConfig
+    public class MapTableTeam : IDatabaseTableMapperConfig
     {
         public void Map(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Asset>(entity =>
+            modelBuilder.Entity<Team>(entity =>
             {
-                entity.ToTable("Asset");
+                entity.ToTable("Team");
 
-                entity.HasKey(e => e.AssetId);
+                entity.HasKey(e => e.TeamId);
 
-                entity.Property(e => e.AssetId)
+                entity.Property(e => e.TeamId)
+                    .IsRequired()
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.AssetTypeId)
-                    .IsRequired();
-                
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -28,9 +26,12 @@ namespace CRM.Database.DatabaseMapper
                     .IsRequired()
                     .HasMaxLength(2000);
 
-                entity.HasMany(many => many.NavPersonAssets)
-                    .WithOne(one => one.NavAsset)
-                    .HasForeignKey(foreignKey => foreignKey.AssetId);
+                entity.Property(e => e.IsActive)
+                    .IsRequired();
+
+                entity.HasMany(many => many.NavPersonTeams)
+                    .WithOne(one => one.NavTeam)
+                    .HasForeignKey(foreignKey => foreignKey.TeamId);
             });
         }
     }

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
 using CRM.Models.Rest.Lists;
-using CRM.Models.Rest.People.Response;
+using CRM.Models.Rest.Person.Response;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {
-    internal  class AutoMapperPeople : IAutoMapperConfig
+    internal  class AutoMapperPerson : IAutoMapperConfig
     {
         public  void Map(IMapperConfigurationExpression cfg)
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CRM.Models.Database
 {
@@ -17,5 +18,7 @@ namespace CRM.Models.Database
         public bool IsActive { get; set; }
 
         public AssetType NavAssetType { get; set; }
+
+        public ICollection<PersonAsset> NavPersonAssets { get; set; }
     }
 }

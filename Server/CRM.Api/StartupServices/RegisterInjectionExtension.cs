@@ -4,8 +4,8 @@ using CRM.Service.AssetTypeServices;
 using CRM.Service.AssetTypeServices.Interfaces;
 using CRM.Service.JobRoleServices;
 using CRM.Service.JobRoleServices.Interfaces;
-using CRM.Service.PeopleServices;
-using CRM.Service.PeopleServices.Interfaces;
+using CRM.Service.PersonServices;
+using CRM.Service.PersonServices.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CRM.Api.StartupServices
@@ -14,10 +14,10 @@ namespace CRM.Api.StartupServices
     {
         public static void RegisterInjection(this IServiceCollection services)
         {
-            // People
+            //  person
             //
-            services.AddTransient<IPeopleGetService, PeopleGetService>();
-            services.AddTransient<IPeopleUpdateService, PeopleUpdateService>();
+            services.AddTransient<IPersonGetService, PersonGetService>();
+            services.AddTransient<IPersonUpdateService, PersonUpdateService>();
 
             //  Job Roles
             //

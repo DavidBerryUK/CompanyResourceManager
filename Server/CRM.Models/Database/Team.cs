@@ -3,14 +3,16 @@ using System.Collections.Generic;
 
 namespace CRM.Models.Database
 {
-    public class JobRole
+    public class Team
     {
-        public Guid JobRoleId { get; set; }
+        public Guid TeamId { get; set; }
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public bool IsActive { get; set; }
 
-        public ICollection<Person> NavPersons { get; set; }
+        public ICollection<PersonTeam> NavPersonTeams { get; set; }
     }
 }

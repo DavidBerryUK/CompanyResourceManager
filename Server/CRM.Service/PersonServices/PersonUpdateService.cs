@@ -1,19 +1,19 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Threading.Tasks;
+using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
-using CRM.Models.Rest.People.Response;
-using CRM.Service.PeopleServices.Interfaces;
+using CRM.Models.Rest.Person.Response;
+using CRM.Service.PersonServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading.Tasks;
 
-namespace CRM.Service.PeopleServices
+namespace CRM.Service.PersonServices
 {
-    public class PeopleUpdateService : IPeopleUpdateService
+    public class PersonUpdateService : IPersonUpdateService
     {
         private readonly CrmDatabaseContext _crmDatabaseContext;
 
-        public PeopleUpdateService(CrmDatabaseContext crmDatabaseContext)
+        public PersonUpdateService(CrmDatabaseContext crmDatabaseContext)
         {
             _crmDatabaseContext = crmDatabaseContext;
         }
@@ -30,7 +30,7 @@ namespace CRM.Service.PeopleServices
             await _crmDatabaseContext.SaveChangesAsync();
 
             var data = await _crmDatabaseContext
-                .People
+                .Persons
                 .Include(inc => inc.NavJobRole)
                 .FirstOrDefaultAsync(o => o.PersonId == entity.PersonId);
 
@@ -42,7 +42,7 @@ namespace CRM.Service.PeopleServices
         public async Task<BaseItemResponse<PersonExtended>> Update(Guid personId, PersonExtended person)
         {
             var response = new BaseItemResponse<PersonExtended>();
-            var data = await _crmDatabaseContext.People.FirstOrDefaultAsync(o=> o.PersonId == personId);
+            var data = await _crmDatabaseContext.Persons.FirstOrDefaultAsync(o=> o.PersonId == personId);
 
             if (data == null)
             {
@@ -53,7 +53,7 @@ namespace CRM.Service.PeopleServices
             await _crmDatabaseContext.SaveChangesAsync();
 
             data = await _crmDatabaseContext
-                .People
+                .Persons
                 .Include(inc => inc.NavJobRole)
                 .FirstOrDefaultAsync(o => o.PersonId == personId);
 
@@ -75,7 +75,7 @@ namespace CRM.Service.PeopleServices
         private async Task<BaseItemResponse<PersonSummary>> AmendPersonActiveStatus(Guid personId, bool isActive)
         {
             var response = new BaseItemResponse<PersonSummary>();
-            var data = await _crmDatabaseContext.People.FirstOrDefaultAsync(o => o.PersonId == personId);
+            var data = await _crmDatabaseContext.Persons.FirstOrDefaultAsync(o => o.PersonId == personId);
 
             if (data == null)
             {

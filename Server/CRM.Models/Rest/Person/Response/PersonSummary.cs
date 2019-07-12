@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CRM.Models.Rest.People.Response
+namespace CRM.Models.Rest.Person.Response
 {
     /// <summary>
     /// Summary records are returned for lists with primary information,

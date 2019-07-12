@@ -1,33 +1,34 @@
-﻿using AutoMapper;
-using CRM.Database.Context;
-using CRM.Models.Rest.BaseResponse;
-using CRM.Models.Rest.Enums;
-using CRM.Models.Rest.People.Request;
-using CRM.Models.Rest.People.Response;
-using CRM.Service.PeopleServices.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using CRM.Database.Context;
+using CRM.Models.Rest.BaseResponse;
+using CRM.Models.Rest.Enums;
+using CRM.Models.Rest.Person.Request;
+using CRM.Models.Rest.Person.Response;
+using CRM.Service.PersonServices.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
-namespace CRM.Service.PeopleServices
+namespace CRM.Service.PersonServices
 {
-    public class PeopleGetService : IPeopleGetService
+    public class PersonGetService : IPersonGetService
     {
         private readonly CrmDatabaseContext _crmDatabaseContext;
 
-        public PeopleGetService(CrmDatabaseContext crmDatabaseContext)
+        public PersonGetService(CrmDatabaseContext crmDatabaseContext)
         {
             _crmDatabaseContext = crmDatabaseContext;
         }
+
 
         public async Task<BaseCollectionResponse<PersonSummary>> GetAllAsync()
         {
             var response = new BaseCollectionResponse<PersonSummary>();
 
             var data = await _crmDatabaseContext
-                .People
+                .Persons
                 .Include(inc => inc.NavJobRole)
                 .OrderBy(order=> order.Surname)
                 .ThenBy(order => order.Forename)
@@ -43,7 +44,7 @@ namespace CRM.Service.PeopleServices
             var response = new BaseCollectionResponse<PersonSummary>();
 
             var query  = _crmDatabaseContext
-                .People
+                .Persons
                 .Include(inc => inc.NavJobRole)
                 .AsQueryable();
 
@@ -73,7 +74,7 @@ namespace CRM.Service.PeopleServices
         {
             var response = new BaseItemResponse<PersonExtended>();
             var data = await _crmDatabaseContext
-                .People
+                .Persons
                 .Include(inc => inc.NavJobRole)
                 .FirstOrDefaultAsync(o=> o.PersonId == personId);
             
@@ -82,12 +83,12 @@ namespace CRM.Service.PeopleServices
             return response;
         }
 
-        public async Task<BaseCollectionResponse<PersonSummary>> GetPeopleWithJobRole(Guid jobRoleId)
+        public async Task<BaseCollectionResponse<PersonSummary>> GetPersonWithJobRole(Guid jobRoleId)
         {
             var response = new BaseCollectionResponse<PersonSummary>();
 
             var data = await _crmDatabaseContext
-                .People
+                .Persons
                 .Include(inc => inc.NavJobRole)
                 .Where(o => o.JobRoleId == jobRoleId)
                 .Where(o=> o.IsActive)

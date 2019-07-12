@@ -2,11 +2,11 @@
 using CRM.Models.Rest.JobRole.Response;
 using CRM.Models.Rest.Lists;
 using CRM.Service.JobRoleServices.Interfaces;
-using CRM.Service.PeopleServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CRM.Service.PersonServices.Interfaces;
 
 namespace CRM.Api.Controllers
 {
@@ -16,17 +16,17 @@ namespace CRM.Api.Controllers
     {
         private readonly IJobRoleGetService _jobRoleGetService;
         private readonly IJobRoleUpdateService _jobRoleUpdateService;
-        private readonly IPeopleGetService _peopleGetService;
+        private readonly IPersonGetService _personGetService;
 
 
         public JobRoleController(
             IJobRoleGetService jobRoleGetService,
             IJobRoleUpdateService jobRoleUpdateService, 
-            IPeopleGetService peopleGetService)
+            IPersonGetService personGetService)
         {
             _jobRoleGetService = jobRoleGetService;
             _jobRoleUpdateService = jobRoleUpdateService;
-            _peopleGetService = peopleGetService;
+            _personGetService = personGetService;
         }
 
         [HttpGet("")]
@@ -36,10 +36,10 @@ namespace CRM.Api.Controllers
             return Ok(data);
         }
 
-        [HttpGet("{jobRoleId}/people")]
-        public async Task<ActionResult<JobRoleSummary>> GetPeopleForJobRole(Guid jobRoleId)
+        [HttpGet("{jobRoleId}/Person")]
+        public async Task<ActionResult<JobRoleSummary>> GetPersonForJobRole(Guid jobRoleId)
         {
-            var data = await _peopleGetService.GetPeopleWithJobRole(jobRoleId);
+            var data = await _personGetService.GetPersonWithJobRole(jobRoleId);
             return Ok(data);
         }
 

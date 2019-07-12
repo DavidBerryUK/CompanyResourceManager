@@ -25,7 +25,7 @@ namespace CRM.Database.DatabaseMapper
                 entity.Property(e => e.IsActive)
                     .IsRequired();
 
-                entity.HasMany(many => many.NavPeople)
+                entity.HasMany(many => many.NavPersons)
                     .WithOne(one => one.NavJobRole)
                     .HasForeignKey(key => key.JobRoleId);
             });

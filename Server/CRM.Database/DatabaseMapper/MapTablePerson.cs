@@ -32,6 +32,18 @@ namespace CRM.Database.DatabaseMapper
                 entity.Property(e => e.IsActive)
                     .IsRequired();
 
+                entity.HasMany(many => many.NavPersonAssets)
+                    .WithOne(one => one.NavPerson)
+                    .HasForeignKey(foreignKey => foreignKey.PersonId);
+
+                entity.HasMany(many => many.NavPersonTeams)
+                    .WithOne(one => one.NavPerson)
+                    .HasForeignKey(foreignKey => foreignKey.PersonId);
+
+                entity.HasMany(many => many.NavPersonSkills)
+                    .WithOne(one => one.NavPerson)
+                    .HasForeignKey(foreignKey => foreignKey.PersonId);
+
             });
         }
     }

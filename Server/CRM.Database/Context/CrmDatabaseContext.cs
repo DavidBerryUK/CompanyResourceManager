@@ -20,7 +20,7 @@ namespace CRM.Database.Context
             mappers.ForEach(o => o.Map(modelBuilder));
         }
 
-        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<AssetType> AssetTypes { get; set; }
         public virtual DbSet<Asset> Assets { get; set; }
         public virtual DbSet<JobRole> JobRoles { get; set; }
