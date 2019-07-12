@@ -11,12 +11,13 @@ import Component                                from "vue-class-component";
 import FilterAssetSummaryService                from '@/services/filters/assetSummaryFilterService/FilterAssetSummaryService';
 import FilterButton                             from '@/componentsCommonGui/filterButton/FilterButton';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
-import ListFilterDialogState                    from '@/componentsCommonGui/listFilterDialog/ListFilterDialogState';
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
+import ObjectArrayMapperAssetSummaryModel       from '@/repositories/objectMappers/asset/ObjectArrayMapperAssetSummaryModel';
+import ObjectMapperAssetSummaryModel            from '@/repositories/objectMappers/asset/ObjectMapperAssetSummaryModel';
 
 /**
  * Presents a list of categories to the user that can be filtered
@@ -35,32 +36,20 @@ import NotificationFactory                      from '@/services/notifications/N
     FilterButton
   }
 })
-export default class AssetList extends BaseListPage implements IComponentMetaData {
+export default class AssetList extends BaseListPage<AssetSummaryModel> implements IComponentMetaData {
 
   //IComponentMetaData
   componentName: string = "Asset List";
   componentDescription: string = "Displays a list of Assets";
   //IComponentMetaData
 
-  // if variables are to be tracked by VueJs they must
-  // have an initial value on initialization
-  //
-
-
-
-  // records the selected values in the filter dialog page
-  dataListState: ListFilterDialogState = new ListFilterDialogState();
-
-  // list of asset returned by ApiAssetTypeRepository
-  dataList: GenericCollectionModel<AssetSummaryModel> = new GenericCollectionModel<AssetSummaryModel>();
-
-  // the currently selected asset Type
-  selectedItem: AssetSummaryModel = new AssetSummaryModel();
   filterModel : AssetSummaryListFilterParametersModel =  new AssetSummaryListFilterParametersModel();
 
 
   constructor() {
-    super(new NavigationCrudAsset())
+    super(  new NavigationCrudAsset(), 
+            new ObjectMapperAssetSummaryModel(),
+            new ObjectArrayMapperAssetSummaryModel())
   }
 
   //
@@ -75,15 +64,6 @@ export default class AssetList extends BaseListPage implements IComponentMetaDat
   // any notifications
   beforeDestroy() {
     NotificationFactory.unsubscribeFromAll(this);
-  }
-
-  // function used to style items in the list, the currently
-  // selected item will have a different coloured background
-  itemStyle(item: AssetSummaryModel): string {
-    if (item.assetId == this.selectedItem.assetId) {
-      return "teal accent-1";
-    }
-    return "";
   }
 
   /**

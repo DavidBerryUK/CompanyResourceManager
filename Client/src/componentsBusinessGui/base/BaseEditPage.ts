@@ -128,7 +128,7 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
     }
   }
   
-  retrieveSecondaryData(constractListener: ContractListener) {
+  retrieveSecondaryData(contractListener: ContractListener) {
 
   }
 

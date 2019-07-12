@@ -1,3 +1,10 @@
+//
+// To assist development of easy to use ApiRepositories,
+// The contract helps 'hide' the complex code and allows, enforces
+// isolation of low-level repository code, and allows
+// the http communication framework to be replaced independently 
+// of the rest of the application
+
 import ContractListener from './ContractListener';
 
 type ICallBackOnFail = (error: string) => void;

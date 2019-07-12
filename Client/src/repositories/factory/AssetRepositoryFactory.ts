@@ -1,8 +1,8 @@
 import AssetSummaryListFilterParametersModel    from '@/repositories/models/asset/AssetSummaryListFilterParametersModal';
 import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
-import ObjectArrayMapperAssetSummaryModel       from '@/repositories/objectMappers/asset/ObjectArrayMapperAssetSummary';
-import ObjectMapperAssetSummary                 from '@/repositories/objectMappers/asset/ObjectMapperAssetSummary';
+import ObjectArrayMapperAssetSummaryModel       from '@/repositories/objectMappers/asset/ObjectArrayMapperAssetSummaryModel';
+import ObjectMapperAssetSummaryModel                 from '@/repositories/objectMappers/asset/ObjectMapperAssetSummaryModel';
 
 export default class AssetRepositoryFactory{
     
@@ -14,7 +14,7 @@ export default class AssetRepositoryFactory{
         var repository = new GenericApiRepository<AssetSummaryModel, AssetSummaryModel, AssetSummaryListFilterParametersModel>(
             new AssetSummaryModel().entityName,
             "api/asset",
-            new ObjectMapperAssetSummary(),
+            new ObjectMapperAssetSummaryModel(),
             new ObjectArrayMapperAssetSummaryModel()
         )
         return repository;

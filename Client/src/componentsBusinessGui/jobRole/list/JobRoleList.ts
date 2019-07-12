@@ -11,12 +11,13 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 import JobRoleListFilterParametersModel         from '@/repositories/models/jobRole/JobRoleListFilterParametersModal';
 import JobRoleModel                             from '@/repositories/models/jobRole/JobRoleModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
-import ListFilterDialogState                    from '@/componentsCommonGui/listFilterDialog/ListFilterDialogState';
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
+import ObjectArrayMapperJobRoleModel            from '@/repositories/objectMappers/jobRole/ObjectArrayMapperJobRoleModel';
+import ObjectMapperJobRoleModel                 from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleModel';
 
 /**
  * Presents a list of categories to the user that can be filtered
@@ -35,29 +36,19 @@ import NotificationFactory                      from '@/services/notifications/N
     FilterButton
   }
 })
-export default class JobRoleList extends BaseListPage implements IComponentMetaData {
+export default class JobRoleList extends BaseListPage<JobRoleModel> implements IComponentMetaData {
 
   //IComponentMetaData
   componentName: string = "Job Role List";
   componentDescription: string = "Displays a list of job roles";
   //IComponentMetaData
 
-  // if variables are to be tracked by VueJs they must
-  // have an initial value on initialization
-  //
-
-  // records the selected values in the filter dialog page
-  dataListState: ListFilterDialogState = new ListFilterDialogState();
-
-  // list of asset typee returned by ApiAssetTypeRepository
-  dataList: GenericCollectionModel<JobRoleModel> = new GenericCollectionModel<JobRoleModel>();
-
-  // the currently selected asset Type
-  selectedItem: JobRoleModel = new JobRoleModel();
   filterModel : JobRoleListFilterParametersModel =  new JobRoleListFilterParametersModel();
 
   constructor() {
-    super(new NavigationCrudJobRole())
+    super(  new NavigationCrudJobRole(), 
+            new ObjectMapperJobRoleModel(),
+            new ObjectArrayMapperJobRoleModel())
   }
 
   //
@@ -74,14 +65,7 @@ export default class JobRoleList extends BaseListPage implements IComponentMetaD
     NotificationFactory.unsubscribeFromAll(this);
   }
 
-  // function used to style items in the list, the currently
-  // selected item will have a different coloured background
-  itemStyle(item: JobRoleModel): string {
-    if (item.jobRoleId == this.selectedItem.jobRoleId) {
-      return "teal accent-1";
-    }
-    return "";
-  }
+
 
   /**
    * When the filter button is pressed the filter dialog modal will be displayed

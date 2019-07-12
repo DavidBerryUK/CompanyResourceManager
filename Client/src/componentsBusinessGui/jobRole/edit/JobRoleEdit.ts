@@ -7,10 +7,10 @@ import JobRoleModel                             from '@/repositories/models/jobR
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
-import ObjectMapperJobRole                      from '@/repositories/objectMappers/jobRole/ObjectMapperJobRole';
+import ObjectMapperJobRoleModel                 from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleModel';
 
 //
-// attribute indicates this is a component, 
+// attribute indicates this is a component,
 //  this is where any sub components are also registered
 @Component({
   components: {
@@ -18,21 +18,23 @@ import ObjectMapperJobRole                      from '@/repositories/objectMappe
     FormEditHeader
   }
 })
-
-export default class JobRoleEdit extends BaseEditPage<JobRoleModel> implements IRouteBeforeNavigationCheck, IComponentMetaData {
-
+export default class JobRoleEdit extends BaseEditPage<JobRoleModel>
+  implements IRouteBeforeNavigationCheck, IComponentMetaData {
   //IComponentMetaData
   public componentName: string = "Asset Type Edit";
-  public componentDescription: string = "Enables the user to edit an Asset Type";
+  public componentDescription: string =
+    "Enables the user to edit an Asset Type";
   //IComponentMetaData
 
-  // list of different asset types types, 
+  // list of different asset types types,
   //
 
   constructor() {
-    super(  new NavigationCrudJobRole(),
-            JobRoleRepositoryFactory.getRepository(),
-            new ObjectMapperJobRole());    
+    super(
+      new NavigationCrudJobRole(),
+      JobRoleRepositoryFactory.getRepository(),
+      new ObjectMapperJobRoleModel()
+    );
   }
 
   // the form has been mounted into the DOM
