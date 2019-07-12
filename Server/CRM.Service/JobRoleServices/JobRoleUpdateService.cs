@@ -18,25 +18,25 @@ namespace CRM.Service.JobRoleServices
             _crmDatabaseContext = crmDatabaseContext;
         }
 
-        public async Task<BaseItemResponse<JobRole>> Create(JobRole jobRole)
+        public async Task<BaseItemResponse<JobRoleExtended>> Create(JobRoleExtended JobRole)
         {
-            var response = new BaseItemResponse<JobRole>();
+            var response = new BaseItemResponse<JobRoleExtended>();
 
-            var entity = Mapper.Map<Models.Database.JobRole>(jobRole);
+            var entity = Mapper.Map<Models.Database.JobRole>(JobRole);
             entity.JobRoleId = Guid.NewGuid();
             entity.IsActive = true;
 
             await _crmDatabaseContext.AddAsync(entity);
             await _crmDatabaseContext.SaveChangesAsync();
 
-            response.Entity = Mapper.Map<JobRole>(entity);
+            response.Entity = Mapper.Map<JobRoleExtended>(entity);
 
             return response;
         }
 
-        public async Task<BaseItemResponse<JobRole>> Update(Guid jobRoleId, JobRole jobRole)
+        public async Task<BaseItemResponse<JobRoleExtended>> Update(Guid jobRoleId, JobRoleExtended jobRole)
         {
-            var response = new BaseItemResponse<JobRole>();
+            var response = new BaseItemResponse<JobRoleExtended>();
             var data = await _crmDatabaseContext.JobRoles.FirstOrDefaultAsync(o => o.JobRoleId == jobRoleId);
 
             if (data == null)
@@ -47,25 +47,25 @@ namespace CRM.Service.JobRoleServices
             {
                 Mapper.Map(jobRole, data);
                 await _crmDatabaseContext.SaveChangesAsync();
-                response.Entity = Mapper.Map<JobRole>(data);
+                response.Entity = Mapper.Map<JobRoleExtended>(data);
             }
 
             return response;
         }
 
-        public async Task<BaseItemResponse<JobRole>> Activate(Guid jobRoleId)
+        public async Task<BaseItemResponse<JobRoleSummary>> Activate(Guid jobRoleId)
         {
             return await AmendActiveStatus(jobRoleId, true);
         }
 
-        public async Task<BaseItemResponse<JobRole>> Deactivate(Guid jobRoleId)
+        public async Task<BaseItemResponse<JobRoleSummary>> Deactivate(Guid jobRoleId)
         {
             return await AmendActiveStatus(jobRoleId, false);
         }
 
-        private async Task<BaseItemResponse<JobRole>> AmendActiveStatus(Guid jobRoleId, bool isActive)
+        private async Task<BaseItemResponse<JobRoleSummary>> AmendActiveStatus(Guid jobRoleId, bool isActive)
         {
-            var response = new BaseItemResponse<JobRole>();
+            var response = new BaseItemResponse<JobRoleSummary>();
             var data = await _crmDatabaseContext.JobRoles.FirstOrDefaultAsync(o => o.JobRoleId == jobRoleId);
 
             if (data == null)
@@ -76,7 +76,7 @@ namespace CRM.Service.JobRoleServices
             {
                 data.IsActive = isActive;
                 await _crmDatabaseContext.SaveChangesAsync();
-                response.Entity = Mapper.Map<JobRole>(data);
+                response.Entity = Mapper.Map<JobRoleSummary>(data);
             }
 
             return response;

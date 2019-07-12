@@ -9,12 +9,17 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
     {
         public void Map(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<Database.AssetType, AssetType>();
-            cfg.CreateMap<AssetType, Database.AssetType>();
-
+            // Map database to rest objects
+            //
+            cfg.CreateMap<Database.AssetType, AssetTypeSummary>();
+            cfg.CreateMap<Database.AssetType, AssetTypeExtended>();
             cfg.CreateMap<Database.AssetType, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.AssetTypeId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
+
+            // Map rest objects back to database entity objects
+            //
+            cfg.CreateMap<AssetTypeExtended, Database.AssetType>();
         }
     }
 }

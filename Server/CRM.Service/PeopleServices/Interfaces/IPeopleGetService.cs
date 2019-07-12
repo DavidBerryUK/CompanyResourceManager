@@ -8,12 +8,12 @@ namespace CRM.Service.PeopleServices.Interfaces
 {
     public interface IPeopleGetService
     {
-        Task<BaseCollectionResponse<PersonExtended>> GetAllAsync();
+        Task<BaseCollectionResponse<PersonSummary>> GetAllAsync();
 
-        Task<BaseCollectionResponse<PersonExtended>> GetFilteredAsync(PersonFilteredListRequest filter);
+        Task<BaseCollectionResponse<PersonSummary>> GetFilteredAsync(PersonFilteredListRequest filter);
 
         Task<BaseItemResponse<PersonExtended>> GetByIdAsync(Guid personId);
 
-        Task<BaseCollectionResponse<PersonExtended>> GetPeopleWithJobRole(Guid jobRoleId);
+        Task<BaseCollectionResponse<PersonSummary>> GetPeopleWithJobRole(Guid jobRoleId);
     }
 }

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using CRM.Models.Rest.Asset.Requests;
+﻿using CRM.Models.Rest.Asset.Requests;
 using CRM.Models.Rest.Asset.Response;
 using CRM.Models.Rest.BaseResponse;
+using System;
+using System.Threading.Tasks;
 
 namespace CRM.Service.AssetServices.Interfaces
 {
@@ -12,7 +12,7 @@ namespace CRM.Service.AssetServices.Interfaces
 
         Task<BaseCollectionResponse<AssetSummary>> GetFilteredAsync(AssetFilteredListRequest filter);
 
-        Task<BaseItemResponse<AssetSummary>> GetByIdAsync(Guid assetId);
+        Task<BaseItemResponse<AssetExtended>> GetByIdAsync(Guid assetId);
 
     }
 }

@@ -8,7 +8,10 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
     {
         public void Map(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<Database.Asset, AssetSummary>()
+            // Map database to rest objects
+            //
+            cfg.CreateMap<Database.Asset, AssetSummary>();
+            cfg.CreateMap<Database.Asset, AssetExtended>()
                 .ForMember(dest => dest.AssetId, opt => opt.MapFrom(source => source.AssetId))
                 .ForMember(dest => dest.AssetTypeId, opt => opt.MapFrom(source => source.AssetTypeId))
                 .ForMember(dest => dest.AssetTypeName, opt => opt.MapFrom(source => source.NavAssetType.Name))
@@ -17,11 +20,9 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
                 .ForMember(dest => dest.HasOperatingSystem, opt => opt.MapFrom(source => source.NavAssetType.HasOperatingSystem))
                 .ForMember(dest => dest.BadgeNo, opt => opt.MapFrom(source => source.BadgeNo));
 
-
-            cfg.CreateMap<AssetSummary, Database.Asset>();
-
-            cfg.CreateMap<Asset, Database.Asset>();
-            cfg.CreateMap<Database.Asset, Asset>();
+            // Map rest objects back to database entity objects
+            //
+            cfg.CreateMap<AssetExtended, Database.Asset>();
         }
     }
 }

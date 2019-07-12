@@ -9,12 +9,17 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
     {
         public void Map(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<Database.JobRole, JobRole>();
-            cfg.CreateMap<JobRole, Database.JobRole>();
-
+            // Map database to rest objects
+            //
+            cfg.CreateMap<Database.JobRole, JobRoleSummary>();
+            cfg.CreateMap<Database.JobRole, JobRoleExtended>();
             cfg.CreateMap<Database.JobRole, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.JobRoleId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
+
+            // Map rest objects back to database entity objects
+            //
+            cfg.CreateMap<JobRoleExtended, Database.JobRole>();
         }
     }
 }

@@ -18,9 +18,9 @@ namespace CRM.Service.AssetServices
             _crmDatabaseContext = crmDatabaseContext;
         }
 
-        public async Task<BaseItemResponse<Asset>> Create(Asset asset)
+        public async Task<BaseItemResponse<AssetExtended>> Create(AssetExtended asset)
         {
-            var response = new BaseItemResponse<Asset>();
+            var response = new BaseItemResponse<AssetExtended>();
 
             var entity = Mapper.Map<Models.Database.Asset>(asset);
             entity.AssetId = Guid.NewGuid();
@@ -29,14 +29,14 @@ namespace CRM.Service.AssetServices
             await _crmDatabaseContext.AddAsync(entity);
             await _crmDatabaseContext.SaveChangesAsync();
 
-            response.Entity = Mapper.Map<Asset>(entity);
+            response.Entity = Mapper.Map<AssetExtended>(entity);
 
             return response;
         }
 
-        public async Task<BaseItemResponse<Asset>> Update(Guid assetId, Asset asset)
+        public async Task<BaseItemResponse<AssetExtended>> Update(Guid assetId, AssetExtended asset)
         {
-            var response = new BaseItemResponse<Asset>();
+            var response = new BaseItemResponse<AssetExtended>();
             var data = await _crmDatabaseContext.Assets.FirstOrDefaultAsync(o => o.AssetId == assetId);
 
             if (data == null)
@@ -47,36 +47,36 @@ namespace CRM.Service.AssetServices
             {
                 Mapper.Map(asset, data);
                 await _crmDatabaseContext.SaveChangesAsync();
-                response.Entity = Mapper.Map<Asset>(data);
+                response.Entity = Mapper.Map<AssetExtended>(data);
             }
 
             return response;
         }
 
-        public async Task<BaseItemResponse<Asset>> Activate(Guid assetId)
+        public async Task<BaseItemResponse<AssetSummary>> Activate(Guid assetId)
         {
             return await AmendActiveStatus(assetId, true);
         }
 
-        public async Task<BaseItemResponse<Asset>> Deactivate(Guid assetId)
+        public async Task<BaseItemResponse<AssetSummary>> Deactivate(Guid assetId)
         {
             return await AmendActiveStatus(assetId, false);
         }
 
-        private async Task<BaseItemResponse<Asset>> AmendActiveStatus(Guid assetId, bool isActive)
+        private async Task<BaseItemResponse<AssetSummary>> AmendActiveStatus(Guid assetId, bool isActive)
         {
-            var response = new BaseItemResponse<Asset>();
+            var response = new BaseItemResponse<AssetSummary>();
             var data = await _crmDatabaseContext.Assets.FirstOrDefaultAsync(o => o.AssetId == assetId);
 
             if (data == null)
             {
-                response.ErrorMessage = $"Asset Id {assetId} not found";
+                response.ErrorMessage = $"AssetSummary Id {assetId} not found";
             }
             else
             {
                 data.IsActive = isActive;
                 await _crmDatabaseContext.SaveChangesAsync();
-                response.Entity = Mapper.Map<Asset>(data);
+                response.Entity = Mapper.Map<AssetSummary>(data);
             }
 
             return response;

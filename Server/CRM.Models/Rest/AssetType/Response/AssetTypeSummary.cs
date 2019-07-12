@@ -2,7 +2,11 @@
 
 namespace CRM.Models.Rest.AssetType.Response
 {
-    public class AssetType
+    /// <summary>
+    /// Summary records are returned for lists with primary information,
+    ///   note that drop down lists use the ListItem class
+    /// </summary>
+    public class AssetTypeSummary
     {
         public Guid AssetTypeId { get; set; }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.Asset.Requests;
 using CRM.Models.Rest.Asset.Response;
@@ -10,6 +6,10 @@ using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
 using CRM.Service.AssetServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Service.AssetServices
 {
@@ -65,17 +65,17 @@ namespace CRM.Service.AssetServices
             return response;
         }
 
-        public async Task<BaseItemResponse<AssetSummary>> GetByIdAsync(Guid assetId)
+        public async Task<BaseItemResponse<AssetExtended>> GetByIdAsync(Guid assetId)
         {
             {
-                var response = new BaseItemResponse<AssetSummary>();
+                var response = new BaseItemResponse<AssetExtended>();
 
                 var data = await _crmDatabaseContext
                     .Assets
                     .Include(o => o.NavAssetType)
                     .FirstOrDefaultAsync(o => o.AssetId == assetId);
 
-                response.Entity = Mapper.Map<AssetSummary>(data);
+                response.Entity = Mapper.Map<AssetExtended>(data);
 
                 return response;
             }

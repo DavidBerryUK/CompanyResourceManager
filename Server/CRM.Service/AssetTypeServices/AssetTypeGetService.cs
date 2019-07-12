@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.AssetType.Requests;
 using CRM.Models.Rest.AssetType.Response;
@@ -11,6 +7,10 @@ using CRM.Models.Rest.Enums;
 using CRM.Models.Rest.Lists;
 using CRM.Service.AssetTypeServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Service.AssetTypeServices
 {
@@ -23,16 +23,16 @@ namespace CRM.Service.AssetTypeServices
             _crmDatabaseContext = crmDatabaseContext;
         }
 
-        public async Task<BaseCollectionResponse<AssetType>> GetAllAsync()
+        public async Task<BaseCollectionResponse<AssetTypeSummary>> GetAllAsync()
         {
-            var response = new BaseCollectionResponse<AssetType>();
+            var response = new BaseCollectionResponse<AssetTypeSummary>();
 
             var data = await _crmDatabaseContext
                 .AssetTypes
                 .OrderBy(o => o.Name)
                 .ToListAsync();
 
-            response.Items = Mapper.Map<List<AssetType>>(data);
+            response.Items = Mapper.Map<List<AssetTypeSummary>>(data);
 
             return response;
         }
@@ -52,9 +52,9 @@ namespace CRM.Service.AssetTypeServices
             return response;
         }
 
-        public async Task<BaseCollectionResponse<AssetType>> GetFilteredAsync(AssetTypeFilteredListRequest filter)
+        public async Task<BaseCollectionResponse<AssetTypeSummary>> GetFilteredAsync(AssetTypeFilteredListRequest filter)
         {
-            var response = new BaseCollectionResponse<AssetType>();
+            var response = new BaseCollectionResponse<AssetTypeSummary>();
 
             var query = _crmDatabaseContext
                 .AssetTypes
@@ -76,20 +76,20 @@ namespace CRM.Service.AssetTypeServices
 
             var data = await query.ToListAsync();
 
-            response.Items = Mapper.Map<List<AssetType>>(data);
+            response.Items = Mapper.Map<List<AssetTypeSummary>>(data);
 
             return response;
         }
 
-        public async Task<BaseItemResponse<AssetType>> GetByIdAsync(Guid assetTypeId)
+        public async Task<BaseItemResponse<AssetTypeExtended>> GetByIdAsync(Guid assetTypeId)
         {
-            var response = new BaseItemResponse<AssetType>();
+            var response = new BaseItemResponse<AssetTypeExtended>();
 
             var data = await _crmDatabaseContext
                 .AssetTypes
                 .FirstOrDefaultAsync(o => o.AssetTypeId == assetTypeId);
 
-            response.Entity = Mapper.Map<AssetType>(data);
+            response.Entity = Mapper.Map<AssetTypeExtended>(data);
 
             return response;
         }

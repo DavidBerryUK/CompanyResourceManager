@@ -18,9 +18,9 @@ namespace CRM.Service.PeopleServices
             _crmDatabaseContext = crmDatabaseContext;
         }
 
-        public async Task<BaseItemResponse<Person>> Create(Person person)
+        public async Task<BaseItemResponse<PersonExtended>> Create(PersonExtended person)
         {
-            var response = new BaseItemResponse<Person>();
+            var response = new BaseItemResponse<PersonExtended>();
 
             var entity = Mapper.Map<Models.Database.Person>(person);
             entity.PersonId = Guid.NewGuid();
@@ -29,54 +29,54 @@ namespace CRM.Service.PeopleServices
             await _crmDatabaseContext.AddAsync(entity);
             await _crmDatabaseContext.SaveChangesAsync();
 
-            response.Entity = Mapper.Map<Person>(entity);
+            response.Entity = Mapper.Map<PersonExtended>(entity);
 
             return response;
         }
 
-        public async Task<BaseItemResponse<Person>> Update(Guid personId, Person person)
+        public async Task<BaseItemResponse<PersonExtended>> Update(Guid personId, PersonExtended person)
         {
-            var response = new BaseItemResponse<Person>();
+            var response = new BaseItemResponse<PersonExtended>();
             var data = await _crmDatabaseContext.People.FirstOrDefaultAsync(o=> o.PersonId == personId);
 
             if (data == null)
             {
-                response.ErrorMessage = $"Person {personId} not found";
+                response.ErrorMessage = $"PersonSummary {personId} not found";
             }
             else
             {
                 Mapper.Map(person, data);
                 await _crmDatabaseContext.SaveChangesAsync();
-                response.Entity = Mapper.Map<Person>(data);
+                response.Entity = Mapper.Map<PersonExtended>(data);
             } 
 
             return response;
         }
 
-        public async Task<BaseItemResponse<Person>> Activate(Guid personId)
+        public async Task<BaseItemResponse<PersonSummary>> Activate(Guid personId)
         {
             return await AmendPersonActiveStatus(personId, true);
         }
 
-        public async Task<BaseItemResponse<Person>> Deactivate(Guid personId)
+        public async Task<BaseItemResponse<PersonSummary>> Deactivate(Guid personId)
         {
             return await AmendPersonActiveStatus(personId, false);
         }
 
-        private async Task<BaseItemResponse<Person>> AmendPersonActiveStatus(Guid personId, bool isActive)
+        private async Task<BaseItemResponse<PersonSummary>> AmendPersonActiveStatus(Guid personId, bool isActive)
         {
-            var response = new BaseItemResponse<Person>();
+            var response = new BaseItemResponse<PersonSummary>();
             var data = await _crmDatabaseContext.People.FirstOrDefaultAsync(o => o.PersonId == personId);
 
             if (data == null)
             {
-                response.ErrorMessage = $"Person {personId} not found";
+                response.ErrorMessage = $"PersonSummary {personId} not found";
             }
             else
             {
                 data.IsActive = isActive;
                 await _crmDatabaseContext.SaveChangesAsync();
-                response.Entity = Mapper.Map<Person>(data);
+                response.Entity = Mapper.Map<PersonSummary>(data);
             }
 
             return response;

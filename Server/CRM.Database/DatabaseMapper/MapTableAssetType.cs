@@ -10,7 +10,7 @@ namespace CRM.Database.DatabaseMapper
         {
             modelBuilder.Entity<AssetType>(entity =>
             {
-                entity.ToTable("AssetType");
+                entity.ToTable("AssetTypeSummary");
 
                 entity.HasKey(e => e.AssetTypeId);
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
@@ -11,6 +7,10 @@ using CRM.Models.Rest.JobRole.Response;
 using CRM.Models.Rest.Lists;
 using CRM.Service.JobRoleServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Service.JobRoleServices
 {
@@ -23,16 +23,16 @@ namespace CRM.Service.JobRoleServices
             _crmDatabaseContext = crmDatabaseContext;
         }
 
-        public async Task<BaseCollectionResponse<JobRole>> GetAllAsync()
+        public async Task<BaseCollectionResponse<JobRoleSummary>> GetAllAsync()
         {
-            var response = new BaseCollectionResponse<JobRole>();
+            var response = new BaseCollectionResponse<JobRoleSummary>();
 
             var data = await _crmDatabaseContext
                 .JobRoles
                 .OrderBy(o => o.Name)
                 .ToListAsync();
 
-            response.Items = Mapper.Map<List<JobRole>>(data);
+            response.Items = Mapper.Map<List<JobRoleSummary>>(data);
 
             return response;
         }
@@ -52,9 +52,9 @@ namespace CRM.Service.JobRoleServices
             return response;
         }
 
-        public async Task<BaseCollectionResponse<JobRole>> GetFilteredAsync(JobRoleFilteredListRequest filter)
+        public async Task<BaseCollectionResponse<JobRoleSummary>> GetFilteredAsync(JobRoleFilteredListRequest filter)
         {
-            var response = new BaseCollectionResponse<JobRole>();
+            var response = new BaseCollectionResponse<JobRoleSummary>();
 
             var query = _crmDatabaseContext
                 .JobRoles
@@ -76,20 +76,20 @@ namespace CRM.Service.JobRoleServices
 
             var data = await query.ToListAsync();
 
-            response.Items = Mapper.Map<List<JobRole>>(data);
+            response.Items = Mapper.Map<List<JobRoleSummary>>(data);
 
             return response;
         }
 
-        public async Task<BaseItemResponse<JobRole>> GetByIdAsync(Guid jobRoleId)
+        public async Task<BaseItemResponse<JobRoleExtended>> GetByIdAsync(Guid jobRoleId)
         {
-            var response = new BaseItemResponse<JobRole>();
+            var response = new BaseItemResponse<JobRoleExtended>();
 
             var data = await _crmDatabaseContext
                 .JobRoles
                 .FirstOrDefaultAsync(o => o.JobRoleId== jobRoleId);
 
-            response.Entity = Mapper.Map<JobRole>(data);
+            response.Entity = Mapper.Map<JobRoleExtended>(data);
 
             return response;
         }

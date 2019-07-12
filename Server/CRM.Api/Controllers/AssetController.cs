@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CRM.Models.Rest.Asset.Requests;
+﻿using CRM.Models.Rest.Asset.Requests;
 using CRM.Models.Rest.Asset.Response;
 using CRM.Service.AssetServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {
     [ApiController]
-    [Route("api/asset")]
+    [Route("api/assetSummary")]
     public class AssetController : Controller
     {
         private readonly IAssetGetService _assetGetService;
@@ -40,35 +40,35 @@ namespace CRM.Api.Controllers
 
 
         [HttpGet("{assetId}")]
-        public async Task<ActionResult<AssetSummary>> GetById(Guid assetId)
+        public async Task<ActionResult<AssetExtended>> GetById(Guid assetId)
         {
             var data = await _assetGetService.GetByIdAsync(assetId);
             return Ok(data);
         }
 
         [HttpPut("{assetId}")]
-        public async Task<ActionResult<Asset>> Update(Guid assetId, [FromBody] Asset asset)
+        public async Task<ActionResult<AssetExtended>> Update(Guid assetId, [FromBody] AssetExtended assetSummary)
         {
-            var data = await _assetUpdateService.Update(assetId, asset);
+            var data = await _assetUpdateService.Update(assetId, assetSummary);
             return Ok(data);
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<Asset>> Create([FromBody] Asset asset)
+        public async Task<ActionResult<AssetExtended>> Create([FromBody] AssetExtended assetSummary)
         {
-            var data = await _assetUpdateService.Create(asset);
+            var data = await _assetUpdateService.Create(assetSummary);
             return Ok(data);
         }
 
         [HttpPut("{assetId}/deactivate")]
-        public async Task<ActionResult<Asset>> Deactivate(Guid assetId)
+        public async Task<ActionResult<AssetSummary>> Deactivate(Guid assetId)
         {
             var data = await _assetUpdateService.Deactivate(assetId);
             return Ok(data);
         }
 
         [HttpPut("{assetId}/activate")]
-        public async Task<ActionResult<Asset>> Activate(Guid assetId)
+        public async Task<ActionResult<AssetSummary>> Activate(Guid assetId)
         {
             var data = await _assetUpdateService.Activate(assetId);
             return Ok(data);

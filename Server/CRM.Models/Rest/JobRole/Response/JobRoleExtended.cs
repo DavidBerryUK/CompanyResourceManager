@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CRM.Models.Rest.People.Response
+﻿namespace CRM.Models.Rest.JobRole.Response
 {
     /// <summary>
     /// Extended models are used to display the full information for an entity,
@@ -10,8 +8,7 @@ namespace CRM.Models.Rest.People.Response
     /// to ensure that this minimum amount of data is always available in
     /// the front end system
     /// </summary>
-    public class PersonExtended : PersonSummary
+    public class JobRoleExtended : JobRoleSummary
     {
-        public string JobRoleName { get; set; }
     }
 }

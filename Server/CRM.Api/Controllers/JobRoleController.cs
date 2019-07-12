@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CRM.Models.Rest.JobRole.Requests;
+﻿using CRM.Models.Rest.JobRole.Requests;
 using CRM.Models.Rest.JobRole.Response;
-using CRM.Models.Rest.People.Response;
+using CRM.Models.Rest.Lists;
 using CRM.Service.JobRoleServices.Interfaces;
 using CRM.Service.PeopleServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {
@@ -30,35 +30,35 @@ namespace CRM.Api.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<List<JobRole>>> All()
+        public async Task<ActionResult<List<JobRoleSummary>>> All()
         {
             var data = await _jobRoleGetService.GetAllAsync();
             return Ok(data);
         }
 
         [HttpGet("{jobRoleId}/people")]
-        public async Task<ActionResult<PersonExtended>> GetPeopleForJobRole(Guid jobRoleId)
+        public async Task<ActionResult<JobRoleSummary>> GetPeopleForJobRole(Guid jobRoleId)
         {
             var data = await _peopleGetService.GetPeopleWithJobRole(jobRoleId);
             return Ok(data);
         }
 
         [HttpGet("items")]
-        public async Task<ActionResult<List<JobRole>>> ListShortActive()
+        public async Task<ActionResult<List<ListItem>>> ListActive()
         {
             var data = await _jobRoleGetService.GetListItemsAsync();
             return Ok(data);
         }
 
         [HttpPost("filtered")]
-        public async Task<ActionResult<List<JobRole>>> FilteredList(JobRoleFilteredListRequest filter)
+        public async Task<ActionResult<List<JobRoleSummary>>> FilteredList(JobRoleFilteredListRequest filter)
         {
             var data = await _jobRoleGetService.GetFilteredAsync(filter);
             return Ok(data);
         }
 
         [HttpGet("{jobRoleId}")]
-        public async Task<ActionResult<JobRole>> GetById(Guid jobRoleId)
+        public async Task<ActionResult<JobRoleExtended>> GetById(Guid jobRoleId)
         {
             var data = await _jobRoleGetService.GetByIdAsync(jobRoleId);
             return Ok(data);
@@ -66,28 +66,28 @@ namespace CRM.Api.Controllers
 
 
         [HttpPut("{jobRoleId}")]
-        public async Task<ActionResult<JobRole>> Update(Guid jobRoleId, [FromBody] JobRole jobRole)
+        public async Task<ActionResult<JobRoleExtended>> Update(Guid jobRoleId, [FromBody] JobRoleExtended jobRoleSummary)
         {
-            var data = await _jobRoleUpdateService.Update(jobRoleId, jobRole);
+            var data = await _jobRoleUpdateService.Update(jobRoleId, jobRoleSummary);
             return Ok(data);
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<JobRole>> Create([FromBody] JobRole jobRole)
+        public async Task<ActionResult<JobRoleExtended>> Create([FromBody] JobRoleExtended jobRoleSummary)
         {
-            var data = await _jobRoleUpdateService.Create(jobRole);
+            var data = await _jobRoleUpdateService.Create(jobRoleSummary);
             return Ok(data);
         }
 
         [HttpPut("{jobRoleId}/deactivate")]
-        public async Task<ActionResult<JobRole>> Deactivate(Guid jobRoleId)
+        public async Task<ActionResult<JobRoleSummary>> Deactivate(Guid jobRoleId)
         {
             var data = await _jobRoleUpdateService.Deactivate(jobRoleId);
             return Ok(data);
         }
 
         [HttpPut("{jobRoleId}/activate")]
-        public async Task<ActionResult<JobRole>> Activate(Guid jobRoleId)
+        public async Task<ActionResult<JobRoleSummary>> Activate(Guid jobRoleId)
         {
             var data = await _jobRoleUpdateService.Activate(jobRoleId);
             return Ok(data);

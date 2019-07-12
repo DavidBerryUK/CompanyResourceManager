@@ -7,9 +7,9 @@ namespace CRM.Service.PeopleServices.Interfaces
 {
     public interface IPeopleUpdateService
     {
-        Task<BaseItemResponse<Person>> Create(Person person);
-        Task<BaseItemResponse<Person>> Update(Guid personId, Person person);
-        Task<BaseItemResponse<Person>> Activate(Guid personId);
-        Task<BaseItemResponse<Person>> Deactivate(Guid personId);
+        Task<BaseItemResponse<PersonExtended>> Create(PersonExtended person);
+        Task<BaseItemResponse<PersonExtended>> Update(Guid personId, PersonExtended person);
+        Task<BaseItemResponse<PersonSummary>> Activate(Guid personId);
+        Task<BaseItemResponse<PersonSummary>> Deactivate(Guid personId);
     }
 }

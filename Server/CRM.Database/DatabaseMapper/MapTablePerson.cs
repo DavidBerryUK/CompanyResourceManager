@@ -10,7 +10,7 @@ namespace CRM.Database.DatabaseMapper
         {
             modelBuilder.Entity<Person>(entity =>
             {
-                entity.ToTable("Person");
+                entity.ToTable("PersonSummary");
 
                 entity.HasKey(e => e.PersonId);
 

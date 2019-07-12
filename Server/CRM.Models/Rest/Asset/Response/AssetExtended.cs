@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CRM.Models.Rest.People.Response
+namespace CRM.Models.Rest.Asset.Response
 {
     /// <summary>
     /// Extended models are used to display the full information for an entity,
@@ -10,8 +10,12 @@ namespace CRM.Models.Rest.People.Response
     /// to ensure that this minimum amount of data is always available in
     /// the front end system
     /// </summary>
-    public class PersonExtended : PersonSummary
+    public class AssetExtended : AssetSummary
     {
-        public string JobRoleName { get; set; }
+        public string AssetTypeName { get; set; }
+
+        public bool HasAssetBadge { get; set; }
+
+        public bool HasOperatingSystem { get; set; }
     }
 }

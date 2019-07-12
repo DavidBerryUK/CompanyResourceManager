@@ -11,7 +11,7 @@ namespace CRM.Database.DatabaseMapper
         {
             modelBuilder.Entity<JobRole>(entity =>
             {
-                entity.ToTable("JobRole");
+                entity.ToTable("JobRoleSummary");
 
                 entity.HasKey(e => e.JobRoleId);
 

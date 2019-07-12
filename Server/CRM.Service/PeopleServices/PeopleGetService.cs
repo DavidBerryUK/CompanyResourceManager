@@ -22,9 +22,9 @@ namespace CRM.Service.PeopleServices
             _crmDatabaseContext = crmDatabaseContext;
         }
 
-        public async Task<BaseCollectionResponse<PersonExtended>> GetAllAsync()
+        public async Task<BaseCollectionResponse<PersonSummary>> GetAllAsync()
         {
-            var response = new BaseCollectionResponse<PersonExtended>();
+            var response = new BaseCollectionResponse<PersonSummary>();
 
             var data = await _crmDatabaseContext
                 .People
@@ -33,14 +33,14 @@ namespace CRM.Service.PeopleServices
                 .ThenBy(order => order.Forename)
                 .ToListAsync();
 
-            response.Items = Mapper.Map<List<PersonExtended>>(data);
+            response.Items = Mapper.Map<List<PersonSummary>>(data);
 
             return response;
         }
 
-        public async Task<BaseCollectionResponse<PersonExtended>> GetFilteredAsync(PersonFilteredListRequest filter)
+        public async Task<BaseCollectionResponse<PersonSummary>> GetFilteredAsync(PersonFilteredListRequest filter)
         {
-            var response = new BaseCollectionResponse<PersonExtended>();
+            var response = new BaseCollectionResponse<PersonSummary>();
 
             var query  = _crmDatabaseContext
                 .People
@@ -64,7 +64,7 @@ namespace CRM.Service.PeopleServices
 
             var data = await query.ToListAsync();
 
-            response.Items = Mapper.Map<List<PersonExtended>>(data);
+            response.Items = Mapper.Map<List<PersonSummary>>(data);
 
             return response;
         }
@@ -82,9 +82,9 @@ namespace CRM.Service.PeopleServices
             return response;
         }
 
-        public async Task<BaseCollectionResponse<PersonExtended>> GetPeopleWithJobRole(Guid jobRoleId)
+        public async Task<BaseCollectionResponse<PersonSummary>> GetPeopleWithJobRole(Guid jobRoleId)
         {
-            var response = new BaseCollectionResponse<PersonExtended>();
+            var response = new BaseCollectionResponse<PersonSummary>();
 
             var data = await _crmDatabaseContext
                 .People
@@ -95,7 +95,7 @@ namespace CRM.Service.PeopleServices
                 .ThenBy(order => order.Forename)
                 .ToListAsync();
 
-            response.Items = Mapper.Map<List<PersonExtended>>(data);
+            response.Items = Mapper.Map<List<PersonSummary>>(data);
 
             return response;
         }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.AssetType.Response;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Service.AssetTypeServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace CRM.Service.AssetTypeServices
 {
@@ -18,9 +18,9 @@ namespace CRM.Service.AssetTypeServices
             _crmDatabaseContext = crmDatabaseContext;
         }
 
-        public async Task<BaseItemResponse<AssetType>> Create(AssetType assetType)
+        public async Task<BaseItemResponse<AssetTypeExtended>> Create(AssetTypeExtended assetType)
         {
-            var response = new BaseItemResponse<AssetType>();
+            var response = new BaseItemResponse<AssetTypeExtended>();
 
             var entity = Mapper.Map<Models.Database.AssetType>(assetType);
             entity.AssetTypeId = Guid.NewGuid();
@@ -29,14 +29,14 @@ namespace CRM.Service.AssetTypeServices
             await _crmDatabaseContext.AddAsync(entity);
             await _crmDatabaseContext.SaveChangesAsync();
 
-            response.Entity = Mapper.Map<AssetType>(entity);
+            response.Entity = Mapper.Map<AssetTypeExtended>(entity);
 
             return response;
         }
 
-        public async Task<BaseItemResponse<AssetType>> Update(Guid assetTypeId, AssetType assetType)
+        public async Task<BaseItemResponse<AssetTypeExtended>> Update(Guid assetTypeId, AssetTypeExtended assetType)
         {
-            var response = new BaseItemResponse<AssetType>();
+            var response = new BaseItemResponse<AssetTypeExtended>();
             var data = await _crmDatabaseContext.AssetTypes.FirstOrDefaultAsync(o => o.AssetTypeId == assetTypeId);
 
             if (data == null)
@@ -47,36 +47,36 @@ namespace CRM.Service.AssetTypeServices
             {
                 Mapper.Map(assetType, data);
                 await _crmDatabaseContext.SaveChangesAsync();
-                response.Entity = Mapper.Map<AssetType>(data);
+                response.Entity = Mapper.Map<AssetTypeExtended>(data);
             }
 
             return response;
         }
 
-        public async Task<BaseItemResponse<AssetType>> Activate(Guid assetTypeId)
+        public async Task<BaseItemResponse<AssetTypeSummary>> Activate(Guid assetTypeId)
         {
             return await AmendActiveStatus(assetTypeId, true);
         }
 
-        public async Task<BaseItemResponse<AssetType>> Deactivate(Guid assetTypeId)
+        public async Task<BaseItemResponse<AssetTypeSummary>> Deactivate(Guid assetTypeId)
         {
             return await AmendActiveStatus(assetTypeId, false);
         }
 
-        private async Task<BaseItemResponse<AssetType>> AmendActiveStatus(Guid assetTypeId, bool isActive)
+        private async Task<BaseItemResponse<AssetTypeSummary>> AmendActiveStatus(Guid assetTypeId, bool isActive)
         {
-            var response = new BaseItemResponse<AssetType>();
+            var response = new BaseItemResponse<AssetTypeSummary>();
             var data = await _crmDatabaseContext.AssetTypes.FirstOrDefaultAsync(o => o.AssetTypeId == assetTypeId);
 
             if (data == null)
             {
-                response.ErrorMessage = $"Asset Type Id {assetTypeId} not found";
+                response.ErrorMessage = $"AssetSummary Type Id {assetTypeId} not found";
             }
             else
             {
                 data.IsActive = isActive;
                 await _crmDatabaseContext.SaveChangesAsync();
-                response.Entity = Mapper.Map<AssetType>(data);
+                response.Entity = Mapper.Map<AssetTypeSummary>(data);
             }
 
             return response;

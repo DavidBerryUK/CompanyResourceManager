@@ -2,7 +2,11 @@
 
 namespace CRM.Models.Rest.People.Response
 {
-    public class Person
+    /// <summary>
+    /// Summary records are returned for lists with primary information,
+    ///   note that drop down lists use the ListItem class
+    /// </summary>
+    public class PersonSummary
     {
         public Guid PersonId { get; set; }
 

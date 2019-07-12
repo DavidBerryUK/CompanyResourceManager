@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
+using CRM.Models.Rest.Lists;
 using CRM.Models.Rest.People.Response;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
@@ -8,11 +9,18 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
     {
         public  void Map(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<Database.Person, Person>();
-            cfg.CreateMap<Person, Database.Person>();
-
+            // Map database to rest objects
+            //
+            cfg.CreateMap<Database.Person, PersonSummary>();
             cfg.CreateMap<Database.Person, PersonExtended>()
                 .ForMember(dest => dest.JobRoleName, opt => opt.MapFrom(source => source.NavJobRole.Name));
+            cfg.CreateMap<Database.Person, ListItem>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.PersonId))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(source => $"{source.Forename} {source.Surname}") );
+
+            // Map rest objects back to database entity objects
+            //
+            cfg.CreateMap<PersonExtended, Database.Person>();
         }
     }
 }
