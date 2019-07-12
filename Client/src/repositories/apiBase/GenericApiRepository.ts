@@ -12,11 +12,11 @@ import NotificationFactory                      from '@/services/notifications/N
 import ObjectArrayMapperListItem                from '../objectMappers/list/ObjectArrayMapperListItem';
 import SuccessCallbackHelper                    from "../helpers/SuccessCallbackHelper";
 
-/// S = Summary model
-/// E = Entity model        :IApiModel
+/// S = Summary Entity model
+/// E = Extended Entity model        :IApiModel
 /// F = List Filter Model
 
-export default class GenericApiRepository<S extends IApiModel, E extends IApiModel, F> extends ApiBase {
+export default class GenericApiRepository<S extends IApiModel, E extends S, F> extends ApiBase {
 
   private baseUrl: string = "";
   private summaryObjectMapper: IObjectMapper<S>;

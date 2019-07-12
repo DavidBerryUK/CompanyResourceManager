@@ -19,5 +19,7 @@ namespace CRM.Models.Rest.People.Response
         public Guid JobRoleId { get; set; }
 
         public bool IsActive { get; set; }
+
+        public string JobRoleName { get; set; }
     }
 }

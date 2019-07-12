@@ -45,16 +45,16 @@ namespace CRM.Api.Controllers
         }
 
         [HttpPut("{personId}")]
-        public async Task<ActionResult<PersonExtended>> Update(Guid personId, [FromBody] PersonExtended personSummary)
+        public async Task<ActionResult<PersonExtended>> Update(Guid personId, [FromBody] PersonExtended person)
         {
-            var data = await _peopleUpdateService.Update(personId, personSummary);
+            var data = await _peopleUpdateService.Update(personId, person);
             return Ok(data);
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<PersonExtended>> Create( [FromBody] PersonExtended personSummary)
+        public async Task<ActionResult<PersonExtended>> Create( [FromBody] PersonExtended person)
         {
-            var data = await _peopleUpdateService.Create( personSummary);
+            var data = await _peopleUpdateService.Create( person);
             return Ok(data);
         }
 

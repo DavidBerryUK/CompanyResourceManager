@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.People.Response;
 using CRM.Service.PeopleServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace CRM.Service.PeopleServices
 {
@@ -29,7 +29,12 @@ namespace CRM.Service.PeopleServices
             await _crmDatabaseContext.AddAsync(entity);
             await _crmDatabaseContext.SaveChangesAsync();
 
-            response.Entity = Mapper.Map<PersonExtended>(entity);
+            var data = await _crmDatabaseContext
+                .People
+                .Include(inc => inc.NavJobRole)
+                .FirstOrDefaultAsync(o => o.PersonId == entity.PersonId);
+
+            response.Entity = Mapper.Map<PersonExtended>(data);
 
             return response;
         }
@@ -43,12 +48,16 @@ namespace CRM.Service.PeopleServices
             {
                 response.ErrorMessage = $"PersonSummary {personId} not found";
             }
-            else
-            {
-                Mapper.Map(person, data);
-                await _crmDatabaseContext.SaveChangesAsync();
-                response.Entity = Mapper.Map<PersonExtended>(data);
-            } 
+
+            Mapper.Map(person, data);
+            await _crmDatabaseContext.SaveChangesAsync();
+
+            data = await _crmDatabaseContext
+                .People
+                .Include(inc => inc.NavJobRole)
+                .FirstOrDefaultAsync(o => o.PersonId == personId);
+
+            response.Entity = Mapper.Map<PersonExtended>(data);
 
             return response;
         }

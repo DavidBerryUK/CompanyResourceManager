@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
@@ -10,6 +6,10 @@ using CRM.Models.Rest.People.Request;
 using CRM.Models.Rest.People.Response;
 using CRM.Service.PeopleServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Service.PeopleServices
 {

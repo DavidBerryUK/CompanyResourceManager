@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CRM.Models.Rest.Asset.Response
+﻿namespace CRM.Models.Rest.Asset.Response
 {
     /// <summary>
     /// Extended models are used to display the full information for an entity,

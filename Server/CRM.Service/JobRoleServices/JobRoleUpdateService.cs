@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.JobRole.Response;
 using CRM.Service.JobRoleServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace CRM.Service.JobRoleServices
 {

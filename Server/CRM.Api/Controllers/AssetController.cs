@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CRM.Api.Controllers
 {
     [ApiController]
-    [Route("api/assetSummary")]
+    [Route("api/asset")]
     public class AssetController : Controller
     {
         private readonly IAssetGetService _assetGetService;

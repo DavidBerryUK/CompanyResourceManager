@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CRM.Models.Rest.People.Response
+﻿namespace CRM.Models.Rest.People.Response
 {
     /// <summary>
     /// Extended models are used to display the full information for an entity,
@@ -12,6 +10,6 @@ namespace CRM.Models.Rest.People.Response
     /// </summary>
     public class PersonExtended : PersonSummary
     {
-        public string JobRoleName { get; set; }
+       
     }
 }

@@ -11,9 +11,12 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<Database.Person, PersonSummary>();
+            cfg.CreateMap<Database.Person, PersonSummary>()
+                .ForMember(dest => dest.JobRoleName, opt => opt.MapFrom(source => source.NavJobRole.Name));
+
             cfg.CreateMap<Database.Person, PersonExtended>()
                 .ForMember(dest => dest.JobRoleName, opt => opt.MapFrom(source => source.NavJobRole.Name));
+
             cfg.CreateMap<Database.Person, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.PersonId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => $"{source.Forename} {source.Surname}") );
