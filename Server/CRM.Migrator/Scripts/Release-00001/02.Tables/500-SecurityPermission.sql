@@ -1,0 +1,23 @@
+﻿USE [CRM]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SecurityPermission](
+	[SecurityPermissionId]	[UNIQUEIDENTIFIER]	NOT NULL,
+	[Name]					[NVARCHAR](50)		NOT NULL,
+	[Description]			[NVARCHAR](2000)	NOT NULL,
+	[BitGroup]				[SmallInt]			NOT NULL,
+	[Bit]					[TinyInt]			NOT NULL,
+	[IsActive]				[bit]				NOT NULL,
+ CONSTRAINT [PK_SecurityPermissionId] PRIMARY KEY CLUSTERED 
+(
+	[SecurityPermissionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] 
+
+GO

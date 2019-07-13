@@ -64,6 +64,21 @@
     <None Update="Scripts\Release-00001\02.Tables\090-PersonSkill.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Scripts\Release-00001\02.Tables\540-SecurityGroupTeam.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\Release-00001\02.Tables\530-SecurityGroupPerson.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\Release-00001\02.Tables\520-SecurityGroupSecurityPermission.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\Release-00001\02.Tables\510-SecurityGroup.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\Release-00001\02.Tables\500-SecurityPermission.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Scripts\Release-00001\06.Data\040 Skill.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

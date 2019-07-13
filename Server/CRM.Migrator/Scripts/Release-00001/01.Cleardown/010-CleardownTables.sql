@@ -10,15 +10,21 @@ DECLARE @ItemsToDrop  TABLE (Id Int Identity, Name nvarchar(100), DeleteOrder in
 INSERT INTO @ItemsToDrop ( Name)
 VALUES 
 
-(	'PersonSkill'	),
-(	'PersonTeam'	),
-(	'PersonAsset'	),
-(	'Person'		),
-(	'JobRole'		),
-(	'Asset'			),
-(	'Team'			),
-(	'Skill'			),
-(	'AssetType'		)
+(	'SecurityGroupPerson'				),
+(	'SecurityGroupTeam'					),
+(	'SecurityGroupSecurityPermission'	),
+(	'SecurityGroup'						),
+(	'SecurityPermission'				),
+(	'PersonSkill'						),
+(	'PersonTeam'						),
+(	'PersonAsset'						),
+(	'Person'							),
+(	'JobRole'							),
+(	'Asset'								),
+(	'Team'								),
+(	'Skill'								),
+(	'AssetType'							)
+
 
 
 DECLARE @Name	NVARCHAR(100);
