@@ -1,9 +1,8 @@
-﻿using CRM.Models.Rest.AssetType.Requests;
-using CRM.Models.Rest.AssetType.Response;
-using CRM.Models.Rest.BaseResponse;
+﻿using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Lists;
 using System;
 using System.Threading.Tasks;
+using CRM.Models.Rest.AssetType;
 
 namespace CRM.Service.AssetTypeServices.Interfaces
 {

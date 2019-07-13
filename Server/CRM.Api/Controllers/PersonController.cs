@@ -2,8 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CRM.Models.Rest.Person.Request;
-using CRM.Models.Rest.Person.Response;
+using CRM.Models.Rest.Person;
 using CRM.Service.PersonServices.Interfaces;
 
 namespace CRM.Api.Controllers

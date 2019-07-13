@@ -2,8 +2,6 @@
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
-using CRM.Models.Rest.JobRole.Requests;
-using CRM.Models.Rest.JobRole.Response;
 using CRM.Models.Rest.Lists;
 using CRM.Service.JobRoleServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CRM.Models.Rest.JobRole;
 
 namespace CRM.Service.JobRoleServices
 {

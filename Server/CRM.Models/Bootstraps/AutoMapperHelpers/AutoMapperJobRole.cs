@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
-using CRM.Models.Rest.JobRole.Response;
+using CRM.Models.Rest.JobRole;
 using CRM.Models.Rest.Lists;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers

@@ -7,10 +7,20 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="FluentValidation" Version="8.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CRM.Utilities\CRM.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Rest\AssetType\Validation\" />
+    <Folder Include="Rest\Asset\Validation\" />
+    <Folder Include="Rest\BaseResponse\Validation\" />
+    <Folder Include="Rest\JobRole\Validation\" />
+    <Folder Include="Rest\Lists\Validation\" />
+    <Folder Include="Rest\Person\Validation\" />
   </ItemGroup>
 
 </Project>

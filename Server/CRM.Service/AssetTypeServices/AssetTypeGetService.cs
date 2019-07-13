@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using CRM.Database.Context;
-using CRM.Models.Rest.AssetType.Requests;
-using CRM.Models.Rest.AssetType.Response;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
 using CRM.Models.Rest.Lists;
@@ -11,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CRM.Models.Rest.AssetType;
 
 namespace CRM.Service.AssetTypeServices
 {

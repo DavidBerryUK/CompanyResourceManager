@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
 using CRM.Models.Rest.Lists;
-using CRM.Models.Rest.Person.Response;
+using CRM.Models.Rest.Person;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {

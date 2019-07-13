@@ -1,11 +1,10 @@
-﻿using CRM.Models.Rest.AssetType.Requests;
-using CRM.Models.Rest.AssetType.Response;
-using CRM.Models.Rest.Lists;
+﻿using CRM.Models.Rest.Lists;
 using CRM.Service.AssetTypeServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CRM.Models.Rest.AssetType;
 
 namespace CRM.Api.Controllers
 {

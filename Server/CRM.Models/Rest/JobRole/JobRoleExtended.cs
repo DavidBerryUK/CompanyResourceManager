@@ -1,4 +1,4 @@
-﻿namespace CRM.Models.Rest.JobRole.Response
+﻿namespace CRM.Models.Rest.JobRole
 {
     /// <summary>
     /// Extended models are used to display the full information for an entity,

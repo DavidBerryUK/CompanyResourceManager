@@ -1,11 +1,10 @@
-﻿using CRM.Models.Rest.JobRole.Requests;
-using CRM.Models.Rest.JobRole.Response;
-using CRM.Models.Rest.Lists;
+﻿using CRM.Models.Rest.Lists;
 using CRM.Service.JobRoleServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CRM.Models.Rest.JobRole;
 using CRM.Service.PersonServices.Interfaces;
 
 namespace CRM.Api.Controllers

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CRM.Models.Rest.Asset.Response
+namespace CRM.Models.Rest.Asset
 {
     /// <summary>
     /// Summary records are returned for lists with primary information,

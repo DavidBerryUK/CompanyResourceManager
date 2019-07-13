@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
-using CRM.Models.Rest.Asset.Response;
+using CRM.Models.Rest.Asset;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {

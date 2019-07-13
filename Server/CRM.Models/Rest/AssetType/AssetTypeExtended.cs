@@ -1,4 +1,4 @@
-﻿namespace CRM.Models.Rest.Person.Response
+﻿namespace CRM.Models.Rest.AssetType
 {
     /// <summary>
     /// Extended models are used to display the full information for an entity,
@@ -8,8 +8,7 @@
     /// to ensure that this minimum amount of data is always available in
     /// the front end system
     /// </summary>
-    public class PersonExtended : PersonSummary
+    public class AssetTypeExtended : AssetTypeSummary
     {
-       
     }
 }

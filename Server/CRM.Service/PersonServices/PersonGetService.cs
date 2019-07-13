@@ -6,8 +6,7 @@ using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
-using CRM.Models.Rest.Person.Request;
-using CRM.Models.Rest.Person.Response;
+using CRM.Models.Rest.Person;
 using CRM.Service.PersonServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

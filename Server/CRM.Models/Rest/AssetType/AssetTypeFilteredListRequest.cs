@@ -1,8 +1,8 @@
 ﻿using CRM.Models.Rest.Enums;
 
-namespace CRM.Models.Rest.Person.Request
+namespace CRM.Models.Rest.AssetType
 {
-    public class PersonFilteredListRequest
+    public class AssetTypeFilteredListRequest
     {
         public EnumRecordActiveStatus RecordActiveStatusFilter { get; set; }
     }
