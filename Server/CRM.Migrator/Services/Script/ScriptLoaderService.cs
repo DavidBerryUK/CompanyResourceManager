@@ -1,7 +1,5 @@
-﻿using CRM.Migrator.Models.Configuration;
-using CRM.Migrator.Services.Modules.Interfaces;
+﻿using CRM.Migrator.Services.Modules.Interfaces;
 using CRM.Migrator.Services.Script.Interfaces;
-using Microsoft.Extensions.Options;
 
 namespace CRM.Migrator.Services.Script
 {
@@ -9,16 +7,13 @@ namespace CRM.Migrator.Services.Script
     {
         private Models.ScriptModels.Script _script;
         private readonly ILoadScriptModule _loadScriptModule;
-        private readonly IOptions<ApplicationSettings> _applicationSettings;
         private readonly IRunScriptsModule _runScriptsModule;
 
         public ScriptLoaderService(
             ILoadScriptModule loadScriptModule, 
-            IOptions<ApplicationSettings> applicationSettings, 
             IRunScriptsModule runScriptsModule)
         {
             _loadScriptModule = loadScriptModule;
-            _applicationSettings = applicationSettings;
             _runScriptsModule = runScriptsModule;
         }
 

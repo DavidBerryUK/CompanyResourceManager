@@ -25,19 +25,15 @@ namespace CRM.Migrator.Services.Modules
 
         public List<string> Run(Task task)
         {
-            var errorCount = 0;
             var errorList = new List<string>();
             var connectionString = _applicationSettings.Value.GetConnectionString(task.ConnectionStringName);
-            string baseDirectory = Environment.CurrentDirectory;
+            var baseDirectory = Environment.CurrentDirectory;
 
             var scanDirectory = Path.Combine(baseDirectory, task.Path);
 
             if (!Directory.Exists(scanDirectory))
             {
-                errorCount++;
                 var auditSchema = _applicationSettings.Value.Audit.DatabaseSchema;
-
-
 
                 ScriptTableRepository.Add(new ScriptAudit
                     {
@@ -58,7 +54,6 @@ namespace CRM.Migrator.Services.Modules
                 var fileInfo = new FileInfo(file);
                 var audit = new ScriptAudit() {FullName = fileInfo.FullName, Name = fileInfo.Name};
 
-
                 try
                 {
 
@@ -78,8 +73,7 @@ namespace CRM.Migrator.Services.Modules
                 {
                     audit.Success = false;
                     audit.Error = ex.Message;
-                    errorCount++;
-                    
+
                     Console.WriteLine("RunSqlScriptsInPathModule Exception");
                     Console.WriteLine("script");
                     PrintExceptionMessages(ex);
@@ -102,6 +96,7 @@ namespace CRM.Migrator.Services.Modules
             Console.WriteLine(ex.Message);
             if (ex.InnerException != null)
             {
+                // ReSharper disable once TailRecursiveCall
                 PrintExceptionMessages(ex.InnerException);
             }
         }

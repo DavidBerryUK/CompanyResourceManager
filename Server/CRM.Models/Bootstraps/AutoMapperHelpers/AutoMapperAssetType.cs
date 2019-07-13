@@ -1,10 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics.CodeAnalysis;
+using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
 using CRM.Models.Rest.AssetType;
 using CRM.Models.Rest.Lists;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal class AutoMapperAssetType : IAutoMapperConfig
     {
         public void Map(IMapperConfigurationExpression cfg)

@@ -2,7 +2,7 @@
 
 namespace CRM.Migrator.Models.AuditModels
 {
-    class ScriptAudit
+    public class ScriptAudit
     {
         public string FullName { get; set; }
         public string Name { get; set; }

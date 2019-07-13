@@ -8,21 +8,20 @@ namespace CRM.Models.Rest.BaseResponse
         public T Entity { get; set; }
 
         private string _errorMessage;
-        private readonly List<ValidationMessage> _validationMessages;
 
-        public List<ValidationMessage> ValidationMessages => _validationMessages;
+        public List<ValidationMessage> ValidationMessages { get; }
 
-        public bool HasValidationMessages => _validationMessages.Any();
+        public bool HasValidationMessages => ValidationMessages.Any();
 
         public bool Success { get; set; }
 
         public void AddValidationMessage(string message)
         {
-            _validationMessages.Add(new ValidationMessage(message));
+            ValidationMessages.Add(new ValidationMessage(message));
         }
         public void AddValidationMessage(string field, string message)
         {
-            _validationMessages.Add(new ValidationMessage(field, message));
+            ValidationMessages.Add(new ValidationMessage(field, message));
         }
 
 
@@ -41,14 +40,14 @@ namespace CRM.Models.Rest.BaseResponse
         {
             Success = true;
             Entity = entity;
-            _validationMessages = new List<ValidationMessage>();
+            ValidationMessages = new List<ValidationMessage>();
         }
 
         public BaseItemResponse()
         {
             Success = true;
             Entity = new T();
-            _validationMessages = new List<ValidationMessage>();
+            ValidationMessages = new List<ValidationMessage>();
         }
 
     }

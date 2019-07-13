@@ -36,7 +36,7 @@ namespace CRM.Migrator.Startup
             return serviceProvider;
         }
 
-        private static void SetupConfiguration(ServiceCollection serviceCollection)
+        private static void SetupConfiguration(IServiceCollection serviceCollection)
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

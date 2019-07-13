@@ -5,11 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CRM.Migrator
 {
-    class Program
+    public class Program
     {
         private static ServiceProvider _serviceProvider;
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             _serviceProvider = RegisterDependencyInjection.Setup();
 
@@ -21,13 +21,14 @@ namespace CRM.Migrator
 
         private static void DisposeServices()
         {
-            if (_serviceProvider == null)
+            switch (_serviceProvider)
             {
-                return;
-            }
-            if (_serviceProvider is IDisposable)
-            {
-                ((IDisposable)_serviceProvider).Dispose();
+                case null:
+                    return;
+
+                case IDisposable disposable:
+                    disposable.Dispose();
+                    break;
             }
         }
     }

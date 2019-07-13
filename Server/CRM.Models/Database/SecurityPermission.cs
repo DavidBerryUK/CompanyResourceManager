@@ -15,7 +15,7 @@ namespace CRM.Models.Database
 
         public string Description { get; set; }
 
-        public Int16 BitGroup { get; set; }
+        public short BitGroup { get; set; }
 
         public byte Bit { get; set; }
 

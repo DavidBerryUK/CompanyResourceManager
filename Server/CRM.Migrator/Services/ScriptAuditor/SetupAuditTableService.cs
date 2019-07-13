@@ -23,7 +23,7 @@ namespace CRM.Migrator.Services.ScriptAuditor
             }
         }
 
-        private void CreateScriptAuditTable(DatabaseHelper databaseHelper, string schemaName)
+        private static void CreateScriptAuditTable(DatabaseHelper databaseHelper, string schemaName)
         {
             if (databaseHelper.DoesSchemaExist(schemaName) == false)
             {
@@ -45,7 +45,7 @@ namespace CRM.Migrator.Services.ScriptAuditor
             databaseHelper.ExecuteSql(sql);
         }
 
-        private void CreateSchema(DatabaseHelper databaseHelper, string schemaName)
+        private static void CreateSchema(DatabaseHelper databaseHelper, string schemaName)
         {
             var sql = $"CREATE SCHEMA [{schemaName}]";
             databaseHelper.ExecuteSql(sql);

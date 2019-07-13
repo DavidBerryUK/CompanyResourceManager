@@ -2,7 +2,7 @@
 
 namespace CRM.Migrator.Services.Database
 {
-    class ScriptTableRepository
+    public class ScriptTableRepository
     {
         public static void Add(ScriptAudit audit,string schema, string connectionString)
         {

@@ -18,11 +18,11 @@ namespace CRM.Service.JobRoleServices
             _crmDatabaseContext = crmDatabaseContext;
         }
 
-        public async Task<BaseItemResponse<JobRoleExtended>> Create(JobRoleExtended JobRole)
+        public async Task<BaseItemResponse<JobRoleExtended>> Create(JobRoleExtended jobRole)
         {
             var response = new BaseItemResponse<JobRoleExtended>();
 
-            var entity = Mapper.Map<Models.Database.JobRole>(JobRole);
+            var entity = Mapper.Map<Models.Database.JobRole>(jobRole);
             entity.JobRoleId = Guid.NewGuid();
             entity.IsActive = true;
 

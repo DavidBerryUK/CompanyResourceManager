@@ -20,7 +20,7 @@ namespace CRM.Models.Database
         // Navigation to related Records
         //
 
-        public ICollection<SecurityGroupTeam> NavSecuityGroupTeams { get; set; }
+        public ICollection<SecurityGroupTeam> NavSecurityGroupTeams { get; set; }
 
         public ICollection<SecurityGroupPerson> NavSecurityGroupPersons { get; set; }
 

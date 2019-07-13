@@ -1,9 +1,11 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+using CRM.Database.DatabaseMapper.Interfaces;
 using CRM.Models.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Database.DatabaseMapper
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class MapTableSecurityGroup : IDatabaseTableMapperConfig
     {
         public void Map(ModelBuilder modelBuilder)
@@ -29,7 +31,7 @@ namespace CRM.Database.DatabaseMapper
                 entity.Property(e => e.IsActive)
                     .IsRequired();
 
-                entity.HasMany(many => many.NavSecuityGroupTeams)
+                entity.HasMany(many => many.NavSecurityGroupTeams)
                     .WithOne(one => one.NavSecurityGroup)
                     .HasForeignKey(foreignKey => foreignKey.SecurityGroupId);
 

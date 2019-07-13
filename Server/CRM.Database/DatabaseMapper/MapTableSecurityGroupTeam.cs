@@ -1,9 +1,11 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+using CRM.Database.DatabaseMapper.Interfaces;
 using CRM.Models.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Database.DatabaseMapper
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class MapTableSecurityGroupTeam : IDatabaseTableMapperConfig
     {
         public void Map(ModelBuilder modelBuilder)

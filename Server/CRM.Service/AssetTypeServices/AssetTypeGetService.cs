@@ -68,6 +68,12 @@ namespace CRM.Service.AssetTypeServices
                 case EnumRecordActiveStatus.InActive:
                     query = query.Where(o => o.IsActive == false).AsQueryable();
                     break;
+
+                case EnumRecordActiveStatus.All:
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             query = query

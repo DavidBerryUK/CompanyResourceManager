@@ -8,13 +8,15 @@ namespace CRM.Migrator.Services.Database
 
         public DatabaseHelper(string connectionString)
         {
-            this._connectionString = connectionString;
+            _connectionString = connectionString;
         }        
 
         public bool DoesSchemaExist(string schema)
         {
             var sql = $"SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '{schema}'";
-            var count = this.ExecuteScalar(sql);
+            var count = ExecuteScalar(sql);
+
+            // ReSharper disable once ConvertIfStatementToReturnStatement
             if (count > 0)
             {
                 return true;
@@ -25,7 +27,9 @@ namespace CRM.Migrator.Services.Database
         public bool DoesTableExist (string schema, string tableName)
         {
             var sql = $"SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{schema}' and TABLE_NAME = '{tableName}'";
-            var count = this.ExecuteScalar(sql);
+            var count = ExecuteScalar(sql);
+
+            // ReSharper disable once ConvertIfStatementToReturnStatement
             if (count > 0)
             {
                 return true;
@@ -36,18 +40,18 @@ namespace CRM.Migrator.Services.Database
         public bool DoesDatabaseExist(string databaseName)
         {
             var sql = $"SELECT COUNT(*) FROM sys.databases WHERE name = '{databaseName}'";
-            var count = this.ExecuteScalar(sql);
+            var count = ExecuteScalar(sql);
             return count > 0;
         }
 
         public int ExecuteScalar(string sql)
         {
-            using (SqlConnection connection = new SqlConnection(this._connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (SqlCommand command = new SqlCommand(sql, connection))
+                using (var command = new SqlCommand(sql, connection))
                 {
                     connection.Open();
-                    object response =  command.ExecuteScalar();
+                    var response =  command.ExecuteScalar();
                     return (int) response;
                 }
             }
@@ -55,9 +59,9 @@ namespace CRM.Migrator.Services.Database
 
         public void ExecuteSql(string sql)
         {
-            using (SqlConnection connection = new SqlConnection(this._connectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (SqlCommand command = new SqlCommand(sql, connection))
+                using (var command = new SqlCommand(sql, connection))
                 {
                     connection.Open();
                     command.CommandTimeout = 120;
