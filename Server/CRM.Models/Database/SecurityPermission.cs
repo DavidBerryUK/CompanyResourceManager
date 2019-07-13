@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CRM.Models.Database
 {
-    public class Permission
+    /// <summary>
+    /// Database Entity Object
+    /// </summary>
+    public class SecurityPermission
     {
-        public Guid PermissionId { get; set; }
+
+        public Guid SecurityPermissionId { get; set; }
 
         public string Name { get; set; }
 
@@ -17,5 +20,11 @@ namespace CRM.Models.Database
         public byte Bit { get; set; }
 
         public bool IsActive { get; set; }
+
+        //
+        // Navigation to related Records
+        //
+
+        public ICollection<SecurityGroupSecurityPermission> NavSecurityGroupSecurityPermissions { get; set; }
     }
 }

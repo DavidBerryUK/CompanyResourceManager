@@ -44,6 +44,10 @@ namespace CRM.Database.DatabaseMapper
                     .WithOne(one => one.NavPerson)
                     .HasForeignKey(foreignKey => foreignKey.PersonId);
 
+                entity.HasMany(many => many.NavSecurityGroupPerson)
+                    .WithOne(one => one.NavPerson)
+                    .HasForeignKey(foreignKey => foreignKey.PersonId);
+
             });
         }
     }

@@ -4,17 +4,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Database.DatabaseMapper
 {
-    public class MapTableTeam : IDatabaseTableMapperConfig
+    public class MapTableSecurityPermission : IDatabaseTableMapperConfig
     {
         public void Map(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Team>(entity =>
+            modelBuilder.Entity<SecurityPermission>(entity =>
             {
-                entity.ToTable("Team");
+                entity.ToTable("SecurityPermission");
 
-                entity.HasKey(e => e.TeamId);
+                entity.HasKey(e => e.SecurityPermissionId);
 
-                entity.Property(e => e.TeamId)
+                entity.Property(e => e.SecurityPermissionId)
                     .IsRequired()
                     .ValueGeneratedNever();
 
@@ -29,14 +29,11 @@ namespace CRM.Database.DatabaseMapper
                 entity.Property(e => e.IsActive)
                     .IsRequired();
 
-                entity.HasMany(many => many.NavPersonTeams)
-                    .WithOne(one => one.NavTeam)
-                    .HasForeignKey(foreignKey => foreignKey.TeamId);
-
-                entity.HasMany(many => many.NavSecurityGroupTeams)
-                   .WithOne(one => one.NavTeam)
-                   .HasForeignKey(foreignKey => foreignKey.TeamId);
+                entity.HasMany(many => many.NavSecurityGroupSecurityPermissions)
+                    .WithOne(one => one.NavSecurityPermission)
+                    .HasForeignKey(foreignKey => foreignKey.SecurityPermissionId);
             });
+
         }
     }
 }

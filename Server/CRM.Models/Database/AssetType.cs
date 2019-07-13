@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace CRM.Models.Database
 {
+    /// <summary>
+    /// Database Entity Object
+    /// </summary>
     public class AssetType
     {
         public Guid AssetTypeId { get; set; }
@@ -14,6 +17,10 @@ namespace CRM.Models.Database
         public bool HasOperatingSystem { get; set; }
 
         public bool IsActive { get; set; }
+
+        //
+        // Navigation to related Records
+        //
 
         public ICollection<Asset> NavAssets { get; set; }
     }
