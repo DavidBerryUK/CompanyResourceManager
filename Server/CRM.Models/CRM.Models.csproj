@@ -17,12 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Rest\AssetType\Validation\" />
-    <Folder Include="Rest\Asset\Validation\" />
     <Folder Include="Rest\BaseResponse\Validation\" />
-    <Folder Include="Rest\JobRole\Validation\" />
     <Folder Include="Rest\Lists\Validation\" />
-    <Folder Include="Rest\Person\Validation\" />
   </ItemGroup>
 
 </Project>

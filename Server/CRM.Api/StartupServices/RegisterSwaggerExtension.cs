@@ -10,7 +10,7 @@ namespace CRM.Api.StartupServices
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Business Management API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Company Resource Manager API", Version = "v1" });
                 c.CustomSchemaIds(i => i.FullName);
             });
         }
@@ -22,7 +22,7 @@ namespace CRM.Api.StartupServices
             app.UseSwaggerUI(c =>
             {
                 
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Business Management API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Company Resource Manager API");
             });
         }
     }
