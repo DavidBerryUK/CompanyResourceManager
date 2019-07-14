@@ -23,14 +23,25 @@ namespace CRM.Api.Controllers
             IJobRoleUpdateService jobRoleUpdateService, 
             IPersonGetService personGetService)
         {
-            _jobRoleGetService = jobRoleGetService;
-            _jobRoleUpdateService = jobRoleUpdateService;
-            _personGetService = personGetService;
+            //
+            // Validate Input Parameters
+            //
+            _jobRoleGetService = jobRoleGetService
+                                 ?? throw new ArgumentNullException(nameof(jobRoleGetService));
+
+            _jobRoleUpdateService = jobRoleUpdateService
+                                    ?? throw new ArgumentNullException(nameof(jobRoleUpdateService));
+
+            _personGetService = personGetService
+                                ?? throw new ArgumentNullException(nameof(personGetService));
         }
 
         [HttpGet("")]
         public async Task<ActionResult<List<JobRoleSummary>>> All()
         {
+            //
+            // Validate Input Parameters
+            //
             var data = await _jobRoleGetService.GetAllAsync();
             return Ok(data);
         }
@@ -38,6 +49,14 @@ namespace CRM.Api.Controllers
         [HttpGet("{jobRoleId}/Person")]
         public async Task<ActionResult<JobRoleSummary>> GetPersonForJobRole(Guid jobRoleId)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (jobRoleId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
+            }
+
             var data = await _personGetService.GetPersonWithJobRole(jobRoleId);
             return Ok(data);
         }
@@ -45,6 +64,9 @@ namespace CRM.Api.Controllers
         [HttpGet("items")]
         public async Task<ActionResult<List<ListItem>>> ListActive()
         {
+            //
+            // Validate Input Parameters
+            //
             var data = await _jobRoleGetService.GetListItemsAsync();
             return Ok(data);
         }
@@ -52,6 +74,14 @@ namespace CRM.Api.Controllers
         [HttpPost("filtered")]
         public async Task<ActionResult<List<JobRoleSummary>>> FilteredList(JobRoleFilteredListRequest filter)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (filter == null)
+            {
+                throw new ArgumentNullException(nameof(filter));
+            }
+
             var data = await _jobRoleGetService.GetFilteredAsync(filter);
             return Ok(data);
         }
@@ -59,28 +89,65 @@ namespace CRM.Api.Controllers
         [HttpGet("{jobRoleId}")]
         public async Task<ActionResult<JobRoleExtended>> GetById(Guid jobRoleId)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (jobRoleId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
+            }
+
             var data = await _jobRoleGetService.GetByIdAsync(jobRoleId);
             return Ok(data);
         }
 
 
         [HttpPut("{jobRoleId}")]
-        public async Task<ActionResult<JobRoleExtended>> Update(Guid jobRoleId, [FromBody] JobRoleExtended jobRoleSummary)
+        public async Task<ActionResult<JobRoleExtended>> Update(Guid jobRoleId, [FromBody] JobRoleExtended jobRole)
         {
-            var data = await _jobRoleUpdateService.Update(jobRoleId, jobRoleSummary);
+            //
+            // Validate Input Parameters
+            //
+            if (jobRoleId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
+            }
+
+            if (jobRole == null)
+            {
+                throw new ArgumentNullException(nameof(jobRole));
+            }
+
+            var data = await _jobRoleUpdateService.Update(jobRoleId, jobRole);
             return Ok(data);
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<JobRoleExtended>> Create([FromBody] JobRoleExtended jobRoleSummary)
+        public async Task<ActionResult<JobRoleExtended>> Create([FromBody] JobRoleExtended jobRole)
         {
-            var data = await _jobRoleUpdateService.Create(jobRoleSummary);
+            //
+            // Validate Input Parameters
+            //
+            if (jobRole == null)
+            {
+                throw new ArgumentNullException(nameof(jobRole));
+            }
+
+            var data = await _jobRoleUpdateService.Create(jobRole);
             return Ok(data);
         }
 
         [HttpPut("{jobRoleId}/deactivate")]
         public async Task<ActionResult<JobRoleSummary>> Deactivate(Guid jobRoleId)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (jobRoleId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
+            }
+
             var data = await _jobRoleUpdateService.Deactivate(jobRoleId);
             return Ok(data);
         }
@@ -88,6 +155,14 @@ namespace CRM.Api.Controllers
         [HttpPut("{jobRoleId}/activate")]
         public async Task<ActionResult<JobRoleSummary>> Activate(Guid jobRoleId)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (jobRoleId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
+            }
+
             var data = await _jobRoleUpdateService.Activate(jobRoleId);
             return Ok(data);
         }

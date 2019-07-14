@@ -17,7 +17,7 @@ namespace CRM.Api.StartupServices
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Company Resource Manager API", Version = "v1" });
-                c.CustomSchemaIds(i => i.FullName);
+             //   c.CustomSchemaIds(i => i.FullName);
             });
         }
 

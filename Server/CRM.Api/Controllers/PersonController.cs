@@ -18,6 +18,9 @@ namespace CRM.Api.Controllers
             IPersonGetService personGetService,
             IPersonUpdateService personUpdateService)
         {
+            //
+            // Validate Input Parameters
+            //
             _personGetService = personGetService
                 ?? throw new ArgumentNullException(nameof(personGetService));
 
@@ -28,6 +31,9 @@ namespace CRM.Api.Controllers
         [HttpGet("")]
         public async Task<ActionResult<List<PersonSummary>>> All()
         {
+            //
+            // Validate Input Parameters
+            //
             var data = await _personGetService.GetAllAsync();
             return Ok(data);
         }
@@ -35,6 +41,9 @@ namespace CRM.Api.Controllers
         [HttpPost("filtered")]
         public async Task<ActionResult<List<PersonSummary>>> FilteredList(PersonFilteredListRequest filter)
         {
+            //
+            // Validate Input Parameters
+            //
             if (filter == null)
             {
                 throw new ArgumentNullException(nameof(filter));
@@ -47,9 +56,12 @@ namespace CRM.Api.Controllers
         [HttpGet("{personId}")]
         public async Task<ActionResult<PersonExtended>> GetById(Guid personId)
         {
+            //
+            // Validate Input Parameters
+            //
             if (personId == Guid.Empty)
             {
-                throw new ArgumentException($@"personId can not be blank");
+                throw new ArgumentException($"{nameof(personId)} can not be blank");
             }
 
             var data = await _personGetService.GetByIdAsync(personId);
@@ -59,9 +71,12 @@ namespace CRM.Api.Controllers
         [HttpPut("{personId}")]
         public async Task<ActionResult<PersonExtended>> Update(Guid personId, [FromBody] PersonExtended person)
         {
+            //
+            // Validate Input Parameters
+            //
             if (personId == Guid.Empty)
             {
-                throw new ArgumentException($@"personId can not be blank");
+                throw new ArgumentException($"{nameof(personId)} can not be blank");
             }
 
             if (person == null)
@@ -76,6 +91,9 @@ namespace CRM.Api.Controllers
         [HttpPost("")]
         public async Task<ActionResult<PersonExtended>> Create( [FromBody] PersonExtended person)
         {
+            //
+            // Validate Input Parameters
+            //
             if (person == null)
             {
                 throw new ArgumentNullException(nameof(person));
@@ -88,6 +106,9 @@ namespace CRM.Api.Controllers
         [HttpPut("{personId}/deactivate")]
         public async Task<ActionResult<PersonSummary>> Deactivate(Guid personId)
         {
+            //
+            // Validate Input Parameters
+            //
             if (personId == Guid.Empty)
             {
                 throw new ArgumentException($@"personId can not be blank");
@@ -100,9 +121,12 @@ namespace CRM.Api.Controllers
         [HttpPut("{personId}/activate")]
         public async Task<ActionResult<PersonSummary>> Activate(Guid personId)
         {
+            //
+            // Validate Input Parameters
+            //
             if (personId == Guid.Empty)
             {
-                throw new ArgumentException($@"personId can not be blank");
+                throw new ArgumentException($"{nameof(personId)} can not be blank");
             }
 
             var data = await _personUpdateService.Activate(personId);
