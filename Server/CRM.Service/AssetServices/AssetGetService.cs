@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CRM.Database.Context;
+using CRM.Models.Rest.Asset;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
 using CRM.Service.AssetServices.Interfaces;
@@ -8,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CRM.Models.Rest.Asset;
 
 namespace CRM.Service.AssetServices
 {
@@ -18,7 +18,8 @@ namespace CRM.Service.AssetServices
 
         public AssetGetService(CrmDatabaseContext crmDatabaseContext)
         {
-            _crmDatabaseContext = crmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext
+                                  ?? throw new ArgumentNullException(nameof(crmDatabaseContext));
         }
 
         public async Task<BaseCollectionResponse<AssetSummary>> GetAllAsync()
@@ -37,6 +38,14 @@ namespace CRM.Service.AssetServices
 
         public async Task<BaseCollectionResponse<AssetSummary>> GetFilteredAsync(AssetFilteredListRequest filter)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (filter == null)
+            {
+                throw new ArgumentNullException(nameof(filter));
+            }
+
             var response = new BaseCollectionResponse<AssetSummary>();
             var query =  _crmDatabaseContext
                 .Assets
@@ -72,18 +81,24 @@ namespace CRM.Service.AssetServices
 
         public async Task<BaseItemResponse<AssetExtended>> GetByIdAsync(Guid assetId)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (assetId == Guid.Empty)
             {
-                var response = new BaseItemResponse<AssetExtended>();
-
-                var data = await _crmDatabaseContext
-                    .Assets
-                    .Include(o => o.NavAssetType)
-                    .FirstOrDefaultAsync(o => o.AssetId == assetId);
-
-                response.Entity = Mapper.Map<AssetExtended>(data);
-
-                return response;
+                throw new ArgumentException($"{nameof(assetId)} can not be blank");
             }
+
+            var response = new BaseItemResponse<AssetExtended>();
+
+            var data = await _crmDatabaseContext
+                .Assets
+                .Include(o => o.NavAssetType)
+                .FirstOrDefaultAsync(o => o.AssetId == assetId);
+
+            response.Entity = Mapper.Map<AssetExtended>(data);
+
+            return response;
         }
     }
 }

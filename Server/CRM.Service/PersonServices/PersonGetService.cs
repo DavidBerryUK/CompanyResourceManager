@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
 using CRM.Models.Rest.Person;
 using CRM.Service.PersonServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Service.PersonServices
 {
@@ -18,7 +18,8 @@ namespace CRM.Service.PersonServices
 
         public PersonGetService(CrmDatabaseContext crmDatabaseContext)
         {
-            _crmDatabaseContext = crmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext
+                                  ?? throw new ArgumentNullException(nameof(crmDatabaseContext));
         }
 
 
@@ -40,6 +41,14 @@ namespace CRM.Service.PersonServices
 
         public async Task<BaseCollectionResponse<PersonSummary>> GetFilteredAsync(PersonFilteredListRequest filter)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (filter == null)
+            {
+                throw new ArgumentNullException(nameof(filter));
+            }
+
             var response = new BaseCollectionResponse<PersonSummary>();
 
             var query  = _crmDatabaseContext
@@ -77,6 +86,14 @@ namespace CRM.Service.PersonServices
 
         public async Task<BaseItemResponse<PersonExtended>> GetByIdAsync(Guid personId)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (personId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(personId)} can not be blank");
+            }
+
             var response = new BaseItemResponse<PersonExtended>();
             var data = await _crmDatabaseContext
                 .Persons
@@ -90,6 +107,14 @@ namespace CRM.Service.PersonServices
 
         public async Task<BaseCollectionResponse<PersonSummary>> GetPersonWithJobRole(Guid jobRoleId)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (jobRoleId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
+            }
+
             var response = new BaseCollectionResponse<PersonSummary>();
 
             var data = await _crmDatabaseContext

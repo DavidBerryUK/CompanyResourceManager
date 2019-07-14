@@ -1,6 +1,7 @@
 ﻿using CRM.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace CRM.Api.StartupServices
 {
@@ -8,6 +9,10 @@ namespace CRM.Api.StartupServices
     {
         public static void RegisterDatabase(this IServiceCollection services)
         {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
             //
             // Add Dependency Injection for the database context
             //

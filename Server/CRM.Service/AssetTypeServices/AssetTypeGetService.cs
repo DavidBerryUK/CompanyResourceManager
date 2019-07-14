@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CRM.Database.Context;
+using CRM.Models.Rest.AssetType;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
 using CRM.Models.Rest.Lists;
@@ -9,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CRM.Models.Rest.AssetType;
 
 namespace CRM.Service.AssetTypeServices
 {
@@ -19,7 +19,8 @@ namespace CRM.Service.AssetTypeServices
 
         public AssetTypeGetService(CrmDatabaseContext crmDatabaseContext)
         {
-            _crmDatabaseContext = crmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext
+                                  ?? throw new ArgumentNullException(nameof(crmDatabaseContext));
         }
 
         public async Task<BaseCollectionResponse<AssetTypeSummary>> GetAllAsync()
@@ -53,6 +54,14 @@ namespace CRM.Service.AssetTypeServices
 
         public async Task<BaseCollectionResponse<AssetTypeSummary>> GetFilteredAsync(AssetTypeFilteredListRequest filter)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (filter == null)
+            {
+                throw new ArgumentNullException(nameof(filter));
+            }
+
             var response = new BaseCollectionResponse<AssetTypeSummary>();
 
             var query = _crmDatabaseContext
@@ -88,6 +97,14 @@ namespace CRM.Service.AssetTypeServices
 
         public async Task<BaseItemResponse<AssetTypeExtended>> GetByIdAsync(Guid assetTypeId)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (assetTypeId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(assetTypeId)} can not be blank");
+            }
+
             var response = new BaseItemResponse<AssetTypeExtended>();
 
             var data = await _crmDatabaseContext

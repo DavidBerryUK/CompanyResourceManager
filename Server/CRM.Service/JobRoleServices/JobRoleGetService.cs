@@ -2,6 +2,7 @@
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
+using CRM.Models.Rest.JobRole;
 using CRM.Models.Rest.Lists;
 using CRM.Service.JobRoleServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CRM.Models.Rest.JobRole;
 
 namespace CRM.Service.JobRoleServices
 {
@@ -19,7 +19,8 @@ namespace CRM.Service.JobRoleServices
 
         public JobRoleGetService(CrmDatabaseContext crmDatabaseContext)
         {
-            _crmDatabaseContext = crmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext
+                                  ?? throw new ArgumentNullException(nameof(crmDatabaseContext));
         }
 
         public async Task<BaseCollectionResponse<JobRoleSummary>> GetAllAsync()
@@ -53,6 +54,14 @@ namespace CRM.Service.JobRoleServices
 
         public async Task<BaseCollectionResponse<JobRoleSummary>> GetFilteredAsync(JobRoleFilteredListRequest filter)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (filter == null)
+            {
+                throw new ArgumentNullException(nameof(filter));
+            }
+
             var response = new BaseCollectionResponse<JobRoleSummary>();
 
             var query = _crmDatabaseContext
@@ -88,6 +97,9 @@ namespace CRM.Service.JobRoleServices
 
         public async Task<BaseItemResponse<JobRoleExtended>> GetByIdAsync(Guid jobRoleId)
         {
+            //
+            // Validate Input Parameters
+            //
             var response = new BaseItemResponse<JobRoleExtended>();
 
             var data = await _crmDatabaseContext

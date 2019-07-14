@@ -1,4 +1,5 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
+﻿using System;
+using CRM.Database.DatabaseMapper.Interfaces;
 using CRM.Models.Database;
 using CRM.Utilities.Reflection;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,14 @@ namespace CRM.Database.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //
+            // Validate Parameters
+            //
+            if (modelBuilder == null)
+            {
+                throw new ArgumentNullException(nameof (modelBuilder));
+            }
+
             var mappers = new ClassListFactory().CreateListOfClassesWithInterface<IDatabaseTableMapperConfig>(GetType().Assembly);
             mappers.ForEach(o => o.Map(modelBuilder));
         }

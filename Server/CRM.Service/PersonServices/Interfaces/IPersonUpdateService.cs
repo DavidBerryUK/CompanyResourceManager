@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using CRM.Models.Rest.BaseResponse;
+﻿using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Person;
+using System;
+using System.Threading.Tasks;
 
 namespace CRM.Service.PersonServices.Interfaces
 {

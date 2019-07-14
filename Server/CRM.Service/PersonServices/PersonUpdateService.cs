@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Person;
 using CRM.Service.PersonServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace CRM.Service.PersonServices
 {
@@ -15,11 +15,20 @@ namespace CRM.Service.PersonServices
 
         public PersonUpdateService(CrmDatabaseContext crmDatabaseContext)
         {
-            _crmDatabaseContext = crmDatabaseContext;
+            _crmDatabaseContext = crmDatabaseContext
+                                  ?? throw new ArgumentNullException(nameof(crmDatabaseContext));
         }
 
         public async Task<BaseItemResponse<PersonExtended>> Create(PersonExtended person)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (person == null)
+            {
+                throw new ArgumentNullException(nameof(person));
+            }
+
             var response = new BaseItemResponse<PersonExtended>();
 
             var entity = Mapper.Map<Models.Database.Person>(person);
@@ -41,6 +50,19 @@ namespace CRM.Service.PersonServices
 
         public async Task<BaseItemResponse<PersonExtended>> Update(Guid personId, PersonExtended person)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (personId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(personId)} can not be blank");
+            }
+
+            if (person == null)
+            {
+                throw new ArgumentNullException(nameof(person));
+            }
+
             var response = new BaseItemResponse<PersonExtended>();
             var data = await _crmDatabaseContext.Persons.FirstOrDefaultAsync(o=> o.PersonId == personId);
 
@@ -64,16 +86,40 @@ namespace CRM.Service.PersonServices
 
         public async Task<BaseItemResponse<PersonSummary>> Activate(Guid personId)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (personId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(personId)} can not be blank");
+            }
+
             return await AmendPersonActiveStatus(personId, true);
         }
 
         public async Task<BaseItemResponse<PersonSummary>> Deactivate(Guid personId)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (personId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(personId)} can not be blank");
+            }
+
             return await AmendPersonActiveStatus(personId, false);
         }
 
         private async Task<BaseItemResponse<PersonSummary>> AmendPersonActiveStatus(Guid personId, bool isActive)
         {
+            //
+            // Validate Input Parameters
+            //
+            if (personId == Guid.Empty)
+            {
+                throw new ArgumentException($"{nameof(personId)} can not be blank");
+            }
+
             var response = new BaseItemResponse<PersonSummary>();
             var data = await _crmDatabaseContext.Persons.FirstOrDefaultAsync(o => o.PersonId == personId);
 

@@ -7,6 +7,7 @@ using CRM.Service.JobRoleServices.Interfaces;
 using CRM.Service.PersonServices;
 using CRM.Service.PersonServices.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace CRM.Api.StartupServices
 {
@@ -14,6 +15,11 @@ namespace CRM.Api.StartupServices
     {
         public static void RegisterInjection(this IServiceCollection services)
         {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
             //  person
             //
             services.AddTransient<IPersonGetService, PersonGetService>();
