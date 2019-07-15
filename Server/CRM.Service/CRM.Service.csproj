@@ -16,4 +16,8 @@
     <ProjectReference Include="..\CRM.Models\CRM.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CurriculumVitaeServices\" />
+  </ItemGroup>
+
 </Project>

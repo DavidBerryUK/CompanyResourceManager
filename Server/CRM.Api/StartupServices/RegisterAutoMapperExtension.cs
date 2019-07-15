@@ -6,7 +6,7 @@ using System;
 
 namespace CRM.Api.StartupServices
 {
-    public static class RegisterAutoMapperExtension
+    internal static class RegisterAutoMapperExtension
     {
         public static void RegisterAutoMapper(this IApplicationBuilder app)
         {

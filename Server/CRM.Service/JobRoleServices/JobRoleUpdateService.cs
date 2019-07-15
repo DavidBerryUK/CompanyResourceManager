@@ -63,7 +63,7 @@ namespace CRM.Service.JobRoleServices
 
             if (data == null)
             {
-                response.ErrorMessage = $"Job Role Id {jobRoleId} not found";
+                response.ErrorMessage = $"{nameof(jobRoleId)} {jobRoleId} not found";
             }
             else
             {
@@ -116,7 +116,7 @@ namespace CRM.Service.JobRoleServices
 
             if (data == null)
             {
-                response.ErrorMessage = $"Job Role Id {jobRoleId} not found";
+                response.ErrorMessage = $"{nameof(jobRoleId)} {jobRoleId} not found";
             }
             else
             {

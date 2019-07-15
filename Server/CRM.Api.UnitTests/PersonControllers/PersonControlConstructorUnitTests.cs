@@ -1,9 +1,9 @@
+using CRM.Api.Controllers;
+using CRM.Service.PersonServices.Interfaces;
+using FluentAssertions;
+using Moq;
 using System;
 using System.Diagnostics.CodeAnalysis;
-using CRM.Service.PersonServices.Interfaces;
-using Moq;
-using CRM.Api.Controllers;
-using FluentAssertions;
 using Xunit;
 
 

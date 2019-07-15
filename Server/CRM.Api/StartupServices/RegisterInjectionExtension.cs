@@ -11,7 +11,7 @@ using System;
 
 namespace CRM.Api.StartupServices
 {
-    public static class RegisterInjectionExtension
+    internal static class RegisterInjectionExtension
     {
         public static void RegisterInjection(this IServiceCollection services)
         {
@@ -24,6 +24,7 @@ namespace CRM.Api.StartupServices
             //
             services.AddTransient<IPersonGetService, PersonGetService>();
             services.AddTransient<IPersonUpdateService, PersonUpdateService>();
+            services.AddTransient<IPersonSimpleQueryService, PersonSimpleQueryService>();
 
             //  Job Roles
             //

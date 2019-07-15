@@ -10,6 +10,9 @@ DECLARE @ItemsToDrop  TABLE (Id Int Identity, Name nvarchar(100), DeleteOrder in
 INSERT INTO @ItemsToDrop ( Name)
 VALUES 
 
+(	'JobApplicantAction'				),
+(	'JobApplicant'						),
+(	'JobApplicantStatus'				),
 (	'SecurityGroupPerson'				),
 (	'SecurityGroupTeam'					),
 (	'SecurityGroupSecurityPermission'	),

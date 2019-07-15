@@ -5,7 +5,7 @@ using System;
 
 namespace CRM.Api.StartupServices
 {
-    public static class RegisterSwaggerExtension
+    internal static class RegisterSwaggerExtension
     {
         public static void RegisterSwagger(this IServiceCollection services)
         {

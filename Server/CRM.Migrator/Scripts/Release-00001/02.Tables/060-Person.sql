@@ -26,11 +26,13 @@ GO
 ALTER TABLE dbo.Person ADD CONSTRAINT
 	FK_Person_JobRole FOREIGN KEY
 	(
-	JobRoleId
-	) REFERENCES dbo.JobRole
+		JobRoleId
+	)
+	REFERENCES dbo.JobRole
 	(
-	JobRoleId
-	) ON UPDATE  NO ACTION 
-	 ON DELETE  NO ACTION 
+		JobRoleId
+	) 
+	ON UPDATE  NO ACTION 
+	ON DELETE  NO ACTION 
 
 GO

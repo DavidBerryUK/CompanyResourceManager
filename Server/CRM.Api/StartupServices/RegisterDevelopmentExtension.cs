@@ -4,7 +4,7 @@ using System;
 
 namespace CRM.Api.StartupServices
 {
-    public static class RegisterDevelopmentExtension
+    internal static class RegisterDevelopmentExtension
     {
         public static void RegisterDevelopmentMode(this IApplicationBuilder app, IHostingEnvironment env)
         {

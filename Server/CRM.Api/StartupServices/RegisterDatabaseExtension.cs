@@ -5,7 +5,7 @@ using System;
 
 namespace CRM.Api.StartupServices
 {
-    public static class RegisterDatabaseExtension
+    internal static class RegisterDatabaseExtension
     {
         public static void RegisterDatabase(this IServiceCollection services)
         {

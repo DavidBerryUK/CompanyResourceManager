@@ -15,7 +15,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.Migrator", "CRM.Migrato
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.Api", "CRM.Api\CRM.Api.csproj", "{61E866F3-3B59-4CCB-9DAF-E1A899A5C15F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.Api.UnitTests", "CRM.Api.UnitTests\CRM.Api.UnitTests.csproj", "{534DFE13-AC8D-4579-88AC-1AA9231B3F3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.Api.UnitTests", "CRM.Api.UnitTests\CRM.Api.UnitTests.csproj", "{534DFE13-AC8D-4579-88AC-1AA9231B3F3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{A7D69FA0-B5F5-40BC-9AA7-D09329129DF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HelpfulSql", "HelpfulSql", "{B3EBCAA3-399D-434A-A9C2-59D22801CA9D}"
+	ProjectSection(SolutionItems) = preProject
+		Fix Could not obtain information about Windows NT group user.sql = Fix Could not obtain information about Windows NT group user.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +61,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B3EBCAA3-399D-434A-A9C2-59D22801CA9D} = {A7D69FA0-B5F5-40BC-9AA7-D09329129DF2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {34731BCA-3201-4ABF-86A5-FCDDB1A13580}

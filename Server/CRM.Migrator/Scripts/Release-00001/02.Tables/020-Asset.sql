@@ -11,7 +11,7 @@ CREATE TABLE [dbo].[Asset](
 	[AssetId]			[UNIQUEIDENTIFIER]	NOT NULL,
 	[AssetTypeId]		[UNIQUEIDENTIFIER]	NOT NULL,
 	[Name]				[NVARCHAR](50)		NOT NULL,
-	[BadgeNo]			[NVARCHAR](20) ]	NULL,
+	[BadgeNo]			[NVARCHAR](20)		NULL,
 	[Description]		[NVARCHAR](2000)	NULL,
 	[IsActive]			[bit]				NOT NULL,
  CONSTRAINT [PK_Asset] PRIMARY KEY CLUSTERED 

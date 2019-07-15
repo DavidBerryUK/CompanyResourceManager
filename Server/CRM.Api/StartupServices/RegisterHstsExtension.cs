@@ -4,7 +4,7 @@ using System;
 
 namespace CRM.Api.StartupServices
 {
-    public static class RegisterHstsExtension
+    internal static class RegisterHstsExtension
     {
         public static void RegisterStrictTransportSecurity(this IApplicationBuilder app, IHostingEnvironment env)
         {

@@ -68,7 +68,7 @@ namespace CRM.Service.PersonServices
 
             if (data == null)
             {
-                response.ErrorMessage = $"PersonSummary {personId} not found";
+                response.ErrorMessage = $"{nameof(person)} {personId} not found";
             }
 
             Mapper.Map(person, data);
@@ -125,7 +125,7 @@ namespace CRM.Service.PersonServices
 
             if (data == null)
             {
-                response.ErrorMessage = $"PersonSummary {personId} not found";
+                response.ErrorMessage = $"{nameof(personId)} {personId} not found";
             }
             else
             {

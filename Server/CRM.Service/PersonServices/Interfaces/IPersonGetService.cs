@@ -12,7 +12,5 @@ namespace CRM.Service.PersonServices.Interfaces
         Task<BaseCollectionResponse<PersonSummary>> GetFilteredAsync(PersonFilteredListRequest filter);
 
         Task<BaseItemResponse<PersonExtended>> GetByIdAsync(Guid personId);
-
-        Task<BaseCollectionResponse<PersonSummary>> GetPersonWithJobRole(Guid jobRoleId);
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CRM.Api.StartupServices
 {
-    public static class RegisterMvcExtension
+    internal static class RegisterMvcExtension
     {
         public static void RegisterMvc(this IServiceCollection services)
         {

@@ -63,7 +63,7 @@ namespace CRM.Service.AssetServices
 
             if (data == null)
             {
-                response.ErrorMessage = $"Asset Id {assetId} not found";
+                response.ErrorMessage = $"{nameof(assetId)} {assetId} not found";
             }
             else
             {
@@ -116,7 +116,7 @@ namespace CRM.Service.AssetServices
 
             if (data == null)
             {
-                response.ErrorMessage = $"AssetSummary Id {assetId} not found";
+                response.ErrorMessage = $"{nameof(assetId)} {assetId} not found";
             }
             else
             {

@@ -4,7 +4,7 @@ using System;
 
 namespace CRM.Api.StartupServices
 {
-    public static class RegisterHttpRedirectionExtension
+    internal static class RegisterHttpRedirectionExtension
     {
         public static void RegisterHttpRedirection(this IApplicationBuilder app, IHostingEnvironment env)
         {

@@ -1,0 +1,38 @@
+﻿USE [CRM]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[JobApplicant](
+	[JobApplicantId]		[UNIQUEIDENTIFIER]	NOT NULL,
+	[JobApplicantStatusId]	[UNIQUEIDENTIFIER]	NOT NULL,
+	[JobRoleId]				[UNIQUEIDENTIFIER]	NULL,
+	[Title]					[NVARCHAR](20)		NULL,
+	[Forename]				[NVARCHAR](200)		NOT NULL,
+	[MiddleNames]			[NVARCHAR](200)		NULL,
+	[Surname]				[NVARCHAR](200)		NOT NULL
+ CONSTRAINT [PK_JobApplicantId] PRIMARY KEY CLUSTERED 
+(
+	[JobApplicantId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] 
+
+GO
+
+ALTER TABLE dbo.JobApplicant ADD CONSTRAINT
+	FK_JobApplicant_JobApplicantStatus FOREIGN KEY
+	(
+		JobApplicantStatusId
+	) 
+	REFERENCES dbo.JobApplicantStatus
+	(
+		JobApplicantStatusId
+	) 
+	ON UPDATE  NO ACTION 
+	ON DELETE  NO ACTION 
+
+GO

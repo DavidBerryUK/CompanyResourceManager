@@ -104,31 +104,5 @@ namespace CRM.Service.PersonServices
 
             return response;
         }
-
-        public async Task<BaseCollectionResponse<PersonSummary>> GetPersonWithJobRole(Guid jobRoleId)
-        {
-            //
-            // Validate Input Parameters
-            //
-            if (jobRoleId == Guid.Empty)
-            {
-                throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
-            }
-
-            var response = new BaseCollectionResponse<PersonSummary>();
-
-            var data = await _crmDatabaseContext
-                .Persons
-                .Include(inc => inc.NavJobRole)
-                .Where(o => o.JobRoleId == jobRoleId)
-                .Where(o=> o.IsActive)
-                .OrderBy(order => order.Surname)
-                .ThenBy(order => order.Forename)
-                .ToListAsync();
-
-            response.Items = Mapper.Map<List<PersonSummary>>(data);
-
-            return response;
-        }
     }
 }

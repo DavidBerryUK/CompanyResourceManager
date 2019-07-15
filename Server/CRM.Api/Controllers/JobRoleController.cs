@@ -16,12 +16,14 @@ namespace CRM.Api.Controllers
         private readonly IJobRoleGetService _jobRoleGetService;
         private readonly IJobRoleUpdateService _jobRoleUpdateService;
         private readonly IPersonGetService _personGetService;
+        private readonly IPersonSimpleQueryService _personSimpleQueryService;
 
 
         public JobRoleController(
             IJobRoleGetService jobRoleGetService,
             IJobRoleUpdateService jobRoleUpdateService, 
-            IPersonGetService personGetService)
+            IPersonGetService personGetService, 
+            IPersonSimpleQueryService personSimpleQueryService)
         {
             //
             // Validate Input Parameters
@@ -34,6 +36,9 @@ namespace CRM.Api.Controllers
 
             _personGetService = personGetService
                                 ?? throw new ArgumentNullException(nameof(personGetService));
+
+            _personSimpleQueryService = personSimpleQueryService 
+                                        ?? throw new ArgumentNullException(nameof(personSimpleQueryService));
         }
 
         [HttpGet("")]
@@ -57,7 +62,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
             }
 
-            var data = await _personGetService.GetPersonWithJobRole(jobRoleId);
+            var data = await _personSimpleQueryService.GetWithFilterAsync(jobRoleId: jobRoleId);
             return Ok(data);
         }
 
