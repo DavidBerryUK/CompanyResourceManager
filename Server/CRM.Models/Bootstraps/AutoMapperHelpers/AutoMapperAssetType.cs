@@ -1,8 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
+using CRM.Models.Database.Assets;
 using CRM.Models.Rest.AssetType;
 using CRM.Models.Rest.Lists;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {
@@ -13,15 +14,15 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<Database.AssetType, AssetTypeSummary>();
-            cfg.CreateMap<Database.AssetType, AssetTypeExtended>();
-            cfg.CreateMap<Database.AssetType, ListItem>()
+            cfg.CreateMap<AssetType, AssetTypeSummary>();
+            cfg.CreateMap<AssetType, AssetTypeExtended>();
+            cfg.CreateMap<AssetType, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.AssetTypeId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
 
             // Map rest objects back to database entity objects
             //
-            cfg.CreateMap<AssetTypeExtended, Database.AssetType>();
+            cfg.CreateMap<AssetTypeExtended, AssetType>();
         }
     }
 }

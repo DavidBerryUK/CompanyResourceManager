@@ -3,7 +3,7 @@ using CRM.Models.Rest.Lists;
 using CRM.Service.AssetTypeServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;C:\Development\CompanyResourceManager\Server\CRM.Api\Controllers\AssetTypeController.cs
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers

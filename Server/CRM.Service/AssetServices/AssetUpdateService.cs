@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CRM.Database.Context;
+using CRM.Models.Database.Assets;
 using CRM.Models.Rest.Asset;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Service.AssetServices.Interfaces;
@@ -31,7 +32,7 @@ namespace CRM.Service.AssetServices
 
             var response = new BaseItemResponse<AssetExtended>();
 
-            var entity = Mapper.Map<Models.Database.Asset>(asset);
+            var entity = Mapper.Map<Asset>(asset);
             entity.AssetId = Guid.NewGuid();
             entity.IsActive = true;
 

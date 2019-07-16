@@ -43,7 +43,13 @@
     <None Update="Scripts\Release-00001\02.Tables\030-Team.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\320-JobApplicantStatus.sql">
+    <None Update="Scripts\Release-00001\02.Tables\410-Workflow.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\Release-00001\02.Tables\400-WorkflowCategory.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\Release-00001\02.Tables\420-WorkflowNode.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scripts\Release-00001\02.Tables\050-JobRole.sql">
@@ -67,7 +73,13 @@
     <None Update="Scripts\Release-00001\02.Tables\090-PersonSkill.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\330-JobApplicantAction.sql">
+    <None Update="Scripts\Release-00001\02.Tables\460-WorkflowInstanceEvent.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\Release-00001\02.Tables\450-WorkflowInstance.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\Release-00001\02.Tables\430-WorkflowAction.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scripts\Release-00001\02.Tables\350-JobApplicant.sql">

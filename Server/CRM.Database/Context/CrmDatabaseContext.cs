@@ -1,8 +1,11 @@
-﻿using System;
-using CRM.Database.DatabaseMapper.Interfaces;
-using CRM.Models.Database;
+﻿using CRM.Database.DatabaseMapper.Interfaces;
+using CRM.Models.Database.Assets;
+using CRM.Models.Database.JobRoles;
+using CRM.Models.Database.Persons;
+using CRM.Models.Database.Skills;
 using CRM.Utilities.Reflection;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace CRM.Database.Context
 {

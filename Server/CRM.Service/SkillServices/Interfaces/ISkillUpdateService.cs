@@ -1,9 +1,9 @@
 ﻿using CRM.Models.Rest.BaseResponse;
+using CRM.Models.Rest.Skill;
 using System;
 using System.Threading.Tasks;
-using CRM.Models.Rest.Skill;
 
-namespace CRM.Service.JobRoleServices.Interfaces
+namespace CRM.Service.SkillServices.Interfaces
 {
     public interface ISkillUpdateService
     {

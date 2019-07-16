@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="CurriculumVitaeServices\" />
+    <Folder Include="Workflow\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using CRM.Migrator.Models.AuditModels;
 using CRM.Migrator.Models.Configuration;
 using CRM.Migrator.Models.ScriptModels;
@@ -31,6 +32,8 @@ namespace CRM.Migrator.Services.Modules
 
             var scanDirectory = Path.Combine(baseDirectory, task.Path);
 
+            Console.WriteLine("Run Scripts In Directory:" + task.Path);
+
             if (!Directory.Exists(scanDirectory))
             {
                 var auditSchema = _applicationSettings.Value.Audit.DatabaseSchema;
@@ -48,7 +51,8 @@ namespace CRM.Migrator.Services.Modules
                 return errorList;
             }
 
-            var files = Directory.GetFiles(scanDirectory, "*.sql");
+            var files = Directory.GetFiles(scanDirectory, "*.sql").OrderBy(o=> o);
+
             foreach (var file in files)
             {
                 var fileInfo = new FileInfo(file);
@@ -64,7 +68,7 @@ namespace CRM.Migrator.Services.Modules
                     var queries = fileContent.Split(new[] {"GO"}, StringSplitOptions.RemoveEmptyEntries);
                     foreach (var query in queries)
                     {
-                        Console.WriteLine(query);
+                        //Console.WriteLine(query);
                         databaseHelper.ExecuteSql(query);
                     }
 
@@ -86,6 +90,8 @@ namespace CRM.Migrator.Services.Modules
                     ScriptTableRepository.Add(audit, auditSchema, connectionString);
                 }
             }
+
+            Console.WriteLine("");
 
             return errorList;
 

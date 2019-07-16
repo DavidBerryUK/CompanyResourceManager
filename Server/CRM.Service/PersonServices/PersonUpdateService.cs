@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CRM.Database.Context;
+using CRM.Models.Database.Persons;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Person;
 using CRM.Service.PersonServices.Interfaces;
@@ -31,7 +32,7 @@ namespace CRM.Service.PersonServices
 
             var response = new BaseItemResponse<PersonExtended>();
 
-            var entity = Mapper.Map<Models.Database.Person>(person);
+            var entity = Mapper.Map<Person>(person);
             entity.PersonId = Guid.NewGuid();
             entity.IsActive = true;
 

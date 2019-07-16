@@ -1,8 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
+using CRM.Models.Database.JobRoles;
 using CRM.Models.Rest.JobRole;
 using CRM.Models.Rest.Lists;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {
@@ -13,15 +14,15 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<Database.JobRole, JobRoleSummary>();
-            cfg.CreateMap<Database.JobRole, JobRoleExtended>();
-            cfg.CreateMap<Database.JobRole, ListItem>()
+            cfg.CreateMap<JobRole, JobRoleSummary>();
+            cfg.CreateMap<JobRole, JobRoleExtended>();
+            cfg.CreateMap<JobRole, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.JobRoleId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
 
             // Map rest objects back to database entity objects
             //
-            cfg.CreateMap<JobRoleExtended, Database.JobRole>();
+            cfg.CreateMap<JobRoleExtended, JobRole>();
         }
     }
 }

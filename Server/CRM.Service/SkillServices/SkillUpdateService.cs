@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using CRM.Database.Context;
+using CRM.Models.Database.Skills;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Skill;
-using CRM.Service.JobRoleServices.Interfaces;
+using CRM.Service.SkillServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace CRM.Service.SkillServices
 
             var response = new BaseItemResponse<SkillExtended>();
 
-            var entity = Mapper.Map<Models.Database.Skill>(skill);
+            var entity = Mapper.Map<Skill>(skill);
             entity.SkillId = Guid.NewGuid();
             entity.IsActive = true;
 

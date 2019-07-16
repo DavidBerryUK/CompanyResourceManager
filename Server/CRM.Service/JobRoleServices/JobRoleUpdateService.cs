@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CRM.Database.Context;
+using CRM.Models.Database.JobRoles;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.JobRole;
 using CRM.Service.JobRoleServices.Interfaces;
@@ -31,7 +32,7 @@ namespace CRM.Service.JobRoleServices
 
             var response = new BaseItemResponse<JobRoleExtended>();
 
-            var entity = Mapper.Map<Models.Database.JobRole>(jobRole);
+            var entity = Mapper.Map<JobRole>(jobRole);
             entity.JobRoleId = Guid.NewGuid();
             entity.IsActive = true;
 
