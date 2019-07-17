@@ -2,10 +2,13 @@
 using CRM.Models.Database.Assets;
 using CRM.Models.Database.JobRoles;
 using CRM.Models.Database.Persons;
+using CRM.Models.Database.Security;
 using CRM.Models.Database.Skills;
+using CRM.Models.Database.Teams;
 using CRM.Utilities.Reflection;
 using Microsoft.EntityFrameworkCore;
 using System;
+using CRM.Models.Database.JobApplicant;
 
 namespace CRM.Database.Context
 {
@@ -32,15 +35,19 @@ namespace CRM.Database.Context
             mappers.ForEach(o => o.Map(modelBuilder));
         }
 
-
         public virtual DbSet<Asset> Assets { get; set; }
-
         public virtual DbSet<AssetType> AssetTypes { get; set; }
-
+        public virtual DbSet<JobApplicant> JobApplicants { get; set; }
         public virtual DbSet<JobRole> JobRoles { get; set; }
-
         public virtual DbSet<Person> Persons { get; set; }
-        
+        public virtual DbSet<PersonAsset> PersonAssets { get; set; }
+        public virtual DbSet<PersonSkill> PersonsSkills { get; set; }
+        public virtual DbSet<PersonTeam> PersonsTeams { get; set; }
+        public virtual DbSet<SecurityGroup> SecurityGroups { get; set; }
+        public virtual DbSet<SecurityGroupPerson> SecurityGroupPersons { get; set; }
+        public virtual DbSet<SecurityGroupSecurityPermission> SecurityGroupSecurityPermissions { get; set; }
+        public virtual DbSet<SecurityGroupTeam> SecurityGroupTeams { get; set; }
+        public virtual DbSet<SecurityPermission> SecurityPermissions { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
     }
 }

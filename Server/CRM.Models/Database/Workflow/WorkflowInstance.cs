@@ -27,5 +27,9 @@ namespace CRM.Models.Database.Workflow
         public WorkflowNode NavWorkFlowNode { get; set; }
 
         public ICollection<WorkflowInstanceEvent> NavWorkflowInstanceEvents { get; set; }
+
+        // optional 1 to 1 links
+        //
+        public JobApplicant.JobApplicant NavJobApplicant { get; set; }
     }
 }

@@ -32,10 +32,23 @@ GO
 ALTER TABLE dbo.PersonSkill ADD CONSTRAINT
 	FK_PersonSkill_Skill FOREIGN KEY
 	(
-	SkillId
-	) REFERENCES dbo.Skill
+		SkillId
+	) 
+	REFERENCES dbo.Skill
 	(
-	SkillId
+		SkillId
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+
+ALTER TABLE dbo.PersonSkill ADD CONSTRAINT
+	FK_PersonSkill_Person FOREIGN KEY
+	(
+		PersonId
+	) REFERENCES dbo.Person
+	(
+		PersonId
 	) ON UPDATE  NO ACTION 
 	 ON DELETE  NO ACTION 
 	

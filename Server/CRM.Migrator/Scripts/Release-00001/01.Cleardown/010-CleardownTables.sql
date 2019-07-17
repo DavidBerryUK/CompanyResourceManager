@@ -10,6 +10,7 @@ DECLARE @ItemsToDrop  TABLE (Id Int Identity, Name nvarchar(100), DeleteOrder in
 INSERT INTO @ItemsToDrop ( Name)
 VALUES 
 
+(	'JobApplicant'						),
 (	'WorkflowInstanceEvent'				),
 (	'WorkflowInstance'					),
 (	'WorkFlowAction'					),
@@ -17,7 +18,6 @@ VALUES
 (	'WorkFlow'							),
 (	'WorkFlowCategory'					),
 (	'JobApplicantAction'				),
-(	'JobApplicant'						),
 (	'SecurityGroupPerson'				),
 (	'SecurityGroupTeam'					),
 (	'SecurityGroupSecurityPermission'	),

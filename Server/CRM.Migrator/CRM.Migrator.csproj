@@ -37,67 +37,67 @@
     <None Update="Scripts\Release-00001\01.Cleardown\010-CleardownTables.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\040-Skill.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0040-Skill.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\030-Team.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0030-Team.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\410-Workflow.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0210-Workflow.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\400-WorkflowCategory.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0200-WorkflowCategory.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\420-WorkflowNode.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0220-WorkflowNode.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\050-JobRole.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0050-JobRole.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\010-AssetType.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0010-AssetType.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\020-Asset.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0020-Asset.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\060-Person.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0060-Person.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\070-PersonTeam.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0070-PersonTeam.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\080-PersonAsset.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0080-PersonAsset.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\090-PersonSkill.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0090-PersonSkill.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\460-WorkflowInstanceEvent.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0250-WorkflowInstanceEvent.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\450-WorkflowInstance.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0240-WorkflowInstance.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\430-WorkflowAction.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0230-WorkflowAction.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\350-JobApplicant.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0400-JobApplicant.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\540-SecurityGroupTeam.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0640-SecurityGroupTeam.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\530-SecurityGroupPerson.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0630-SecurityGroupPerson.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\520-SecurityGroupSecurityPermission.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0620-SecurityGroupSecurityPermission.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\510-SecurityGroup.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0610-SecurityGroup.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\02.Tables\500-SecurityPermission.sql">
+    <None Update="Scripts\Release-00001\02.Tables\0600-SecurityPermission.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scripts\Release-00001\06.Data\040 Skill.sql">
