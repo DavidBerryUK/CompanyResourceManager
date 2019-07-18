@@ -58,9 +58,9 @@ namespace CRM.Database.DatabaseMapper.Persons
                     .WithOne(one => one.NavPerson)
                     .HasForeignKey(foreignKey => foreignKey.PersonId);
 
-                entity.HasMany(many => many.NavWorkflowInstances)
+                entity.HasMany(many => many.NavWorkflowInstancesCreated)
                     .WithOne(one => one.NavCreatedByPerson)
-                    .HasForeignKey(foreignKey => foreignKey.NavCreatedByPerson);
+                    .HasForeignKey(foreignKey => foreignKey.CreatedByPersonId);
 
                 entity.HasMany(many => many.NavWorkflowInstanceEvents)
                     .WithOne(one => one.NavPerson)

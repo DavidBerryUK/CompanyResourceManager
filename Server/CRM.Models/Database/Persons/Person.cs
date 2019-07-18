@@ -42,6 +42,6 @@ namespace CRM.Models.Database.Persons
 
         public ICollection<WorkflowInstanceEvent> NavWorkflowInstanceEvents { get; set; }
 
-        public ICollection<WorkflowInstance> NavWorkflowInstances { get; set; }
+        public ICollection<WorkflowInstance> NavWorkflowInstancesCreated { get; set; }
     }
 }

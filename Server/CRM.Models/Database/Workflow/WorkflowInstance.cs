@@ -32,5 +32,6 @@ namespace CRM.Models.Database.Workflow
         // optional 1 to 1 links
         //
         public JobApplicant NavJobApplicant { get; set; }
+
     }
 }
