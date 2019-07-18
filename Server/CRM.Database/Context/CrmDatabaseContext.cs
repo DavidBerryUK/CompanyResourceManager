@@ -8,7 +8,7 @@ using CRM.Models.Database.Teams;
 using CRM.Utilities.Reflection;
 using Microsoft.EntityFrameworkCore;
 using System;
-using CRM.Models.Database.JobApplicant;
+using CRM.Models.Database.JobApplicants;
 
 namespace CRM.Database.Context
 {

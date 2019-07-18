@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CRM.Models.Database.Workflow;
 
-namespace CRM.Models.Database.JobApplicant
+namespace CRM.Models.Database.JobApplicants
 {
-    public class JobApplicant
+    public class JobApplicantSummary
     {
         public Guid JobApplicantId { get; set; }
 
@@ -20,7 +18,5 @@ namespace CRM.Models.Database.JobApplicant
         public string MiddleNames { get; set; }
 
         public string Surname { get; set; }
-
-        public WorkflowInstance NavWorkflowInstance { get; set; }
     }
 }

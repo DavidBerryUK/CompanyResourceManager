@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CRM.Models.Database.JobApplicants;
 using CRM.Models.Database.Persons;
 
 namespace CRM.Models.Database.Workflow
@@ -30,6 +31,6 @@ namespace CRM.Models.Database.Workflow
 
         // optional 1 to 1 links
         //
-        public JobApplicant.JobApplicant NavJobApplicant { get; set; }
+        public JobApplicant NavJobApplicant { get; set; }
     }
 }
