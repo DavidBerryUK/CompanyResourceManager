@@ -1,4 +1,3 @@
-import ObjectMapperPersonSummaryModel           from '@/repositories/objectMappers/person/ObjectMapperPersonSummaryModel';
 import { EnumModalWidth }                       from '@/componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import { MaterialDesignColor }                  from '@/services/colors/materialDesign/constants/MaterialDesignColors';
@@ -13,9 +12,8 @@ import ListFiltersDialog                        from '@/componentsCommonGui/list
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
-import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import ObjectArrayMapperPersonSummaryModel      from '@/repositories/objectMappers/person/ObjectArrayMapperPersonSummaryModel';
-import PersonListFilterParametersModel          from '@/repositories/models/person/PersonListFilterParametersModal';
+import ObjectMapperPersonSummaryModel           from '@/repositories/objectMappers/person/ObjectMapperPersonSummaryModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 
@@ -43,10 +41,10 @@ export default class PersonList extends BaseListPage<PersonSummaryModel> impleme
   componentDescription: string = "Displays of list people";
   //IComponentMetaData
  
-  filterModel : PersonListFilterParametersModel =  new PersonListFilterParametersModel();
 
   constructor() {
     super(  new NavigationCrudPerson(), 
+            PersonRepositoryFactory.getRepository(),
             new ObjectMapperPersonSummaryModel(),
             new ObjectArrayMapperPersonSummaryModel() );
   }
@@ -55,14 +53,13 @@ export default class PersonList extends BaseListPage<PersonSummaryModel> impleme
   // View has been mounted
   //
   mounted() {
-    this.listenToModelUpdates();
-    this.getData();
+    super.mounted();
   }
 
   // before the view is destroyed, it must unsubscribe from
   // any notifications
   beforeDestroy() {
-    NotificationFactory.unsubscribeFromAll(this);
+    super.beforeDestroy();
   }
 
   /**
@@ -112,45 +109,21 @@ export default class PersonList extends BaseListPage<PersonSummaryModel> impleme
   // user has pressed the clear button on the text filter
   //
   onFilterClearClicked() {
-    this.listFilterText = "";
+    super.onFilterClearClicked();
   }
 
   //
   // user pressed the add button to create a new person
   //
   onAddClicked() {
-    this.navigationHandler.gotoNewPage(this);
+    super.onAddClicked();
   }
 
   //
   // a list item has been selected, navigate to the person view screen
   //
   onSelectItem(item: PersonSummaryModel) {
-    this.selectedItem = item;
-    this.navigationHandler.gotoViewPage(this,item.personId)    
-  }
-
-  //
-  // listen to updates
-  //
-  private listenToModelUpdates() {
-
-    NotificationFactory.instance.getNotificationInstance<PersonSummaryModel>(new PersonSummaryModel().entityName)
-      .onItemCreated(this, (model: PersonSummaryModel) => {
-        this.updateList(model, true);
-      })
-      .onItemUpdated(this, (model: PersonSummaryModel) => {
-        this.updateList(model, false);
-      })
-      .onItemDeleted(this, (model: PersonSummaryModel) => {
-        this.updateList(model, false);
-      })
-      .onItemActivated(this, (model: PersonSummaryModel) => {
-        this.updateList(model, false);
-      })
-      .onItemDeactivated(this, (model: PersonSummaryModel) => {
-        this.updateList(model, false);
-      });
+    super.onSelectItem(item);
   }
 
   /**
@@ -161,39 +134,13 @@ export default class PersonList extends BaseListPage<PersonSummaryModel> impleme
    * @param {boolean} isNew - if this is a new item, it is injected into the list array
    * @memberof PersonList
    */
-  private updateList(model: PersonSummaryModel, isNew: boolean) {
+    updateList(model: PersonSummaryModel, isNew: boolean) {
     if (isNew) {
       this.dataList.addItem(model);
       this.selectedItem = model;
     }
     this.dataList.updateItem(this, model, (item) => { return model.personId == item.personId })
     this.dataList.sortAscByString((a, b) => { return { a: a.surname + ' ' + a.forename, b: b.surname + ' ' + b.forename } });
-  }
-
-
-  /**
-   * get person data from the server using the 
-   * current filters
-   *
-   * @private
-   * @memberof CategoryList
-   */
-  private getData() {
-
-    var repository = PersonRepositoryFactory.getRepository();
-    this.isLoading = true;
-    //repository.getAllAsSummary()
-    repository.getFilteredList(this.filterModel)
-      .onSuccess((itemList: GenericCollectionModel<PersonSummaryModel>) => {        
-        this.dataList = itemList;
-        this.isLoading = false;
-      })
-      .onFailed((errorMessage: string) => {
-        this.isLoading = false;
-        console.log("PeopleList:getData:failed to get data");
-        console.log(errorMessage);
-      });
-
   }
 
 

@@ -2,7 +2,6 @@ import { EnumModalWidth }                       from '@/componentsCommonGui/dial
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import { MaterialDesignColor }                  from '@/services/colors/materialDesign/constants/MaterialDesignColors';
 import AssetRepositoryFactory                   from '@/repositories/factory/AssetRepositoryFactory';
-import AssetSummaryListFilterParametersModel    from '@/repositories/models/asset/AssetSummaryListFilterParametersModal';
 import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
 import BaseListPage                             from '@/componentsBusinessGui/base/BaseListPage';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
@@ -15,9 +14,8 @@ import ListFiltersDialog                        from '@/componentsCommonGui/list
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
-import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import ObjectArrayMapperAssetSummaryModel       from '@/repositories/objectMappers/asset/ObjectArrayMapperAssetSummaryModel';
-import ObjectMapperAssetExtendedModel            from '@/repositories/objectMappers/asset/ObjectMapperAssetExtendedModel';
+import ObjectMapperAssetExtendedModel           from '@/repositories/objectMappers/asset/ObjectMapperAssetExtendedModel';
 
 /**
  * Presents a list of categories to the user that can be filtered
@@ -42,12 +40,10 @@ export default class AssetList extends BaseListPage<AssetSummaryModel> implement
   componentName: string = "Asset List";
   componentDescription: string = "Displays a list of Assets";
   //IComponentMetaData
-
-  filterModel : AssetSummaryListFilterParametersModel =  new AssetSummaryListFilterParametersModel();
-
-
+  
   constructor() {
     super(  new NavigationCrudAsset(), 
+            AssetRepositoryFactory.getRepository(),
             new ObjectMapperAssetExtendedModel(),
             new ObjectArrayMapperAssetSummaryModel())
   }
@@ -56,14 +52,13 @@ export default class AssetList extends BaseListPage<AssetSummaryModel> implement
   // View has been mounted
   //
   mounted() {
-    this.listenToModelUpdates();
-    this.getData();
+    super.mounted();
   }
 
   // before the view is destroyed, it must unsubscribe from
   // any notifications
   beforeDestroy() {
-    NotificationFactory.unsubscribeFromAll(this);
+    super.beforeDestroy();
   }
 
   /**
@@ -113,45 +108,21 @@ export default class AssetList extends BaseListPage<AssetSummaryModel> implement
   // user has pressed the clear button on the text filter
   //
   onFilterClearClicked() {
-    this.listFilterText = "";
+    super.onFilterClearClicked();
   }
 
   //
   // user pressed the add button to create a new asset 
   //
   onAddClicked() {
-    this.navigationHandler.gotoNewPage(this);    
+    super.onAddClicked();
   }
 
   //
   // a list item has been selected, navigate to the asset  view screen
   //
   onSelectItem(item: AssetSummaryModel) {
-    this.selectedItem = item;
-    this.navigationHandler.gotoViewPage(this,item.assetId)    
-  }
-
-  //
-  // listen to updates
-  //
-  private listenToModelUpdates() {
-
-    NotificationFactory.instance.getNotificationInstance<AssetSummaryModel>(new AssetSummaryModel().entityName)
-      .onItemCreated(this, (model: AssetSummaryModel) => {
-        this.updateList(model, true);
-      })
-      .onItemUpdated(this, (model: AssetSummaryModel) => {
-        this.updateList(model, false);
-      })
-      .onItemDeleted(this, (model: AssetSummaryModel) => {
-        this.updateList(model, false);
-      })
-      .onItemActivated(this, (model: AssetSummaryModel) => {
-        this.updateList(model, false);
-      })
-      .onItemDeactivated(this, (model: AssetSummaryModel) => {
-        this.updateList(model, false);
-      });
+    super.onSelectItem(item);
   }
 
   /**
@@ -162,7 +133,7 @@ export default class AssetList extends BaseListPage<AssetSummaryModel> implement
    * @param {boolean} isNew - if this is a new item, it is injected into the list array
    * @memberof PersonList
    */
-  private updateList(model: AssetSummaryModel, isNew: boolean) {
+  updateList(model: AssetSummaryModel, isNew: boolean) {
     if (isNew) {
       this.dataList.addItem(model);
       this.selectedItem = model;
@@ -171,31 +142,6 @@ export default class AssetList extends BaseListPage<AssetSummaryModel> implement
     this.dataList.sortAscByString((a, b) => { return { a: a.name, b: b.name } });
   }
 
-
-  /**
-   * get asset data from the server using the 
-   * current filters
-   *
-   * @private
-   * @memberof CategoryList
-   */
-  private getData() {
-
-    var repository = AssetRepositoryFactory.getRepository();
-    this.isLoading = true;
-
-    repository.getFilteredList(this.filterModel)
-      .onSuccess((itemList: GenericCollectionModel<AssetSummaryModel>) => {        
-        this.dataList = itemList;
-        this.isLoading = false;
-      })
-      .onFailed((errorMessage: string) => {
-        this.isLoading = false;
-        console.log("Asset List:getData:failed to get data");
-        console.log(errorMessage);
-      });
-
-  }
 
 
   //

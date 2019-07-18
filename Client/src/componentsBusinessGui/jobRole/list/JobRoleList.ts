@@ -8,16 +8,15 @@ import Component                                from "vue-class-component";
 import FilterButton                             from '@/componentsCommonGui/filterButton/FilterButton';
 import FilterJobRoleService                     from '@/services/filters/JobRoleFilterService/FilterJobRoleService';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
-import JobRoleListFilterParametersModel         from '@/repositories/models/jobRole/JobRoleListFilterParametersModal';
-import JobRoleSummaryModel                             from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
+import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
-import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import ObjectArrayMapperJobRoleModel            from '@/repositories/objectMappers/jobRole/ObjectArrayMapperJobRoleModel';
-import ObjectMapperJobRoleExtendedModel                 from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleExtendedModel';
+import ObjectMapperJobRoleExtendedModel         from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleExtendedModel';
+
 
 /**
  * Presents a list of categories to the user that can be filtered
@@ -41,12 +40,11 @@ export default class JobRoleList extends BaseListPage<JobRoleSummaryModel> imple
   //IComponentMetaData
   componentName: string = "Job Role List";
   componentDescription: string = "Displays a list of job roles";
-  //IComponentMetaData
-
-  filterModel : JobRoleListFilterParametersModel =  new JobRoleListFilterParametersModel();
+  //IComponentMetaData  
 
   constructor() {
     super(  new NavigationCrudJobRole(), 
+              JobRoleRepositoryFactory.getRepository(),
             new ObjectMapperJobRoleExtendedModel(),
             new ObjectArrayMapperJobRoleModel())
   }
@@ -55,14 +53,13 @@ export default class JobRoleList extends BaseListPage<JobRoleSummaryModel> imple
   // View has been mounted
   //
   mounted() {
-    this.listenToModelUpdates();
-    this.getData();
+    super.mounted();
   }
 
   // before the view is destroyed, it must unsubscribe from
   // any notifications
   beforeDestroy() {
-    NotificationFactory.unsubscribeFromAll(this);
+    super.beforeDestroy();
   }
 
 
@@ -114,47 +111,21 @@ export default class JobRoleList extends BaseListPage<JobRoleSummaryModel> imple
   // user has pressed the clear button on the text filter
   //
   onFilterClearClicked() {
-    this.listFilterText = "";
+    super.onFilterClearClicked();
   }
 
   //
   // user pressed the add button to create a new job role
   //
   onAddClicked() {
-    this.navigationHandler.gotoNewPage(this);
+    super.onAddClicked();
   }
 
   //
   // a list item has been selected, navigate to the job role view screen
   //
   onSelectItem(item: JobRoleSummaryModel) {
-    this.selectedItem = item;
-    this.navigationHandler.gotoViewPage(this,item.jobRoleId)    
-  }
-
-  //
-  // listen to updates
-  //
-  private listenToModelUpdates() {
-
-    let notifications = NotificationFactory.instance.getNotificationInstance<JobRoleSummaryModel>(new JobRoleSummaryModel().entityName);
-
-    notifications
-      .onItemCreated(this, (model: JobRoleSummaryModel) => {
-        this.updateList(model, true);
-      })
-      .onItemUpdated(this, (model: JobRoleSummaryModel) => {
-        this.updateList(model, false);
-      })
-      .onItemDeleted(this, (model: JobRoleSummaryModel) => {
-        this.updateList(model, false);
-      })
-      .onItemActivated(this, (model: JobRoleSummaryModel) => {
-        this.updateList(model, false);
-      })
-      .onItemDeactivated(this, (model: JobRoleSummaryModel) => {
-        this.updateList(model, false);
-      });
+    super.onSelectItem(item);
   }
 
   /**
@@ -165,39 +136,13 @@ export default class JobRoleList extends BaseListPage<JobRoleSummaryModel> imple
    * @param {boolean} isNew - if this is a new item, it is injected into the list array
    * @memberof PersonList
    */
-  private updateList(model: JobRoleSummaryModel, isNew: boolean) {
+  updateList(model: JobRoleSummaryModel, isNew: boolean) {
     if (isNew) {
       this.dataList.addItem(model);
       this.selectedItem = model;
     }
     this.dataList.updateItem(this, model, (item) => { return model.jobRoleId == item.jobRoleId })
     this.dataList.sortAscByString((a, b) => { return { a: a.name, b: b.name } });
-  }
-
-
-  /**
-   * get asset type data from the server using the 
-   * current filters
-   *
-   * @private
-   * @memberof CategoryList
-   */
-  private getData() {
-
-    var repository = JobRoleRepositoryFactory.getRepository();
-    this.isLoading = true;
-
-    repository.getFilteredList(this.filterModel)
-      .onSuccess((itemList: GenericCollectionModel<JobRoleSummaryModel>) => {        
-        this.dataList = itemList;
-        this.isLoading = false;
-      })
-      .onFailed((errorMessage: string) => {
-        this.isLoading = false;
-        console.log("Job Role List:getData:failed to get data");
-        console.log(errorMessage);
-      });
-
   }
 
 
