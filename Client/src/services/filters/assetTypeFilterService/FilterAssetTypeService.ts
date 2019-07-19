@@ -1,8 +1,9 @@
-import { IFilterModelService }                  from '@/services/interfaces/IFilterModelService';
-import AssetTypeSummmaryModel                           from '@/repositories/models/assetType/AssetTypeSummaryModel';
+import { IListFilterByText }                    from './../interfaces/FilterInterfaces';
+import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 
-export default class FilterAssetTypeService implements IFilterModelService {
+
+export default class FilterAssetTypeService implements IListFilterByText<AssetTypeSummmaryModel> {
 
     filterWithRankings( filterText : string , 
                         list : GenericCollectionModel<AssetTypeSummmaryModel>) : GenericCollectionModel<AssetTypeSummmaryModel> {

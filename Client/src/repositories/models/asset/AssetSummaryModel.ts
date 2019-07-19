@@ -23,7 +23,12 @@ export default class AssetSummaryModel implements IApiModel {
     get entityKey(): string {
         return `${this.assetId}`;
     }
+
     get entityValue(): string {
+        return `${this.name}`;
+    }
+
+    get entitySortValue(): any {
         return `${this.name}`;
     }
 }

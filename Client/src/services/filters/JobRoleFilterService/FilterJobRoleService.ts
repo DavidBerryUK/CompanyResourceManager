@@ -1,8 +1,8 @@
-import JobRoleSummaryModel                             from '@/repositories/models/jobRole/JobRoleSummaryModel';
-import { IFilterModelService }                  from '@/services/interfaces/IFilterModelService';
+import { IListFilterByText }                    from './../interfaces/FilterInterfaces';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
+import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
 
-export default class FilterJobRoleService implements IFilterModelService {
+export default class FilterJobRoleService implements IListFilterByText<JobRoleSummaryModel> {
 
     filterWithRankings( filterText : string , 
                         list : GenericCollectionModel<JobRoleSummaryModel>) : GenericCollectionModel<JobRoleSummaryModel> {

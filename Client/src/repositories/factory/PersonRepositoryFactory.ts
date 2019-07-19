@@ -15,7 +15,7 @@ export default class PersonRepositoryFactory {
     static getRepository() : GenericApiRepository<PersonSummaryModel, PersonExtendedModel, ListFilterWithArchiveFlag> {
         var repository = new GenericApiRepository<PersonSummaryModel, PersonExtendedModel, ListFilterWithArchiveFlag>(
             new PersonSummaryModel().entityName,
-            "api/people",
+            "api/person",
             new ObjectMapperPersonSummaryModel(),
             new ObjectMapperPersonExtendedModel(),
             new ObjectArrayMapperPersonSummaryModel()

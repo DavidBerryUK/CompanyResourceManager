@@ -15,10 +15,16 @@ export default class JobRoleSummaryModel implements IApiModel{
     get entityName() : string {
         return "JobRole";
     }
+
     get entityKey() : string {
         return `${this.jobRoleId}`;
     }
+
     get entityValue() : string {
+        return `${this.name}`;
+    }
+
+    get entitySortValue() : any {
         return `${this.name}`;
     }
 }

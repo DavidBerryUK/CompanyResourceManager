@@ -34,4 +34,13 @@ export interface IApiModel {
      * @memberof IApiModel
      */
     entityValue: string;
+
+
+    /**
+     * return variable that is used for sorting
+     *
+     * @returns {any}
+     * @memberof IApiModel
+     */
+    entitySortValue: any;
 }

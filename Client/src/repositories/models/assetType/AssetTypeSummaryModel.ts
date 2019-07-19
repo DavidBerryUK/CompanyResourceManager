@@ -19,10 +19,16 @@ export default class AssetTypeSummmaryModel implements IApiModel{
     get entityName() : string {
         return "AssetType";
     }
+
     get entityKey() : string {
         return `${this.assetTypeId}`;
     }
+
     get entityValue() : string {
+        return `${this.name}`;
+    }
+
+    get entitySortValue() : any {
         return `${this.name}`;
     }
 }

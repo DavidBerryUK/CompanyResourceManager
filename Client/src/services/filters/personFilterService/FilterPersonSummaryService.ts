@@ -1,8 +1,8 @@
-import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
-import { IFilterModelService }                  from '@/services/interfaces/IFilterModelService';
+import { IListFilterByText }                    from './../interfaces/FilterInterfaces';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
+import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 
-export default class FilterPersonSummaryService implements IFilterModelService {
+export default class FilterPersonSummaryService implements IListFilterByText<PersonSummaryModel> {
 
     filterWithRankings( filterText : string , 
                         list : GenericCollectionModel<PersonSummaryModel>) : GenericCollectionModel<PersonSummaryModel> {

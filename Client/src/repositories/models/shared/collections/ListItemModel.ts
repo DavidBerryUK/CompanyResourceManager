@@ -13,10 +13,16 @@ export default class ListItemModel implements IApiModel {
     get entityName(): string {
         return "item";
     }
+
     get entityKey(): string {
         return `${this.id}`;
     }
+
     get entityValue(): string {
+        return `${this.name}`;
+    }
+
+    get entitySortValue(): any {
         return `${this.name}`;
     }
 }

@@ -27,4 +27,7 @@ export default class PersonSummaryModel implements IApiModel{
     get entityValue() : string {
         return `${this.forename} ${this.surname}`;
     }
+    get entitySortValue() : any {
+        return `${this.forename}-${this.surname}`;
+    }
 }
