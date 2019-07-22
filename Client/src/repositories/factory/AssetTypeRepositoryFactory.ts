@@ -11,14 +11,13 @@ export default class AssetTypeRepositoryFactory {
     // create a Asset Type Respository using the generic base repository class
     //  this repository supports all the basic CRUD operations as well
     //  as providing a filtered object list ( providing the server supports the functionality )
-    static getRepository() : GenericApiRepository<AssetTypeSummmaryModel, AssetTypeSummmaryModel, ListFilterWithArchiveFlag> {
-        var repository = new GenericApiRepository<AssetTypeSummmaryModel, AssetTypeSummmaryModel, ListFilterWithArchiveFlag>(
+    public static getRepository(): GenericApiRepository<AssetTypeSummmaryModel, AssetTypeSummmaryModel, ListFilterWithArchiveFlag> {
+        const repository = new GenericApiRepository<AssetTypeSummmaryModel, AssetTypeSummmaryModel, ListFilterWithArchiveFlag>(
             new AssetTypeSummmaryModel().entityName,
-            "api/assettype",
+            'api/assettype',
             new ObjectMapperAssetTypeSummaryModel(),
             new ObjectMapperAssetTypeExtendedModel(),
-            new ObjectArrayMapperAssetTypeModel()
-        )
+            new ObjectArrayMapperAssetTypeModel());
         return repository;
     }
 }

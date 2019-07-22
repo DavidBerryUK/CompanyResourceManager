@@ -12,7 +12,6 @@ import Vue                                      from 'vue';
  */
 export default class GenericCollectionModel<T> {
 
-
     /**
      * when used as the response model from calling an api, this is used
      * to indicate if the server operation was a success
@@ -41,12 +40,11 @@ export default class GenericCollectionModel<T> {
      */
     public items: T[];
 
-    constructor() {        
+    constructor() {
         this.items = new Array<T>();
         this.success = false;
-        this.errorMessage = '';        
+        this.errorMessage = '';
     }
-
 
     /**
      * Update an item, note that in VUE an items needs to be

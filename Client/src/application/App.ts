@@ -1,7 +1,7 @@
 import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 import Component                                from 'vue-class-component';
 import HeaderComponent                          from '../componentsCommonGui/header/HeaderComponent.vue';
-import MenuComponent                            from "../componentsCommonGui/menuComponent/MenuComponent.vue";
+import MenuComponent                            from '../componentsCommonGui/menuComponent/MenuComponent.vue';
 import VeeValidate                              from 'vee-validate';
 import Vue                                      from 'vue';
 
@@ -18,7 +18,7 @@ Vue.use(VeeValidate);
 @Component({
   components: {
     HeaderComponent,
-    MenuComponent
+    MenuComponent,
   },
 })
 export default class App extends Vue {
@@ -26,13 +26,8 @@ export default class App extends Vue {
   private showToolbar: boolean = true;
   private showHeader: boolean = true;
 
-  private mounted() {
-
-  }
-
   public data(): any {
     return {};
   }
-
 
 }

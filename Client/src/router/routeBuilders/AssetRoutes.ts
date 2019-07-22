@@ -8,47 +8,47 @@ export default class AssetRoutes {
 
     public static register(): RouteConfig {
 
-        var route: RouteConfig = {
-          path: "/asset",
-    
+        const route: RouteConfig = {
+          path: '/asset',
+
           component: MasterDetailPage,
           children: [
             {
-              name: "Asset",
-              path: "",
-              components: {
-                navigation: AssetList
-              }
-            },
-    
-            {
-              name: "AssetView",
-              path: ":id/view",
+              name: 'Asset',
+              path: '',
               components: {
                 navigation: AssetList,
-                detail: AssetView
+              },
+            },
+
+            {
+              name: 'AssetView',
+              path: ':id/view',
+              components: {
+                navigation: AssetList,
+                detail: AssetView,
               },
               props: {
                 navigation: true,
-                detail: true
-              }
+                detail: true,
+              },
             },
-    
+
             {
-              name: "AssetEdit",
-              path: ":id/edit",
+              name: 'AssetEdit',
+              path: ':id/edit',
               components: {
                 navigation: AssetList,
-                detail: AssetEdit
+                detail: AssetEdit,
               },
               props: {
                 navigation: true,
-                detail: true
-              }
-            }
-          ]
+                detail: true,
+              },
+            },
+          ],
         };
-    
+
         return route;
       }
 }

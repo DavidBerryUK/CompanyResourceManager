@@ -1,12 +1,12 @@
-import Component                        from 'vue-class-component'
-import Vue                              from 'vue'
+import Component                        from 'vue-class-component';
+import Vue                              from 'vue';
 
 @Component
-export default class Loader extends Vue {         
+export default class Loader extends Vue {
 
-    data() : any  {
+    public data(): any  {
         return {};
     }
 }
-  
-Vue.component('custom-loader',Loader)
+
+Vue.component('custom-loader', Loader);

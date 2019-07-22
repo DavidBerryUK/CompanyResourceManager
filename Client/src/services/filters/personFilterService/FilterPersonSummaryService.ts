@@ -1,48 +1,44 @@
 import { IListFilterByText }                    from './../interfaces/FilterInterfaces';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
+import StringCompare                            from '@/utilities/stringMatch/StringCompare';
 
 export default class FilterPersonSummaryService implements IListFilterByText<PersonSummaryModel> {
 
-    filterWithRankings( filterText : string , 
-                        list : GenericCollectionModel<PersonSummaryModel>) : GenericCollectionModel<PersonSummaryModel> {
-                    
-        var rankingListA = new Array<PersonSummaryModel>();
-        var rankingListB = new Array<PersonSummaryModel>();
-        var rankingListC = new Array<PersonSummaryModel>();
-        var rankingListD = new Array<PersonSummaryModel>();
+    public filterWithRankings( filterText: string,
+                               list: GenericCollectionModel<PersonSummaryModel>)
+                                : GenericCollectionModel<PersonSummaryModel> {
 
-        var filterTextLowerCase = filterText.toLowerCase();
+        const rankingListA = new Array<PersonSummaryModel>();
+        const rankingListB = new Array<PersonSummaryModel>();
+        const rankingListC = new Array<PersonSummaryModel>();
+        const rankingListD = new Array<PersonSummaryModel>();
 
-        var castList = list.items as Array<PersonSummaryModel>;
-        
+        const filterTextLowerCase = filterText.toLowerCase();
+
+        const castList = list.items as Array<PersonSummaryModel>;
+
         castList.forEach((item: PersonSummaryModel) => {
-            var indexOfSurnameName = item.surname.toLowerCase().indexOf(filterTextLowerCase);
-            var indexOfForenameName = item.forename.toLowerCase().indexOf(filterTextLowerCase);
-            
-            
-            if ( indexOfSurnameName == 0) {
-                rankingListA.push(item)
-            }
-            else if ( indexOfForenameName == 0) {
-                rankingListB.push(item)
-            }
-            else if ( indexOfSurnameName > 0) {
-                rankingListC.push(item)
-            } 
-            else if ( indexOfForenameName > 0) {
-                rankingListD.push(item)
+
+            const ranking = StringCompare.compareWithRanking(filterText, item.entityValue);
+
+            if ( ranking === 100) {
+                rankingListA.push(item);
+            } else if ( ranking >= 75) {
+                rankingListB.push(item);
+            } else if ( ranking >= 50) {
+                rankingListC.push(item);
+            } else if ( ranking > 0) {
+                rankingListD.push(item);
             }
         });
 
-        var filteredDataList = new GenericCollectionModel<PersonSummaryModel>();
+        const filteredDataList = new GenericCollectionModel<PersonSummaryModel>();
         filteredDataList.items = rankingListA
           .concat(rankingListB)
           .concat(rankingListC)
           .concat(rankingListD);
 
-
         return filteredDataList;
     }
-
 }

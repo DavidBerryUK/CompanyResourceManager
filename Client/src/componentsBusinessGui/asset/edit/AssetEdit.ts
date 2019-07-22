@@ -4,7 +4,7 @@ import AssetExtendedModel                       from '@/repositories/models/asse
 import AssetRepositoryFactory                   from '@/repositories/factory/AssetRepositoryFactory';
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
-import Component                                from "vue-class-component";
+import Component                                from 'vue-class-component';
 import ContractListener                         from '@/repositories/contracts/ContractListener';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
@@ -13,69 +13,67 @@ import ListItemModel                            from '@/repositories/models/shar
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 import ObjectMapperAssetExtendedModel           from '@/repositories/objectMappers/asset/ObjectMapperAssetExtendedModel';
 
-//
-// attribute indicates this is a component, 
+// attribute indicates this is a component,
 //  this is where any sub components are also registered
 @Component({
   components: {
     LabelDataReadOnly,
-    FormEditHeader
-  }
+    FormEditHeader,
+  },
 })
 
 export default class AssetEdit extends BaseEditPage<AssetExtendedModel> implements IRouteBeforeNavigationCheck, IComponentMetaData {
 
-  //IComponentMetaData
-  public componentName: string = "Asset Edit";
-  public componentDescription: string = "Enables the user to edit an Asset";
-  //IComponentMetaData
+  // IComponentMetaData
+  public componentName: string = 'Asset Edit';
+  public componentDescription: string = 'Enables the user to edit an Asset';
+  // IComponentMetaData
 
   // reference data - each asset has an asset type
-  public assetTypesList : GenericCollectionModel<ListItemModel> = new GenericCollectionModel<ListItemModel>();
+  public assetTypesList: GenericCollectionModel<ListItemModel> = new GenericCollectionModel<ListItemModel>();
 
 
   constructor() {
     super(
-      new NavigationCrudAsset(), 
+      new NavigationCrudAsset(),
       AssetRepositoryFactory.getRepository(),
-      new ObjectMapperAssetExtendedModel() );        
+      new ObjectMapperAssetExtendedModel() );
   }
 
   // the form has been mounted into the DOM
-  mounted() {
+  public mounted() {
     super.mounted();
   }
 
   // the cancel button has been pressed
-  onCancel() {
+  public onCancel() {
     super.onCancel();
   }
 
   // the delete button has been pressed
   //
-  onArchive() {
+  public onArchive() {
     super.onArchive();
   }
 
 
   // the save button has been pressed by the users
   //
-  onSave() {
+  public onSave() {
       super.onSave();
   }
 
    // load additional data,
   //
-  retrieveSecondaryData(contractListener: ContractListener) {
+  public retrieveSecondaryData(contractListener: ContractListener) {
 
-    var assetTypeRepository = AssetTypeRepositoryFactory.getRepository();
+    const assetTypeRepository = AssetTypeRepositoryFactory.getRepository();
 
     assetTypeRepository
     .getActiveList()
-    .onSuccess((list:GenericCollectionModel<ListItemModel> ) => {
-      this.assetTypesList = list
+    .onSuccess((list: GenericCollectionModel<ListItemModel> ) => {
+      this.assetTypesList = list;
     })
     .contractListener(contractListener);
   }
- 
 }

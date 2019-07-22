@@ -10,7 +10,8 @@ export default class MenuFactory {
         menuItems.push(new MenuItem('Home', 'home', `fa-2x ${ComponentIconConstants.HomeIcon}`));
         menuItems.push(new MenuItem('About', 'about', `fa-2x ${ComponentIconConstants.AboutIcon}`));
         menuItems.push(this.peopleMenu());
-        menuItems.push(this.assetMenu())
+        menuItems.push(this.assetMenu());
+        menuItems.push(this.developmentMenu());
 
         return menuItems;
     }
@@ -27,6 +28,13 @@ export default class MenuFactory {
         const menuItem = new MenuItem('Assets', '', '');
         menuItem.subMenus.push(new MenuItem('Types', 'AssetType', `fa-2x ${ComponentIconConstants.AssetTypesListIcon}`));
         menuItem.subMenus.push(new MenuItem('Assets', 'Asset', `fa-2x ${ComponentIconConstants.AssetsListIcon}`));
+        menuItem.active = true;
+        return menuItem;
+    }
+
+    private static developmentMenu(): MenuItem {
+        const menuItem = new MenuItem('Development', '', '');
+        menuItem.subMenus.push(new MenuItem('Development', 'development', `fa-2x ${ComponentIconConstants.DevelopmentListIcon}`));
         menuItem.active = true;
         return menuItem;
     }

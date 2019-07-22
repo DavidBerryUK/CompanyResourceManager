@@ -2,7 +2,7 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import AssetExtendedModel                       from '@/repositories/models/asset/AssetExtendedModel';
 import AssetRepositoryFactory                   from '@/repositories/factory/AssetRepositoryFactory';
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
-import Component                                from "vue-class-component";
+import Component                                from 'vue-class-component';
 import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
@@ -10,33 +10,33 @@ import NavigationCrudAsset                      from '@/routeNavigation/Navigati
 @Component({
   components: {
     FormViewHeader,
-    LabelDataReadOnly
-  }
+    LabelDataReadOnly,
+  },
 })
 export default class AssetView extends BaseViewPage<AssetExtendedModel> implements IComponentMetaData {
 
-  //IComponentMetaData
-  public componentName : string = "Asset View";
-  public componentDescription : string = "Enables the user to view an Asset";
-  //IComponentMetaData
-  
+  // IComponentMetaData
+  public componentName: string = 'Asset View';
+  public componentDescription: string = 'Enables the user to view an Asset';
+  // IComponentMetaData
+
   constructor() {
     super(
-      new NavigationCrudAsset(), 
-      AssetRepositoryFactory.getRepository())
+      new NavigationCrudAsset(),
+      AssetRepositoryFactory.getRepository());
 
     this.model = new AssetExtendedModel();
   }
 
-  mounted() {
+  public mounted() {
     super.mounted();
   }
 
-  onEdit() {
+  public onEdit() {
     super.onEdit();
   }
 
-  onRestore() {
+  public onRestore() {
     super.onRestore();
   }
 }

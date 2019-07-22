@@ -8,47 +8,47 @@ export default class AssetTypeRoutes {
 
     public static register(): RouteConfig {
 
-        var route: RouteConfig = {
-          path: "/assettype",
-    
+        const route: RouteConfig = {
+          path: '/assettype',
+
           component: MasterDetailPage,
           children: [
             {
-              name: "AssetType",
-              path: "",
-              components: {
-                navigation: AssetTypeList
-              }
-            },
-    
-            {
-              name: "AssetTypeView",
-              path: ":id/view",
+              name: 'AssetType',
+              path: '',
               components: {
                 navigation: AssetTypeList,
-                detail: AssetTypeView
+              },
+            },
+
+            {
+              name: 'AssetTypeView',
+              path: ':id/view',
+              components: {
+                navigation: AssetTypeList,
+                detail: AssetTypeView,
               },
               props: {
                 navigation: true,
-                detail: true
-              }
+                detail: true,
+              },
             },
-    
+
             {
-              name: "AssetTypeEdit",
-              path: ":id/edit",
+              name: 'AssetTypeEdit',
+              path: ':id/edit',
               components: {
                 navigation: AssetTypeList,
-                detail: AssetTypeEdit
+                detail: AssetTypeEdit,
               },
               props: {
                 navigation: true,
-                detail: true
-              }
-            }
-          ]
+                detail: true,
+              },
+            },
+          ],
         };
-    
+
         return route;
       }
 }

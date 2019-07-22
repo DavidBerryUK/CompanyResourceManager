@@ -8,47 +8,47 @@ export default class JobRoleRoutes {
 
     public static register(): RouteConfig {
 
-        var route: RouteConfig = {
-          path: "/jobrole",
-    
+        const route: RouteConfig = {
+          path: '/jobrole',
+
           component: MasterDetailPage,
           children: [
             {
-              name: "jobrole",
-              path: "",
-              components: {
-                navigation: JobRoleList
-              }
-            },
-    
-            {
-              name: "JobRoleView",
-              path: ":id/view",
+              name: 'jobrole',
+              path: '',
               components: {
                 navigation: JobRoleList,
-                detail: JobRoleView
+              },
+            },
+
+            {
+              name: 'JobRoleView',
+              path: ':id/view',
+              components: {
+                navigation: JobRoleList,
+                detail: JobRoleView,
               },
               props: {
                 navigation: true,
-                detail: true
-              }
+                detail: true,
+              },
             },
-    
+
             {
-              name: "JobRoleEdit",
-              path: ":id/edit",
+              name: 'JobRoleEdit',
+              path: ':id/edit',
               components: {
                 navigation: JobRoleList,
-                detail: JobRoleEdit
+                detail: JobRoleEdit,
               },
               props: {
                 navigation: true,
-                detail: true
-              }
-            }
-          ]
+                detail: true,
+              },
+            },
+          ],
         };
-    
+
         return route;
       }
 }

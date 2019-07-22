@@ -12,14 +12,13 @@ export default class PersonRepositoryFactory {
     // create a Person Respository using the generic base repository class
     //  this repository supports all the basic CRUD operations as well
     //  as providing a filtered object list ( providing the server supports the functionality )
-    static getRepository() : GenericApiRepository<PersonSummaryModel, PersonExtendedModel, ListFilterWithArchiveFlag> {
-        var repository = new GenericApiRepository<PersonSummaryModel, PersonExtendedModel, ListFilterWithArchiveFlag>(
+    public static getRepository(): GenericApiRepository<PersonSummaryModel, PersonExtendedModel, ListFilterWithArchiveFlag> {
+        const repository = new GenericApiRepository<PersonSummaryModel, PersonExtendedModel, ListFilterWithArchiveFlag>(
             new PersonSummaryModel().entityName,
-            "api/person",
+            'api/person',
             new ObjectMapperPersonSummaryModel(),
             new ObjectMapperPersonExtendedModel(),
-            new ObjectArrayMapperPersonSummaryModel()
-        )
+            new ObjectArrayMapperPersonSummaryModel());
         return repository;
     }
 }

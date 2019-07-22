@@ -1,12 +1,12 @@
 //
 // Custom contract, used to help coordinate
-// multiple long running tasks that can be initiated 
+// multiple long running tasks that can be initiated
 // in different areas of the application.
 //
 // This was developed to simplify Api Repositories, to enable strongly
 // typed methods and ease of coordinating multiple data retrievals
 //
-// various callbacks are available to report the status of all 
+// various callbacks are available to report the status of all
 // process assigned to the contract,
 //
 // * onAllSucceeded
@@ -48,7 +48,6 @@ export class ContractListenerCallbackHandles {
         this.callbackSingleFailResponse = Array<ICallBackNoParameters>();
         this.callbackStatusChange = new Array<ICallBackStatusChange>();
     }
-    
 }
 
 /**
@@ -117,13 +116,13 @@ export class ContractListenerResponse {
  */
 export default class ContractListener {
 
+    public response: ContractListenerResponse;
+    public handers: ContractListenerCallbackHandles | null;
+
     private totalCount: number;
     private responseCount: number;
     private successCount: number;
     private failCount: number;
-
-    public response: ContractListenerResponse;
-    public handers: ContractListenerCallbackHandles | null;
 
     constructor() {
         this.handers = null;

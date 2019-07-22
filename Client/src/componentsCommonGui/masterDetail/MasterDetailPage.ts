@@ -30,86 +30,68 @@ export default class MasterDetailPage extends Vue {
       return {};
     }
 
-    beforeRouteEnter(from: any, to: any, next: any) {
-       console.log("Navigation Detail:beforeRouter     Enter");
-       console.log("----------------------------------------");
-       if (this)
-       {
+    public beforeRouteEnter(from: any, to: any, next: any) {
+      //  console.log('Navigation Detail:beforeRouter     Enter');
+      //  console.log('----------------------------------------');
+       if (this) {
          this.doAllTheChecking(next);
        } else {
          next();
        }
-   
      }
-   
-     beforeRouteUpdate(from: any, to: any, next: any) {
-       //console.log("Navigation Detail:beforeRouter     Update");
-       //console.log("------------------------------------");
-       
+
+     public beforeRouteUpdate(from: any, to: any, next: any) {
+       // console.log("Navigation Detail:beforeRouter     Update");
+       // console.log("------------------------------------");
          this.doAllTheChecking(next);
-       
      }
-   
-     beforeRouteLeave(from: any, to: any, next: any) {
-       //console.log("Navigation Detail:beforeRouter   Leave");
-       //console.log("------------------------------------");
-       if (this)
-       {
+
+     public beforeRouteLeave(from: any, to: any, next: any) {
+       // console.log("Navigation Detail:beforeRouter   Leave");
+       // console.log("------------------------------------");
+       if (this) {
          this.doAllTheChecking(next);
-       }
-       else {
+       } else {
          next();
        }
      }
-   
-   
+
      private doAllTheChecking(next: any) {
-   
-      console.log("MasterDetailPage - do All the Checking");
-   
-   
-       var doNeedToAskForPermission = false;
-   
-       //console.log("checking children in the view: count=" + this.$children.length);
-       this.$children.forEach((child : Vue) => {
-         
-         if ( ComponentMetaDataInterfaceGuards.doesSupportIComponentMetaData(child) )
-         {
-           //console.log("checking for navigation guards on " + child.componentName);
-         }
-         else{
-           //console.log("checking for navigation guards on ");
-         }
-   
+      // console.log("MasterDetailPage - do All the Checking");
+
+       let doNeedToAskForPermission = false;
+
+       // console.log("checking children in the view: count=" + this.$children.length);
+       this.$children.forEach((child: Vue) => {
+        //  if ( ComponentMetaDataInterfaceGuards.doesSupportIComponentMetaData(child) ) {
+        //    //console.log("checking for navigation guards on " + child.componentName);
+        //  }
+        //  else{
+        //    //console.log("checking for navigation guards on ");
+        //  }
+
          if ( NavigationCheckInterfaceGuards.doesSupportIRouteBeforeNavigationCheck(child)) {
-           var canClose = child.canCloseComponentBeforeNavigation();
-           if (canClose == false)
-           {
+           const canClose = child.canCloseComponentBeforeNavigation();
+           if (canClose === false) {
              doNeedToAskForPermission = true;
            }
          }
-   
-       })
-       
-       if (doNeedToAskForPermission)
-       {
-   
+       });
+
+       if (doNeedToAskForPermission) {
+
          // console.log("NEED TO ASK FOR PERMISSION");
-   
-   
-         var dialogController = new CommonAppDialogController(this);
-         dialogController.createWithParameters(  "Unsaved Changes",
-                                                 "There are unsaved changes, do you want to abandon these?",
+
+         const dialogController = new CommonAppDialogController(this);
+         dialogController.createWithParameters(  'Unsaved Changes',
+                                                 'There are unsaved changes, do you want to abandon these?',
                                                  EnumModalIcon.Question,
                                                  EnumModalButton.YesNo,
-                                                 EnumModalWidth.FixedMedium
+                                                 EnumModalWidth.FixedMedium,
          ).yesPressed(() => {
            return next();
          }).show();
-   
-   
-       }
-       else {
+       } else {
          next();
        }
      }

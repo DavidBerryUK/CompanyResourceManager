@@ -9,5 +9,5 @@ export enum EnumRecordStatusFilter {
     Undefined = -1,
     Active = 0,
     InActive = 1,
-    All = 2
+    All = 2,
 }

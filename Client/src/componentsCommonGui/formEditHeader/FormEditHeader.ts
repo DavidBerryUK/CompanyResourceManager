@@ -1,43 +1,43 @@
-import { Prop }                         from 'vue-property-decorator'
-import Component                        from 'vue-class-component'
-import Vue                              from 'vue'
+import { Prop }                         from 'vue-property-decorator';
+import Component                        from 'vue-class-component';
+import Vue                              from 'vue';
 
 @Component
-export default class FormEditHeader extends Vue {         
+export default class FormEditHeader extends Vue {
 
 
     @Prop()
-    title?: string;
+    public title?: string;
 
     @Prop()
-    saveEnabled?:  boolean;
+    public saveEnabled?: boolean;
 
     @Prop()
-    isActive?: boolean;
+    public isActive?: boolean;
 
-    constructor(){                
+    constructor() {
         super();
     }
 
-    mounted(){        
+    public mounted() {
     }
 
-    data() : any  {
+    public data(): any  {
         return {};
     }
 
-    onArchive() {
-        this.$emit("onArchive");
+    public onArchive() {
+        this.$emit('onArchive');
     }
 
-    onSave() {
-        this.$emit("onSave");
+    public onSave() {
+        this.$emit('onSave');
     }
 
-    onCancel() {
-        this.$emit("onCancel");
+    public onCancel() {
+        this.$emit('onCancel');
     }
 
 }
-  
-Vue.component('custom-form-edit-header',FormEditHeader)
+
+Vue.component('custom-form-edit-header', FormEditHeader);

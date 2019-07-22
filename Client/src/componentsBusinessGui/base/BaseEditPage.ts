@@ -8,60 +8,58 @@ import { IObjectMapper }                        from '@/repositories/objectMappe
 import { Prop }                                 from 'vue-property-decorator';
 import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
 import { Watch }                                from 'vue-property-decorator';
-import BasePage                                 from "./BasePage";
+import BasePage                                 from './BasePage';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import ContractListener                         from '@/repositories/contracts/ContractListener';
-import DeepObjectComparator                     from "../../services/objectComparison/DeepObjectComparator"
+import DeepObjectComparator                     from '../../services/objectComparison/DeepObjectComparator';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 
 export default class BaseEditPage<T extends IApiModel> extends BasePage implements IComponentMetaData {
-  //IComponentMetaData
-  public componentName: string = "BaseEditPage";
-  public componentDescription: string = "BaseEditPage";
-  //IComponentMetaData
+  // IComponentMetaData
+  public componentName: string = 'BaseEditPage';
+  public componentDescription: string = 'BaseEditPage';
+  // IComponentMetaData
 
-  public repository : GenericApiRepository<any, T, any>
+  public repository: GenericApiRepository<any, T, any>;
 
   // track changes in the branch object
   //
   public modelChangeTracker!: DeepObjectComparator;
   public model!: T;
   public objectMapper: IObjectMapper<T>;
-  
 
-  @Prop() id!: string;
+  @Prop() public id!: string;
 
-  navigationHandler : INavigationCrud;
+  public navigationHandler: INavigationCrud;
 
-  constructor(  navigationHandler : INavigationCrud, 
-                repository : GenericApiRepository<any, T, any>,
+  constructor(  navigationHandler: INavigationCrud,
+                repository: GenericApiRepository<any, T, any>,
                 objectMapper: IObjectMapper<T>) {
     super();
     this.navigationHandler = navigationHandler;
     this.repository = repository;
     this.objectMapper = objectMapper;
-    
-    this.model = this.objectMapper.map({})
+
+    this.model = this.objectMapper.map({});
     this.modelChangeTracker = new DeepObjectComparator(this.model);
   }
 
-  @Watch("id")
-  onIdChanged(value: string, oldValue: string) {    
+  @Watch('id')
+  public onIdChanged(value: string, oldValue: string) {
     this.retrieveData();
-  }  
-  
+  }
+
   //
   // Do a Deep watch on the asset type model to see if any
   // property has been updated
   // (watch does not work when moved to base class)
-  @Watch("model", { deep: true })
-  onModelChanged(newValue: T, oldValue: T) {
+  @Watch('model', { deep: true })
+  public onModelChanged(newValue: T, oldValue: T) {
     // check to see if the object has returned to its original value
-    //    
     this.modelChangeTracker.evaluateHasObjectChanged(this.model);
   }
-  
-  mounted() {
+
+  public mounted() {
     this.retrieveData();
   }
 
@@ -70,43 +68,37 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
   // this is called by the router before navigation to ensure its ok
   // to navigate away from this screen
   //
-  canCloseComponentBeforeNavigation(): boolean {
-    console.log("BaseEditPage:canCloseComponentBeforeNavigation()");
+  public canCloseComponentBeforeNavigation(): boolean {
     if (this.modelChangeTracker != null) {
       return this.modelChangeTracker.isObjectSameAsOriginal;
     }
-    return false
+    return false;
   }
   // IRouteBeforeNavigationCheck
 
    // the cancel button has been pressed by the user
   //
-  onCancel() {
+  public onCancel() {
     this.navigationHandler.gotoViewPage(this, this.model.entityKey);
   }
 
-  retrieveData() {
-  
-
+  public retrieveData() {
     //
     // load the person for id
     //
-    if (this.id == 'new') {
+    if (this.id === 'new') {
       //
       // if this is a create page, then just create a new person model, otherwise
       //  get a person via the API
-      //  
 
-      this.model = this.objectMapper.map({})
+      this.model = this.objectMapper.map({});
       this.modelChangeTracker = new DeepObjectComparator(this.model);
       this.isLoading = false;
-    }
-    else {
-
+    } else {
       //
       // when all the trailing repositories have finished then do this.
       //
-      var listener = new ContractListener();
+      const listener = new ContractListener();
 
       listener.monitor()
         .onAllResponded(() => {
@@ -127,19 +119,18 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
         .contractListener(listener);
     }
   }
-  
-  retrieveSecondaryData(contractListener: ContractListener) {
 
+  public retrieveSecondaryData(contractListener: ContractListener) {
   }
 
   // the delete button has been pressed
   //
-  onArchive() {
+  public onArchive() {
 
     //
     // ask the user to confirm they with to delete the asset
     //
-    var dialog = new CommonAppDialogController(this);
+    const dialog = new CommonAppDialogController(this);
 
     dialog.createWithParameters(`Archive ${this.model.entityName}?`,
       `Are you sure you wish to Archive this ${this.model.entityValue}?`,
@@ -151,7 +142,6 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
         //
         // call api to deactivate the asset  , on success display the read only version
         //
-        
 
         this.repository.deactivate(this.model.entityKey)
           .onSuccess((data: T | null) => {
@@ -160,13 +150,14 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
             //
             // if failed, show user why
             //
-            var dialog = new CommonAppDialogController(this);
-            dialog.createWithParameters(
+            const failureDialog = new CommonAppDialogController(this);
+            failureDialog.createWithParameters(
               `Archive ${this.model.entityValue}`,
               `Failed to archive ${this.model.entityName} ${this.model.entityValue} :${message}`,
               EnumModalIcon.Error,
               EnumModalButton.Ok,
-              EnumModalWidth.FixedMedium).show();
+              EnumModalWidth.FixedMedium)
+              .show();
           });
 
       }).show();
@@ -175,21 +166,20 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
 
    // the save button has been pressed by the users
   //
-  onSave() {
+  public onSave() {
     //
     // validate the page, is all is valid then save, otherwise
-    // do nothing and wait for the user to correct the 
+    // do nothing and wait for the user to correct the
     // validation issues
     //
     this.$validator.validateAll().then((result) => {
 
       if (result) {
         // save data to server
-        //        
         this.repository.save(this.model)
           .onSuccess((data: T) => {
 
-            // reset the model change tracker, this will 
+            // reset the model change tracker, this will
             // disable the save button
 
             this.modelChangeTracker.reset(data);
@@ -200,18 +190,18 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
             this.addValidationErrors(validationMessages);
           })
 
-          .onFailed((message: string) => {            
+          .onFailed((message: string) => {
             // public generic dialog
             //  letting the user know the
             //  save failed
-            var dialog = new CommonAppDialogController(this);
+            const dialog = new CommonAppDialogController(this);
             dialog.createWithParameters(
               `Save ${this.model.entityName} ${this.model.entityValue}`,
               `Failed to save :${message}`,
               EnumModalIcon.Error,
               EnumModalButton.Ok,
               EnumModalWidth.FixedMedium).show();
-          })
+          });
       }
     });
   }

@@ -1,15 +1,15 @@
-import { Prop }                                 from 'vue-property-decorator'
-import Component                                from 'vue-class-component'
+import { Prop }                                 from 'vue-property-decorator';
+import Component                                from 'vue-class-component';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import UiListCollection                         from './models/UiListCollection';
 import UiListFilterService                      from '../../services/filters/UiListFilterService';
 import UiListItem                               from './models/UiListItem';
-import Vue                                      from 'vue'
+import Vue                                      from 'vue';
 
 @Component({
   components: {
-    Loader
-  }
+    Loader,
+  },
 })
 export default class ListItemComponent extends Vue {
 
@@ -17,34 +17,32 @@ export default class ListItemComponent extends Vue {
   public itemCollection: UiListCollection = new UiListCollection();
 
   @Prop()
-  public title: string = "";
+  public title: string = '';
 
   @Prop()
-  public themeColor: string = "";
+  public themeColor: string = '';
 
-  listFilterText: string = "";
+  public listFilterText: string = '';
 
-  get filteredListItems(): Array<UiListItem> {
-
-    var filteredList = UiListFilterService.filterWithRankings(this.listFilterText, this.itemCollection);
+  public get filteredListItems(): Array<UiListItem> {
+    const filteredList = UiListFilterService.filterWithRankings(this.listFilterText, this.itemCollection);
     return filteredList.items;
   }
 
-  onShowAllItemsChanged() {
+  public onShowAllItemsChanged() {
     if (this.itemCollection.allSelected) {
       this.onFilterClearPressed();
     }
   }
 
-  onFilterClearPressed() {
-    this.listFilterText = "";
+  public onFilterClearPressed() {
+    this.listFilterText = '';
   }
 
-  data() {
-    return {
-    }
+  public data() {
+    return {};
   }
 
 }
 
-Vue.component('list-item-component', ListItemComponent)
+Vue.component('list-item-component', ListItemComponent);

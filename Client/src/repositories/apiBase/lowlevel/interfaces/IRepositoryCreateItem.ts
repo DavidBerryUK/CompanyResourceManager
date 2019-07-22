@@ -5,12 +5,10 @@ import { ISuccessCallback }                     from '@/repositories/helpers/Suc
 
 export interface IRepositoryCreateItem<T> {
 
-    post<T>(
+    post(
         baseUrl: string,
         entityModel: T,
         convertor: IObjectMapper<T>,
         successNotificationType: EnumSuccessType,
-        successCallback: ISuccessCallback<T>
-    )
-        : ApiResponse<T>
+        successCallback: ISuccessCallback<T>): ApiResponse<T>;
 }

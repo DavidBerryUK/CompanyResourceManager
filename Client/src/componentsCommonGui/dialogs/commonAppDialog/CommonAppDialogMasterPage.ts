@@ -1,23 +1,24 @@
 import { DialogResponseContract }               from '../base/GenericDialogContract';
-import { EnumModalButton }                      from "./CommonAppDialogOptions";
-import { EnumModalIcon }                        from "./CommonAppDialogOptions";
-import { ICommonDialogInjectableView }          from "../base/ICommonDialogInjectableView";
-import { Watch }                                from "vue-property-decorator";
-import CommonAppDialogOptions                   from "./CommonAppDialogOptions";
-import CommonDialogInjectableView               from "../base/ICommonDialogInjectableView";
-import Component                                from "vue-class-component";
-import StandardDialogWidth                      from "../constants/StandardDialogWidth";
-import Vue                                      from "vue";
+import { EnumModalButton }                      from './CommonAppDialogOptions';
+import { EnumModalIcon }                        from './CommonAppDialogOptions';
+import { ICommonDialogInjectableView }          from '../base/ICommonDialogInjectableView';
+import { Watch }                                from 'vue-property-decorator';
+import CommonAppDialogOptions                   from './CommonAppDialogOptions';
+import CommonDialogInjectableView               from '../base/ICommonDialogInjectableView';
+import Component                                from 'vue-class-component';
+import StandardDialogWidth                      from '../constants/StandardDialogWidth';
+import Vue                                      from 'vue';
 
 //
-// attribute indicates this is a component, 
+// attribute indicates this is a component,
 //  this is where any sub components are also registered
 @Component
 export default class CommonAppDialogMasterPage extends Vue {
 
+  public showDialog: boolean = true;
+  public dialogStyle: string = '';
+
   private contract: DialogResponseContract | null = null;
-  showDialog: boolean = true;
-  dialogStyle: string = "";
 
   // contains all input options for the form
   //
@@ -25,8 +26,8 @@ export default class CommonAppDialogMasterPage extends Vue {
 
   // variables and flags used for the form
   //
-  private iconClass: string = "";
-  private iconTextColour: string = "";
+  private iconClass: string = '';
+  private iconTextColour: string = '';
   private showCancelButton: boolean = false;
   private showNoButton: boolean = false;
   private showOkButton: boolean = false;
@@ -36,53 +37,11 @@ export default class CommonAppDialogMasterPage extends Vue {
 
   public mounted() {
     if (this.contract != null) {
-      var bodyView = this.contract.requestSubscriberForCustomBody();
-
+      const bodyView = this.contract.requestSubscriberForCustomBody();
       if (bodyView != null) {
         this.mountCustomBody(bodyView);
       }
     }
-  }
-
-  //
-  // A Custom instantiated Vue Body was provided to the dialog controller, this
-  //  will now be injected into the body of the dialog 'master page'.
-  //
-  private mountCustomBody(bodyView: Vue) {
-
-    //
-    // if the custom body view supports the ICommonDialogInjectableView interface
-    // the initializeDialogView method will be executed, this will pass a contract
-    // to the body view that will allow it to raise events that are the
-    // equivalent of the user pressing the ok,yes,no,cancel buttons as well 
-    // as being able to close the form
-    //
-    if (CommonDialogInjectableView.doesSupportICommonDialogInjectableView(bodyView)) {
-      if (this.contract != null) {
-        this.injectedBodyView = bodyView as ICommonDialogInjectableView;
-        this.injectedBodyView.initializeDialogView(this.contract);
-      }
-    }
-
-    //
-    // initialise the body view, making it ready to place
-    // into the DOM
-    //
-    bodyView.$mount();
-
-    // get reference to the HTML Element where the body view will be placed
-    //
-    var container = this.$refs.containerBody;
-    var containerView = <HTMLElement>container;
-    //
-    // inject the custom body view
-    //
-    containerView.appendChild(bodyView.$el);
-
-    //
-    // clear out any existing content
-    (<HTMLElement>this.$refs.commonDialogBody).innerHTML = "";
-
   }
 
   //
@@ -91,15 +50,14 @@ export default class CommonAppDialogMasterPage extends Vue {
   // background surrounding the form and wishes to exit the
   // dialog without performing any actions
   //
-  @Watch("showDialog")
+  @Watch('showDialog')
   public onShowDialogChanged() {
-    if (this.showDialog == false) {
+    if (this.showDialog === false) {
       if (this.contract != null) {
         this.contract.returnOnBackgroundPressed();
       }
     }
   }
-
 
   //
   // the master page is initialised by the dialog controller class
@@ -112,18 +70,12 @@ export default class CommonAppDialogMasterPage extends Vue {
     this.determineDialogStyle();
   }
 
-
-  private determineDialogStyle() {
-    var widthInfo = StandardDialogWidth.getWidthInfo(this.dialogOptions.dialogWidth);
-    this.dialogStyle = widthInfo.css;
-  }
-
   //
   // the user has pressed the YES button
   //  validate the form, send message to master page informing of the dialog closure
   //  then return message back to class that launched the dialog with the reason of
   //  the closure
-  onYesPressed() {
+  public onYesPressed() {
     if (this.validate()) {
       this.dialogWillClose();
       if (this.contract != null) {
@@ -137,7 +89,7 @@ export default class CommonAppDialogMasterPage extends Vue {
   //  validate the form, send message to master page informing of the dialog closure
   //  then return message back to class that launched the dialog with the reason of
   //  the closure
-  onNoPressed() {
+  public onNoPressed() {
     if (this.validate()) {
       this.dialogWillClose();
       if (this.contract != null) {
@@ -151,7 +103,7 @@ export default class CommonAppDialogMasterPage extends Vue {
   //  validate the form, send message to master page informing of the dialog closure
   //  then return message back to class that launched the dialog with the reason of
   //  the closure
-  onOkPressed() {
+  public onOkPressed() {
     if (this.validate()) {
       this.dialogWillClose();
       if (this.contract != null) {
@@ -165,7 +117,7 @@ export default class CommonAppDialogMasterPage extends Vue {
   //  validate the form, send message to master page informing of the dialog closure
   //  then return message back to class that launched the dialog with the reason of
   //  the closure
-  onCancelPressed() {
+  public onCancelPressed() {
     if (this.validate()) {
       this.dialogWillClose();
       if (this.contract != null) {
@@ -174,35 +126,14 @@ export default class CommonAppDialogMasterPage extends Vue {
     }
   }
 
-  //
-  // validate the injected body view if it exists
-  //
-  private validate(): boolean {
-    if (this.injectedBodyView) {
-      return this.injectedBodyView.validate();
-    }
-    return true;
-  }
-
-  //
-  // inform the injected body view if it exists
-  //  that the dialog will close
-  //
-  private dialogWillClose() {
-    if (this.injectedBodyView) {
-      this.injectedBodyView.dialogWillClose();
-    }
-  }
-
-
   // required as standard, but typescript version of Vue can just
   // access public variables on this class
-  data(): any {
+  public data(): any {
     return {};
   }
 
   //
-  // determine what buttons to display on the screen 
+  // determine what buttons to display on the screen
   //  based upon the dialogOptions
   //
   private determineButtonsToUse() {
@@ -239,27 +170,91 @@ export default class CommonAppDialogMasterPage extends Vue {
 
     switch (this.dialogOptions.icon) {
       case EnumModalIcon.Information:
-        this.iconClass = "fas fa-info-circle fa-10x";
-        this.iconTextColour = "light-blue--text text--lighten-1";
+        this.iconClass = 'fas fa-info-circle fa-10x';
+        this.iconTextColour = 'light-blue--text text--lighten-1';
         break;
 
       case EnumModalIcon.Question:
-        this.iconClass = "fas fa-question-circle fa-10x";
-        this.iconTextColour = "blue-grey--text text--lighten-1";
+        this.iconClass = 'fas fa-question-circle fa-10x';
+        this.iconTextColour = 'blue-grey--text text--lighten-1';
         break;
 
       case EnumModalIcon.Warning:
-        this.iconClass = "fas fa-exclamation-circle fa-10x";
-        this.iconTextColour = "amber--text text--lighten-1";
+        this.iconClass = 'fas fa-exclamation-circle fa-10x';
+        this.iconTextColour = 'amber--text text--lighten-1';
         break;
 
       case EnumModalIcon.Error:
-        this.iconClass = "fas fa-times-circle fa-10x";
-        this.iconTextColour = "deep-orange--text text--lighten-1";
+        this.iconClass = 'fas fa-times-circle fa-10x';
+        this.iconTextColour = 'deep-orange--text text--lighten-1';
         break;
     }
 
   }
 
-}
+   //
+  // A Custom instantiated Vue Body was provided to the dialog controller, this
+  //  will now be injected into the body of the dialog 'master page'.
+  //
+  private mountCustomBody(bodyView: Vue) {
 
+    //
+    // if the custom body view supports the ICommonDialogInjectableView interface
+    // the initializeDialogView method will be executed, this will pass a contract
+    // to the body view that will allow it to raise events that are the
+    // equivalent of the user pressing the ok,yes,no,cancel buttons as well
+    // as being able to close the form
+    //
+    if (CommonDialogInjectableView.doesSupportICommonDialogInjectableView(bodyView)) {
+      if (this.contract != null) {
+        this.injectedBodyView = bodyView as ICommonDialogInjectableView;
+        this.injectedBodyView.initializeDialogView(this.contract);
+      }
+    }
+
+    //
+    // initialise the body view, making it ready to place
+    // into the DOM
+    //
+    bodyView.$mount();
+
+    // get reference to the HTML Element where the body view will be placed
+    //
+    const container = this.$refs.containerBody;
+    const containerView = container as HTMLElement;
+    //
+    // inject the custom body view
+    //
+    containerView.appendChild(bodyView.$el);
+
+    //
+    // clear out any existing content
+    (this.$refs.commonDialogBody as HTMLElement).innerHTML = '';
+
+  }
+
+  private determineDialogStyle() {
+    const widthInfo = StandardDialogWidth.getWidthInfo(this.dialogOptions.dialogWidth);
+    this.dialogStyle = widthInfo.css;
+  }
+
+  //
+  // validate the injected body view if it exists
+  //
+  private validate(): boolean {
+    if (this.injectedBodyView) {
+      return this.injectedBodyView.validate();
+    }
+    return true;
+  }
+
+  //
+  // inform the injected body view if it exists
+  //  that the dialog will close
+  //
+  private dialogWillClose() {
+    if (this.injectedBodyView) {
+      this.injectedBodyView.dialogWillClose();
+    }
+  }
+}

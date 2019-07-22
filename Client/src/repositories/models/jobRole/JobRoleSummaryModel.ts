@@ -1,30 +1,30 @@
-import { IApiModel }                            from "../interfaces/IApiModel";
+import { IApiModel }                            from '../interfaces/IApiModel';
 
-export default class JobRoleSummaryModel implements IApiModel{
+export default class JobRoleSummaryModel implements IApiModel {
 
-    public jobRoleId : string
-    public name : string        
-    public isActive : boolean
+    public jobRoleId: string;
+    public name: string;
+    public isActive: boolean;
 
     constructor() {
-        this.jobRoleId = "00000000-0000-0000-0000-000000000000";
-        this.name = ""        
-        this.isActive = false
+        this.jobRoleId = '00000000-0000-0000-0000-000000000000';
+        this.name = '';
+        this.isActive = false;
     }
 
-    get entityName() : string {
-        return "JobRole";
+    public get entityName(): string {
+        return 'JobRole';
     }
 
-    get entityKey() : string {
+    public get entityKey(): string {
         return `${this.jobRoleId}`;
     }
 
-    get entityValue() : string {
+    public get entityValue(): string {
         return `${this.name}`;
     }
 
-    get entitySortValue() : any {
+    public get entitySortValue(): any {
         return `${this.name}`;
     }
 }

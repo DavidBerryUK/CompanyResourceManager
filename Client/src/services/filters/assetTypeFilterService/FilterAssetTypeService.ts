@@ -5,34 +5,30 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 
 export default class FilterAssetTypeService implements IListFilterByText<AssetTypeSummmaryModel> {
 
-    filterWithRankings( filterText : string , 
-                        list : GenericCollectionModel<AssetTypeSummmaryModel>) : GenericCollectionModel<AssetTypeSummmaryModel> {
-                    
-        var rankingListA = new Array<AssetTypeSummmaryModel>();
-        var rankingListB = new Array<AssetTypeSummmaryModel>();
+    public filterWithRankings(  filterText: string,
+                                list: GenericCollectionModel<AssetTypeSummmaryModel>)
+                                : GenericCollectionModel<AssetTypeSummmaryModel> {
 
+        const rankingListA = new Array<AssetTypeSummmaryModel>();
+        const rankingListB = new Array<AssetTypeSummmaryModel>();
+        const filterTextLowerCase = filterText.toLowerCase();
 
-        var filterTextLowerCase = filterText.toLowerCase();
+        const castList = list.items as Array<AssetTypeSummmaryModel>;
 
-        var castList = list.items as Array<AssetTypeSummmaryModel>;
-        
         castList.forEach((item: AssetTypeSummmaryModel) => {
-            var indexOfName = item.name.toLowerCase().indexOf(filterTextLowerCase);
-        
-            if ( indexOfName == 0) {
-                rankingListA.push(item)
-            }
-          
-            else if ( indexOfName > 0) {
-                rankingListB.push(item)
+            const indexOfName = item.name.toLowerCase().indexOf(filterTextLowerCase);
+
+            if ( indexOfName === 0) {
+                rankingListA.push(item);
+            } else if ( indexOfName > 0) {
+                rankingListB.push(item);
             }
         });
 
-        var filteredDataList = new GenericCollectionModel<AssetTypeSummmaryModel>();
+        const filteredDataList = new GenericCollectionModel<AssetTypeSummmaryModel>();
         filteredDataList.items = rankingListA
           .concat(rankingListB);
 
         return filteredDataList;
     }
-
 }

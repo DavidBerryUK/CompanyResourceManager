@@ -1,13 +1,13 @@
 import { IComponentMetaData }                   from '../../../components/interfaces/ComponentMetaDataInterfaces';
 import { IRouteBeforeNavigationCheck }          from '../../../router/interfaces/NavigationCheckInterfaces';
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
-import Component                                from "vue-class-component";
+import Component                                from 'vue-class-component';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
-import JobRoleSummaryModel                             from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
+import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
-import ObjectMapperJobRoleExtendedModel                 from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleExtendedModel';
+import ObjectMapperJobRoleExtendedModel         from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleExtendedModel';
 
 //
 // attribute indicates this is a component,
@@ -15,16 +15,15 @@ import ObjectMapperJobRoleExtendedModel                 from '@/repositories/obj
 @Component({
   components: {
     LabelDataReadOnly,
-    FormEditHeader
-  }
+    FormEditHeader,
+  },
 })
 export default class JobRoleEdit extends BaseEditPage<JobRoleSummaryModel>
   implements IRouteBeforeNavigationCheck, IComponentMetaData {
-  //IComponentMetaData
-  public componentName: string = "Asset Type Edit";
-  public componentDescription: string =
-    "Enables the user to edit an Asset Type";
-  //IComponentMetaData
+  // IComponentMetaData
+  public componentName: string = 'Job Role Edit';
+  public componentDescription: string = 'Enables the user to edit a Job Role';
+  // IComponentMetaData
 
   // list of different asset types types,
   //
@@ -33,29 +32,28 @@ export default class JobRoleEdit extends BaseEditPage<JobRoleSummaryModel>
     super(
       new NavigationCrudJobRole(),
       JobRoleRepositoryFactory.getRepository(),
-      new ObjectMapperJobRoleExtendedModel()
-    );
+      new ObjectMapperJobRoleExtendedModel());
   }
 
   // the form has been mounted into the DOM
-  mounted() {
+  public mounted() {
     super.mounted();
   }
 
   // the cancel button has been pressed
-  onCancel() {
+  public onCancel() {
     super.onCancel();
   }
 
   // the delete button has been pressed
   //
-  onArchive() {
+  public onArchive() {
     super.onArchive();
   }
 
   // the save button has been pressed by the users
   //
-  onSave() {
+  public onSave() {
     super.onSave();
   }
 }

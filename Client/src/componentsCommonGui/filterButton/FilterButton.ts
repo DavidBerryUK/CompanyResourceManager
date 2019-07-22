@@ -1,24 +1,22 @@
-import { Prop }                                 from 'vue-property-decorator'
-import Component                                from 'vue-class-component'
-import Vue                                      from 'vue'
-
+import { Prop }                                 from 'vue-property-decorator';
+import Component                                from 'vue-class-component';
+import Vue                                      from 'vue';
 
 @Component
 export default class FilterButton extends Vue {
 
     @Prop()
-    isFilterSet: boolean = false;
+    public isFilterSet: boolean = false;
 
-    onFilterClicked() {        
-        this.$emit("onFilterClicked")
+    public onFilterClicked() {
+        this.$emit('onFilterClicked');
     }
 
-    data(): any {
+    public data(): any {
         return {};
     }
-
 }
 
 // Register the custom tag
 //
-Vue.component('custom-filter-button', FilterButton)
+Vue.component('custom-filter-button', FilterButton);

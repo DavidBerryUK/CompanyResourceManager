@@ -2,16 +2,16 @@ import { IApiModel }                            from '@/repositories/models/inte
 
 export default class ListItemModel implements IApiModel {
 
-    public id: string
-    public name: string    
+    public id: string;
+    public name: string;
 
     constructor() {
-        this.id = "";
-        this.name = ""        
+        this.id = '';
+        this.name = '';
     }
 
     get entityName(): string {
-        return "item";
+        return 'item';
     }
 
     get entityKey(): string {

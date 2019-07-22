@@ -1,6 +1,6 @@
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
-import Component                                from "vue-class-component";
+import Component                                from 'vue-class-component';
 import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
@@ -10,34 +10,33 @@ import PersonRepositoryFactory                  from '@/repositories/factory/Per
 @Component({
   components: {
     FormViewHeader,
-    LabelDataReadOnly
-  }
+    LabelDataReadOnly,
+  },
 })
 export default class PersonView extends BaseViewPage<PersonExtendedModel> implements IComponentMetaData {
 
-  //IComponentMetaData
-  public componentName : string = "Person View";
-  public componentDescription : string = "Enables the user to view a Person";
-  //IComponentMetaData
-  
+  // IComponentMetaData
+  public componentName: string = 'Person View';
+  public componentDescription: string = 'Enables the user to view a Person';
+  // IComponentMetaData
+
   constructor() {
     super(
-      new NavigationCrudPerson(), 
+      new NavigationCrudPerson(),
       PersonRepositoryFactory.getRepository());
 
     this.model = new PersonExtendedModel();
   }
 
-  mounted() {
+  public mounted() {
     super.mounted();
   }
 
-  onEdit() {
+  public onEdit() {
     super.onEdit();
   }
 
-  onRestore() {
+  public onRestore() {
     super.onRestore();
   }
-  
 }

@@ -26,12 +26,12 @@ export default class BaseApiRepositoryCreateItem<T> implements IRepositoryCreate
      * @returns {(ApiResponse<T>)} - strongly typed response contract
      * @memberof ApiBasePostSimple
      */
-    public post<T>(baseUrl: string,
-        entityModel: T,
-        convertor: IObjectMapper<T>,
-        successNotificationType: EnumSuccessType,
-        successCallback: ISuccessCallback<T>)
-        : ApiResponse<T> {
+    public post( baseUrl: string,
+                 entityModel: T,
+                 convertor: IObjectMapper<T>,
+                 successNotificationType: EnumSuccessType,
+                 successCallback: ISuccessCallback<T>)
+                    : ApiResponse<T> {
 
         const contract = new ApiResponseContract<T>();
 

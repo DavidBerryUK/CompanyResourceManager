@@ -8,48 +8,46 @@ export default class PeopleRoutes {
 
     public static register(): RouteConfig {
 
-        var route: RouteConfig = {
-          path: "/person",
-    
+        const route: RouteConfig = {
+          path: '/person',
+
           component: MasterDetailPage,
           children: [
             {
-              name: "person",
-              path: "",
-              components: {
-                navigation: PersonList
-              }
-            },
-    
-            {
-              name: "PersonView",
-              path: ":id/view",
+              name: 'person',
+              path: '',
               components: {
                 navigation: PersonList,
-                detail: PersonView
+              },
+            },
+
+            {
+              name: 'PersonView',
+              path: ':id/view',
+              components: {
+                navigation: PersonList,
+                detail: PersonView,
               },
               props: {
                 navigation: true,
-                detail: true
-              }
+                detail: true,
+              },
             },
-    
+
             {
-              name: "PersonEdit",
-              path: ":id/edit",
+              name: 'PersonEdit',
+              path: ':id/edit',
               components: {
                 navigation: PersonList,
-                detail: PersonEdit
+                detail: PersonEdit,
               },
               props: {
                 navigation: true,
-                detail: true
-              }
-            }
-          ]
+                detail: true,
+              },
+            },
+          ],
         };
-    
         return route;
       }
-
 }

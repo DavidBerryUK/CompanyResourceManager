@@ -1,11 +1,11 @@
 import { ValidationMessage }                    from './../../repositories/contracts/ApiResponseContract';
-import Vue                                      from "vue";
+import Vue                                      from 'vue';
 
 export default class BasePage extends Vue {
 
-  isLoading: boolean = true;
+  public isLoading: boolean = true;
 
-  data(): any {
+  public data(): any {
     return {};
   }
 
@@ -16,7 +16,7 @@ export default class BasePage extends Vue {
    * @param {Array<ValidationMessage>} validationMessages
    * @memberof BaseEditPage
    */
-  addValidationErrors(validationMessages: Array<ValidationMessage>) {
+  public addValidationErrors(validationMessages: Array<ValidationMessage>) {
     validationMessages.forEach((msg: ValidationMessage) => {
       this.$validator.errors.add({ field: msg.field, msg: msg.message });
     });

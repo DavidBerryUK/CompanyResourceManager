@@ -3,11 +3,6 @@ import { IObjectArrayMapper }                   from '@/repositories/objectMappe
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 
 export interface IRepositoryReadList<T> {
-
-    getAll<T>(
-        baseUrl: string,
-        convertor?: IObjectArrayMapper<T>
-    )
+    getAll(baseUrl: string, convertor?: IObjectArrayMapper<T> )
         : ApiResponse<GenericCollectionModel<T>>;
-
 }

@@ -1,8 +1,8 @@
-import Vue                                      from "vue";
+import Vue                                      from 'vue';
 
-interface ICallBackNoParameters { (): void }
-interface ICallbackVueResponseParameters { (): Vue }
-interface IHandlers { (callbackHandles: DialogCallbackHandles): void }
+type ICallBackNoParameters = () => void;
+type ICallbackVueResponseParameters = () => Vue;
+type IHandlers = (callbackHandles: DialogCallbackHandles) => void;
 
 // A strongly typed response contract to pass
 // events back from a dialog back to the original
@@ -36,13 +36,13 @@ export class DialogCallbackHandles {
         this.callbackOnDialogClosed = new Array<ICallBackNoParameters>();
         this.callbackYesPressed = new Array<ICallBackNoParameters>();
         this.callbackCustomBody = null;
-    }    
+    }
 
-    onShowDialog(callback: ICallBackNoParameters) {
+    public onShowDialog(callback: ICallBackNoParameters) {
         this.callbackOnShowDialog = callback;
     }
 
-    issueCommandToDialogShowCallback() {
+    public issueCommandToDialogShowCallback() {
         if (this.callbackOnShowDialog) {
             this.callbackOnShowDialog();
         }
@@ -64,7 +64,7 @@ export class DialogResponse {
         handlers(this.callbackHandles);
     }
 
-    supplyCustomBody(callback: ICallbackVueResponseParameters): DialogResponse {
+    public supplyCustomBody(callback: ICallbackVueResponseParameters): DialogResponse {
 
         if (this.showCalled) {
             this.reportShowCalledError();
@@ -75,7 +75,7 @@ export class DialogResponse {
         return this;
     }
 
-    dialogClosed(callback: ICallBackNoParameters): DialogResponse {
+    public dialogClosed(callback: ICallBackNoParameters): DialogResponse {
 
         if (this.showCalled) {
             this.reportShowCalledError();
@@ -88,7 +88,7 @@ export class DialogResponse {
         return this;
     }
 
-    yesPressed(callback: ICallBackNoParameters): DialogResponse {
+    public yesPressed(callback: ICallBackNoParameters): DialogResponse {
 
         if (this.showCalled) {
             this.reportShowCalledError();
@@ -101,7 +101,7 @@ export class DialogResponse {
         return this;
     }
 
-    noPressed(callback: ICallBackNoParameters): DialogResponse {
+    public noPressed(callback: ICallBackNoParameters): DialogResponse {
 
         if (this.showCalled) {
             this.reportShowCalledError();
@@ -114,7 +114,7 @@ export class DialogResponse {
         return this;
     }
 
-    okPressed(callback: ICallBackNoParameters): DialogResponse {
+    public okPressed(callback: ICallBackNoParameters): DialogResponse {
 
         if (this.showCalled) {
             this.reportShowCalledError();
@@ -127,7 +127,7 @@ export class DialogResponse {
         return this;
     }
 
-    backgroundPressed(callback: ICallBackNoParameters): DialogResponse {
+    public backgroundPressed(callback: ICallBackNoParameters): DialogResponse {
 
         if (this.showCalled) {
             this.reportShowCalledError();
@@ -140,7 +140,7 @@ export class DialogResponse {
         return this;
     }
 
-    cancelPressed(callback: ICallBackNoParameters): DialogResponse {
+    public cancelPressed(callback: ICallBackNoParameters): DialogResponse {
 
         if (this.showCalled) {
             this.reportShowCalledError();
@@ -153,13 +153,13 @@ export class DialogResponse {
         return this;
     }
 
-    show() {
+    public show() {
         this.callbackHandles.issueCommandToDialogShowCallback();
         this.showCalled = true;
     }
 
     public reportShowCalledError() {
-        console.log("Dialog Contract Error - contract methods can not be called after the 'show' command has been issued");
+        console.log('Dialog Contract Error - contract methods can not be called after the "show" command has been issued');
     }
 }
 
@@ -174,55 +174,55 @@ export class DialogResponseContract {
     public handers: DialogCallbackHandles;
 
     constructor() {
-        this.handers = new DialogCallbackHandles()
+        this.handers = new DialogCallbackHandles();
         this.response = new DialogResponse((handlers) => {
             this.handers = handlers;
         });
     }
 
-    requestSubscriberForCustomBody(): Vue | null {
+    public requestSubscriberForCustomBody(): Vue | null {
         if (this.handers.callbackCustomBody) {
             return this.handers.callbackCustomBody();
         }
         return null;
     }
 
-    returnYesPressed() {
+    public returnYesPressed() {
         if (this.handers.callbackYesPressed != null) {
             this.handers.callbackYesPressed.forEach((handler) => { handler(); });
         }
         this.returnDialogClosed();
     }
 
-    returnNoPressed() {
+    public returnNoPressed() {
         if (this.handers.callbackNoPressed != null) {
             this.handers.callbackNoPressed.forEach((handler) => { handler(); });
         }
         this.returnDialogClosed();
     }
 
-    returnOkPressed() {
+    public returnOkPressed() {
         if (this.handers.callbackOkPressed != null) {
             this.handers.callbackOkPressed.forEach((handler) => { handler(); });
         }
         this.returnDialogClosed();
     }
 
-    returnOnCancelPressed() {
+    public returnOnCancelPressed() {
         if (this.handers.callbackCancelPressed != null) {
             this.handers.callbackCancelPressed.forEach((handler) => { handler(); });
         }
         this.returnDialogClosed();
     }
 
-    returnOnBackgroundPressed() {
+    public returnOnBackgroundPressed() {
         if (this.handers.callbackBackgroundPressed != null) {
             this.handers.callbackBackgroundPressed.forEach((handler) => { handler(); });
         }
         this.returnDialogClosed();
     }
 
-    returnDialogClosed() {
+    public returnDialogClosed() {
         if (this.handers.callbackOnDialogClosed) {
             this.handers.callbackOnDialogClosed.forEach((handler) => { handler(); });
         }

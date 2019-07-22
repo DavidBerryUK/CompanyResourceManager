@@ -18,9 +18,9 @@ export default class BaseApiRepositoryReadItem<T> implements IRepositoryReadItem
      * @returns {(ApiResponse<T>)} - strongly typed api promise
      * @memberof ApiBaseGetById
      */
-    public getById<T>(
-        url: string, 
-        convertor : IObjectMapper<T>): ApiResponse<T> {
+    public getById(
+        url: string,
+        convertor: IObjectMapper<T>): ApiResponse<T> {
         const contract = new ApiResponseContract<T>();
 
         axios

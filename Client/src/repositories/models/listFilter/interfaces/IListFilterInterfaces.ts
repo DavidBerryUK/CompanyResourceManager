@@ -1,10 +1,9 @@
 import { EnumRecordStatusFilter }               from './../../../shared/enums/RecordEnums';
 
 export interface IListFilter {
-     isFilterSet: Boolean;
+     isFilterSet: boolean;
 }
 
 export interface IListFilterArchiveFlag extends IListFilter {
-     recordActiveStatusFilter : EnumRecordStatusFilter;
-     
+     recordActiveStatusFilter: EnumRecordStatusFilter;
 }

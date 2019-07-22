@@ -18,7 +18,7 @@ export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList
      * @returns {ApiResponse<GenericCollectionModel<T>>}
      * @memberof ApiBaseGetAll
      */
-    public getAll<T>(baseUrl: string, convertor?: IObjectArrayMapper<T>): ApiResponse<GenericCollectionModel<T>> {
+    public getAll(baseUrl: string, convertor?: IObjectArrayMapper<T>): ApiResponse<GenericCollectionModel<T>> {
 
         const contract = new ApiResponseContract<GenericCollectionModel<T>>();
         const model = new GenericCollectionModel<T>();
@@ -27,11 +27,11 @@ export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList
             .get(baseUrl, BaseApiConfig.baseConfig)
             .then((response) => {
                 model.success = response.data.success;
-                model.errorMessage = response.data.errorMessage;                
+                model.errorMessage = response.data.errorMessage;
 
-                if (convertor) {                    
+                if (convertor) {
                     model.items = convertor.map(response.data.items);
-                } else {                    
+                } else {
                     model.items = response.data.items;
                 }
 

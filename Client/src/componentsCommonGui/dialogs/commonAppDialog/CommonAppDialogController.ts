@@ -6,37 +6,36 @@ import { EnumModalWidth }                       from '../constants/StandardDialo
 import CommonAppDialogMasterPage                from './CommonAppDialogMasterPage.vue';
 import CommonAppDialogMasterPageCode            from './CommonAppDialogMasterPage';
 import CommonAppDialogOptions                   from './CommonAppDialogOptions';
-import Vue                                      from 'vue'
+import Vue                                      from 'vue';
 
 //
 // this class helps launch and destroy dialogs
-// from code without having to place them into 
+// from code without having to place them into
 // a template
 //
 export default class CommonAppDialogController {
 
-    private dialogOptions: CommonAppDialogOptions = new CommonAppDialogOptions()
-    private hostComponent: Vue
+    private dialogOptions: CommonAppDialogOptions = new CommonAppDialogOptions();
+    private hostComponent: Vue;
     private dialogMasterPage: CommonAppDialogMasterPage;
     private contract: DialogResponseContract;
 
-    constructor(hostComponent: Vue, ) {
+    constructor(hostComponent: Vue ) {
         this.hostComponent = hostComponent;
-        this.dialogMasterPage = new CommonAppDialogMasterPage;
+        this.dialogMasterPage = new CommonAppDialogMasterPage();
         this.contract = new DialogResponseContract();
     }
 
     //
     // this will launch the dialog
     //
-    createWithParameters(
+    public createWithParameters(
         title: string,
         message: string,
         icon: EnumModalIcon,
         buttons: EnumModalButton,
-        width: EnumModalWidth
-    ): DialogResponse {
-        var dialogOptions = new CommonAppDialogOptions();
+        width: EnumModalWidth): DialogResponse {
+        const dialogOptions = new CommonAppDialogOptions();
         dialogOptions.title = title;
         dialogOptions.message = message;
         dialogOptions.button = buttons;
@@ -49,22 +48,20 @@ export default class CommonAppDialogController {
     //
     // this will launch the dialog
     //
-    createWithOptionsObject(dialogOptions: CommonAppDialogOptions): DialogResponse {
+    public createWithOptionsObject(dialogOptions: CommonAppDialogOptions): DialogResponse {
         this.dialogOptions = dialogOptions;
         this.contract.responder.dialogClosed(() => {
             this.hide();
         });
 
-        // this.genericModal = new GenericModal();  
+        // this.genericModal = new GenericModal();
 
         // bit of a bodge', but as the type is imported from a vue templates it
         // does not understand the interface is implemented..
 
         this.contract.handers.onShowDialog(() => {
             this.showActualForm();
-        })
-
-
+        });
         return this.contract.responder;
     }
 
@@ -72,10 +69,10 @@ export default class CommonAppDialogController {
     // only show the form once we have all the parameters
     //
     private showActualForm() {
-        var obj = this.dialogMasterPage as CommonAppDialogMasterPageCode;
+        const obj = this.dialogMasterPage as CommonAppDialogMasterPageCode;
         obj.initialise(this.contract, this.dialogOptions);
-        this.dialogMasterPage.$mount()
-        this.hostComponent.$el.appendChild(this.dialogMasterPage.$el)
+        this.dialogMasterPage.$mount();
+        this.hostComponent.$el.appendChild(this.dialogMasterPage.$el);
     }
 
 

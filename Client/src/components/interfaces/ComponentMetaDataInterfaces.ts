@@ -8,7 +8,7 @@ export interface IComponentMetaData {
 export default class ComponentMetaDataInterfaceGuards {
 
     public static doesSupportIComponentMetaData(classInstance: any): classInstance is IComponentMetaData {
-        let doesUseInterface = classInstance.componentName !== undefined;
+        const doesUseInterface = classInstance.componentName !== undefined;
         return doesUseInterface;
     }
 }

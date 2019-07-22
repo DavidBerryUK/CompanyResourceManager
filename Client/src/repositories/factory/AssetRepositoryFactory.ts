@@ -6,20 +6,19 @@ import ObjectArrayMapperAssetSummaryModel       from '@/repositories/objectMappe
 import ObjectMapperAssetExtendedModel           from '@/repositories/objectMappers/asset/ObjectMapperAssetExtendedModel';
 import ObjectMapperAssetSummaryModel            from '@/repositories/objectMappers/asset/ObjectMapperAssetSummaryModel';
 
-export default class AssetRepositoryFactory{
-    
+export default class AssetRepositoryFactory {
+
     //
     // create a Asset Respository using the generic base repository class
     //  this repository supports all the basic CRUD operations as well
     //  as providing a filtered object list ( providing the server supports the functionality )
-    static getRepository() : GenericApiRepository<AssetSummaryModel, AssetExtendedModel, ListFilterWithArchiveFlag> {
-        var repository = new GenericApiRepository<AssetSummaryModel, AssetExtendedModel, ListFilterWithArchiveFlag>(
+    public static getRepository(): GenericApiRepository<AssetSummaryModel, AssetExtendedModel, ListFilterWithArchiveFlag> {
+        const repository = new GenericApiRepository<AssetSummaryModel, AssetExtendedModel, ListFilterWithArchiveFlag>(
             new AssetSummaryModel().entityName,
-            "api/asset",
+            'api/asset',
             new ObjectMapperAssetSummaryModel(),
             new ObjectMapperAssetExtendedModel(),
-            new ObjectArrayMapperAssetSummaryModel()
-        )
+            new ObjectArrayMapperAssetSummaryModel());
         return repository;
     }
 }

@@ -4,6 +4,6 @@ import NavigationBaseCrud                       from './base/NavigationBaseCrud'
 export default class NavigationCrudPerson extends NavigationBaseCrud implements INavigationCrud  {
 
     constructor() {
-        super("PersonView","PersonEdit","PersonEdit")
-    }  
+        super('PersonView', 'PersonEdit', 'PersonEdit');
+    }
 }

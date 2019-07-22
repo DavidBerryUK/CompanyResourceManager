@@ -1,11 +1,11 @@
-import { EnumModalWidth }                       from "../constants/StandardDialogWidth";
-import { MaterialDesignColor }                  from "../../../services/colors/materialDesign/constants/MaterialDesignColors";
+import { EnumModalWidth }                       from '../constants/StandardDialogWidth';
+import { MaterialDesignColor }                  from '../../../services/colors/materialDesign/constants/MaterialDesignColors';
 
 export enum EnumModalIcon {
     Information = 1,
     Question = 2,
     Warning = 3,
-    Error = 4
+    Error = 4,
 }
 
 export enum EnumModalButton {
@@ -16,12 +16,12 @@ export enum EnumModalButton {
 
 export default class CommonAppDialogOptions {
 
-    themeColor: string = MaterialDesignColor.teal;
-    icon: EnumModalIcon = EnumModalIcon.Information;
-    button: EnumModalButton = EnumModalButton.Ok;
-    dialogWidth: EnumModalWidth = EnumModalWidth.Default;
-    title: string = "";
-    message: string = "";
+    public themeColor: string = MaterialDesignColor.teal;
+    public icon: EnumModalIcon = EnumModalIcon.Information;
+    public button: EnumModalButton = EnumModalButton.Ok;
+    public dialogWidth: EnumModalWidth = EnumModalWidth.Default;
+    public title: string = '';
+    public message: string = '';
 
     constructor() {
 

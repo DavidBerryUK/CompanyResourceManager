@@ -4,6 +4,6 @@ import NavigationBaseCrud                       from './base/NavigationBaseCrud'
 export default class NavigationCrudAssetType extends NavigationBaseCrud implements INavigationCrud  {
 
     constructor() {
-        super("AssetTypeView","AssetTypeEdit","AssetTypeEdit")
+        super('AssetTypeView', 'AssetTypeEdit', 'AssetTypeEdit');
     }
 }

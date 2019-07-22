@@ -1,5 +1,4 @@
-import JobRoleSummaryModel from './JobRoleSummaryModel';
+import JobRoleSummaryModel                      from './JobRoleSummaryModel';
 
 export default class JobRoleExtendedModel extends JobRoleSummaryModel {
-    
 }

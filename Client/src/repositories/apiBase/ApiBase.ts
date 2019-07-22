@@ -1,14 +1,14 @@
-import { ApiResponse }                      from '../contracts/ApiResponseContract';
-import { ApiResponseContract }              from '../contracts/ApiResponseContract';
-import { EnumSuccessType }                  from '../helpers/SuccessCallbackHelper';
-import { IApiModel }                        from '../models/interfaces/IApiModel';
-import { IObjectArrayMapper }               from '../objectMappers/interfaces/IObjectArrayMapper';
-import { IObjectMapper }                    from '../objectMappers/interfaces/IObjectMapper';
-import { ISuccessCallback }                 from '../helpers/SuccessCallbackHelper';
-import ApiBaseEntityGetById                 from './lowlevel/BaseApiRepositoryReadItem';
-import BaseApiRepositoryCreateItem                    from './lowlevel/BaseApiRepositoryCreateItem';
-import BaseApiRepositoryUpdateItem                     from './lowlevel/BaseApiRepositoryUpdateItem';
+import { ApiResponse }                          from '../contracts/ApiResponseContract';
+import { ApiResponseContract }                  from '../contracts/ApiResponseContract';
+import { EnumSuccessType }                      from '../helpers/SuccessCallbackHelper';
+import { IApiModel }                            from '../models/interfaces/IApiModel';
+import { IObjectArrayMapper }                   from '../objectMappers/interfaces/IObjectArrayMapper';
+import { IObjectMapper }                        from '../objectMappers/interfaces/IObjectMapper';
+import { ISuccessCallback }                     from '../helpers/SuccessCallbackHelper';
+import ApiBaseEntityGetById                     from './lowlevel/BaseApiRepositoryReadItem';
+import BaseApiRepositoryCreateItem              from './lowlevel/BaseApiRepositoryCreateItem';
 import BaseApiRepositoryReadList                from './lowlevel/BaseApiRepositoryReadList';
+import BaseApiRepositoryUpdateItem              from './lowlevel/BaseApiRepositoryUpdateItem';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 
 /**
@@ -43,9 +43,8 @@ export default class ApiBase {
         successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
         console.log(`ApiBase-basePutWithNoModel:${baseUrl}`);
-
-        var service = new BaseApiRepositoryUpdateItem()
-        return service.put<T>(baseUrl, null, convertor, successType, successCallback);
+        const service = new BaseApiRepositoryUpdateItem<T>();
+        return service.put(baseUrl, null, convertor, successType, successCallback);
     }
 
     /**
@@ -67,17 +66,16 @@ export default class ApiBase {
         successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
         const contract = new ApiResponseContract<T>();
-        
 
-        if (model.entityKey == null || model.entityKey === '' || model.entityKey == "00000000-0000-0000-0000-000000000000") {            
-            var servicePost = new BaseApiRepositoryCreateItem<T>();
-            return servicePost.post(baseUrl, model, convertor ,EnumSuccessType.CreatedOk, successCallback);
+        if (model.entityKey == null || model.entityKey === '' || model.entityKey === '00000000-0000-0000-0000-000000000000') {
+            const servicePost = new BaseApiRepositoryCreateItem<T>();
+            return servicePost.post(baseUrl, model, convertor, EnumSuccessType.CreatedOk, successCallback);
         }
-        
-        var servicePut = new BaseApiRepositoryUpdateItem<T>();
+
+        const servicePut = new BaseApiRepositoryUpdateItem<T>();
         return servicePut.put(
             `${baseUrl}/${model.entityKey}`,
-            model,            
+            model,
             convertor,
             EnumSuccessType.UpdatedOk,
             successCallback);
@@ -95,9 +93,8 @@ export default class ApiBase {
     public baseGetById<T>(
         url: string,
         convertor: IObjectMapper<T>): ApiResponse<T> {
-
-        var service = new  ApiBaseEntityGetById()
-        return service.getById<T>(url, convertor);
+        const service = new  ApiBaseEntityGetById<T>();
+        return service.getById(url, convertor);
     }
 
     /**
@@ -109,8 +106,7 @@ export default class ApiBase {
      * @memberof ApiBase
      */
     public baseGetAll<T>(baseUrl: string,  convertor?: IObjectArrayMapper<T>): ApiResponse<GenericCollectionModel<T>> {
-
-        var service = new BaseApiRepositoryReadList<T>();
-        return service.getAll<T>(baseUrl, convertor);
+        const service = new BaseApiRepositoryReadList<T>();
+        return service.getAll(baseUrl, convertor);
     }
 }

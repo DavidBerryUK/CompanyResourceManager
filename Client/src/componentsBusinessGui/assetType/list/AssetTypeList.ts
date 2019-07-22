@@ -2,7 +2,7 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
 import BaseListPage                             from '@/componentsBusinessGui/base/BaseListPage';
-import Component                                from "vue-class-component";
+import Component                                from 'vue-class-component';
 import FilterAssetTypeService                   from '@/services/filters/assetTypeFilterService/FilterAssetTypeService';
 import FilterButton                             from '@/componentsCommonGui/filterButton/FilterButton';
 import Loader                                   from '@/componentsCommonGui/loader/Loader';
@@ -11,28 +11,23 @@ import ObjectArrayMapperAssetTypeModel          from '@/repositories/objectMappe
 import ObjectMapperAssetTypeSummaryModel        from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeSummaryModel';
 
 /**
- * Presents a list of categories to the user that can be filtered
+ * Presents a list of Asset Types to the user that can be filtered
  * by record status (current,deleted or all)
- * 
- * when a asset type is selected its details will be displayed
- * 
- * @export
- * @class AssetTypeList
- * @extends {BaseListPage}
- * @implements {IComponentMetaData}
+ *
+ * when a Tsset Type is selected its details will be displayed
  */
 @Component({
   components: {
     Loader,
-    FilterButton
-  }
+    FilterButton,
+  },
 })
 export default class AssetTypeList extends BaseListPage<AssetTypeSummmaryModel> implements IComponentMetaData {
 
-  //IComponentMetaData
-  componentName: string = "Asset Type List";
-  componentDescription: string = "Displays a list of asset types";
-  //IComponentMetaData
+  // IComponentMetaData
+  public componentName: string = 'Asset Type List';
+  public componentDescription: string = 'Displays a list of asset types';
+  // IComponentMetaData
 
 
   constructor() {
@@ -40,50 +35,38 @@ export default class AssetTypeList extends BaseListPage<AssetTypeSummmaryModel> 
             AssetTypeRepositoryFactory.getRepository(), // Repository to get list Asset via Api
             new ObjectMapperAssetTypeSummaryModel(),    // Converts list of java objects list of AssetTypeSummary objects
             new ObjectArrayMapperAssetTypeModel(),      // Converts a single java object to a AssetTypeSummary object
-            new FilterAssetTypeService())               // Filters list of list of AssetTypeSummary
+            new FilterAssetTypeService());              // Filters list of list of AssetTypeSummary
   }
 
-  //
   // View has been mounted
-  //
-  mounted() {
+  public mounted() {
     super.mounted();
   }
 
   // before the view is destroyed, it must unsubscribe from
   // any notifications
-  beforeDestroy() {
+  public beforeDestroy() {
     super.beforeDestroy();
   }
-    /**
-   * When the filter button is pressed the filter dialog modal will be displayed
-   * allowing the user to filter  the record types
-   * 
-   * @memberof PersonList
-   */
-  onFilterClicked() {
+
+  // When the filter button is pressed the filter dialog modal will be displayed
+  // allowing the user to filter  the record types
+  public onFilterClicked() {
     super.onFilterClicked();
   }
 
-  //
   // user has pressed the clear button on the text filter
-  //
-  onFilterClearClicked() {
+  public onFilterClearClicked() {
     super.onFilterClearClicked();
   }
 
-  //
   // user pressed the add button to create a new asset type
-  //
-  onAddClicked() {
+  public onAddClicked() {
     super.onAddClicked();
   }
 
-  //
   // a list item has been selected, navigate to the asset type view screen
-  //
-  onSelectItem(item: AssetTypeSummmaryModel) {
+  public onSelectItem(item: AssetTypeSummmaryModel) {
     super.onSelectItem(item);
   }
-
 }

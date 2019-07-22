@@ -4,34 +4,30 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 
 export default class FilterAssetSummaryService implements IListFilterByText<AssetSummaryModel> {
 
-    filterWithRankings( filterText : string , 
-                        list : GenericCollectionModel<AssetSummaryModel>) : GenericCollectionModel<AssetSummaryModel> {
-                    
-        var rankingListA = new Array<AssetSummaryModel>();
-        var rankingListB = new Array<AssetSummaryModel>();
+    public filterWithRankings( filterText: string,
+                               list: GenericCollectionModel<AssetSummaryModel>): GenericCollectionModel<AssetSummaryModel> {
 
+        const rankingListA = new Array<AssetSummaryModel>();
+        const rankingListB = new Array<AssetSummaryModel>();
 
-        var filterTextLowerCase = filterText.toLowerCase();
+        const filterTextLowerCase = filterText.toLowerCase();
 
-        var castList = list.items as Array<AssetSummaryModel>;
-        
+        const castList = list.items as Array<AssetSummaryModel>;
+
         castList.forEach((item: AssetSummaryModel) => {
-            var indexOfName = item.name.toLowerCase().indexOf(filterTextLowerCase);
-        
-            if ( indexOfName == 0) {
-                rankingListA.push(item)
-            }
-          
-            else if ( indexOfName > 0) {
-                rankingListB.push(item)
+            const indexOfName = item.name.toLowerCase().indexOf(filterTextLowerCase);
+
+            if ( indexOfName === 0) {
+                rankingListA.push(item);
+            } else if ( indexOfName > 0) {
+                rankingListB.push(item);
             }
         });
 
-        var filteredDataList = new GenericCollectionModel<AssetSummaryModel>();
+        const filteredDataList = new GenericCollectionModel<AssetSummaryModel>();
         filteredDataList.items = rankingListA
           .concat(rankingListB);
 
         return filteredDataList;
     }
-
 }

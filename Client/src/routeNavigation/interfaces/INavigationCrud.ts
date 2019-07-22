@@ -1,4 +1,4 @@
-import Vue                                      from "vue";
+import Vue                                      from 'vue';
 
 export interface INavigationCrud {
     gotoViewPage(instance: Vue, entityId: string): void;

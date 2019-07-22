@@ -18,7 +18,7 @@ export enum EnumModalWidth {
   FixedNarrow = 5,
   FixedMedium = 6,
   FixedLarge = 7,
-  FixedExtraLarge = 8
+  FixedExtraLarge = 8,
 }
 
 //
@@ -26,9 +26,9 @@ export enum EnumModalWidth {
 // information together, managed and organised
 //
 export class WidthInfo {
-  id: EnumModalWidth;
-  css: string;
-  name: string;
+  public id: EnumModalWidth;
+  public css: string;
+  public name: string;
 
   constructor(id: EnumModalWidth, css: string, name: string) {
     this.id = id;
@@ -50,17 +50,17 @@ export default class StandardDialogWidth {
     // is list isn't already created then initialise it
     //
     if (this.widthInfoList == null) {
-      var list = Array<WidthInfo>();
+      const list = Array<WidthInfo>();
 
-      list.push(new WidthInfo(EnumModalWidth.DynamicQuarterWidth, "dialog-width-quarter-width", "Quarter Width"));
-      list.push(new WidthInfo(EnumModalWidth.DynamicHalfWidth, "dialog-width-half-width", "Half Width"));
-      list.push(new WidthInfo(EnumModalWidth.DynamicFullWidth, "dialog-width-full-width", "Full Width"));
-      list.push(new WidthInfo(EnumModalWidth.FixedExtraNarrow, "dialog-width-extra-narrow", "Extra Narrow"));
-      list.push(new WidthInfo(EnumModalWidth.FixedNarrow, "dialog-width-narrow", "Narrow"));
-      list.push(new WidthInfo(EnumModalWidth.FixedMedium, "dialog-width-medium", "Medium"));
-      list.push(new WidthInfo(EnumModalWidth.FixedLarge, "dialog-width-large", "Large"));
-      list.push(new WidthInfo(EnumModalWidth.FixedExtraLarge, "dialog-width-extra-large", "Extra Large"));
-      list.push(new WidthInfo(EnumModalWidth.Default, "dialog-width-default", "Default"));
+      list.push(new WidthInfo(EnumModalWidth.DynamicQuarterWidth, 'dialog-width-quarter-width', 'Quarter Width'));
+      list.push(new WidthInfo(EnumModalWidth.DynamicHalfWidth, 'dialog-width-half-width', 'Half Width'));
+      list.push(new WidthInfo(EnumModalWidth.DynamicFullWidth, 'dialog-width-full-width', 'Full Width'));
+      list.push(new WidthInfo(EnumModalWidth.FixedExtraNarrow, 'dialog-width-extra-narrow', 'Extra Narrow'));
+      list.push(new WidthInfo(EnumModalWidth.FixedNarrow, 'dialog-width-narrow', 'Narrow'));
+      list.push(new WidthInfo(EnumModalWidth.FixedMedium, 'dialog-width-medium', 'Medium'));
+      list.push(new WidthInfo(EnumModalWidth.FixedLarge, 'dialog-width-large', 'Large'));
+      list.push(new WidthInfo(EnumModalWidth.FixedExtraLarge, 'dialog-width-extra-large', 'Extra Large'));
+      list.push(new WidthInfo(EnumModalWidth.Default, 'dialog-width-default', 'Default'));
 
       this.widthInfoList = list;
     }
@@ -71,9 +71,9 @@ export default class StandardDialogWidth {
   //
   // get info for a given width enum
   //
-  static getWidthInfo(width: EnumModalWidth) {
-    var info = this.widthList.filter((info: WidthInfo) => {
-      return info.id == width;
+  public static getWidthInfo(width: EnumModalWidth) {
+    const info = this.widthList.filter((widthInfo: WidthInfo) => {
+      return widthInfo.id === width;
     });
 
     return info[0];

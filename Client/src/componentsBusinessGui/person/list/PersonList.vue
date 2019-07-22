@@ -71,4 +71,5 @@
 </template>
 
 
-<script lang="ts" src='./PersonList.ts'></script>
+<script lang="ts" src='./PersonList.ts'>
+</script>

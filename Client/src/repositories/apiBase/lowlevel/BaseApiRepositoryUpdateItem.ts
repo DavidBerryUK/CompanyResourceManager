@@ -10,8 +10,7 @@ import axios                                    from 'axios';
 import BaseApiConfig                            from './ApiBaseConfig';
 
 export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdateItem<T> {
-  
-     /**
+    /**
      *
      *
      * @static
@@ -24,11 +23,11 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
      * @returns {(ApiResponse<T>)}
      * @memberof ApiBasePut
      */
-    public put<T>(  baseUrl: string, 
-                    model: T | null, 
-                    convertor: IObjectMapper<T>, 
-                    successType: EnumSuccessType, 
-                    successCallback: ISuccessCallback<T>): ApiResponse<T> {
+    public put(  baseUrl: string,
+                 model: T | null,
+                 convertor: IObjectMapper<T>,
+                 successType: EnumSuccessType,
+                 successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
         const contract = new ApiResponseContract<T>();
 
@@ -36,12 +35,11 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
             .put(baseUrl, model, BaseApiConfig.baseConfig)
             .then((response) => {
 
-                if (response.data == null) {                    
+                if (response.data == null) {
                     contract.publishFailure('No data returned');
                 } else {
 
-                    
-                    if (response.data.hasValidationMessages) {                        
+                    if (response.data.hasValidationMessages) {
                         if (response.data.validationMessages) {
                             contract.publishValidationErrorsRaised(response.data.validationMessages);
                         } else {
@@ -50,7 +48,7 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
                         return;
                     }
 
-                    if (response.data.entity) {                        
+                    if (response.data.entity) {
                         const mappedModel = convertor.map(response.data.entity);
                         successCallback( mappedModel, successType);
                         contract.publishSuccess(mappedModel);
@@ -61,15 +59,11 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
 
                 }
             })
-            .catch((error) => {                
-
+            .catch((error) => {
                 ApiBaseError.handleErrorResponse(error);
                 contract.publishFailure(error);
             });
 
         return contract.responder;
     }
-
-     
-
 }

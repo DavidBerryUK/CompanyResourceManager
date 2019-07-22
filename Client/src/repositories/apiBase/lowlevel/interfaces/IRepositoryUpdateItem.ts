@@ -5,11 +5,10 @@ import { ISuccessCallback }                     from '@/repositories/helpers/Suc
 
 export interface IRepositoryUpdateItem<T> {
 
-    put<T>(
-        baseUrl: string, model: T | null,       
+    put(
+        baseUrl: string, model: T | null,
         convertor: IObjectMapper<T>,
         successType: EnumSuccessType,
-        successCallback: ISuccessCallback<T>
-    )
-        : ApiResponse<T>
+        successCallback: ISuccessCallback<T>)
+        : ApiResponse<T>;
 }

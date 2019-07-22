@@ -10,9 +10,10 @@
   },
   "rules": {
     "array-type":false,
-    "max-line-length": { "limit": 180 },
+    "max-line-length": [true, 200],
     "import-spacing": false,
     "no-var-requires": false,
+    "no-empty": false,
     "indent": [true, "spaces", 2],
     "interface-name": false,
     "max-classes-per-file": false,
