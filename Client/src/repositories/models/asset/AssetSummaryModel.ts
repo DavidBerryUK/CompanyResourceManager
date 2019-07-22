@@ -5,6 +5,7 @@ export default class AssetSummaryModel implements IApiModel {
     public assetId: string;
     public assetTypeId: string;
     public name: string;
+    public description: string;
     public badgeNo: string;
 
     constructor() {
@@ -12,6 +13,7 @@ export default class AssetSummaryModel implements IApiModel {
         this.assetTypeId = '';
         this.name = '';
         this.badgeNo = '';
+        this.description = '';
     }
 
     public get entityName(): string {

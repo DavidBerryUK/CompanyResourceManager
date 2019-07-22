@@ -1,10 +1,10 @@
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
-import BaseListPage                             from '@/componentsBusinessGui/base/BaseListPage';
+import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
-import FilterButton                             from '@/componentsCommonGui/filterButton/FilterButton';
 import FilterPersonSummaryService               from '@/services/filters/personFilterService/FilterPersonSummaryService';
-import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
+import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
+import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
 import ObjectArrayMapperPersonSummaryModel      from '@/repositories/objectMappers/person/ObjectArrayMapperPersonSummaryModel';
 import ObjectMapperPersonSummaryModel           from '@/repositories/objectMappers/person/ObjectMapperPersonSummaryModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
@@ -18,54 +18,33 @@ import PersonSummaryModel                       from '@/repositories/models/pers
  */
 @Component({
   components: {
-    Loader,
-    FilterButton,
+    NavigationListComponent,
   },
 })
-export default class PersonList extends BaseListPage<PersonSummaryModel> implements IComponentMetaData {
+export default class PersonList extends BasePage implements IComponentMetaData {
 
   // IComponentMetaData
   public componentName: string = 'Person List';
   public componentDescription: string = 'Displays of list people';
   // IComponentMetaData
 
-  constructor() {
-    super(new NavigationCrudPerson(),
-      PersonRepositoryFactory.getRepository(),
-      new ObjectMapperPersonSummaryModel(),
-      new ObjectArrayMapperPersonSummaryModel(),
-      new FilterPersonSummaryService());
+   // Create the configuration for development of the component
+  //
+  public listConfiguration: NavigationListConfig<PersonSummaryModel> =
+    new NavigationListConfig<PersonSummaryModel>(
+    'Person',                                                         // Title
+    new NavigationCrudPerson(),                                       // People Navigation Provider
+    PersonRepositoryFactory.getRepository(),                          // People Repository Provider
+    new ObjectMapperPersonSummaryModel(),                             // Map Java Object to Typescript People Object
+    new ObjectArrayMapperPersonSummaryModel(),                        // Map Java Object Array to Typescript Array of People Objects
+    new FilterPersonSummaryService(),                                 // Filter People list (user text search)
+    (data: PersonSummaryModel) => `${data.forename} ${data.surname}`, // Format of text for cell line 1 (header)
+    (data: PersonSummaryModel) => `${data.jobRoleName}`,              // Format of text for cell line 2 (body)
+    (data: PersonSummaryModel) => `${data.email}`,                    // Format of text for cell line 3 (footer)
+  );
+
+  public data(): any {
+    return {};
   }
 
-  // View has been mounted
-  public mounted() {
-    super.mounted();
-  }
-
-  // before the view is destroyed, it must unsubscribe from
-  // any notifications
-  public beforeDestroy() {
-    super.beforeDestroy();
-  }
-
-  // When the filter button is pressed the filter dialog modal will be displayed
-  // allowing the user to filter  the record types
-  public onFilterClicked() {
-    super.onFilterClicked();
-  }
-
-  // user has pressed the clear button on the text filter
-  public onFilterClearClicked() {
-    super.onFilterClearClicked();
-  }
-
-  // user pressed the add button to create a new person
-  public onAddClicked() {
-    super.onAddClicked();
-  }
-
-  // a list item has been selected, navigate to the person view screen
-  public onSelectItem(item: PersonSummaryModel) {
-    super.onSelectItem(item);
-  }
 }

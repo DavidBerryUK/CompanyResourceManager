@@ -1,7 +1,8 @@
 <template>
-  <db-element-page>    
+  <db-element-page>
     <crm-navigation-list 
-      title="People">      
+        :configuration="listConfiguration" 
+        title="People">  
     </crm-navigation-list>
   </db-element-page>
 </template>

@@ -42,7 +42,6 @@ export default class ApiBase {
         successType: EnumSuccessType,
         successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
-        console.log(`ApiBase-basePutWithNoModel:${baseUrl}`);
         const service = new BaseApiRepositoryUpdateItem<T>();
         return service.put(baseUrl, null, convertor, successType, successCallback);
     }

@@ -1,12 +1,12 @@
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
-import BaseListPage                             from '@/componentsBusinessGui/base/BaseListPage';
+import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterAssetTypeService                   from '@/services/filters/assetTypeFilterService/FilterAssetTypeService';
-import FilterButton                             from '@/componentsCommonGui/filterButton/FilterButton';
-import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
+import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
+import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
 import ObjectArrayMapperAssetTypeModel          from '@/repositories/objectMappers/assetType/ObjectArrayMapperAssetTypeModel';
 import ObjectMapperAssetTypeSummaryModel        from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeSummaryModel';
 
@@ -18,55 +18,35 @@ import ObjectMapperAssetTypeSummaryModel        from '@/repositories/objectMappe
  */
 @Component({
   components: {
-    Loader,
-    FilterButton,
+    NavigationListComponent,
   },
 })
-export default class AssetTypeList extends BaseListPage<AssetTypeSummmaryModel> implements IComponentMetaData {
+export default class AssetTypeList extends BasePage implements IComponentMetaData {
 
   // IComponentMetaData
   public componentName: string = 'Asset Type List';
   public componentDescription: string = 'Displays a list of asset types';
   // IComponentMetaData
 
+  public listConfiguration: NavigationListConfig<AssetTypeSummmaryModel> =
+  new NavigationListConfig<AssetTypeSummmaryModel>(
+  'Assets',                                                   // Title
+  new NavigationCrudAssetType(),                              // People Navigation Provider
+  AssetTypeRepositoryFactory.getRepository(),                 // People Repository Provider
+  new ObjectMapperAssetTypeSummaryModel(),                    // Map Java Object to Typescript People Object
+  new ObjectArrayMapperAssetTypeModel(),                      // Map Java Object Array to Typescript Array of People Objects
+  new FilterAssetTypeService(),                               // Filter People list (user text search)
+  (data: AssetTypeSummmaryModel) => `${data.name}`,           // Format of text for cell line 1 (header)
+  (data: AssetTypeSummmaryModel) => ``,                       // Format of text for cell line 2 (body)
+  (data: AssetTypeSummmaryModel) => `${this.footerMessage(data)}`,  // Format of text for cell line 3 (footer)
+);
 
-  constructor() {
-    super(  new NavigationCrudAssetType(),              // Navigation Handler
-            AssetTypeRepositoryFactory.getRepository(), // Repository to get list Asset via Api
-            new ObjectMapperAssetTypeSummaryModel(),    // Converts list of java objects list of AssetTypeSummary objects
-            new ObjectArrayMapperAssetTypeModel(),      // Converts a single java object to a AssetTypeSummary object
-            new FilterAssetTypeService());              // Filters list of list of AssetTypeSummary
-  }
 
-  // View has been mounted
-  public mounted() {
-    super.mounted();
-  }
+    public footerMessage(data: AssetTypeSummmaryModel): string {
+      if ( data.hasAssetBadge ) {
+        return 'Tracked with Asset Badge';
+      }
+      return '';
+    }
 
-  // before the view is destroyed, it must unsubscribe from
-  // any notifications
-  public beforeDestroy() {
-    super.beforeDestroy();
-  }
-
-  // When the filter button is pressed the filter dialog modal will be displayed
-  // allowing the user to filter  the record types
-  public onFilterClicked() {
-    super.onFilterClicked();
-  }
-
-  // user has pressed the clear button on the text filter
-  public onFilterClearClicked() {
-    super.onFilterClearClicked();
-  }
-
-  // user pressed the add button to create a new asset type
-  public onAddClicked() {
-    super.onAddClicked();
-  }
-
-  // a list item has been selected, navigate to the asset type view screen
-  public onSelectItem(item: AssetTypeSummmaryModel) {
-    super.onSelectItem(item);
-  }
 }

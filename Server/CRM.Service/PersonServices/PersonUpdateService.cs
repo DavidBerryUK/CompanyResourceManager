@@ -122,7 +122,10 @@ namespace CRM.Service.PersonServices
             }
 
             var response = new BaseItemResponse<PersonSummary>();
-            var data = await _crmDatabaseContext.Persons.FirstOrDefaultAsync(o => o.PersonId == personId);
+            var data = await _crmDatabaseContext
+                .Persons
+                .Include(inc => inc.NavJobRole)
+                .FirstOrDefaultAsync(o => o.PersonId == personId);
 
             if (data == null)
             {

@@ -1,5 +1,6 @@
 <template>
   <div class="form-style">
+
     <custom-form-edit-header
       title="Person"
       :saveEnabled="modelChangeTracker.hasObjectChanged"
@@ -28,9 +29,8 @@
         </v-card>
 
         <v-form ref="editForm" class="form-body">
-
           <v-card class="mt-2 pt-4 pl-4 pr-4 pb-2">
-
+            
             <v-layout row>
               <v-flex xs4 pr-4>
                 <v-text-field
@@ -55,37 +55,32 @@
               </v-flex>
 
               <v-flex xs4>
-                 <v-text-field
-              label="Email Address"
-              v-model="model.email"
-              v-validate="'required'"
-              data-vv-name="Email"
-              required
-              :error-messages="errors.collect('Email')"
-            ></v-text-field>
+                <v-text-field
+                  label="Email Address"
+                  v-model="model.email"
+                  v-validate="'required'"
+                  data-vv-name="Email"
+                  required
+                  :error-messages="errors.collect('Email')"
+                ></v-text-field>
               </v-flex>
-
             </v-layout>
 
-        <v-layout row>
-           <v-flex xs4  pr-4>
-            
-            <v-select :items="jobRoleList.items" 
-                          label="Job Role" 
-                          item-value="id" 
-                          item-text="name" required 
-                          data-vv-name="Job Role"
-                          v-validate="'required'"
-                          :error-messages="errors.collect('Job Role')"
-                          v-model="model.jobRoleId"></v-select>
+            <v-layout row>
+              <v-flex xs4 pr-4>
+                <v-select
+                  :items="jobRoleList.items"
+                  label="Job Role"
+                  item-value="id"
+                  item-text="name"
+                  required
+                  data-vv-name="Job Role"
+                  v-validate="'required'"
+                  :error-messages="errors.collect('Job Role')"
+                  v-model="model.jobRoleId"
+                ></v-select>
               </v-flex>
-        </v-layout>
-
-
-           
-
-                 
-
+            </v-layout>
           </v-card>
         </v-form>
       </div>

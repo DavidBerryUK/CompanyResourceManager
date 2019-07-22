@@ -1,7 +1,7 @@
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
 import Component                                from 'vue-class-component';
-import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
+import EntityViewTemplateComponent              from '@/componentsCommonGui/entityViewTemplate/EntityViewTemplateComponent.vue';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
@@ -9,8 +9,8 @@ import PersonRepositoryFactory                  from '@/repositories/factory/Per
 
 @Component({
   components: {
-    FormViewHeader,
     LabelDataReadOnly,
+    EntityViewTemplateComponent,
   },
 })
 export default class PersonView extends BaseViewPage<PersonExtendedModel> implements IComponentMetaData {

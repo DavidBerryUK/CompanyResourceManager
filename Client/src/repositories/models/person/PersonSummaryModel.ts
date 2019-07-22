@@ -7,6 +7,7 @@ export default class PersonSummaryModel implements IApiModel {
     public surname: string;
     public email: string;
     public jobRoleId: string;
+    public jobRoleName: string;
     public isActive: boolean;
 
     constructor() {
@@ -15,6 +16,7 @@ export default class PersonSummaryModel implements IApiModel {
         this.surname = '';
         this.email = '';
         this.jobRoleId = '';
+        this.jobRoleName = '';
         this.isActive = false;
     }
 

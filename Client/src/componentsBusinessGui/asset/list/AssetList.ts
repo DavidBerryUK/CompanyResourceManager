@@ -1,14 +1,14 @@
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import AssetRepositoryFactory                   from '@/repositories/factory/AssetRepositoryFactory';
 import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
-import BaseListPage                             from '@/componentsBusinessGui/base/BaseListPage';
+import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterAssetSummaryService                from '@/services/filters/assetSummaryFilterService/FilterAssetSummaryService';
-import FilterButton                             from '@/componentsCommonGui/filterButton/FilterButton';
-import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
+import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
+import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
 import ObjectArrayMapperAssetSummaryModel       from '@/repositories/objectMappers/asset/ObjectArrayMapperAssetSummaryModel';
-import ObjectMapperAssetExtendedModel           from '@/repositories/objectMappers/asset/ObjectMapperAssetExtendedModel';
+import ObjectMapperAssetSummaryModel            from '@/repositories/objectMappers/asset/ObjectMapperAssetSummaryModel';
 
 /**
  * Presents a list of assets to the user that can be filtered
@@ -21,54 +21,28 @@ import ObjectMapperAssetExtendedModel           from '@/repositories/objectMappe
  */
 @Component({
   components: {
-    Loader,
-    FilterButton,
+    NavigationListComponent,
   },
 })
-export default class AssetList extends BaseListPage<AssetSummaryModel> implements IComponentMetaData {
+export default class AssetList extends BasePage implements IComponentMetaData {
 
   // IComponentMetaData
   public componentName: string = 'Asset List';
   public componentDescription: string = 'Displays a list of Assets';
   // IComponentMetaData
 
-  constructor() {
-    super(new NavigationCrudAsset(),
-      AssetRepositoryFactory.getRepository(),
-      new ObjectMapperAssetExtendedModel(),
-      new ObjectArrayMapperAssetSummaryModel(),
-      new FilterAssetSummaryService());
-  }
+  public listConfiguration: NavigationListConfig<AssetSummaryModel> =
+  new NavigationListConfig<AssetSummaryModel>(
+  'Assets',                                           // Title
+  new NavigationCrudAsset(),                          // People Navigation Provider
+  AssetRepositoryFactory.getRepository(),             // People Repository Provider
+  new ObjectMapperAssetSummaryModel(),                // Map Java Object to Typescript People Object
+  new ObjectArrayMapperAssetSummaryModel(),           // Map Java Object Array to Typescript Array of People Objects
+  new FilterAssetSummaryService(),                    // Filter People list (user text search)
+  (data: AssetSummaryModel) => `${data.description}`, // Format of text for cell line 1 (header)
+  (data: AssetSummaryModel) => ``,                    // Format of text for cell line 2 (body)
+  (data: AssetSummaryModel) => `${data.badgeNo}`,     // Format of text for cell line 3 (footer)
+);
 
-  // View has been mounted
-  public mounted() {
-    super.mounted();
-  }
 
-  // before the view is destroyed, it must unsubscribe from
-  // any notifications
-  public beforeDestroy() {
-    super.beforeDestroy();
-  }
-
-  // When the filter button is pressed the filter dialog modal will be displayed
-  // allowing the user to filter the record type
-  public onFilterClicked() {
-    super.onFilterClicked();
-  }
-
-  // user has pressed the clear button on the text filter
-  public onFilterClearClicked() {
-    super.onFilterClearClicked();
-  }
-
-  // user pressed the add button to create a new asset
-  public onAddClicked() {
-    super.onAddClicked();
-  }
-
-  // a list item has been selected, navigate to the asset  view screen
-  public onSelectItem(item: AssetSummaryModel) {
-    super.onSelectItem(item);
-  }
 }

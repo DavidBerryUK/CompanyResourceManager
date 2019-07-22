@@ -1,12 +1,9 @@
 <template>
-     <div class="scrollable-list">
+  <div class="scrollable-list">
     <v-toolbar color="purple" dark class="scroll-header">
-      <v-toolbar-title>{{title}}</v-toolbar-title>
+      <v-toolbar-title>{{configuration.title}}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <custom-filter-button
-        :isFilterSet="false"
-        @onFilterClicked="onFilterClicked"
-      ></custom-filter-button>
+      <custom-filter-button :isFilterSet="false" @onFilterClicked="onFilterClicked"></custom-filter-button>
       <v-btn fab small color="pink" @click="onAddClicked">
         <v-icon dark>add</v-icon>
       </v-btn>
@@ -25,8 +22,12 @@
     </v-container>
 
     <v-container fluid class="scroll-content with-search-header" grid-list-lg>
-      <custom-loader v-if="isLoading"></custom-loader>
-
+      <custom-loader v-if="isLoading"></custom-loader>      
+      <div v-else-if="isAnApiError" @click="onReload">        
+        <v-alert :value="true" type="warning">
+          Could not obtain data, click here try again. 
+        </v-alert>        
+      </div>
       <v-layout v-else row wrap>
         <v-card width="100%">
           <v-list three-line>
@@ -34,34 +35,24 @@
               <v-list-tile
                 ripple
                 @click="onSelectItem(item)"
-                :key="item.personId"
+                :key="item.entityKey"
                 :class="itemStyle(item)"
               >
                 <v-list-tile-content>
                   <div
-                      v-if="!item.isActive"
-                      class="caption red white--text text-alert fixed-top-right"                      
-                    >Archived</div>
-
-                  
-
-                   <v-list-tile primary-title>
-                      <div>
-                        <div :class="theme.listTitleStyle">{{item.forename}} {{item.surname}}</div>
-                        
-                            <div :class="theme.listBodyStyle">{{item.jobRoleName}}</div>
-                            <div :class="theme.listFooterStyle">{{item.email}}</div>                        
+                    v-if="!item.isActive"
+                    class="caption red white--text text-alert fixed-top-right"
+                  >Archived</div>
+                  <v-list-tile primary-title>
+                    <div>
+                      <div :class="theme.listTitleStyle">{{configuration.line1TextFunction(item)}}</div>
+                      <div :class="theme.listBodyStyle">{{configuration.line2TextFunction(item)}}</div>
+                      <div :class="theme.listFooterStyle">{{configuration.line3TextFunction(item)}}</div>
                     </div>
                   </v-list-tile>
-                  
-
-                                      
-                  
-
-                  
                 </v-list-tile-content>
               </v-list-tile>
-              <v-divider :key="item.personId + '_'"></v-divider>
+              <v-divider :key="item.entityKey + '_'"></v-divider>
             </template>
           </v-list>
         </v-card>
@@ -72,6 +63,5 @@
 
 <script lang="ts" src='./NavigationListComponent.ts'/>
 </script>
-<style lang="stylus" scoped src='./Styles.styl'>
-</style>
 
+<style lang="stylus" scoped src='./Styles.styl'></style>
