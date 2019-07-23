@@ -5,16 +5,16 @@ import Component                                from 'vue-class-component';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
-import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
 import ObjectMapperJobRoleExtendedModel         from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleExtendedModel';
+import EntityEditTemplateComponent              from '@/componentsCommonGui/entityEditTemplate/EntityEditTemplateComponent';
 
 //
 // attribute indicates this is a component,
 //  this is where any sub components are also registered
 @Component({
   components: {
-    LabelDataReadOnly,
+    EntityEditTemplateComponent,
     FormEditHeader,
   },
 })

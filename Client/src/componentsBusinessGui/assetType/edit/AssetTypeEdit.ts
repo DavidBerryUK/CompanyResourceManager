@@ -4,8 +4,8 @@ import AssetTypeExtendedModel                   from '@/repositories/models/asse
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
 import Component                                from 'vue-class-component';
+import EntityEditTemplateComponent              from '@/componentsCommonGui/entityEditTemplate/EntityEditTemplateComponent';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
-import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 import ObjectMapperAssetTypeExtendedModel       from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeExtendedModel';
 
@@ -14,7 +14,7 @@ import ObjectMapperAssetTypeExtendedModel       from '@/repositories/objectMappe
 //  this is where any sub components are also registered
 @Component({
   components: {
-    LabelDataReadOnly,
+    EntityEditTemplateComponent,
     FormEditHeader,
   },
 })

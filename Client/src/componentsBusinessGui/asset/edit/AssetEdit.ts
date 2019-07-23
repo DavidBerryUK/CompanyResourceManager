@@ -6,7 +6,7 @@ import AssetTypeRepositoryFactory               from '@/repositories/factory/Ass
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
 import Component                                from 'vue-class-component';
 import ContractListener                         from '@/repositories/contracts/ContractListener';
-import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
+import EntityEditTemplateComponent              from '@/componentsCommonGui/entityEditTemplate/EntityEditTemplateComponent';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
@@ -18,7 +18,7 @@ import ObjectMapperAssetExtendedModel           from '@/repositories/objectMappe
 @Component({
   components: {
     LabelDataReadOnly,
-    FormEditHeader,
+    EntityEditTemplateComponent,
   },
 })
 

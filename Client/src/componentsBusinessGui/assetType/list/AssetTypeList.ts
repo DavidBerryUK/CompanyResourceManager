@@ -30,7 +30,7 @@ export default class AssetTypeList extends BasePage implements IComponentMetaDat
 
   public listConfiguration: NavigationListConfig<AssetTypeSummmaryModel> =
   new NavigationListConfig<AssetTypeSummmaryModel>(
-  'Assets',                                                   // Title
+  'Asset Types',                                                   // Title
   new NavigationCrudAssetType(),                              // People Navigation Provider
   AssetTypeRepositoryFactory.getRepository(),                 // People Repository Provider
   new ObjectMapperAssetTypeSummaryModel(),                    // Map Java Object to Typescript People Object

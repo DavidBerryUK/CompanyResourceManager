@@ -9,7 +9,7 @@
     @onArchive="onArchive">
 
     <!-- HEADER -->
-    <div slot="body">
+    <div slot="header">
       <v-layout row>
         <v-flex xs6>
           <crm-label-data label="Forename" :stringValue="model.forename" one-time-bind></crm-label-data>
