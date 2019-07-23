@@ -1,7 +1,6 @@
 ﻿using System;
-using CRM.Models.Database.Workflow;
 
-namespace CRM.Models.Database.JobApplicants
+namespace CRM.Models.Rest.JobApplicants
 {
     public class JobApplicantSummary
     {

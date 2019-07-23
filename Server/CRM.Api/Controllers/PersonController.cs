@@ -111,7 +111,7 @@ namespace CRM.Api.Controllers
             //
             if (personId == Guid.Empty)
             {
-                throw new ArgumentException($@"personId can not be blank");
+                throw new ArgumentException("personId can not be blank");
             }
 
             var data = await _personUpdateService.Deactivate(personId);

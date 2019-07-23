@@ -22,7 +22,7 @@
     </v-container>
 
     <v-container fluid class="scroll-content with-search-header" grid-list-lg>
-      <custom-loader v-if="isLoading"></custom-loader>      
+      <crm-loader v-if="isLoading"></crm-loader>      
       <div v-else-if="isAnApiError" @click="onReload">        
         <v-alert :value="true" type="warning">
           Could not obtain data, click here try again. 
@@ -61,7 +61,8 @@
   </div>
 </template>
 
-<script lang="ts" src='./NavigationListComponent.ts'/>
+<script lang='ts' src='./NavigationListComponent.ts'>
 </script>
 
-<style lang="stylus" scoped src='./Styles.styl'></style>
+<style lang="stylus" scoped src='./Styles.styl'>
+</style>

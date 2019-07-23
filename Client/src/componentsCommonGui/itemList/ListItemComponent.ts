@@ -45,4 +45,4 @@ export default class ListItemComponent extends Vue {
 
 }
 
-Vue.component('list-item-component', ListItemComponent);
+Vue.component('crm-list-item-component', ListItemComponent);

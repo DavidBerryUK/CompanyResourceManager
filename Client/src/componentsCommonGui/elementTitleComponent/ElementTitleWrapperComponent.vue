@@ -7,6 +7,7 @@
     </div>
 </template>
 
-<script lang="ts" src='./ElementTitleWrapperComponent.ts'></script>
-<style lang="stylus" scoped src='./Styles.styl'></style>
-
+<script lang='ts' src='./ElementTitleWrapperComponent.ts'>
+</script>
+<style lang="stylus" scoped src='./Styles.styl'>
+</style>

@@ -1,6 +1,5 @@
 ﻿using CRM.Models.Rest.Skill;
 using CRM.Models.Rest.Lists;
-using CRM.Service.JobRoleServices.Interfaces;
 using CRM.Service.PersonServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;

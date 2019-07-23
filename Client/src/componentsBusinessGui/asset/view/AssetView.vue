@@ -1,60 +1,56 @@
 <template>
-  <div class="form-style">
-    <custom-form-view-header
-      title="Asset"
-      :isActive="model.isActive"
-      @onRestore="onRestore"
-      @onEdit="onEdit"
-    ></custom-form-view-header>
+  <crm-entity-view-template
+    title="Asset"
+    :isActive="model.isActive"
+    @onEdit="onEdit"
+    @onRestore="onRestore"
+  >
+    <!-- HEADER -->
+    <v-layout row slot="header">
+      <v-flex xs5>
+        <crm-label-data label="Asset" :stringValue="model.description"></crm-label-data>
+      </v-flex>
+      <v-flex xs5>
+        <crm-label-data label="Asset Type" :stringValue="model.assetTypeName"></crm-label-data>
+      </v-flex>
+      <v-flex xs2>
+        <crm-label-data label="Asset Badge" :stringValue="model.badgeNo"></crm-label-data>
+      </v-flex>
+    </v-layout>
+    <!-- HEADER -->
 
-    <div class="form-body">
-      <v-card dark color="blue">
-        <v-container fluid>
-          <v-layout row>
-            <v-flex xs5>
-              <custom-label-data label="Asset" :stringValue="model.description"></custom-label-data>
-            </v-flex>
-            <v-flex xs5>
-              <custom-label-data label="Asset Type" :stringValue="model.assetTypeName"></custom-label-data>
-            </v-flex>
-            <v-flex xs2>
-              <custom-label-data label="Asset Badge" :stringValue="model.badgeNo"></custom-label-data>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card>
+    <!-- BODY -->
+    <div slot="body">
+      <v-layout row>
+        <v-flex xs4>
+          <crm-label-data label="Description" :stringValue="model.description"></crm-label-data>
+        </v-flex>
+        <v-flex xs4>
+          <crm-label-data label="Asset Type" :stringValue="model.assetTypeName"></crm-label-data>
+        </v-flex>
+        <v-flex xs4>
+          <crm-label-data label="Asset Badge" :stringValue="model.badgeNo"></crm-label-data>
+        </v-flex>
+      </v-layout>
 
-      <v-card class="mt-2 pt-4 pl-4 pr-4 pb-2">
-        <v-layout row>
-          <v-flex xs4>
-            <custom-label-data label="Description" :stringValue="model.description"></custom-label-data>
-          </v-flex>
-          <v-flex xs4>
-            <custom-label-data label="Asset Type" :stringValue="model.assetTypeName"></custom-label-data>
-          </v-flex>
-          <v-flex xs4>
-            <custom-label-data label="Asset Badge" :stringValue="model.badgeNo"></custom-label-data>
-          </v-flex>
-        </v-layout>
+      <v-layout row pt-3>
+        <v-flex xs4>Has Asset Badge</v-flex>
+        <v-flex xs4>Has Operating System</v-flex>
+      </v-layout>
 
-        <v-layout row pt-3>
-          <v-flex xs4>Has Asset Badge</v-flex>
-          <v-flex xs4>Has Operating System</v-flex>
-        </v-layout>
-
-        <v-layout row>
-          <v-flex xs4>
-            <v-switch readonly class="controls-no-top" v-model="model.hasAssetBadge"></v-switch>
-          </v-flex>
-          <v-flex xs4>
-            <v-switch readonly class="controls-no-top" v-model="model.hasOperatingSystem"></v-switch>
-          </v-flex>
-        </v-layout>
-      </v-card>
+      <v-layout row>
+        <v-flex xs4>
+          <v-switch readonly class="controls-no-top" v-model="model.hasAssetBadge"></v-switch>
+        </v-flex>
+        <v-flex xs4>
+          <v-switch readonly class="controls-no-top" v-model="model.hasOperatingSystem"></v-switch>
+        </v-flex>
+      </v-layout>
     </div>
-  </div>
+    <!-- BODY -->
+    
+  </crm-entity-view-template>
 </template>
 
-<script lang="ts" src='./AssetView.ts'>
+<script lang='ts' src='./AssetView.ts'>
 </script>
-

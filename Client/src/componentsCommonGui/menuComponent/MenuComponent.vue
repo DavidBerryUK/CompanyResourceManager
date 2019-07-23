@@ -37,5 +37,7 @@
 
 
 
-<script lang="ts" src='./MenuComponent.ts'></script>
-<style lang="stylus"  src='./Styles.styl'></style>
+<script lang='ts' src='./MenuComponent.ts'>
+</script>
+<style lang="stylus"  src='./Styles.styl'>
+</style>

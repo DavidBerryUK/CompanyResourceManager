@@ -1,15 +1,15 @@
-import AssetTypeExtendedModel                   from '@/repositories/models/assetType/AssetTypeExtendedModel';
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
+import AssetTypeExtendedModel                   from '@/repositories/models/assetType/AssetTypeExtendedModel';
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
 import Component                                from 'vue-class-component';
-import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
+import EntityViewTemplateComponent              from '@/componentsCommonGui/entityViewTemplate/EntityViewTemplateComponent.vue';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 
 @Component({
   components: {
-    FormViewHeader,
+    EntityViewTemplateComponent,
     LabelDataReadOnly,
   },
 })

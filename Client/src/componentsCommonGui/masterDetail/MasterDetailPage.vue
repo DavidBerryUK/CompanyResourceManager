@@ -6,6 +6,7 @@
 </template>
 
 
-<script lang="ts"  src='./MasterDetailPage.ts'></script>
-<style lang="stylus" src="./NavigationDetail.styl"></script>
-
+<script lang='ts'  src='./MasterDetailPage.ts'>
+</script>
+<style lang="stylus" src="./NavigationDetail.styl">
+</style>

@@ -1,15 +1,15 @@
 <template>
   <div class="form-style">
-    <custom-form-edit-header
+    <crm-form-edit-header
       title="Job Role"
       :saveEnabled="modelChangeTracker.hasObjectChanged"
       :isActive="model.isActive"
       @onSave="onSave"
       @onCancel="onCancel"
       @onArchive="onArchive"
-    ></custom-form-edit-header>
+    ></crm-form-edit-header>
 
-    <custom-loader v-if="isLoading" key="panel-loading"></custom-loader>
+    <crm-loader v-if="isLoading" key="panel-loading"></crm-loader>
 
     <div v-else class="form-body" key="panel-editing">
       <div>
@@ -17,7 +17,7 @@
           <v-container fluid>
             <v-layout row>
               <v-flex xs12>
-                <custom-label-data label="Name" :stringValue="model.name" one-time-bind></custom-label-data>
+                <crm-label-data label="Name" :stringValue="model.name" one-time-bind></crm-label-data>
               </v-flex>
             </v-layout>
           </v-container>
@@ -46,4 +46,5 @@
   </div>
 </template>
 
-<script lang="ts" src="./JobRoleEdit.ts"></script>
+<script lang='ts' src='./JobRoleEdit.ts'>
+</script>

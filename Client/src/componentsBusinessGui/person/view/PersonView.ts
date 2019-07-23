@@ -9,8 +9,8 @@ import PersonRepositoryFactory                  from '@/repositories/factory/Per
 
 @Component({
   components: {
-    LabelDataReadOnly,
     EntityViewTemplateComponent,
+    LabelDataReadOnly,
   },
 })
 export default class PersonView extends BaseViewPage<PersonExtendedModel> implements IComponentMetaData {

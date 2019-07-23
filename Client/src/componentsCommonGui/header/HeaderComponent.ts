@@ -9,4 +9,4 @@ export default class HeaderComponent extends Vue   {
     }
   }
 
-Vue.component('db-header', HeaderComponent);
+Vue.component('crm-header', HeaderComponent);

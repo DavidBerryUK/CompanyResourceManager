@@ -63,4 +63,5 @@
   </div>
 </template>
 
-<script  lang="ts"  src='./ListFiltersDialog.ts'></script>
+<script  lang='ts'  src='./ListFiltersDialog.ts'>
+</script>

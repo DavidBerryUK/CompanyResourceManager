@@ -63,4 +63,4 @@ export default class LabelDataReadOnly extends Vue {
     }
 }
 
-Vue.component('custom-label-data', LabelDataReadOnly);
+Vue.component('crm-label-data', LabelDataReadOnly);

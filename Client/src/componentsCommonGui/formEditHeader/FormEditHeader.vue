@@ -8,4 +8,5 @@
     </v-toolbar>
 </template>
 
-<script lang="ts" src='./FormEditHeader.ts'></script>
+<script lang='ts' src='./FormEditHeader.ts'>
+</script>

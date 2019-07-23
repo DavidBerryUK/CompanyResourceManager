@@ -9,4 +9,4 @@ export default class ElementPageWrapperComponent extends Vue   {
     }
   }
 
-Vue.component('db-element-page', ElementPageWrapperComponent);
+Vue.component('crm-element-page', ElementPageWrapperComponent);

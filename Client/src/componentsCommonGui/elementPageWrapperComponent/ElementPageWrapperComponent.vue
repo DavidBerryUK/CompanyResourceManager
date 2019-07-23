@@ -5,5 +5,5 @@
 </template>
 
 
-<script lang="ts" src='./ElementPageWrapperComponent.ts'></script>
-
+<script lang='ts' src='./ElementPageWrapperComponent.ts'>
+</script>

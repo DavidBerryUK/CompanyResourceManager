@@ -9,4 +9,4 @@ export default class Loader extends Vue {
     }
 }
 
-Vue.component('custom-loader', Loader);
+Vue.component('crm-loader', Loader);

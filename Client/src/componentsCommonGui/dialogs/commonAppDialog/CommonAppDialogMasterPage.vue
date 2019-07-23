@@ -41,4 +41,5 @@
 </template>
 
 
-<script lang="ts" src='./CommonAppDialogMasterPage.ts'></script>
+<script lang='ts' src='./CommonAppDialogMasterPage.ts'>
+</script>

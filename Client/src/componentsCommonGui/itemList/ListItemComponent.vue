@@ -31,7 +31,7 @@
     </v-toolbar>
 
     <div class="pl-0 pr-0" style="height: 300px;overflow:auto;">
-      <custom-loader v-if="itemCollection.isLoading"></custom-loader>
+      <crm-loader v-if="itemCollection.isLoading"></crm-loader>
       <v-list v-else row>
         <v-list-tile
           v-for="item in filteredListItems"
@@ -57,4 +57,5 @@
   </v-card>
 </template>
 
-<script  lang="ts"  src='./ListItemComponent.ts'></script>
+<script  lang='ts'  src='./ListItemComponent.ts'>
+</script>

@@ -12,4 +12,5 @@
 </div>
 </template>
 
-<script  lang="ts"  src='./FilterButton.ts'></script>
+<script  lang='ts'  src='./FilterButton.ts'>
+</script>

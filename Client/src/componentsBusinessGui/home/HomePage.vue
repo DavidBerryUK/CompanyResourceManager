@@ -1,6 +1,6 @@
 <template>
-  <db-element-page>
-    <db-element-title :iconCss="`${ComponentIconConstants.HomeIcon}`">VueJS Component Test Harness</db-element-title>
+  <crm-element-page>
+    <crm-element-title :iconCss="`${ComponentIconConstants.HomeIcon}`">VueJS Component Test Harness</crm-element-title>
 
     <div class="mt-4">
       <div class="font-weight-light headline primary--text pa-2">Introduction</div>
@@ -51,8 +51,9 @@
         </v-layout>
       </v-container>
     </div>
-  </db-element-page>
+  </crm-element-page>
 </template>
 
 
-<script lang="ts" src='./HomePage.ts'></script>
+<script lang='ts' src='./HomePage.ts'>
+</script>

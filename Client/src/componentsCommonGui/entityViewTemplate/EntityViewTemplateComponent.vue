@@ -1,11 +1,11 @@
 <template>
   <div class="form-style">
-        <custom-form-view-header
+        <crm-form-view-header
       :title="title"
       :isActive="isActive"
        @onRestore="onRestore"
       @onEdit="onEdit"
-    ></custom-form-view-header>
+    ></crm-form-view-header>
 
     <div class="form-body">
       <v-card dark color="blue">
@@ -25,5 +25,5 @@
   </div>
 </template>
 
-<script lang="ts" src='./EntityViewTemplateComponent.ts'>
+<script lang='ts' src='./EntityViewTemplateComponent.ts'>
 </script>

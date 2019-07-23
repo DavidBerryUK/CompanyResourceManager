@@ -31,4 +31,4 @@ export default class FormViewHeader extends Vue {
     }
 }
 
-Vue.component('custom-form-view-header', FormViewHeader);
+Vue.component('crm-form-view-header', FormViewHeader);

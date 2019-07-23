@@ -17,4 +17,4 @@ export default class MenuComponent extends Vue {
     }
 }
 
-Vue.component('db-menu', MenuComponent);
+Vue.component('crm-menu', MenuComponent);

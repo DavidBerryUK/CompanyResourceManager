@@ -13,4 +13,4 @@ export default class ElementTitleWrapperComponent extends Vue   {
     }
   }
 
-Vue.component('db-element-title', ElementTitleWrapperComponent);
+Vue.component('crm-element-title', ElementTitleWrapperComponent);

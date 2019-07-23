@@ -40,4 +40,4 @@ export default class FormEditHeader extends Vue {
 
 }
 
-Vue.component('custom-form-edit-header', FormEditHeader);
+Vue.component('crm-form-edit-header', FormEditHeader);

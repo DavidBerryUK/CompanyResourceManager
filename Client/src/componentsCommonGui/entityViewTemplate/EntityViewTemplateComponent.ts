@@ -1,7 +1,7 @@
+import { Prop }                                 from 'vue-property-decorator';
 import Component                                from 'vue-class-component';
-import Vue                                      from 'vue';
 import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
-import { Prop } from 'vue-property-decorator';
+import Vue                                      from 'vue';
 
 @Component({
   components: {

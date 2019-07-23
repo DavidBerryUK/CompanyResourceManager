@@ -6,4 +6,5 @@
     </div>
 </template>
 
-<script  lang="ts"  src='./Loader.ts'></script>
+<script  lang='ts'  src='./Loader.ts'>
+</script>

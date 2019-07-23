@@ -3,7 +3,7 @@ import { IRouteBeforeNavigationCheck }          from '../../../router/interfaces
 import BaseEditPage                             from '@/componentsBusinessGui/base/BaseEditPage';
 import Component                                from 'vue-class-component';
 import ContractListener                         from '@/repositories/contracts/ContractListener';
-import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
+import EntityEditTemplateComponent              from '@/componentsCommonGui/entityEditTemplate/EntityEditTemplateComponent';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
@@ -19,7 +19,7 @@ import PersonRepositoryFactory                  from '@/repositories/factory/Per
 @Component({
   components: {
     LabelDataReadOnly,
-    FormEditHeader,
+    EntityEditTemplateComponent,
   },
 })
 export default class PersonEdit extends BaseEditPage<PersonExtendedModel>
@@ -28,6 +28,8 @@ export default class PersonEdit extends BaseEditPage<PersonExtendedModel>
   public componentName: string = 'Person Edit';
   public componentDescription: string = 'Enables the user to edit a Person';
   // IComponentMetaData
+
+
 
   public jobRoleList: GenericCollectionModel<ListItemModel> = new GenericCollectionModel<ListItemModel>();
   // list of different person types, e.g. filling Stations, Superstore, Home goods
@@ -66,6 +68,9 @@ export default class PersonEdit extends BaseEditPage<PersonExtendedModel>
   // load additional data,
   //
   public retrieveSecondaryData(contractListener: ContractListener) {
+
+    // Load Job Role List
+    //
     const jobRoleRepository = JobRoleRepositoryFactory.getRepository();
     jobRoleRepository
       .getActiveList()

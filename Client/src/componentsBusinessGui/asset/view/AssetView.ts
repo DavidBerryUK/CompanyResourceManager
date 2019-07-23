@@ -3,13 +3,13 @@ import AssetExtendedModel                       from '@/repositories/models/asse
 import AssetRepositoryFactory                   from '@/repositories/factory/AssetRepositoryFactory';
 import BaseViewPage                             from '@/componentsBusinessGui/base/BaseViewPage';
 import Component                                from 'vue-class-component';
-import FormViewHeader                           from '@/componentsCommonGui/formViewHeader/FormViewHeader.vue';
+import EntityViewTemplateComponent              from '@/componentsCommonGui/entityViewTemplate/EntityViewTemplateComponent.vue';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 
 @Component({
   components: {
-    FormViewHeader,
+    EntityViewTemplateComponent,
     LabelDataReadOnly,
   },
 })

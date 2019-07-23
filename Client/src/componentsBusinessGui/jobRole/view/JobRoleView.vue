@@ -1,39 +1,30 @@
 <template>
-  <div class="form-style">
-    <custom-form-view-header
-      title="Job Role"
-      :isActive="model.isActive"
-      @onRestore="onRestore"
-      @onEdit="onEdit"
-    ></custom-form-view-header>
+  <crm-entity-view-template
+    title="Job Role"
+    :isActive="model.isActive"
+    @onEdit="onEdit"
+    @onRestore="onRestore"
+  >
+    <!-- HEADER -->
+    <v-layout row slot="header">
+      <v-flex xs5>
+        <crm-label-data label="Job Role" :stringValue="model.name"></crm-label-data>
+      </v-flex>
+    </v-layout>
+    <!-- HEADER -->
 
-    <div class="form-body">
-      <v-card dark color="blue">
-        <v-container fluid>
-          <v-layout row>
-            <v-flex xs5>
-              <custom-label-data label="Job Role" :stringValue="model.name"></custom-label-data>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card>
-
-      <v-card class="mt-2 pt-4 pl-4 pr-4 pb-2">
-        <v-layout row>
-          <v-flex xs12>
-            <custom-label-data label="Job Role" :stringValue="model.name"></custom-label-data>
-          </v-flex>
-    
-        </v-layout>
-
-    
-
-       
-      </v-card>
+    <!-- BODY -->
+    <div slot="body">
+      <v-layout row>
+        <v-flex xs12>
+          <crm-label-data label="Job Role" :stringValue="model.name"></crm-label-data>
+        </v-flex>
+      </v-layout>
     </div>
-  </div>
+    <!-- BODY -->
+
+  </crm-entity-view-template>
 </template>
 
-<script lang="ts" src='./JobRoleView.ts'>
+<script lang='ts' src='./JobRoleView.ts'>
 </script>
-
