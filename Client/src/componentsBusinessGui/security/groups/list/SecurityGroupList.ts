@@ -9,6 +9,7 @@ import ObjectArrayMapperSecurityGroupSummaryModel from '@/repositories/objectMap
 import ObjectMapperSecurityGroupSummaryModel      from '@/repositories/objectMappers/securityGroup/ObjectMapperSecurityGroupSummaryModel';
 import SecurityGroupRepositoryFactory             from '@/repositories/factory/SecurityGroupRepositoryFactory';
 import SecurityGroupSummaryModel                  from '@/repositories/models/securityGroup/SecurityGroupSummaryModel';
+import ObjectMapperFactorySecuityGroup from '@/repositories/objectMappers/ObjectMapperFactorySecurityGroup';
 
 /**
  * Presents a list of Job Rols to the user that can be filtered
@@ -35,8 +36,7 @@ export default class SecurityGroupList extends BasePage implements IComponentMet
     'Security Groups',                                          // Title
     new NavigationCrudSecurityGroup(),                          // Security Group Navigation Provider
     SecurityGroupRepositoryFactory.getRepository(),             // Security Group Repository Provider
-    new ObjectMapperSecurityGroupSummaryModel(),                // Map Java Object to Typescript Security Group Object
-    new ObjectArrayMapperSecurityGroupSummaryModel(),           // Map Java Object Array to Typescript Array of Security Group Objects
+    ObjectMapperFactorySecuityGroup.createSummaryMapper(),      // Map Java Object to Typescript Security Group Object
     new FilterSecurityGroupService(),                           // Filter Security Group list (user text search)
     (data: SecurityGroupSummaryModel) => `${data.name}`,        // Format of text for cell line 1 (header)
     (data: SecurityGroupSummaryModel) => `${data.description}`, // Format of text for cell line 2 (body)

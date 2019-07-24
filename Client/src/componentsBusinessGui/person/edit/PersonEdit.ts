@@ -9,7 +9,7 @@ import JobRoleRepositoryFactory                 from '@/repositories/factory/Job
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
-import ObjectMapperPersonExtendedModel          from '@/repositories/objectMappers/person/ObjectMapperPersonExtendedModel';
+import ObjectMapperFactoryPerson                from '@/repositories/objectMappers/ObjectMapperFactoryPerson';
 import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 
@@ -39,7 +39,7 @@ export default class PersonEdit extends BaseEditPage<PersonExtendedModel>
     super(
       new NavigationCrudPerson(),
       PersonRepositoryFactory.getRepository(),
-      new ObjectMapperPersonExtendedModel());
+      ObjectMapperFactoryPerson.createExtendedMapper());
   }
 
   // the component has mounted into the HTML DOM,

@@ -5,7 +5,7 @@ import Component                                from 'vue-class-component';
 import EntityEditTemplateComponent              from '@/componentsCommonGui/entityEditTemplate/EntityEditTemplateComponent';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
-import ObjectMapperSkillExtendedModel           from '@/repositories/objectMappers/skill/ObjectMapperSkillExtendedModel';
+import ObjectMapperFactorySkill                 from '@/repositories/objectMappers/ObjectMapperFactorySkill';
 import SkillRepositoryFactory                   from '@/repositories/factory/SkillRepositoryFactory';
 import SkillSummaryModel                        from '@/repositories/models/skill/SkillSummaryModel';
 
@@ -32,7 +32,7 @@ export default class SkillEdit extends BaseEditPage<SkillSummaryModel>
     super(
       new NavigationCrudJobRole(),
       SkillRepositoryFactory.getRepository(),
-      new ObjectMapperSkillExtendedModel());
+      ObjectMapperFactorySkill.createExtendedMapper());
   }
 
   // the form has been mounted into the DOM

@@ -4,7 +4,7 @@ import { EnumModalWidth }                       from '../../componentsCommonGui/
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IComponentMetaData }                   from './../../components/interfaces/ComponentMetaDataInterfaces';
 import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
-import { IObjectMapper }                        from '@/repositories/objectMappers/interfaces/IObjectMapper';
+import { IObjectGenericMapper }                 from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
 import { Prop }                                 from 'vue-property-decorator';
 import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
 import { Watch }                                from 'vue-property-decorator';
@@ -26,7 +26,7 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
   //
   public modelChangeTracker!: DeepObjectComparator;
   public model!: T;
-  public objectMapper: IObjectMapper<T>;
+  public objectMapper: IObjectGenericMapper<T>;
 
   @Prop() public id!: string;
 
@@ -34,13 +34,13 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
 
   constructor(  navigationHandler: INavigationCrud,
                 repository: GenericApiRepository<any, T, any>,
-                objectMapper: IObjectMapper<T>) {
+                objectMapper: IObjectGenericMapper<T>) {
     super();
     this.navigationHandler = navigationHandler;
     this.repository = repository;
     this.objectMapper = objectMapper;
 
-    this.model = this.objectMapper.map({});
+    this.model = this.objectMapper.mapToEntity({});
     this.modelChangeTracker = new DeepObjectComparator(this.model);
   }
 
@@ -91,7 +91,7 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
       // if this is a create page, then just create a new person model, otherwise
       //  get a person via the API
 
-      this.model = this.objectMapper.map({});
+      this.model = this.objectMapper.mapToEntity({});
       this.modelChangeTracker = new DeepObjectComparator(this.model);
       this.isLoading = false;
     } else {

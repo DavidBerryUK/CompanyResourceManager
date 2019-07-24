@@ -5,8 +5,7 @@ import FilterPersonSummaryService               from '@/services/filters/personF
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ObjectArrayMapperPersonSummaryModel      from '@/repositories/objectMappers/person/ObjectArrayMapperPersonSummaryModel';
-import ObjectMapperPersonSummaryModel           from '@/repositories/objectMappers/person/ObjectMapperPersonSummaryModel';
+import ObjectMapperFactoryPerson                from '@/repositories/objectMappers/ObjectMapperFactoryPerson';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 
@@ -35,8 +34,7 @@ export default class PersonList extends BasePage implements IComponentMetaData {
     'Person',                                                         // Title
     new NavigationCrudPerson(),                                       // People Navigation Provider
     PersonRepositoryFactory.getRepository(),                          // People Repository Provider
-    new ObjectMapperPersonSummaryModel(),                             // Map Java Object to Typescript People Object
-    new ObjectArrayMapperPersonSummaryModel(),                        // Map Java Object Array to Typescript Array of People Objects
+    ObjectMapperFactoryPerson.createSummaryMapper(),                  // Map Java Object to Typescript People Object
     new FilterPersonSummaryService(),                                 // Filter People list (user text search)
     (data: PersonSummaryModel) => `${data.forename} ${data.surname}`, // Format of text for cell line 1 (header)
     (data: PersonSummaryModel) => `${data.jobRoleName}`,              // Format of text for cell line 2 (body)

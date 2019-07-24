@@ -7,8 +7,8 @@ import FilterAssetSummaryService                from '@/services/filters/assetSu
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ObjectArrayMapperAssetSummaryModel       from '@/repositories/objectMappers/asset/ObjectArrayMapperAssetSummaryModel';
-import ObjectMapperAssetSummaryModel            from '@/repositories/objectMappers/asset/ObjectMapperAssetSummaryModel';
+import ObjectMapperFactoryAsset                 from '@/repositories/objectMappers/ObjectMapperFactoryAsset';
+
 
 /**
  * Presents a list of assets to the user that can be filtered
@@ -36,8 +36,7 @@ export default class AssetList extends BasePage implements IComponentMetaData {
   'Assets',                                           // Title
   new NavigationCrudAsset(),                          // People Navigation Provider
   AssetRepositoryFactory.getRepository(),             // People Repository Provider
-  new ObjectMapperAssetSummaryModel(),                // Map Java Object to Typescript People Object
-  new ObjectArrayMapperAssetSummaryModel(),           // Map Java Object Array to Typescript Array of People Objects
+  ObjectMapperFactoryAsset.createSummaryMapper(),                // Map Java Object to Typescript People Object
   new FilterAssetSummaryService(),                    // Filter People list (user text search)
   (data: AssetSummaryModel) => `${data.description}`, // Format of text for cell line 1 (header)
   (data: AssetSummaryModel) => ``,                    // Format of text for cell line 2 (body)

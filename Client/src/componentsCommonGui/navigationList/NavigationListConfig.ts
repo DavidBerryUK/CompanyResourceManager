@@ -1,9 +1,8 @@
+import { IObjectGenericMapper } from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IListFilterArchiveFlag }               from '@/repositories/models/listFilter/interfaces/IListFilterInterfaces';
 import { IListFilterByText }                    from '@/services/filters/interfaces/FilterInterfaces';
 import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
-import { IObjectArrayMapper }                   from '@/repositories/objectMappers/interfaces/IObjectArrayMapper';
-import { IObjectMapper }                        from '@/repositories/objectMappers/interfaces/IObjectMapper';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
@@ -16,8 +15,7 @@ export default class NavigationListConfig<S extends IApiModel> {
     public filterListService: IListFilterByText<S>;
     public navigationHandler: INavigationCrud;
     public repository: GenericApiRepository<S, any, any>;
-    public objectArrayMapper: IObjectArrayMapper<S>;
-    public objectMapper: IObjectMapper<S>;
+    public objectMapper: IObjectGenericMapper<S>;
     public summaryEntityName: string;
     // the currently selected person
     public selectedItem: S;
@@ -34,8 +32,7 @@ export default class NavigationListConfig<S extends IApiModel> {
         title: string,
         navigationHandler: INavigationCrud,
         repository: GenericApiRepository<S, any, any>,
-        objectMapper: IObjectMapper<S>,
-        objectArrayMapper: IObjectArrayMapper<S>,
+        objectMapper: IObjectGenericMapper<S>,
         filterListService: IListFilterByText<S>,
         line1TextFunction: ((data: S ) => string  ),
         line2TextFunction: ((data: S ) => string  ),
@@ -47,10 +44,9 @@ export default class NavigationListConfig<S extends IApiModel> {
         this.repository = repository;
         this.navigationHandler = navigationHandler;
         this.objectMapper = objectMapper;
-        this.objectArrayMapper = objectArrayMapper;
-        this.selectedItem = this.objectMapper.map({});
-        this.dataList.items = this.objectArrayMapper.map([]);
-        this.summaryEntityName = this.objectMapper.map({}).entityName;
+        this.selectedItem = this.objectMapper.mapToEntity({});
+        this.dataList.items = this.objectMapper.mapToArray([]);
+        this.summaryEntityName = this.selectedItem.entityName;
         this.line1TextFunction = line1TextFunction;
         this.line2TextFunction = line2TextFunction;
         this.line3TextFunction = line3TextFunction;

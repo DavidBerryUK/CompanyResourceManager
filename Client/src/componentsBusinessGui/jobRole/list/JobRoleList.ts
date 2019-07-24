@@ -7,8 +7,7 @@ import JobRoleSummaryModel                      from '@/repositories/models/jobR
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ObjectArrayMapperJobRoleModel            from '@/repositories/objectMappers/jobRole/ObjectArrayMapperJobRoleModel';
-import ObjectMapperJobRoleSummaryModel          from '@/repositories/objectMappers/jobRole/ObjectMapperJobRoleSummaryModel';
+import ObjectMapperFactoryJobRole               from '@/repositories/objectMappers/ObjectMapperFactoryJobRole';
 
 /**
  * Presents a list of Job Rols to the user that can be filtered
@@ -35,8 +34,7 @@ export default class JobRoleList extends BasePage implements IComponentMetaData 
     'Job Roles',                                    // Title
     new NavigationCrudJobRole(),                    // People Navigation Provider
     JobRoleRepositoryFactory.getRepository(),       // People Repository Provider
-    new ObjectMapperJobRoleSummaryModel(),          // Map Java Object to Typescript People Object
-    new ObjectArrayMapperJobRoleModel(),            // Map Java Object Array to Typescript Array of People Objects
+    ObjectMapperFactoryJobRole.createSummaryMapper(),          // Map Java Object to Typescript People Object
     new FilterJobRoleService(),                     // Filter People list (user text search)
     (data: JobRoleSummaryModel) => `${data.name}`,  // Format of text for cell line 1 (header)
     (data: JobRoleSummaryModel) => ``,              // Format of text for cell line 2 (body)

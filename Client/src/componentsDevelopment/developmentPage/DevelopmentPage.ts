@@ -4,11 +4,10 @@ import FilterPersonSummaryService                 from '@/services/filters/perso
 import NavigationCrudPerson                       from '@/routeNavigation/NavigationCrudPerson';
 import NavigationListComponent                    from '../../componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                       from '../../componentsCommonGui/navigationList/NavigationListConfig';
-import ObjectArrayMapperPersonSummaryModel        from '@/repositories/objectMappers/person/ObjectArrayMapperPersonSummaryModel';
-import ObjectMapperPersonSummaryModel             from '@/repositories/objectMappers/person/ObjectMapperPersonSummaryModel';
 import PersonRepositoryFactory                    from '@/repositories/factory/PersonRepositoryFactory';
 import PersonSummaryModel                         from '@/repositories/models/person/PersonSummaryModel';
 import Vue                                        from 'vue';
+import ObjectMapperFactoryPerson                  from '@/repositories/objectMappers/ObjectMapperFactoryPerson';
 
 @Component({
   components: {
@@ -25,8 +24,7 @@ export default class DevelopmentPage extends Vue {
     'Person',
     new NavigationCrudPerson(),
     PersonRepositoryFactory.getRepository(),
-    new ObjectMapperPersonSummaryModel(),
-    new ObjectArrayMapperPersonSummaryModel(),
+    ObjectMapperFactoryPerson.createSummaryMapper(),
     new FilterPersonSummaryService(),
     (data: PersonSummaryModel) => `${data.forename} ${data.surname}`,
     (data: PersonSummaryModel) => `${data.jobRoleName}`,
