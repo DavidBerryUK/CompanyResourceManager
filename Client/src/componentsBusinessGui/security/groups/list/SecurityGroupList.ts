@@ -5,11 +5,9 @@ import FilterSecurityGroupService                 from '@/services/filters/Secur
 import NavigationCrudSecurityGroup                from '@/routeNavigation/NavigationCrudSecurityGroup';
 import NavigationListComponent                    from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                       from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ObjectArrayMapperSecurityGroupSummaryModel from '@/repositories/objectMappers/securityGroup/ObjectArrayMapperSecurityGroupSummaryModel';
-import ObjectMapperSecurityGroupSummaryModel      from '@/repositories/objectMappers/securityGroup/ObjectMapperSecurityGroupSummaryModel';
+import ObjectMapperFactorySecuityGroup            from '@/repositories/objectMappers/ObjectMapperFactorySecurityGroup';
 import SecurityGroupRepositoryFactory             from '@/repositories/factory/SecurityGroupRepositoryFactory';
 import SecurityGroupSummaryModel                  from '@/repositories/models/securityGroup/SecurityGroupSummaryModel';
-import ObjectMapperFactorySecuityGroup from '@/repositories/objectMappers/ObjectMapperFactorySecurityGroup';
 
 /**
  * Presents a list of Job Rols to the user that can be filtered

@@ -7,7 +7,6 @@ import BaseApiConfig                            from './lowlevel/ApiBaseConfig';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
-import ObjectArrayMapperListItem                from '../objectMappers/list/ObjectArrayMapperListItem';
 import SuccessCallbackHelper                    from '../helpers/SuccessCallbackHelper';
 import { IObjectGenericMapper }                 from '../objectMappers/interfaces/IObjectGenericMapper';
 import ObjectMapperFactoryListItem from '../objectMappers/ObjectMapperFactoryListItem';

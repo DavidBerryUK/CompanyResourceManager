@@ -2,15 +2,13 @@ import { ApiResponse }                          from '../contracts/ApiResponseCo
 import { ApiResponseContract }                  from '../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../helpers/SuccessCallbackHelper';
 import { IApiModel }                            from '../models/interfaces/IApiModel';
-import { IObjectArrayMapper }                   from '../objectMappers/interfaces/IObjectArrayMapper';
-import { IObjectMapper }                        from '../objectMappers/interfaces/IObjectMapper';
+import { IObjectGenericMapper }                 from '../objectMappers/interfaces/IObjectGenericMapper';
 import { ISuccessCallback }                     from '../helpers/SuccessCallbackHelper';
 import ApiBaseEntityGetById                     from './lowlevel/BaseApiRepositoryReadItem';
 import BaseApiRepositoryCreateItem              from './lowlevel/BaseApiRepositoryCreateItem';
 import BaseApiRepositoryReadList                from './lowlevel/BaseApiRepositoryReadList';
 import BaseApiRepositoryUpdateItem              from './lowlevel/BaseApiRepositoryUpdateItem';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
-import { IObjectGenericMapper } from '../objectMappers/interfaces/IObjectGenericMapper';
 
 /**
  * The lowest level API interface for the application that deals with

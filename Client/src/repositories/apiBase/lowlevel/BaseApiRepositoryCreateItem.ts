@@ -2,7 +2,6 @@ import { IObjectGenericMapper } from '@/repositories/objectMappers/interfaces/IO
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../../helpers/SuccessCallbackHelper';
-import { IObjectMapper }                        from '@/repositories/objectMappers/interfaces/IObjectMapper';
 import { IRepositoryCreateItem }                from './interfaces/IRepositoryCreateItem';
 import { ISuccessCallback }                     from '../../helpers/SuccessCallbackHelper';
 import { ValidationMessage }                    from '../../contracts/ApiResponseContract';
