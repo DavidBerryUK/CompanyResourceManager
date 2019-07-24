@@ -1,3 +1,4 @@
+import { IObjectGenericMapper } from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../../helpers/SuccessCallbackHelper';
@@ -28,7 +29,7 @@ export default class BaseApiRepositoryCreateItem<T> implements IRepositoryCreate
      */
     public post( baseUrl: string,
                  entityModel: T,
-                 convertor: IObjectMapper<T>,
+                 convertor: IObjectGenericMapper<T>,
                  successNotificationType: EnumSuccessType,
                  successCallback: ISuccessCallback<T>)
                     : ApiResponse<T> {
@@ -52,7 +53,7 @@ export default class BaseApiRepositoryCreateItem<T> implements IRepositoryCreate
                     }
 
                     if (response.data.entity) {
-                        const model = convertor.map(response.data.entity);
+                        const model = convertor.mapToEntity(response.data.entity);
                         successCallback(model, successNotificationType);
                         contract.publishSuccess(model);
                     } else {

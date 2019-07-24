@@ -6,11 +6,16 @@ import HomeRoutes                             from './routeBuilders/HomeRoutes';
 import JobRoleRoutes                          from './routeBuilders/JobRoleRoutes';
 import PeopleRoutes                           from './routeBuilders/PeopleRoutes';
 import Router                                 from 'vue-router';
+import SecurityGroupRoutes                    from './routeBuilders/SecurityGroupRoutes';
+import SkillRoutes                            from './routeBuilders/SkillRoutes';
 import Vue                                    from 'vue';
-import VueRouter                              from 'vue-router';
 
-Vue.use(VueRouter);
 
+Vue.use(Router);
+
+// route registration is broken down into seperate sub classes
+// for maintainability.
+//
 export default class ApplicationRouter extends Router {
 
   constructor() {
@@ -19,10 +24,12 @@ export default class ApplicationRouter extends Router {
         AboutRoutes.register(),
         AssetRoutes.register(),
         AssetTypeRoutes.register(),
+        DevelopmentRoutes.register(),
         HomeRoutes.register(),
         JobRoleRoutes.register(),
         PeopleRoutes.register(),
-        DevelopmentRoutes.register(),
+        SecurityGroupRoutes.register(),
+        SkillRoutes.register(),
       ],
     });
   }

@@ -1,9 +1,7 @@
 import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ObjectArrayMapperAssetTypeModel          from '@/repositories/objectMappers/assetType/ObjectArrayMapperAssetTypeModel';
-import ObjectMapperAssetTypeExtendedModel       from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeExtendedModel';
-import ObjectMapperAssetTypeSummaryModel        from '@/repositories/objectMappers/assetType/ObjectMapperAssetTypeSummaryModel';
+import ObjectMapperFactoryAssetType             from '../objectMappers/ObjectMapperFactoryAssetType';
 
 export default class AssetTypeRepositoryFactory {
 
@@ -15,9 +13,8 @@ export default class AssetTypeRepositoryFactory {
         const repository = new GenericApiRepository<AssetTypeSummmaryModel, AssetTypeSummmaryModel, ListFilterWithArchiveFlag>(
             new AssetTypeSummmaryModel().entityName,
             'api/assettype',
-            new ObjectMapperAssetTypeSummaryModel(),
-            new ObjectMapperAssetTypeExtendedModel(),
-            new ObjectArrayMapperAssetTypeModel());
+            ObjectMapperFactoryAssetType.createSummaryMapper(),
+            ObjectMapperFactoryAssetType.createExtendedMapper());
         return repository;
     }
 }

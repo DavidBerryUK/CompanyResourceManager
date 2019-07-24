@@ -1,13 +1,13 @@
+import { IObjectGenericMapper }                 from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
 import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '@/repositories/helpers/SuccessCallbackHelper';
-import { IObjectMapper }                        from '@/repositories/objectMappers/interfaces/IObjectMapper';
 import { ISuccessCallback }                     from '@/repositories/helpers/SuccessCallbackHelper';
 
 export interface IRepositoryUpdateItem<T> {
 
     put(
         baseUrl: string, model: T | null,
-        convertor: IObjectMapper<T>,
+        convertor: IObjectGenericMapper<T>,
         successType: EnumSuccessType,
         successCallback: ISuccessCallback<T>)
         : ApiResponse<T>;

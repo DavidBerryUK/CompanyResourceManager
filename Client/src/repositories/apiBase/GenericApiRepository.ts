@@ -1,8 +1,6 @@
 import { ApiResponse }                          from '../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../helpers/SuccessCallbackHelper';
 import { IApiModel }                            from '../models/interfaces/IApiModel';
-import { IObjectArrayMapper }                   from '@/repositories/objectMappers/interfaces/IObjectArrayMapper';
-import { IObjectMapper }                        from '@/repositories/objectMappers/interfaces/IObjectMapper';
 import ApiBase                                  from './ApiBase';
 import ApiBasePostWithCollectionResult          from './lowlevel/ApiBasePostWithCollectionResult';
 import BaseApiConfig                            from './lowlevel/ApiBaseConfig';
@@ -11,6 +9,8 @@ import ListItemModel                            from '@/repositories/models/shar
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import ObjectArrayMapperListItem                from '../objectMappers/list/ObjectArrayMapperListItem';
 import SuccessCallbackHelper                    from '../helpers/SuccessCallbackHelper';
+import { IObjectGenericMapper }                 from '../objectMappers/interfaces/IObjectGenericMapper';
+import ObjectMapperFactoryListItem from '../objectMappers/ObjectMapperFactoryListItem';
 
 /// S = Summary Entity model
 /// E = Extended Entity model        :IApiModel
@@ -21,64 +21,62 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   public entityName: string;
 
   private baseUrl: string = '';
-  private summaryObjectMapper: IObjectMapper<S>;
-  private extendedObjectMapper: IObjectMapper<E>;
-  private summaryListObjectMapper: IObjectArrayMapper<S>;
+  private objectSummaryEntitytMapper: IObjectGenericMapper<S>;
+  private objectExtendedEntitytMapper: IObjectGenericMapper<E>;
+
 
   public constructor(
     entityName: string,
     endpoint: string,
-    summaryObjectMapper: IObjectMapper<S>,
-    extendedObjectMapper: IObjectMapper<E>,
-    summaryListObjectMapper: IObjectArrayMapper<S>) {
+    objectSummaryEntitytMapper: IObjectGenericMapper<S>,
+    objectExtendedEntitytMapper: IObjectGenericMapper<E>) {
     super();
 
     this.entityName = entityName;
 
-    if ( summaryObjectMapper === null || summaryObjectMapper === undefined ) {
-      throw new Error('Can not create GenericApiRepository without an summaryObjectMapper');
+    if ( objectSummaryEntitytMapper === null || objectSummaryEntitytMapper === undefined ) {
+      throw new Error('Can not create GenericApiRepository without an Summary Object Mapper');
     }
 
-    if ( extendedObjectMapper === null || extendedObjectMapper === undefined ) {
-      throw new Error('Can not create GenericApiRepository without an extendedObjectMapper');
+    if ( objectExtendedEntitytMapper === null || objectExtendedEntitytMapper === undefined ) {
+      throw new Error('Can not create GenericApiRepository without an Extended Object Mapper');
     }
 
-    if ( summaryListObjectMapper === null || summaryListObjectMapper === undefined ) {
-      throw new Error('Can not create GenericApiRepository without an summaryListObjectMapper');
-    }
-
-    this.summaryObjectMapper = summaryObjectMapper;
-    this.extendedObjectMapper = extendedObjectMapper;
-    this.summaryListObjectMapper = summaryListObjectMapper;
+    this.objectSummaryEntitytMapper = objectSummaryEntitytMapper;
+    this.objectExtendedEntitytMapper = objectExtendedEntitytMapper;
     this.baseUrl = `${BaseApiConfig.baseEndpoint}${endpoint}`;
   }
 
   //
   // get a list of all items
   //
-  public getAllAsSummary(): ApiResponse<GenericCollectionModel<S>> {
+  public getAllAsSummary():
+    ApiResponse<GenericCollectionModel<S>> {
 
     return this.baseGetAll<S>(
       this.baseUrl,
-      this.summaryListObjectMapper);
+      this.objectSummaryEntitytMapper);
   }
 
   //
   // get a list of filtered items
   //
-  public getFilteredList(filter: F): ApiResponse<GenericCollectionModel<S>> {
+  public getFilteredList(filter: F):
+    ApiResponse<GenericCollectionModel<S>> {
 
     return ApiBasePostWithCollectionResult.post(
       `${this.baseUrl}/filtered`,
       filter,
-      this.summaryListObjectMapper);
+      this.objectSummaryEntitytMapper);
 
   }
 
   // get an active list of asset types with just id and name
   //
   public getActiveList(): ApiResponse<GenericCollectionModel<ListItemModel>> {
-    return this.baseGetAll<ListItemModel>(`${this.baseUrl}/items`, new ObjectArrayMapperListItem());
+    return this.baseGetAll<ListItemModel>(
+      `${this.baseUrl}/items`,
+      ObjectMapperFactoryListItem.createMapper());
   }
 
   ///
@@ -88,7 +86,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   public getById(id: string): ApiResponse<E> {
     return this.baseGetById(
       this.baseUrl + '/' + id,
-      this.extendedObjectMapper);
+      this.objectExtendedEntitytMapper);
 
   }
 
@@ -100,7 +98,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
     return this.baseSave(
       this.baseUrl,
       model,
-      this.extendedObjectMapper,
+      this.objectExtendedEntitytMapper,
       (returnedModel, successType) => {
         this.savedModel(this.entityName, returnedModel, successType);
       });
@@ -110,7 +108,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   public deactivate(id: string): ApiResponse<S> {
     return this.basePutWithNoModel(
       `${this.baseUrl}/${id}/deactivate`,
-      this.summaryObjectMapper,
+      this.objectSummaryEntitytMapper,
       EnumSuccessType.DeActivatedOk,
       (model, successType) => {
         this.savedModel(this.entityName, model, successType);
@@ -121,7 +119,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   public activate(id: string): ApiResponse<S> {
     return this.basePutWithNoModel(
       `${this.baseUrl}/${id}/activate`,
-      this.summaryObjectMapper,
+      this.objectSummaryEntitytMapper,
       EnumSuccessType.ActivatedOk,
       (model, successType) => {this.savedModel(this.entityName, model, successType);
       });

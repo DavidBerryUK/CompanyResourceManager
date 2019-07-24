@@ -7,6 +7,7 @@ import GenericNotifications                     from './GenericNotifications';
 import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import ModelUpdateNotifications                 from './ModelUpdateNotifications';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
+import SecurityGroupSummaryModel                from '@/repositories/models/securityGroup/SecurityGroupSummaryModel';
 
 export default class NotificationFactory {
 
@@ -30,6 +31,7 @@ export default class NotificationFactory {
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetTypeSummmaryModel>(new AssetTypeSummmaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<JobRoleSummaryModel>(new JobRoleSummaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<PersonSummaryModel>(new PersonSummaryModel().entityName));
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<SecurityGroupSummaryModel>(new SecurityGroupSummaryModel().entityName));
         }
         return this.factoryInstance;
     }

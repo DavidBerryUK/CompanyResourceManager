@@ -1,6 +1,6 @@
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
-import { IObjectMapper }                        from '../../objectMappers/interfaces/IObjectMapper';
+import { IObjectGenericMapper }                 from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
 import { IRepositoryReadItem }                  from './interfaces/IRepositoryReadItem';
 import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
@@ -20,7 +20,7 @@ export default class BaseApiRepositoryReadItem<T> implements IRepositoryReadItem
      */
     public getById(
         url: string,
-        convertor: IObjectMapper<T>): ApiResponse<T> {
+        convertor: IObjectGenericMapper<T>): ApiResponse<T> {
         const contract = new ApiResponseContract<T>();
 
         axios
@@ -32,7 +32,7 @@ export default class BaseApiRepositoryReadItem<T> implements IRepositoryReadItem
                     // console.log(response.data);
 
                     if (response.data.entity) {
-                        const model = convertor.map(response.data.entity);
+                        const model = convertor.mapToEntity(response.data.entity);
                         contract.publishSuccess(model);
 
                     } else {

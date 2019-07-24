@@ -8,7 +8,7 @@ namespace CRM.Models.Rest.Skill
     /// </summary>
     public class SkillSummary
     {
-        public Guid JobRoleId { get; set; }
+        public Guid SkillId { get; set; }
 
         public string Name { get; set; }
 

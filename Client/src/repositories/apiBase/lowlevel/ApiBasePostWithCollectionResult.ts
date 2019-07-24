@@ -1,6 +1,6 @@
 import { ApiResponse }                      from '../../contracts/ApiResponseContract';
 import { ApiResponseContract}               from '../../contracts/ApiResponseContract';
-import { IObjectArrayMapper }               from '../../objectMappers/interfaces/IObjectArrayMapper';
+import { IObjectGenericMapper }             from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
 import ApiBaseError                         from './ApiBaseError';
 import axios                                from 'axios';
 import BaseApiConfig                        from './ApiBaseConfig';
@@ -26,7 +26,7 @@ export default class ApiBasePostWithCollectionResult {
     public static post<T, B>(
         baseUrl: string,
         bodyModel: B,
-        convertor?: IObjectArrayMapper<T>,
+        convertor?: IObjectGenericMapper<T>,
     ): ApiResponse<GenericCollectionModel<T>> {
 
         const contract = new ApiResponseContract<GenericCollectionModel<T>>();
@@ -47,7 +47,7 @@ export default class ApiBasePostWithCollectionResult {
                     model.errorMessage = response.data.errorMessage;
 
                     if (convertor) {
-                        model.items = convertor.map(response.data.items);
+                        model.items = convertor.mapToArray(response.data.items);
                     } else {
                         model.items = response.data.items;
                     }

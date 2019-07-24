@@ -4,7 +4,7 @@ import MenuItem                                 from './models/MenuItem';
 import Vue                                      from 'vue';
 
 @Component
-export default class MenuComponent extends Vue {
+export default class NavigationMenuComponent extends Vue {
 
     private menuItems: Array<MenuItem> = new Array<MenuItem>();
 
@@ -17,4 +17,4 @@ export default class MenuComponent extends Vue {
     }
 }
 
-Vue.component('crm-menu', MenuComponent);
+Vue.component('crm-menu', NavigationMenuComponent);

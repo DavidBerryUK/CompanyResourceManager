@@ -10,6 +10,7 @@ import BaseApiRepositoryCreateItem              from './lowlevel/BaseApiReposito
 import BaseApiRepositoryReadList                from './lowlevel/BaseApiRepositoryReadList';
 import BaseApiRepositoryUpdateItem              from './lowlevel/BaseApiRepositoryUpdateItem';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
+import { IObjectGenericMapper } from '../objectMappers/interfaces/IObjectGenericMapper';
 
 /**
  * The lowest level API interface for the application that deals with
@@ -38,7 +39,7 @@ export default class ApiBase {
      */
     public basePutWithNoModel<T>(
         baseUrl: string,
-        convertor: IObjectMapper<T>,
+        convertor: IObjectGenericMapper<T>,
         successType: EnumSuccessType,
         successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
@@ -61,7 +62,7 @@ export default class ApiBase {
     public baseSave<T extends IApiModel>(
         baseUrl: string,
         model: T,
-        convertor: IObjectMapper<T>,
+        convertor: IObjectGenericMapper<T>,
         successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
         const contract = new ApiResponseContract<T>();
@@ -91,7 +92,7 @@ export default class ApiBase {
      */
     public baseGetById<T>(
         url: string,
-        convertor: IObjectMapper<T>): ApiResponse<T> {
+        convertor: IObjectGenericMapper<T>): ApiResponse<T> {
         const service = new  ApiBaseEntityGetById<T>();
         return service.getById(url, convertor);
     }
@@ -104,7 +105,10 @@ export default class ApiBase {
      * @returns {ApiResponse<GenericCollectionModel<T>>}
      * @memberof ApiBase
      */
-    public baseGetAll<T>(baseUrl: string,  convertor?: IObjectArrayMapper<T>): ApiResponse<GenericCollectionModel<T>> {
+    public baseGetAll<T>(
+        baseUrl: string,
+        convertor?: IObjectGenericMapper<T>): ApiResponse<GenericCollectionModel<T>> {
+
         const service = new BaseApiRepositoryReadList<T>();
         return service.getAll(baseUrl, convertor);
     }

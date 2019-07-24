@@ -8,6 +8,10 @@ using CRM.Service.PersonServices;
 using CRM.Service.PersonServices.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using CRM.Service.SecurityServices;
+using CRM.Service.SecurityServices.Interfaces;
+using CRM.Service.SkillServices;
+using CRM.Service.SkillServices.Interfaces;
 
 namespace CRM.Api.StartupServices
 {
@@ -26,17 +30,31 @@ namespace CRM.Api.StartupServices
             services.AddTransient<IPersonUpdateService, PersonUpdateService>();
             services.AddTransient<IPersonSimpleQueryService, PersonSimpleQueryService>();
 
-            //  Job Roles
+            //  Job
             //
             services.AddTransient<IJobRoleGetService, JobRoleGetService>();
             services.AddTransient<IJobRoleUpdateService, JobRoleUpdateService>();
 
-            //  Assets
+            //  Skills
+            //
+            services.AddTransient<ISkillGetService, SkillGetService>();
+            services.AddTransient<ISkillUpdateService, SkillUpdateService>();
+
+            //  Security Groups
+            //
+            services.AddTransient<ISecurityGroupGetService, SecurityGroupGetService>();
+            services.AddTransient<ISecurityGroupUpdateService, SecurityGroupUpdateService>();
+
+            //  Assets Types
             // 
-            services.AddTransient<IAssetGetService, AssetGetService>();
-            services.AddTransient<IAssetUpdateService, AssetUpdateService>();
             services.AddTransient<IAssetTypeGetService, AssetTypeGetService>();
             services.AddTransient<IAssetTypeUpdateService, AssetTypeUpdateService>();
+
+            // Assets
+            //
+            services.AddTransient<IAssetGetService, AssetGetService>();
+            services.AddTransient<IAssetUpdateService, AssetUpdateService>();
+            
         }
     }
 }

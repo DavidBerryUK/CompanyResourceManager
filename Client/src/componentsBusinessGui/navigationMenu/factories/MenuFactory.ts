@@ -11,6 +11,7 @@ export default class MenuFactory {
         menuItems.push(new MenuItem('About', 'about', `fa-2x ${ComponentIconConstants.AboutIcon}`));
         menuItems.push(this.peopleMenu());
         menuItems.push(this.assetMenu());
+        menuItems.push(this.securityMenu());
         menuItems.push(this.developmentMenu());
 
         return menuItems;
@@ -20,7 +21,15 @@ export default class MenuFactory {
         const menuItem = new MenuItem('People', '', '');
         menuItem.subMenus.push(new MenuItem('List', 'person', `fa-2x ${ComponentIconConstants.StaffListIcon}`));
         menuItem.subMenus.push(new MenuItem('Roles', 'jobrole', `fa-2x ${ComponentIconConstants.StaffListIcon}`));
+        menuItem.subMenus.push(new MenuItem('Skills', 'skill', `fa-2x ${ComponentIconConstants.SkillListIcon}`));
         menuItem.active = true;
+        return menuItem;
+    }
+
+    private static securityMenu(): MenuItem {
+        const menuItem = new MenuItem('Security', '', '');
+        menuItem.subMenus.push(new MenuItem('Groups', 'securitygroup', `fa-2x ${ComponentIconConstants.SecurityGroupListIcon}`));
+        menuItem.active = false;
         return menuItem;
     }
 
@@ -28,14 +37,14 @@ export default class MenuFactory {
         const menuItem = new MenuItem('Assets', '', '');
         menuItem.subMenus.push(new MenuItem('Types', 'AssetType', `fa-2x ${ComponentIconConstants.AssetTypesListIcon}`));
         menuItem.subMenus.push(new MenuItem('Assets', 'Asset', `fa-2x ${ComponentIconConstants.AssetsListIcon}`));
-        menuItem.active = true;
+        menuItem.active = false;
         return menuItem;
     }
 
     private static developmentMenu(): MenuItem {
         const menuItem = new MenuItem('Development', '', '');
         menuItem.subMenus.push(new MenuItem('Development', 'development', `fa-2x ${ComponentIconConstants.DevelopmentListIcon}`));
-        menuItem.active = true;
+        menuItem.active = false;
         return menuItem;
     }
 

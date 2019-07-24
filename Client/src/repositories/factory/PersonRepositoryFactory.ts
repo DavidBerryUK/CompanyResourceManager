@@ -1,8 +1,6 @@
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ObjectArrayMapperPersonSummaryModel      from '@/repositories/objectMappers/person/ObjectArrayMapperPersonSummaryModel';
-import ObjectMapperPersonExtendedModel          from '../objectMappers/person/ObjectMapperPersonExtendedModel';
-import ObjectMapperPersonSummaryModel           from '@/repositories/objectMappers/person/ObjectMapperPersonSummaryModel';
+import ObjectMapperFactoryPerson                from '../objectMappers/ObjectMapperFactoryPerson';
 import PersonExtendedModel                      from '../models/person/PersonExtendedModel';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 
@@ -16,9 +14,8 @@ export default class PersonRepositoryFactory {
         const repository = new GenericApiRepository<PersonSummaryModel, PersonExtendedModel, ListFilterWithArchiveFlag>(
             new PersonSummaryModel().entityName,
             'api/person',
-            new ObjectMapperPersonSummaryModel(),
-            new ObjectMapperPersonExtendedModel(),
-            new ObjectArrayMapperPersonSummaryModel());
+            ObjectMapperFactoryPerson.createSummaryMapper(),
+            ObjectMapperFactoryPerson.createExtendedMapper());
         return repository;
     }
 }

@@ -1,6 +1,6 @@
+import { IObjectGenericMapper }                 from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
 import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '@/repositories/helpers/SuccessCallbackHelper';
-import { IObjectMapper }                        from '@/repositories/objectMappers/interfaces/IObjectMapper';
 import { ISuccessCallback }                     from '@/repositories/helpers/SuccessCallbackHelper';
 
 export interface IRepositoryCreateItem<T> {
@@ -8,7 +8,7 @@ export interface IRepositoryCreateItem<T> {
     post(
         baseUrl: string,
         entityModel: T,
-        convertor: IObjectMapper<T>,
+        convertor: IObjectGenericMapper<T>,
         successNotificationType: EnumSuccessType,
         successCallback: ISuccessCallback<T>): ApiResponse<T>;
 }

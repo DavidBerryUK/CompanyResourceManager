@@ -1,7 +1,7 @@
-import { IRepositoryReadList }              from './interfaces/IRepositoryReadList';
 import { ApiResponse }                      from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }              from '../../contracts/ApiResponseContract';
-import { IObjectArrayMapper }               from '@/repositories/objectMappers/interfaces/IObjectArrayMapper';
+import { IObjectGenericMapper }             from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
+import { IRepositoryReadList }              from './interfaces/IRepositoryReadList';
 import ApiBaseError                         from './ApiBaseError';
 import axios                                from 'axios';
 import BaseApiConfig                        from './ApiBaseConfig';
@@ -18,7 +18,7 @@ export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList
      * @returns {ApiResponse<GenericCollectionModel<T>>}
      * @memberof ApiBaseGetAll
      */
-    public getAll(baseUrl: string, convertor?: IObjectArrayMapper<T>): ApiResponse<GenericCollectionModel<T>> {
+    public getAll(baseUrl: string, convertor?: IObjectGenericMapper<T>): ApiResponse<GenericCollectionModel<T>> {
 
         const contract = new ApiResponseContract<GenericCollectionModel<T>>();
         const model = new GenericCollectionModel<T>();
@@ -30,7 +30,7 @@ export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList
                 model.errorMessage = response.data.errorMessage;
 
                 if (convertor) {
-                    model.items = convertor.map(response.data.items);
+                    model.items = convertor.mapToArray(response.data.items);
                 } else {
                     model.items = response.data.items;
                 }
