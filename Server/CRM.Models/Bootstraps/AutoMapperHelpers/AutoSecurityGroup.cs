@@ -16,6 +16,9 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
             //
             cfg.CreateMap<SecurityGroup, SecurityGroupSummary>();
             cfg.CreateMap<SecurityGroup, SecurityGroupExtended>();
+
+            // Map to List Item
+            //
             cfg.CreateMap<SecurityGroup, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.SecurityGroupId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));

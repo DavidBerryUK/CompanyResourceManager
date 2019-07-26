@@ -2,24 +2,24 @@ import { IApiModel }                            from '../interfaces/IApiModel';
 
 export default class SkillSummaryModel implements IApiModel {
 
-    public SkillId: string;
+    public skillId: string;
     public name: string;
     public description: string;
     public isActive: boolean;
 
     constructor() {
-        this.SkillId = '00000000-0000-0000-0000-000000000000';
+        this.skillId = '00000000-0000-0000-0000-000000000000';
         this.name = '';
         this.description = '';
         this.isActive = false;
     }
 
     public get entityName(): string {
-        return 'JobRole';
+        return 'Skill';
     }
 
     public get entityKey(): string {
-        return `${this.SkillId}`;
+        return `${this.skillId}`;
     }
 
     public get entityValue(): string {

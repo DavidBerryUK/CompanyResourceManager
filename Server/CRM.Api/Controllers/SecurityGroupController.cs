@@ -1,11 +1,12 @@
-﻿using CRM.Models.Rest.Lists;
+﻿using CRM.Models.Rest.Generic;
+using CRM.Models.Rest.Lists;
+using CRM.Models.Rest.Security;
 using CRM.Models.Rest.Skill;
-using CRM.Service.SecurityServices.Interfaces;
+using CRM.Service.Repository.SecurityServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CRM.Models.Rest.Security;
 
 
 namespace CRM.Api.Controllers
@@ -14,23 +15,16 @@ namespace CRM.Api.Controllers
     [Route("api/security/group")]
     public class SecurityGroupController : Controller
     {
-        private readonly ISecurityGroupGetService _securityGroupGetService;
-        private readonly ISecurityGroupUpdateService _securityGroupUpdateService;
-        
-
+        private readonly ISecurityGroupCrudService _securityGroupCrudService;
 
         public SecurityGroupController(
-            ISecurityGroupGetService securityGroupGetService,
-            ISecurityGroupUpdateService securityGroupUpdateService)
+            ISecurityGroupCrudService securityGroupCrudService)
         {
             //
             // Validate Input Parameters
             //
-            _securityGroupGetService = securityGroupGetService
-                                 ?? throw new ArgumentNullException(nameof(securityGroupGetService));
-
-            _securityGroupUpdateService = securityGroupUpdateService
-                                    ?? throw new ArgumentNullException(nameof(securityGroupUpdateService));
+            _securityGroupCrudService = securityGroupCrudService
+                                 ?? throw new ArgumentNullException(nameof(securityGroupCrudService));
         }
 
         [HttpGet("")]
@@ -39,7 +33,7 @@ namespace CRM.Api.Controllers
             //
             // Validate Input Parameters
             //
-            var data = await _securityGroupGetService.GetAllAsync();
+            var data = await _securityGroupCrudService.GetAllAsSummaryAsync();
             return Ok(data);
         }
 
@@ -51,12 +45,12 @@ namespace CRM.Api.Controllers
             //
             // Validate Input Parameters
             //
-            var data = await _securityGroupGetService.GetListItemsAsync();
+            var data = await _securityGroupCrudService.GetActiveAsListItemsAsync();
             return Ok(data);
         }
 
         [HttpPost("filtered")]
-        public async Task<ActionResult<List<SkillSummary>>> FilteredList(SecurityGroupFilteredListRequest filter)
+        public async Task<ActionResult<List<SkillSummary>>> FilteredList(FilteredArchiveRequest filter)
         {
             //
             // Validate Input Parameters
@@ -66,7 +60,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(filter));
             }
 
-            var data = await _securityGroupGetService.GetFilteredAsync(filter);
+            var data = await _securityGroupCrudService.GetFilteredAsSummaryAsync(filter);
             return Ok(data);
         }
 
@@ -81,7 +75,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(securityGroupId)} can not be blank");
             }
 
-            var data = await _securityGroupGetService.GetByIdAsync(securityGroupId);
+            var data = await _securityGroupCrudService.GetItemAsExtendedAsync(securityGroupId);
             return Ok(data);
         }
 
@@ -102,7 +96,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(securityGroup));
             }
 
-            var data = await _securityGroupUpdateService.Update(securityGroupId, securityGroup);
+            var data = await _securityGroupCrudService.UpdateAsync(securityGroupId, securityGroup);
             return Ok(data);
         }
 
@@ -117,7 +111,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(securityGroup));
             }
 
-            var data = await _securityGroupUpdateService.Create(securityGroup);
+            var data = await _securityGroupCrudService.CreateAsync(securityGroup);
             return Ok(data);
         }
 
@@ -132,7 +126,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(securityGroupId)} can not be blank");
             }
 
-            var data = await _securityGroupUpdateService.Deactivate(securityGroupId);
+            var data = await _securityGroupCrudService.UpdateActiveStatusAsync(securityGroupId, false);
             return Ok(data);
         }
 
@@ -147,7 +141,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(securityGroupId)} can not be blank");
             }
 
-            var data = await _securityGroupUpdateService.Activate(securityGroupId);
+            var data = await _securityGroupCrudService.UpdateActiveStatusAsync(securityGroupId, true);
             return Ok(data);
         }
 

@@ -23,24 +23,8 @@ export default class ModelUpdateNotifications<  T extends IApiModel>  {
         this.subscribersItemDeactivated = new Array<SubscriberRegistryItem<IMessageWithModel<T>>>();
     }
 
-    // listSubscribers() {
-    //     console.log("####################################");
-    //     this.listSubscriberForArray("Items Created",this.subscribersItemCreated);
-    //     this.listSubscriberForArray("Items Updated",this.subscribersItemUpdated);
-    //     this.listSubscriberForArray("Items Deleted",this.subscribersItemDeleted);
-    //     this.listSubscriberForArray("Items Deactivated",this.subscribersItemDeactivated);
-    //     this.listSubscriberForArray("Items Activated",this.subscribersItemActivated);
-    // }
-
-    // private listSubscriberForArray(title: string, array : Array<SubscriberRegistryItem<IMessageWithModel<T>>>){
-    //     console.log("----" + title + "----");
-    //     array.forEach((item) => {
-    //         console.log(item.subscriber.componentName);
-    //     });
-    // }
-
     public unregisterSubscriberFromAll(subscriber: IComponentMetaData) {
-        // console.log("!!!!!!!!!!!!!!!!! unregisterSubscriberFromAll:[b]");
+
         this.subscribersItemCreated = this.subscribersItemCreated
         .filter((item: SubscriberRegistryItem<IMessageWithModel<T>>) => item.subscriber !== subscriber);
 
@@ -102,7 +86,11 @@ export default class ModelUpdateNotifications<  T extends IApiModel>  {
     }
 
     public publishItemUpdated(model: T) {
-       this.subscribersItemUpdated.forEach((subscriber) => { subscriber.callback(model); });
+        console.log('**************************');
+        console.log('* Publish that item has been updated');
+        console.log(model);
+        console.log('**************************');
+        this.subscribersItemUpdated.forEach((subscriber) => { subscriber.callback(model); });
     }
 
     public publishItemDeleted(model: T) {

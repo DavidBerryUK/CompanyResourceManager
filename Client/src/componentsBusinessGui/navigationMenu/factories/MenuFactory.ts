@@ -22,6 +22,7 @@ export default class MenuFactory {
         menuItem.subMenus.push(new MenuItem('List', 'person', `fa-2x ${ComponentIconConstants.StaffListIcon}`));
         menuItem.subMenus.push(new MenuItem('Roles', 'jobrole', `fa-2x ${ComponentIconConstants.StaffListIcon}`));
         menuItem.subMenus.push(new MenuItem('Skills', 'skill', `fa-2x ${ComponentIconConstants.SkillListIcon}`));
+        menuItem.subMenus.push(new MenuItem('Teams', 'team', `fa-2x ${ComponentIconConstants.TeamListIcon}`));
         menuItem.active = true;
         return menuItem;
     }

@@ -17,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CurriculumVitaeServices\" />
-    <Folder Include="Workflow\" />
+    <Folder Include="Repository\Workflow\" />
   </ItemGroup>
 
 </Project>

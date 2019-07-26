@@ -5,7 +5,7 @@ import FilterSecurityGroupService                 from '@/services/filters/Secur
 import NavigationCrudSecurityGroup                from '@/routeNavigation/NavigationCrudSecurityGroup';
 import NavigationListComponent                    from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                       from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ObjectMapperFactorySecuityGroup            from '@/repositories/objectMappers/ObjectMapperFactorySecurityGroup';
+import ModelMapperFactorySecuityGroup            from '@/repositories/modelMappers/ModelMapperFactorySecurityGroup';
 import SecurityGroupRepositoryFactory             from '@/repositories/factory/SecurityGroupRepositoryFactory';
 import SecurityGroupSummaryModel                  from '@/repositories/models/securityGroup/SecurityGroupSummaryModel';
 
@@ -34,7 +34,7 @@ export default class SecurityGroupList extends BasePage implements IComponentMet
     'Security Groups',                                          // Title
     new NavigationCrudSecurityGroup(),                          // Security Group Navigation Provider
     SecurityGroupRepositoryFactory.getRepository(),             // Security Group Repository Provider
-    ObjectMapperFactorySecuityGroup.createSummaryMapper(),      // Map Java Object to Typescript Security Group Object
+    ModelMapperFactorySecuityGroup.createSummaryMapper(),      // Map Java Object to Typescript Security Group Object
     new FilterSecurityGroupService(),                           // Filter Security Group list (user text search)
     (data: SecurityGroupSummaryModel) => `${data.name}`,        // Format of text for cell line 1 (header)
     (data: SecurityGroupSummaryModel) => `${data.description}`, // Format of text for cell line 2 (body)

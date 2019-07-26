@@ -7,7 +7,6 @@
         <div v-else>        
             <i class="fas fa-filter icon-button-border "></i>
         </div>
-
     </v-btn>
 </div>
 </template>

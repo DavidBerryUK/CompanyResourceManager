@@ -6,6 +6,7 @@ import { Prop }                                 from 'vue-property-decorator';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import CommonAppDialogOptions                   from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
 import Component                                from 'vue-class-component';
+import FilterButton                             from '../filterButton/FilterButton';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListFilterDialogState                    from '@/componentsCommonGui/listFilterDialog/ListFilterDialogState';
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
@@ -14,7 +15,6 @@ import NavigationListConfig                     from './NavigationListConfig';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import ThemeSettings                            from '@/componentsCommonGui/theme/ThemeSettings';
 import Vue                                      from 'vue';
-import FilterButton                             from '../filterButton/FilterButton';
 
 @Component({
   components: {
@@ -159,6 +159,10 @@ export default class NavigationListComponent extends Vue  implements IComponentM
         this.updateList(model, true);
       })
       .onItemUpdated(this, (model: IApiModel) => {
+        console.log('**************************************');
+        console.log('ListenToModelUpdated:onItemUpdated:');
+        console.log(model);
+        console.log('**************************************');
         this.updateList(model, false);
       })
       .onItemDeleted(this, (model: IApiModel) => {

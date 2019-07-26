@@ -1,5 +1,6 @@
 ﻿using CRM.Models.Rest.Asset;
-using CRM.Service.AssetServices.Interfaces;
+using CRM.Models.Rest.Generic;
+using CRM.Service.Repository.AssetServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,33 +12,24 @@ namespace CRM.Api.Controllers
     [Route("api/asset")]
     public class AssetController : Controller
     {
-        private readonly IAssetGetService _assetGetService;
-        private readonly IAssetUpdateService _assetUpdateService;
 
+        private readonly IAssetCrudService _assetCrudService;
 
-        public AssetController(
-            IAssetGetService assetGetService, 
-            IAssetUpdateService assetUpdateService)
+        public AssetController(IAssetCrudService assetCrudService)
         {
-            //
-            // Validate Input Parameters
-            //
-            _assetGetService = assetGetService
-                               ?? throw new ArgumentNullException(nameof(assetGetService));
-
-            _assetUpdateService = assetUpdateService
-                                  ?? throw new ArgumentNullException(nameof(assetUpdateService));
+            _assetCrudService = assetCrudService
+                                ?? throw new ArgumentNullException(nameof(assetCrudService));
         }
 
         [HttpGet("")]
         public async Task<ActionResult<List<AssetSummary>>> All()
         {
-            var data = await _assetGetService.GetAllAsync();
+            var data = await _assetCrudService.GetAllAsSummaryAsync();
             return Ok(data);
         }
 
         [HttpPost("filtered")]
-        public async Task<ActionResult<List<AssetSummary>>> FilteredList(AssetFilteredListRequest filter)
+        public async Task<ActionResult<List<AssetSummary>>> FilteredList(FilteredArchiveRequest filter)
         {
             //
             // Validate Input Parameters
@@ -47,7 +39,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(filter));
             }
 
-            var data = await _assetGetService.GetFilteredAsync(filter);
+            var data = await _assetCrudService.GetFilteredAsSummaryAsync(filter);
             return Ok(data);
         }
 
@@ -63,7 +55,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(assetId)} can not be blank");
             }
 
-            var data = await _assetGetService.GetByIdAsync(assetId);
+            var data = await _assetCrudService.GetItemAsExtendedAsync(assetId);
             return Ok(data);
         }
 
@@ -83,7 +75,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(assetSummary));
             }
 
-            var data = await _assetUpdateService.Update(assetId, assetSummary);
+            var data = await _assetCrudService.UpdateAsync(assetId, assetSummary);
             return Ok(data);
         }
 
@@ -98,21 +90,21 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(assetSummary));
             }
 
-            var data = await _assetUpdateService.Create(assetSummary);
+            var data = await _assetCrudService.CreateAsync(assetSummary);
             return Ok(data);
         }
 
         [HttpPut("{assetId}/deactivate")]
         public async Task<ActionResult<AssetSummary>> Deactivate(Guid assetId)
         {
-            var data = await _assetUpdateService.Deactivate(assetId);
+            var data = await _assetCrudService.UpdateActiveStatusAsync(assetId,false);
             return Ok(data);
         }
 
         [HttpPut("{assetId}/activate")]
         public async Task<ActionResult<AssetSummary>> Activate(Guid assetId)
         {
-            var data = await _assetUpdateService.Activate(assetId);
+            var data = await _assetCrudService.UpdateActiveStatusAsync(assetId, true);
             return Ok(data);
         }
     }

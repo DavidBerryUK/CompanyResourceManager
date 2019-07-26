@@ -3,6 +3,7 @@ using CRM.Models.Bootstraps.Interfaces;
 using CRM.Models.Database.Assets;
 using CRM.Models.Rest.Asset;
 using System.Diagnostics.CodeAnalysis;
+using CRM.Models.Rest.Lists;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {
@@ -22,6 +23,12 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
                 .ForMember(dest => dest.HasAssetBadge, opt => opt.MapFrom(source => source.NavAssetType.HasAssetBadge))
                 .ForMember(dest => dest.HasOperatingSystem, opt => opt.MapFrom(source => source.NavAssetType.HasOperatingSystem))
                 .ForMember(dest => dest.BadgeNo, opt => opt.MapFrom(source => source.BadgeNo));
+
+            // Map to List Item
+            //
+            cfg.CreateMap<Asset, ListItem>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.AssetTypeId))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
 
             // Map rest objects back to database entity objects
             //

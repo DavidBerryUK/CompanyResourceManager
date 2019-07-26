@@ -3,8 +3,8 @@ import { EnumModalIcon }                        from '../../componentsCommonGui/
 import { EnumModalWidth }                       from '../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IComponentMetaData }                   from './../../components/interfaces/ComponentMetaDataInterfaces';
+import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
-import { IObjectGenericMapper }                 from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
 import { Prop }                                 from 'vue-property-decorator';
 import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
 import { Watch }                                from 'vue-property-decorator';
@@ -26,7 +26,7 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
   //
   public modelChangeTracker!: DeepObjectComparator;
   public model!: T;
-  public objectMapper: IObjectGenericMapper<T>;
+  public objectMapper: IModelGenericMapper<T>;
 
   @Prop() public id!: string;
 
@@ -34,7 +34,7 @@ export default class BaseEditPage<T extends IApiModel> extends BasePage implemen
 
   constructor(  navigationHandler: INavigationCrud,
                 repository: GenericApiRepository<any, T, any>,
-                objectMapper: IObjectGenericMapper<T>) {
+                objectMapper: IModelGenericMapper<T>) {
     super();
     this.navigationHandler = navigationHandler;
     this.repository = repository;

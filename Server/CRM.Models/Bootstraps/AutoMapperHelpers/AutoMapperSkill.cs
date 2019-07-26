@@ -16,6 +16,9 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
             //
             cfg.CreateMap<Skill, SkillSummary>();
             cfg.CreateMap<Skill, SkillExtended>();
+
+            // Map to List Item
+            //
             cfg.CreateMap<Skill, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.SkillId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));

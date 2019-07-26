@@ -1,9 +1,6 @@
 <template>
   <crm-element-page>
-    <crm-navigation-list 
-        :configuration="listConfiguration" 
-        title="People">  
-    </crm-navigation-list>
+    <h1>Development Page</h1>
   </crm-element-page>
 </template>
 

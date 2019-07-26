@@ -1,6 +1,7 @@
 ﻿using CRM.Models.Rest.AssetType;
+using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
-using CRM.Service.AssetTypeServices.Interfaces;
+using CRM.Service.Repository.AssetTypeServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,40 +13,36 @@ namespace CRM.Api.Controllers
     [Route("api/assettype")]
     public class AssetTypeController : Controller
     {
-        private readonly IAssetTypeGetService _assetTypeGetService;
-        private readonly IAssetTypeUpdateService _assetTypeUpdateService;
+        
+        private readonly IAssetTypeCrudService _assetTypeCrudService;
 
 
         public AssetTypeController(
-            IAssetTypeGetService assetTypeGetService, 
-            IAssetTypeUpdateService assetTypeUpdateService)
+            IAssetTypeCrudService assetTypeCrudService)
         {
             //
             // Validate Input Parameters
             //
-            _assetTypeGetService = assetTypeGetService
-                                   ?? throw new ArgumentNullException(nameof(assetTypeGetService));
-
-            _assetTypeUpdateService = assetTypeUpdateService
-                                      ?? throw new ArgumentNullException(nameof(assetTypeUpdateService));
+            _assetTypeCrudService = assetTypeCrudService
+                                   ?? throw new ArgumentNullException(nameof(assetTypeCrudService));
         }
 
         [HttpGet("")]
         public async Task<ActionResult<List<AssetTypeSummary>>> All()
         {
-            var data = await _assetTypeGetService.GetAllAsync();
+            var data = await _assetTypeCrudService.GetAllAsSummaryAsync();
             return Ok(data);
         }
 
         [HttpGet("items")]
         public async Task<ActionResult<List<ListItem>>> ListActive()
         {
-            var data = await _assetTypeGetService.GetListItemsAsync();
+            var data = await _assetTypeCrudService.GetActiveAsListItemsAsync();
             return Ok(data);
         }
 
         [HttpPost("filtered")]
-        public async Task<ActionResult<List<AssetTypeSummary>>> FilteredList(AssetTypeFilteredListRequest filter)
+        public async Task<ActionResult<List<AssetTypeSummary>>> FilteredList(FilteredArchiveRequest filter)
         {
             //
             // Validate Input Parameters
@@ -55,7 +52,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(filter));
             }
 
-            var data = await _assetTypeGetService.GetFilteredAsync(filter);
+            var data = await _assetTypeCrudService.GetFilteredAsSummaryAsync(filter);
             return Ok(data);
         }
 
@@ -70,7 +67,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(assetTypeId)} can not be blank");
             }
 
-            var data = await _assetTypeGetService.GetByIdAsync(assetTypeId);
+            var data = await _assetTypeCrudService.GetItemAsExtendedAsync(assetTypeId);
             return Ok(data);
         }
 
@@ -91,7 +88,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(assetType));
             }
 
-            var data = await _assetTypeUpdateService.Update(assetTypeId, assetType);
+            var data = await _assetTypeCrudService.UpdateAsync(assetTypeId, assetType);
             return Ok(data);
         }
 
@@ -106,7 +103,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(assetType));
             }
 
-            var data = await _assetTypeUpdateService.Create(assetType);
+            var data = await _assetTypeCrudService.CreateAsync(assetType);
             return Ok(data);
         }
 
@@ -121,7 +118,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(assetTypeId)} can not be blank");
             }
 
-            var data = await _assetTypeUpdateService.Deactivate(assetTypeId);
+            var data = await _assetTypeCrudService.UpdateActiveStatusAsync(assetTypeId,false);
             return Ok(data);
         }
 
@@ -136,7 +133,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(assetTypeId)} can not be blank");
             }
 
-            var data = await _assetTypeUpdateService.Activate(assetTypeId);
+            var data = await _assetTypeCrudService.UpdateActiveStatusAsync(assetTypeId,true);
             return Ok(data);
         }
 

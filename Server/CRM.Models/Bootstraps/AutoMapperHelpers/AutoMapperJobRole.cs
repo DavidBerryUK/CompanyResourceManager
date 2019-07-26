@@ -16,6 +16,9 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
             //
             cfg.CreateMap<JobRole, JobRoleSummary>();
             cfg.CreateMap<JobRole, JobRoleExtended>();
+
+            // Map to List Item
+            //
             cfg.CreateMap<JobRole, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.JobRoleId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));

@@ -7,7 +7,7 @@ import FilterAssetSummaryService                from '@/services/filters/assetSu
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ObjectMapperFactoryAsset                 from '@/repositories/objectMappers/ObjectMapperFactoryAsset';
+import ModelMapperFactoryAsset                 from '@/repositories/modelMappers/ModelMapperFactoryAsset';
 
 
 /**
@@ -36,7 +36,7 @@ export default class AssetList extends BasePage implements IComponentMetaData {
   'Assets',                                           // Title
   new NavigationCrudAsset(),                          // People Navigation Provider
   AssetRepositoryFactory.getRepository(),             // People Repository Provider
-  ObjectMapperFactoryAsset.createSummaryMapper(),                // Map Java Object to Typescript People Object
+  ModelMapperFactoryAsset.createSummaryMapper(),                // Map Java Object to Typescript People Object
   new FilterAssetSummaryService(),                    // Filter People list (user text search)
   (data: AssetSummaryModel) => `${data.description}`, // Format of text for cell line 1 (header)
   (data: AssetSummaryModel) => ``,                    // Format of text for cell line 2 (body)

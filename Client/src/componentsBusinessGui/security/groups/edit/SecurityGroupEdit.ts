@@ -5,7 +5,7 @@ import Component                                from 'vue-class-component';
 import EntityEditTemplateComponent              from '@/componentsCommonGui/entityEditTemplate/EntityEditTemplateComponent';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import NavigationCrudSecurityGroup              from '@/routeNavigation/NavigationCrudSecurityGroup';
-import ObjectMapperFactorySecuityGroup          from '@/repositories/objectMappers/ObjectMapperFactorySecurityGroup';
+import ModelMapperFactorySecuityGroup          from '@/repositories/modelMappers/ModelMapperFactorySecurityGroup';
 import SecurityGroupRepositoryFactory           from '@/repositories/factory/SecurityGroupRepositoryFactory';
 import SecurityGroupSummaryModel                from '@/repositories/models/securityGroup/SecurityGroupSummaryModel';
 
@@ -32,7 +32,7 @@ export default class SecurityGroupEdit extends BaseEditPage<SecurityGroupSummary
     super(
       new NavigationCrudSecurityGroup(),
       SecurityGroupRepositoryFactory.getRepository(),
-      ObjectMapperFactorySecuityGroup.createExtendedMapper());
+      ModelMapperFactorySecuityGroup.createExtendedMapper());
   }
 
   // the form has been mounted into the DOM

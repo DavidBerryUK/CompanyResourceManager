@@ -8,6 +8,7 @@ import PeopleRoutes                           from './routeBuilders/PeopleRoutes
 import Router                                 from 'vue-router';
 import SecurityGroupRoutes                    from './routeBuilders/SecurityGroupRoutes';
 import SkillRoutes                            from './routeBuilders/SkillRoutes';
+import TeamRoutes                             from './routeBuilders/TeamRoutes';
 import Vue                                    from 'vue';
 
 
@@ -29,6 +30,7 @@ export default class ApplicationRouter extends Router {
         JobRoleRoutes.register(),
         PeopleRoutes.register(),
         SecurityGroupRoutes.register(),
+        TeamRoutes.register(),
         SkillRoutes.register(),
       ],
     });

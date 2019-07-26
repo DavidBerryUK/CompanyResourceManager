@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using CRM.Api.Controllers;
-using CRM.Service.AssetServices.Interfaces;
+using CRM.Service.Repository.AssetServices.Interfaces;
 using FluentAssertions;
 using Moq;
 using Xunit;
@@ -14,12 +14,12 @@ namespace CRM.Api.UnitTests.AssetControllers
         [Fact]
         public void CreateConstructorSuccess()
         {
-            var mockAssetGetService = new Mock<IAssetGetService>();
-            var mockAssetUpdateService = new Mock<IAssetUpdateService>();
+            var mockAssetCrudService = new Mock<IAssetCrudService>();
+            
 
             Action act = () =>
             {
-                var controller = new AssetController(mockAssetGetService.Object, mockAssetUpdateService.Object);
+                var controller = new AssetController(mockAssetCrudService.Object);
             };
 
             act.Should().NotThrow<Exception>();
@@ -28,11 +28,11 @@ namespace CRM.Api.UnitTests.AssetControllers
         [Fact]
         public void CreateConstructorMissingGetAssetService()
         {
-            var mockAssetUpdateService = new Mock<IAssetUpdateService>();
+           
 
             Action act = () =>
             {
-                var controller = new AssetController(null, mockAssetUpdateService.Object);
+                var controller = new AssetController(null);
             };
 
             act.Should().Throw<ArgumentNullException>()
@@ -41,23 +41,5 @@ namespace CRM.Api.UnitTests.AssetControllers
                 .Should().Be("assetGetService");
                 
         }
-
-        [Fact]
-        public void CreateConstructorMissingUpdateAssetService()
-        {
-            var mockAssetGetService = new Mock<IAssetGetService>();
-
-            Action act = () =>
-            {
-                var controller = new AssetController(mockAssetGetService.Object,null);
-            };
-
-            act.Should().Throw<ArgumentNullException>()
-                .And
-                .ParamName
-                .Should().Be("assetUpdateService");
-
-        }
-
     }
 }

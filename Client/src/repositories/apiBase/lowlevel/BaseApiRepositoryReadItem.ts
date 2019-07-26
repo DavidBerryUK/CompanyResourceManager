@@ -1,6 +1,6 @@
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
-import { IObjectGenericMapper }                 from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
+import { IModelGenericMapper }                 from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { IRepositoryReadItem }                  from './interfaces/IRepositoryReadItem';
 import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
@@ -20,7 +20,7 @@ export default class BaseApiRepositoryReadItem<T> implements IRepositoryReadItem
      */
     public getById(
         url: string,
-        convertor: IObjectGenericMapper<T>): ApiResponse<T> {
+        convertor: IModelGenericMapper<T>): ApiResponse<T> {
         const contract = new ApiResponseContract<T>();
 
         axios

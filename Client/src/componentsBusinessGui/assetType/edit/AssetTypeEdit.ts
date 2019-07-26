@@ -6,7 +6,7 @@ import BaseEditPage                             from '@/componentsBusinessGui/ba
 import Component                                from 'vue-class-component';
 import EntityEditTemplateComponent              from '@/componentsCommonGui/entityEditTemplate/EntityEditTemplateComponent';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
-import ObjectMapperFactoryAssetType             from '@/repositories/objectMappers/ObjectMapperFactoryAssetType';
+import ModelMapperFactoryAssetType              from '@/repositories/modelMappers/ModelMapperFactoryAssetType';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 
 //
@@ -31,7 +31,7 @@ export default class AssetTypeEdit extends BaseEditPage<AssetTypeExtendedModel>
     super(
       new NavigationCrudAssetType(),
       AssetTypeRepositoryFactory.getRepository(),
-      ObjectMapperFactoryAssetType.createExtendedMapper());
+      ModelMapperFactoryAssetType.createExtendedMapper());
   }
 
   public mounted() {

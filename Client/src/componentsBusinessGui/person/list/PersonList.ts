@@ -5,7 +5,7 @@ import FilterPersonSummaryService               from '@/services/filters/personF
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ObjectMapperFactoryPerson                from '@/repositories/objectMappers/ObjectMapperFactoryPerson';
+import ModelMapperFactoryPerson                from '@/repositories/modelMappers/ModelMapperFactoryPerson';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 
@@ -34,7 +34,7 @@ export default class PersonList extends BasePage implements IComponentMetaData {
     'Person',                                                         // Title
     new NavigationCrudPerson(),                                       // People Navigation Provider
     PersonRepositoryFactory.getRepository(),                          // People Repository Provider
-    ObjectMapperFactoryPerson.createSummaryMapper(),                  // Map Java Object to Typescript People Object
+    ModelMapperFactoryPerson.createSummaryMapper(),                  // Map Java Object to Typescript People Object
     new FilterPersonSummaryService(),                                 // Filter People list (user text search)
     (data: PersonSummaryModel) => `${data.forename} ${data.surname}`, // Format of text for cell line 1 (header)
     (data: PersonSummaryModel) => `${data.jobRoleName}`,              // Format of text for cell line 2 (body)

@@ -1,17 +1,19 @@
-﻿using CRM.Service.AssetServices;
-using CRM.Service.AssetServices.Interfaces;
-using CRM.Service.AssetTypeServices;
-using CRM.Service.AssetTypeServices.Interfaces;
-using CRM.Service.JobRoleServices;
-using CRM.Service.JobRoleServices.Interfaces;
-using CRM.Service.PersonServices;
-using CRM.Service.PersonServices.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using CRM.Service.SecurityServices;
-using CRM.Service.SecurityServices.Interfaces;
-using CRM.Service.SkillServices;
-using CRM.Service.SkillServices.Interfaces;
+using CRM.Service.Repository.AssetServices;
+using CRM.Service.Repository.AssetServices.Interfaces;
+using CRM.Service.Repository.AssetTypeServices;
+using CRM.Service.Repository.AssetTypeServices.Interfaces;
+using CRM.Service.Repository.JobRoleServices;
+using CRM.Service.Repository.JobRoleServices.Interfaces;
+using CRM.Service.Repository.PersonServices;
+using CRM.Service.Repository.PersonServices.Interfaces;
+using CRM.Service.Repository.SecurityServices;
+using CRM.Service.Repository.SecurityServices.Interfaces;
+using CRM.Service.Repository.SkillServices;
+using CRM.Service.Repository.SkillServices.Interfaces;
+using CRM.Service.Repository.TeamServices;
+using CRM.Service.Repository.TeamServices.Interfaces;
 
 namespace CRM.Api.StartupServices
 {
@@ -25,36 +27,27 @@ namespace CRM.Api.StartupServices
             }
 
             //  person
-            //
-            services.AddTransient<IPersonGetService, PersonGetService>();
-            services.AddTransient<IPersonUpdateService, PersonUpdateService>();
             services.AddTransient<IPersonSimpleQueryService, PersonSimpleQueryService>();
+            services.AddTransient<IPersonCrudService, PersonCrudService>();
 
             //  Job
-            //
-            services.AddTransient<IJobRoleGetService, JobRoleGetService>();
-            services.AddTransient<IJobRoleUpdateService, JobRoleUpdateService>();
+            services.AddTransient<IJobRoleCrudService, JobRoleCrudService>();
 
             //  Skills
-            //
-            services.AddTransient<ISkillGetService, SkillGetService>();
-            services.AddTransient<ISkillUpdateService, SkillUpdateService>();
+            services.AddTransient<ISkillCrudService, SkillCrudService>();
 
             //  Security Groups
-            //
-            services.AddTransient<ISecurityGroupGetService, SecurityGroupGetService>();
-            services.AddTransient<ISecurityGroupUpdateService, SecurityGroupUpdateService>();
+            services.AddTransient<ISecurityGroupCrudService, SecurityGroupCrudService>();
+
+            //  Teams
+            services.AddTransient<ITeamCrudService, TeamCrudService>();
 
             //  Assets Types
-            // 
-            services.AddTransient<IAssetTypeGetService, AssetTypeGetService>();
-            services.AddTransient<IAssetTypeUpdateService, AssetTypeUpdateService>();
+            services.AddTransient<IAssetCrudService, AssetCrudService>();
 
             // Assets
-            //
-            services.AddTransient<IAssetGetService, AssetGetService>();
-            services.AddTransient<IAssetUpdateService, AssetUpdateService>();
-            
+            services.AddTransient<IAssetCrudService, AssetCrudService>();
+            services.AddTransient<IAssetTypeCrudService, AssetTypeCrudService>();
         }
     }
 }

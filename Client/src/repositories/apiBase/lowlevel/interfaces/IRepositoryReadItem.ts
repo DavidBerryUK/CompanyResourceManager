@@ -1,6 +1,6 @@
-import { IObjectGenericMapper }                 from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
+import { IModelGenericMapper }                 from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
 
 export interface IRepositoryReadItem<T> {
-    getById(url: string, convertor: IObjectGenericMapper<T>): ApiResponse<T>;
+    getById(url: string, convertor: IModelGenericMapper<T>): ApiResponse<T>;
 }

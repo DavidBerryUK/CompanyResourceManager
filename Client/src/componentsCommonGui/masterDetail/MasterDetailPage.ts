@@ -4,7 +4,7 @@ import { EnumModalWidth }                         from '@/componentsCommonGui/di
 import CommonAppDialogController                  from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import Component                                  from 'vue-class-component';
 import ComponentIconConstants                     from '@/constants/ComponentIconConstants';
-import ElementPageWrapperComponent                from '@/componentsCommonGui/elementPageWrapperComponent/ElementPageWrapperComponent';
+import ElementPageWrapperComponent                from '@/componentsCommonGui/elementPageWrapper/ElementPageWrapperComponent';
 import ElementTitleWrapperComponent               from '@/componentsCommonGui/elementTitleComponent/ElementTitleWrapperComponent';
 import NavigationCheckInterfaceGuards             from '@/router/interfaces/NavigationCheckInterfaces';
 import Vue                                        from 'vue';

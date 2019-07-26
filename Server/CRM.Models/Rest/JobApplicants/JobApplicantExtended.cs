@@ -1,21 +1,15 @@
-﻿using System;
-
-namespace CRM.Models.Rest.JobApplicants
+﻿namespace CRM.Models.Rest.JobApplicants
 {
-    public class JobApplicantSummary
+    /// <summary>
+    /// Extended models are used to display the full information for an entity,
+    ///  These will include reference data from additional database tables.
+    ///
+    /// The Extended models will always be a super class of the summery model
+    /// to ensure that this minimum amount of data is always available in
+    /// the front end system
+    /// </summary>
+    public class JobApplicantExtended: JobApplicantSummary
     {
-        public Guid JobApplicantId { get; set; }
-
-        public Guid JobRoleId { get; set; }
-
-        public Guid WorkflowInstanceId { get; set; }
-
-        public string Title { get; set; }
-
-        public string Forename { get; set; }
-
-        public string MiddleNames { get; set; }
-
-        public string Surname { get; set; }
+       
     }
 }

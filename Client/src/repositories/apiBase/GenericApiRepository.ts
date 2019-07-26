@@ -1,37 +1,49 @@
-import { ApiResponse }                          from '../contracts/ApiResponseContract';
-import { EnumSuccessType }                      from '../helpers/SuccessCallbackHelper';
-import { IApiModel }                            from '../models/interfaces/IApiModel';
-import ApiBase                                  from './ApiBase';
-import ApiBasePostWithCollectionResult          from './lowlevel/ApiBasePostWithCollectionResult';
-import BaseApiConfig                            from './lowlevel/ApiBaseConfig';
+import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
+import { EnumSuccessType }                      from '@/repositories/helpers/SuccessCallbackHelper';
+import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
+import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
+import ApiBase                                  from '@/repositories/apiBase/ApiBase';
+import ApiBasePostWithCollectionResult          from '@/repositories/apiBase/lowlevel/ApiBasePostWithCollectionResult';
+import BaseApiConfig                            from '@/repositories/apiBase/lowlevel/ApiBaseConfig';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
+import ModelMapperFactoryListItem               from '@/repositories/modelMappers/ModelMapperFactoryListItem';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
-import SuccessCallbackHelper                    from '../helpers/SuccessCallbackHelper';
-import { IObjectGenericMapper }                 from '../objectMappers/interfaces/IObjectGenericMapper';
-import ObjectMapperFactoryListItem from '../objectMappers/ObjectMapperFactoryListItem';
+import SuccessCallbackHelper                    from '@/repositories/helpers/SuccessCallbackHelper';
+
+// Top Level of the repository that provides the following functions
+// * activate             - restore a record from being archived
+// * deactivate           - archive a record
+// * getActiveList        - get a list of active records, key value only
+// * getAllAsSummary      - get a list of all records ( summary model version )
+// * getById              - get single record ( extended model version )
+// * getFilteredList      - get a list of filtered records ( summary model version )
+// * save                 - save a record ( extended model version )
+//
+// This calls lower level functions on the ApiBase class, which in turn
+// calls very low level classes for each of the functions above.
+// The low level classes de-couple the application from the network package
+// used to connect to the server, it also provides a common wrapper to
+// add a layer of application functionallity that is available by default
+// for all modules requiring API functions.
 
 /// S = Summary Entity model
 /// E = Extended Entity model        :IApiModel
 /// F = List Filter Model
-
 export default class GenericApiRepository<S extends IApiModel, E extends S, F> extends ApiBase {
 
   public entityName: string;
 
   private baseUrl: string = '';
-  private objectSummaryEntitytMapper: IObjectGenericMapper<S>;
-  private objectExtendedEntitytMapper: IObjectGenericMapper<E>;
+  private objectSummaryEntitytMapper: IModelGenericMapper<S>;
+  private objectExtendedEntitytMapper: IModelGenericMapper<E>;
 
 
   public constructor(
-    entityName: string,
     endpoint: string,
-    objectSummaryEntitytMapper: IObjectGenericMapper<S>,
-    objectExtendedEntitytMapper: IObjectGenericMapper<E>) {
+    objectSummaryEntitytMapper: IModelGenericMapper<S>,
+    objectExtendedEntitytMapper: IModelGenericMapper<E>) {
     super();
-
-    this.entityName = entityName;
 
     if ( objectSummaryEntitytMapper === null || objectSummaryEntitytMapper === undefined ) {
       throw new Error('Can not create GenericApiRepository without an Summary Object Mapper');
@@ -43,6 +55,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
 
     this.objectSummaryEntitytMapper = objectSummaryEntitytMapper;
     this.objectExtendedEntitytMapper = objectExtendedEntitytMapper;
+    this.entityName = this.objectSummaryEntitytMapper.mapToEntity({}).entityName;
     this.baseUrl = `${BaseApiConfig.baseEndpoint}${endpoint}`;
   }
 
@@ -75,7 +88,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   public getActiveList(): ApiResponse<GenericCollectionModel<ListItemModel>> {
     return this.baseGetAll<ListItemModel>(
       `${this.baseUrl}/items`,
-      ObjectMapperFactoryListItem.createMapper());
+      ModelMapperFactoryListItem.createMapper());
   }
 
   ///
@@ -120,12 +133,24 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
       `${this.baseUrl}/${id}/activate`,
       this.objectSummaryEntitytMapper,
       EnumSuccessType.ActivatedOk,
-      (model, successType) => {this.savedModel(this.entityName, model, successType);
+      (model, successType) => {
+        this.savedModel(this.entityName, model, successType);
       });
 
   }
 
-  private savedModel(entityName: string, model: S | E, successType: EnumSuccessType) {
+  /**
+   * Publishes notifications to inform any interested pieces of code that an entity
+   * have saved, successfully. Is an error occurs then the lower level code
+   * will publish an appropriate message to the notification channel.
+   * @param entityName The name of the entity saved / updated / deleted
+   * @param model the model after has been updated
+   * @param successType Success Type
+   */
+  private savedModel(
+    entityName: string,
+    model: S | E,
+    successType: EnumSuccessType) {
     const notificationHandler = NotificationFactory.instance.getNotificationInstance(entityName);
 
     switch (successType) {
@@ -149,6 +174,5 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
       default:
           NotificationFactory.instance.genericNotifications().publishMessage(`Item ${SuccessCallbackHelper.enumSuccessTypeToString(successType)}`);
     }
-
   }
 }

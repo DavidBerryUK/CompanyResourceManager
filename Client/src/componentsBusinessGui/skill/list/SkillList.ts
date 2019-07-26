@@ -5,7 +5,7 @@ import FilterSkillService                       from '@/services/filters/SkillFi
 import NavigationCrudSkill                      from '@/routeNavigation/NavigationCrudSkill';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ObjectMapperFactorySkill                 from '@/repositories/objectMappers/ObjectMapperFactorySkill';
+import ModelMapperFactorySkill                 from '@/repositories/modelMappers/ModelMapperFactorySkill';
 import SkillRepositoryFactory                   from '@/repositories/factory/SkillRepositoryFactory';
 import SkillSummaryModel                        from '@/repositories/models/skill/SkillSummaryModel';
 
@@ -34,7 +34,7 @@ export default class SkillList extends BasePage implements IComponentMetaData {
     'Skills',                                     // Title
     new NavigationCrudSkill(),                    // Skill Navigation Provider
     SkillRepositoryFactory.getRepository(),       // Skill Repository Provider
-    ObjectMapperFactorySkill.createSummaryMapper(),          // Map Java Object to Typescript Skill Object
+    ModelMapperFactorySkill.createSummaryMapper(),          // Map Java Object to Typescript Skill Object
     new FilterSkillService(),                     // Filter Skill list (user text search)
     (data: SkillSummaryModel) => `${data.name}`,  // Format of text for cell line 1 (header)
     (data: SkillSummaryModel) => ``,              // Format of text for cell line 2 (body)

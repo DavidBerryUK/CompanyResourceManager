@@ -20,6 +20,8 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
             cfg.CreateMap<Person, PersonExtended>()
                 .ForMember(dest => dest.JobRoleName, opt => opt.MapFrom(source => source.NavJobRole.Name));
 
+            // Map to List Item
+            //
             cfg.CreateMap<Person, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.PersonId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => $"{source.Forename} {source.Surname}") );

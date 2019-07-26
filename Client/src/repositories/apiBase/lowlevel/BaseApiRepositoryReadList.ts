@@ -1,6 +1,6 @@
 import { ApiResponse }                      from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }              from '../../contracts/ApiResponseContract';
-import { IObjectGenericMapper }             from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
+import { IModelGenericMapper }             from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { IRepositoryReadList }              from './interfaces/IRepositoryReadList';
 import ApiBaseError                         from './ApiBaseError';
 import axios                                from 'axios';
@@ -18,7 +18,7 @@ export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList
      * @returns {ApiResponse<GenericCollectionModel<T>>}
      * @memberof ApiBaseGetAll
      */
-    public getAll(baseUrl: string, convertor?: IObjectGenericMapper<T>): ApiResponse<GenericCollectionModel<T>> {
+    public getAll(baseUrl: string, convertor?: IModelGenericMapper<T>): ApiResponse<GenericCollectionModel<T>> {
 
         const contract = new ApiResponseContract<GenericCollectionModel<T>>();
         const model = new GenericCollectionModel<T>();

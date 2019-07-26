@@ -2,7 +2,7 @@ import { ApiResponse }                          from '../contracts/ApiResponseCo
 import { ApiResponseContract }                  from '../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../helpers/SuccessCallbackHelper';
 import { IApiModel }                            from '../models/interfaces/IApiModel';
-import { IObjectGenericMapper }                 from '../objectMappers/interfaces/IObjectGenericMapper';
+import { IModelGenericMapper }                 from '../modelMappers/interfaces/IModelGenericMapper';
 import { ISuccessCallback }                     from '../helpers/SuccessCallbackHelper';
 import ApiBaseEntityGetById                     from './lowlevel/BaseApiRepositoryReadItem';
 import BaseApiRepositoryCreateItem              from './lowlevel/BaseApiRepositoryCreateItem';
@@ -37,7 +37,7 @@ export default class ApiBase {
      */
     public basePutWithNoModel<T>(
         baseUrl: string,
-        convertor: IObjectGenericMapper<T>,
+        convertor: IModelGenericMapper<T>,
         successType: EnumSuccessType,
         successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
@@ -60,7 +60,7 @@ export default class ApiBase {
     public baseSave<T extends IApiModel>(
         baseUrl: string,
         model: T,
-        convertor: IObjectGenericMapper<T>,
+        convertor: IModelGenericMapper<T>,
         successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
         const contract = new ApiResponseContract<T>();
@@ -90,7 +90,7 @@ export default class ApiBase {
      */
     public baseGetById<T>(
         url: string,
-        convertor: IObjectGenericMapper<T>): ApiResponse<T> {
+        convertor: IModelGenericMapper<T>): ApiResponse<T> {
         const service = new  ApiBaseEntityGetById<T>();
         return service.getById(url, convertor);
     }
@@ -105,7 +105,7 @@ export default class ApiBase {
      */
     public baseGetAll<T>(
         baseUrl: string,
-        convertor?: IObjectGenericMapper<T>): ApiResponse<GenericCollectionModel<T>> {
+        convertor?: IModelGenericMapper<T>): ApiResponse<GenericCollectionModel<T>> {
 
         const service = new BaseApiRepositoryReadList<T>();
         return service.getAll(baseUrl, convertor);

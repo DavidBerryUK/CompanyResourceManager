@@ -1,4 +1,4 @@
-import { IObjectGenericMapper } from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
+import { IModelGenericMapper } from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../../helpers/SuccessCallbackHelper';
@@ -28,7 +28,7 @@ export default class BaseApiRepositoryCreateItem<T> implements IRepositoryCreate
      */
     public post( baseUrl: string,
                  entityModel: T,
-                 convertor: IObjectGenericMapper<T>,
+                 convertor: IModelGenericMapper<T>,
                  successNotificationType: EnumSuccessType,
                  successCallback: ISuccessCallback<T>)
                     : ApiResponse<T> {

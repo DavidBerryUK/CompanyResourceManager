@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Security
 {
     /// <summary>
     /// Database Entity Object
     /// </summary>
-    public class SecurityGroup
+    public class SecurityGroup : IDatabaseEntity<Guid>
     {
         public Guid SecurityGroupId { get; set; }
 
@@ -25,5 +26,9 @@ namespace CRM.Models.Database.Security
         public ICollection<SecurityGroupPerson> NavSecurityGroupPersons { get; set; }
 
         public ICollection<SecurityGroupSecurityPermission> NavSecurityGroupSecurityPermission { get; set; }
+
+        // Interface IDatabaseEntity
+        public Guid PrimaryKey => this.SecurityGroupId;
+        // Interface IDatabaseEntity
     }
 }

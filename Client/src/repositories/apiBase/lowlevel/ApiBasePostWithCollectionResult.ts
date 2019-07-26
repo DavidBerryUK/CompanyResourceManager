@@ -1,6 +1,6 @@
 import { ApiResponse }                      from '../../contracts/ApiResponseContract';
 import { ApiResponseContract}               from '../../contracts/ApiResponseContract';
-import { IObjectGenericMapper }             from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
+import { IModelGenericMapper }             from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import ApiBaseError                         from './ApiBaseError';
 import axios                                from 'axios';
 import BaseApiConfig                        from './ApiBaseConfig';
@@ -26,7 +26,7 @@ export default class ApiBasePostWithCollectionResult {
     public static post<T, B>(
         baseUrl: string,
         bodyModel: B,
-        convertor?: IObjectGenericMapper<T>,
+        convertor?: IModelGenericMapper<T>,
     ): ApiResponse<GenericCollectionModel<T>> {
 
         const contract = new ApiResponseContract<GenericCollectionModel<T>>();

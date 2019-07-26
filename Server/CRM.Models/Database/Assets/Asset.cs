@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Assets
 {
     /// <summary>
     /// Database Entity Object
     /// </summary>
-    public class Asset
+    public class Asset : IDatabaseEntity<Guid>
     {
         public Guid AssetId { get; set; }
 
@@ -27,5 +28,9 @@ namespace CRM.Models.Database.Assets
         public AssetType NavAssetType { get; set; }
 
         public ICollection<PersonAsset> NavPersonAssets { get; set; }
+
+        // Interface IDatabaseEntity
+        public Guid PrimaryKey => this.AssetId;
+        // Interface IDatabaseEntity
     }
 }

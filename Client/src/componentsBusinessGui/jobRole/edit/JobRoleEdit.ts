@@ -6,8 +6,8 @@ import EntityEditTemplateComponent              from '@/componentsCommonGui/enti
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
+import ModelMapperFactoryJobRole                from '@/repositories/modelMappers/ModelMapperFactoryJobRole';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
-import ObjectMapperFactoryJobRole               from '@/repositories/objectMappers/ObjectMapperFactoryJobRole';
 
 //
 // attribute indicates this is a component,
@@ -32,7 +32,7 @@ export default class JobRoleEdit extends BaseEditPage<JobRoleSummaryModel>
     super(
       new NavigationCrudJobRole(),
       JobRoleRepositoryFactory.getRepository(),
-      ObjectMapperFactoryJobRole.createExtendedMapper());
+      ModelMapperFactoryJobRole.createExtendedMapper());
   }
 
   // the form has been mounted into the DOM

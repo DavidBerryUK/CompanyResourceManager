@@ -11,7 +11,7 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
 import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
-import ObjectMapperFactoryAsset                 from '@/repositories/objectMappers/ObjectMapperFactoryAsset';
+import ModelMapperFactoryAsset                 from '@/repositories/modelMappers/ModelMapperFactoryAsset';
 
 // attribute indicates this is a component,
 //  this is where any sub components are also registered
@@ -37,7 +37,7 @@ export default class AssetEdit extends BaseEditPage<AssetExtendedModel> implemen
     super(
       new NavigationCrudAsset(),
       AssetRepositoryFactory.getRepository(),
-      ObjectMapperFactoryAsset.createExtendedMapper());
+      ModelMapperFactoryAsset.createExtendedMapper());
   }
 
   // the form has been mounted into the DOM

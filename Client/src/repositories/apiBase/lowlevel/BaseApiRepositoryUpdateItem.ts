@@ -1,7 +1,7 @@
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../../helpers/SuccessCallbackHelper';
-import { IObjectGenericMapper }                 from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
+import { IModelGenericMapper }                 from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { IRepositoryUpdateItem }                from './interfaces/IRepositoryUpdateItem';
 import { ISuccessCallback }                     from '../../helpers/SuccessCallbackHelper';
 import { ValidationMessage }                    from '../../contracts/ApiResponseContract';
@@ -25,7 +25,7 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
      */
     public put(  baseUrl: string,
                  model: T | null,
-                 convertor: IObjectGenericMapper<T>,
+                 convertor: IModelGenericMapper<T>,
                  successType: EnumSuccessType,
                  successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
@@ -49,7 +49,15 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
                     }
 
                     if (response.data.entity) {
+
                         const mappedModel = convertor.mapToEntity(response.data.entity);
+
+                        console.log('Item Updated');
+                        console.log('Item returned');
+                        console.log(response.data.entity);
+                        console.log('mapped moddel');
+                        console.log(mappedModel);
+
                         successCallback( mappedModel, successType);
                         contract.publishSuccess(mappedModel);
 

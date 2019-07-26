@@ -49,5 +49,6 @@ namespace CRM.Database.Context
         public virtual DbSet<SecurityGroupTeam> SecurityGroupTeams { get; set; }
         public virtual DbSet<SecurityPermission> SecurityPermissions { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
+        public virtual DbSet<Team> Teams { get; set; }
     }
 }

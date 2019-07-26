@@ -1,11 +1,12 @@
-﻿using CRM.Models.Rest.Skill;
+﻿using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
-using CRM.Service.PersonServices.Interfaces;
+using CRM.Models.Rest.Skill;
+using CRM.Service.Repository.PersonServices.Interfaces;
+using CRM.Service.Repository.SkillServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CRM.Service.SkillServices.Interfaces;
 
 namespace CRM.Api.Controllers
 {
@@ -13,29 +14,19 @@ namespace CRM.Api.Controllers
     [Route("api/skill")]
     public class SkillController : Controller
     {
-        private readonly ISkillGetService _skillGetService;
-        private readonly ISkillUpdateService _skillUpdateService;
-        private readonly IPersonGetService _personGetService;
+        private readonly ISkillCrudService _skillCrudService;
         private readonly IPersonSimpleQueryService _personSimpleQueryService;
 
 
         public SkillController(
-            ISkillGetService skillGetService,
-            ISkillUpdateService skillUpdateService, 
-            IPersonGetService personGetService, 
+            ISkillCrudService skillCrudService,
             IPersonSimpleQueryService personSimpleQueryService)
         {
             //
             // Validate Input Parameters
             //
-            _skillGetService = skillGetService
-                                 ?? throw new ArgumentNullException(nameof(skillGetService));
-
-            _skillUpdateService = skillUpdateService
-                                    ?? throw new ArgumentNullException(nameof(skillUpdateService));
-
-            _personGetService = personGetService
-                                ?? throw new ArgumentNullException(nameof(personGetService));
+            _skillCrudService = skillCrudService
+                                 ?? throw new ArgumentNullException(nameof(skillCrudService));
 
             _personSimpleQueryService = personSimpleQueryService 
                                 ?? throw new ArgumentNullException(nameof(personSimpleQueryService));
@@ -47,7 +38,7 @@ namespace CRM.Api.Controllers
             //
             // Validate Input Parameters
             //
-            var data = await _skillGetService.GetAllAsync();
+            var data = await _skillCrudService.GetAllAsSummaryAsync();
             return Ok(data);
         }
 
@@ -72,12 +63,12 @@ namespace CRM.Api.Controllers
             //
             // Validate Input Parameters
             //
-            var data = await _skillGetService.GetListItemsAsync();
+            var data = await _skillCrudService.GetActiveAsListItemsAsync();
             return Ok(data);
         }
 
         [HttpPost("filtered")]
-        public async Task<ActionResult<List<SkillSummary>>> FilteredList(SkillFilteredListRequest filter)
+        public async Task<ActionResult<List<SkillSummary>>> FilteredList(FilteredArchiveRequest filter)
         {
             //
             // Validate Input Parameters
@@ -87,7 +78,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(filter));
             }
 
-            var data = await _skillGetService.GetFilteredAsync(filter);
+            var data = await _skillCrudService.GetFilteredAsSummaryAsync(filter);
             return Ok(data);
         }
 
@@ -102,7 +93,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(skillId)} can not be blank");
             }
 
-            var data = await _skillGetService.GetByIdAsync(skillId);
+            var data = await _skillCrudService.GetItemAsExtendedAsync(skillId);
             return Ok(data);
         }
 
@@ -123,7 +114,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(skill));
             }
 
-            var data = await _skillUpdateService.Update(skillId, skill);
+            var data = await _skillCrudService.UpdateAsync(skillId, skill);
             return Ok(data);
         }
 
@@ -138,7 +129,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(skill));
             }
 
-            var data = await _skillUpdateService.Create(skill);
+            var data = await _skillCrudService.CreateAsync(skill);
             return Ok(data);
         }
 
@@ -153,7 +144,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(skillId)} can not be blank");
             }
 
-            var data = await _skillUpdateService.Deactivate(skillId);
+            var data = await _skillCrudService.UpdateActiveStatusAsync(skillId,false);
             return Ok(data);
         }
 
@@ -168,7 +159,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(skillId)} can not be blank");
             }
 
-            var data = await _skillUpdateService.Activate(skillId);
+            var data = await _skillCrudService.UpdateActiveStatusAsync(skillId, true);
             return Ok(data);
         }
 

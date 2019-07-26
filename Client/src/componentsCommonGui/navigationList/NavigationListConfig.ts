@@ -1,4 +1,4 @@
-import { IObjectGenericMapper } from '@/repositories/objectMappers/interfaces/IObjectGenericMapper';
+import { IModelGenericMapper } from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IListFilterArchiveFlag }               from '@/repositories/models/listFilter/interfaces/IListFilterInterfaces';
 import { IListFilterByText }                    from '@/services/filters/interfaces/FilterInterfaces';
@@ -15,7 +15,7 @@ export default class NavigationListConfig<S extends IApiModel> {
     public filterListService: IListFilterByText<S>;
     public navigationHandler: INavigationCrud;
     public repository: GenericApiRepository<S, any, any>;
-    public objectMapper: IObjectGenericMapper<S>;
+    public objectMapper: IModelGenericMapper<S>;
     public summaryEntityName: string;
     // the currently selected person
     public selectedItem: S;
@@ -32,7 +32,7 @@ export default class NavigationListConfig<S extends IApiModel> {
         title: string,
         navigationHandler: INavigationCrud,
         repository: GenericApiRepository<S, any, any>,
-        objectMapper: IObjectGenericMapper<S>,
+        objectMapper: IModelGenericMapper<S>,
         filterListService: IListFilterByText<S>,
         line1TextFunction: ((data: S ) => string  ),
         line2TextFunction: ((data: S ) => string  ),

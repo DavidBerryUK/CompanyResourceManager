@@ -1,7 +1,8 @@
-﻿using CRM.Models.Rest.JobRole;
+﻿using CRM.Models.Rest.Generic;
+using CRM.Models.Rest.JobRole;
 using CRM.Models.Rest.Lists;
-using CRM.Service.JobRoleServices.Interfaces;
-using CRM.Service.PersonServices.Interfaces;
+using CRM.Service.Repository.JobRoleServices.Interfaces;
+using CRM.Service.Repository.PersonServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,31 +14,21 @@ namespace CRM.Api.Controllers
     [Route("api/jobrole")]
     public class JobRoleController : Controller
     {
-        private readonly IJobRoleGetService _jobRoleGetService;
-        private readonly IJobRoleUpdateService _jobRoleUpdateService;
-        private readonly IPersonGetService _personGetService;
+        private readonly IJobRoleCrudService _jobRoleCrudService;
         private readonly IPersonSimpleQueryService _personSimpleQueryService;
 
 
         public JobRoleController(
-            IJobRoleGetService jobRoleGetService,
-            IJobRoleUpdateService jobRoleUpdateService, 
-            IPersonGetService personGetService, 
+            IJobRoleCrudService jobRoleCrudService,
             IPersonSimpleQueryService personSimpleQueryService)
         {
             //
             // Validate Input Parameters
             //
-            _jobRoleGetService = jobRoleGetService
-                                 ?? throw new ArgumentNullException(nameof(jobRoleGetService));
+            _jobRoleCrudService = jobRoleCrudService
+                                 ?? throw new ArgumentNullException(nameof(jobRoleCrudService));
 
-            _jobRoleUpdateService = jobRoleUpdateService
-                                    ?? throw new ArgumentNullException(nameof(jobRoleUpdateService));
-
-            _personGetService = personGetService
-                                ?? throw new ArgumentNullException(nameof(personGetService));
-
-            _personSimpleQueryService = personSimpleQueryService 
+            _personSimpleQueryService = personSimpleQueryService
                                         ?? throw new ArgumentNullException(nameof(personSimpleQueryService));
         }
 
@@ -47,7 +38,7 @@ namespace CRM.Api.Controllers
             //
             // Validate Input Parameters
             //
-            var data = await _jobRoleGetService.GetAllAsync();
+            var data = await _jobRoleCrudService.GetAllAsSummaryAsync();
             return Ok(data);
         }
 
@@ -72,12 +63,12 @@ namespace CRM.Api.Controllers
             //
             // Validate Input Parameters
             //
-            var data = await _jobRoleGetService.GetListItemsAsync();
+            var data = await _jobRoleCrudService.GetActiveAsListItemsAsync();
             return Ok(data);
         }
 
         [HttpPost("filtered")]
-        public async Task<ActionResult<List<JobRoleSummary>>> FilteredList(JobRoleFilteredListRequest filter)
+        public async Task<ActionResult<List<JobRoleSummary>>> FilteredList(FilteredArchiveRequest filter)
         {
             //
             // Validate Input Parameters
@@ -87,7 +78,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(filter));
             }
 
-            var data = await _jobRoleGetService.GetFilteredAsync(filter);
+            var data = await _jobRoleCrudService.GetFilteredAsSummaryAsync(filter);
             return Ok(data);
         }
 
@@ -102,7 +93,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
             }
 
-            var data = await _jobRoleGetService.GetByIdAsync(jobRoleId);
+            var data = await _jobRoleCrudService.GetItemAsExtendedAsync(jobRoleId);
             return Ok(data);
         }
 
@@ -123,7 +114,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(jobRole));
             }
 
-            var data = await _jobRoleUpdateService.Update(jobRoleId, jobRole);
+            var data = await _jobRoleCrudService.UpdateAsync(jobRoleId, jobRole);
             return Ok(data);
         }
 
@@ -138,7 +129,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(jobRole));
             }
 
-            var data = await _jobRoleUpdateService.Create(jobRole);
+            var data = await _jobRoleCrudService.CreateAsync(jobRole);
             return Ok(data);
         }
 
@@ -153,7 +144,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
             }
 
-            var data = await _jobRoleUpdateService.Deactivate(jobRoleId);
+            var data = await _jobRoleCrudService.UpdateActiveStatusAsync(jobRoleId, false);
             return Ok(data);
         }
 
@@ -168,7 +159,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
             }
 
-            var data = await _jobRoleUpdateService.Activate(jobRoleId);
+            var data = await _jobRoleCrudService.UpdateActiveStatusAsync(jobRoleId, true);
             return Ok(data);
         }
 

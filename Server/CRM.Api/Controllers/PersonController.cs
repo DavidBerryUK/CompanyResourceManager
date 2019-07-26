@@ -1,5 +1,6 @@
-﻿using CRM.Models.Rest.Person;
-using CRM.Service.PersonServices.Interfaces;
+﻿using CRM.Models.Rest.Generic;
+using CRM.Models.Rest.Person;
+using CRM.Service.Repository.PersonServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,21 +12,11 @@ namespace CRM.Api.Controllers
     [Route("api/Person")]
     public class PersonController : Controller
     {
-        private readonly IPersonGetService _personGetService;
-        private readonly IPersonUpdateService _personUpdateService;
-
-        public PersonController(
-            IPersonGetService personGetService,
-            IPersonUpdateService personUpdateService)
+        private readonly IPersonCrudService _personCrudService;
+        public PersonController(IPersonCrudService personCrudService)
         {
-            //
-            // Validate Input Parameters
-            //
-            _personGetService = personGetService
-                ?? throw new ArgumentNullException(nameof(personGetService));
-
-            _personUpdateService = personUpdateService
-                ?? throw new ArgumentNullException(nameof(personUpdateService));
+            _personCrudService = personCrudService
+                ?? throw new ArgumentNullException(nameof(personCrudService));
         }
 
         [HttpGet("")]
@@ -34,12 +25,12 @@ namespace CRM.Api.Controllers
             //
             // Validate Input Parameters
             //
-            var data = await _personGetService.GetAllAsync();
+            var data = await _personCrudService.GetAllAsSummaryAsync();
             return Ok(data);
         }
 
         [HttpPost("filtered")]
-        public async Task<ActionResult<List<PersonSummary>>> FilteredList(PersonFilteredListRequest filter)
+        public async Task<ActionResult<List<PersonSummary>>> FilteredList(FilteredArchiveRequest filter)
         {
             //
             // Validate Input Parameters
@@ -49,7 +40,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(filter));
             }
 
-            var data = await _personGetService.GetFilteredAsync(filter);
+            var data = await _personCrudService.GetFilteredAsSummaryAsync(filter);
             return Ok(data);
         }
 
@@ -64,7 +55,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(personId)} can not be blank");
             }
 
-            var data = await _personGetService.GetByIdAsync(personId);
+            var data = await _personCrudService.GetItemAsExtendedAsync(personId);
             return Ok(data);
         }
 
@@ -84,12 +75,12 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(person));
             }
 
-            var data = await _personUpdateService.Update(personId, person);
+            var data = await _personCrudService.UpdateAsync(personId, person);
             return Ok(data);
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<PersonExtended>> Create( [FromBody] PersonExtended person)
+        public async Task<ActionResult<PersonExtended>> Create([FromBody] PersonExtended person)
         {
             //
             // Validate Input Parameters
@@ -99,7 +90,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(person));
             }
 
-            var data = await _personUpdateService.Create( person);
+            var data = await _personCrudService.CreateAsync(person);
             return Ok(data);
         }
 
@@ -114,7 +105,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException("personId can not be blank");
             }
 
-            var data = await _personUpdateService.Deactivate(personId);
+            var data = await _personCrudService.UpdateActiveStatusAsync(personId,false);
             return Ok(data);
         }
 
@@ -129,7 +120,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(personId)} can not be blank");
             }
 
-            var data = await _personUpdateService.Activate(personId);
+            var data = await _personCrudService.UpdateActiveStatusAsync(personId, true);
             return Ok(data);
         }
     }

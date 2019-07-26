@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Skills
 {
     /// <summary>
     /// Database Entity Object
     /// </summary>
-    public class Skill
+    public class Skill : IDatabaseEntity<Guid>
     {
         public Guid SkillId { get; set; }
 
@@ -21,5 +22,9 @@ namespace CRM.Models.Database.Skills
         //
 
         public ICollection<PersonSkill>  NavPersonSkills { get; set; }
+
+        // Interface IDatabaseEntity
+        public Guid PrimaryKey => this.SkillId;
+        // Interface IDatabaseEntity
     }
 }

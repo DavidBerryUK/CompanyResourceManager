@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Workflow
 {
-    public class Workflow
+    public class Workflow : IDatabaseEntity<Guid>
     {
         public Guid WorkflowId { get; set; }
 
@@ -25,5 +26,8 @@ namespace CRM.Models.Database.Workflow
 
         public ICollection<WorkflowNode> NavWorkflowNodes { get; set; }
 
+        // Interface IDatabaseEntity
+        public Guid PrimaryKey => this.WorkflowId;
+        // Interface IDatabaseEntity
     }
 }
