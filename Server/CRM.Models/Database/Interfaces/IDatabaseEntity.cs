@@ -1,8 +1,7 @@
 ﻿namespace CRM.Models.Database.Interfaces
 {
-    public interface IDatabaseEntity<TPrimaryKey>
+    public interface IDatabaseLinkEntity<TPrimaryKey>
     {
-        TPrimaryKey PrimaryKey { get;}
-        bool IsActive { get; set; }
+        (TPrimaryKey first,  TPrimaryKey second) GetKey { get;}
     }
 }

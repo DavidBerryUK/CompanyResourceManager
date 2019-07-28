@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CRM.Service.Repository.TeamServices;
 
 namespace CRM.Api.Controllers
 {
@@ -15,15 +16,20 @@ namespace CRM.Api.Controllers
     public class TeamController : Controller
     {
         private readonly ITeamCrudService _teamCrudService;
+        private readonly ITeamListService _teamListService;
 
         public TeamController(
-            ITeamCrudService teamCrudService)
+            ITeamCrudService teamCrudService, 
+            ITeamListService teamListService)
         {
             //
             // Validate Input Parameters
             //
             _teamCrudService = teamCrudService
-                                 ?? throw new ArgumentNullException(nameof(teamCrudService));
+                    ?? throw new ArgumentNullException(nameof(teamCrudService));
+
+            _teamListService = teamListService
+                    ?? throw new ArgumentNullException(nameof(teamListService));
         }
 
         [HttpGet("")]
@@ -33,18 +39,6 @@ namespace CRM.Api.Controllers
             // Validate Input Parameters
             //
             var data = await _teamCrudService.GetAllAsSummaryAsync();
-            return Ok(data);
-        }
-
-        
-
-        [HttpGet("items")]
-        public async Task<ActionResult<List<ListItem>>> ListActive()
-        {
-            //
-            // Validate Input Parameters
-            //
-            var data = await _teamCrudService.GetActiveAsListItemsAsync();
             return Ok(data);
         }
 
@@ -141,6 +135,33 @@ namespace CRM.Api.Controllers
             }
 
             var data = await _teamCrudService.UpdateActiveStatusAsync(teamId, true);
+            return Ok(data);
+        }
+
+        [HttpGet("items")]
+        public async Task<ActionResult<List<ListItem>>> ItemsActive()
+        {
+            //
+            // Validate Input Parameters
+            //
+            var data = await _teamCrudService.GetActiveAsListItemsAsync();
+            return Ok(data);
+        }
+
+        [HttpGet("DevelopTestGetAll")]
+        public async Task<ActionResult<List<ListItem>>> List()
+        {
+        
+            var data = await _teamListService.GetAll();
+            return Ok(data);
+        }
+
+        [HttpGet("DevelopTestGetForDate")]
+        public async Task<ActionResult<List<ListItem>>> ListDave()
+        {
+
+            var data = await _teamListService.GetAllWithSelectionForPerson(
+                Guid.Parse("326F4B79-A524-4190-9524-F682E0AACB0E"));
             return Ok(data);
         }
 

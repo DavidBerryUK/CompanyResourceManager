@@ -103,7 +103,7 @@
     <None Update="Scripts\Release-00001\06.Data\040 Skill.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Scripts\Release-00001\06.Data\030 Team.sql">
+    <None Update="Scripts\Release-00001\06.Data\065 Team.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Scripts\Release-00001\06.Data\020 Asset.sql">

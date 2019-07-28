@@ -1,0 +1,22 @@
+﻿using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using CRM.Models.Database.Interfaces;
+using CRM.Models.Rest.BaseResponse;
+using CRM.Models.Rest.Lists;
+
+namespace CRM.Service.Repository.TeamServices.Interfaces
+{
+    public interface IBaseListService<TReferenceEntity, TLinkEntity, TPrimaryKey>
+        where TReferenceEntity : class, IDatabaseEntity<TPrimaryKey> 
+        where TLinkEntity : class, IDatabaseLinkEntity<TPrimaryKey>
+    {
+        Task<BaseCollectionResponse<ListItem>> GetAllWithSelection(
+            Expression<Func<TReferenceEntity, TPrimaryKey>> referenceKeyProperty,
+            Expression<Func<TLinkEntity, TPrimaryKey>> joinProperty,
+            Expression<Func<TReferenceEntity, string>> textProperty,
+            Expression<Func<TLinkEntity, TPrimaryKey>> filterProperty,
+            TPrimaryKey filterValue
+        );
+    }
+}

@@ -41,6 +41,7 @@ namespace CRM.Api.StartupServices
 
             //  Teams
             services.AddTransient<ITeamCrudService, TeamCrudService>();
+            services.AddTransient<ITeamListService,TeamListService>();
 
             //  Assets Types
             services.AddTransient<IAssetCrudService, AssetCrudService>();

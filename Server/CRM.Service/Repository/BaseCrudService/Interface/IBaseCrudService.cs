@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using CRM.Models.Database.Interfaces;
+﻿using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseCrudService.Interface
 {
