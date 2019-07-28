@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-
 namespace CRM.Api.Controllers
 {
     [ApiController]
@@ -37,9 +36,7 @@ namespace CRM.Api.Controllers
             return Ok(data);
         }
 
-        
-
-        [HttpGet("items")]
+        [HttpGet("list")]
         public async Task<ActionResult<List<ListItem>>> ListActive()
         {
             //
@@ -144,6 +141,5 @@ namespace CRM.Api.Controllers
             var data = await _securityGroupCrudService.UpdateActiveStatusAsync(securityGroupId, true);
             return Ok(data);
         }
-
     }
 }

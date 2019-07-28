@@ -1,16 +1,16 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using CRM.Database.Context;
+﻿using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
 using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
-using CRM.Service.Repository.BaseCrudService.Interface;
-using CRM.Service.Repository.BaseCrudService.LowLevel;
+using CRM.Service.Repository.BaseServices.Interface;
+using CRM.Service.Repository.BaseServices.LowLevel;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CRM.Service.Repository.BaseCrudService
+namespace CRM.Service.Repository.BaseServices
 {
     public abstract class BaseCrudService<TEntity, TSummary, TExtended, TPrimaryKey>
         : IBaseCrudService<TEntity, TSummary, TExtended, TPrimaryKey>

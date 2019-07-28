@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using CRM.Database.Context;
+﻿using CRM.Database.Context;
 using CRM.Models.Database.Teams;
 using CRM.Models.Rest.Team;
-using CRM.Service.Repository.BaseCrudService;
+using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.TeamServices.Interfaces;
+using System;
+using System.Linq;
 
 namespace CRM.Service.Repository.TeamServices
 {

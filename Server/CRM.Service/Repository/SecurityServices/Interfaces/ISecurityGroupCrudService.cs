@@ -1,7 +1,7 @@
-﻿using System;
-using CRM.Models.Database.Security;
+﻿using CRM.Models.Database.Security;
 using CRM.Models.Rest.Security;
-using CRM.Service.Repository.BaseCrudService.Interface;
+using CRM.Service.Repository.BaseServices.Interface;
+using System;
 
 namespace CRM.Service.Repository.SecurityServices.Interfaces
 {

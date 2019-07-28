@@ -1,6 +1,6 @@
-﻿using CRM.Models.Database.Persons;
+﻿using CRM.Models.Database.Interfaces;
+using CRM.Models.Database.Persons;
 using System;
-using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Teams
 {

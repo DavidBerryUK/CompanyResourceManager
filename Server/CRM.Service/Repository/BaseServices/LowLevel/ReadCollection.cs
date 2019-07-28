@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CRM.Service.Repository.BaseCrudService.LowLevel
+namespace CRM.Service.Repository.BaseServices.LowLevel
 {
     internal static class ReadCollection<TEntity, TRestModel, TPrimaryKey>
         where TEntity : class, IDatabaseEntity<TPrimaryKey>

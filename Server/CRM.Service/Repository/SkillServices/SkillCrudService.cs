@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using CRM.Database.Context;
+﻿using CRM.Database.Context;
 using CRM.Models.Database.Skills;
 using CRM.Models.Rest.Skill;
-using CRM.Service.Repository.BaseCrudService;
+using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.SkillServices.Interfaces;
+using System;
+using System.Linq;
 
 namespace CRM.Service.Repository.SkillServices
 {

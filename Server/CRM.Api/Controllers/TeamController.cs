@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CRM.Service.Repository.TeamServices;
 
 namespace CRM.Api.Controllers
 {
@@ -138,32 +137,33 @@ namespace CRM.Api.Controllers
             return Ok(data);
         }
 
-        [HttpGet("items")]
-        public async Task<ActionResult<List<ListItem>>> ItemsActive()
+        [HttpGet("list")]
+        public async Task<ActionResult<List<ListItem>>> ListAll()
         {
-            //
-            // Validate Input Parameters
-            //
-            var data = await _teamCrudService.GetActiveAsListItemsAsync();
-            return Ok(data);
-        }
-
-        [HttpGet("DevelopTestGetAll")]
-        public async Task<ActionResult<List<ListItem>>> List()
-        {
-        
             var data = await _teamListService.GetAll();
             return Ok(data);
         }
 
-        [HttpGet("DevelopTestGetForDate")]
-        public async Task<ActionResult<List<ListItem>>> ListDave()
-        {
-
-            var data = await _teamListService.GetAllWithSelectionForPerson(
-                Guid.Parse("326F4B79-A524-4190-9524-F682E0AACB0E"));
+        [HttpGet("list/person/{personId}/all")]
+        public async Task<ActionResult<List<ListItem>>> ListAllWithSelection(Guid personId)
+        { 
+            var data = await _teamListService.GetAllWithSelectionForPerson(personId);
             return Ok(data);
         }
 
+        [HttpGet("list/person/{personId}/selected")]
+        public async Task<ActionResult<List<ListItem>>> ListSelected(Guid personId)
+        {
+
+            var data = await _teamListService.GetSelectedForPerson(personId);
+            return Ok(data);
+        }
+
+        [HttpGet("list/person/{personId}/unselected")]
+        public async Task<ActionResult<List<ListItem>>> ListUnselected(Guid personId)
+        {
+            var data = await _teamListService.GetUnSelectedForPerson(personId);
+            return Ok(data);
+        }
     }
 }

@@ -1,17 +1,19 @@
-﻿using System;
+﻿using AutoMapper;
+using CRM.Database.Context;
+using CRM.Models.Database.Interfaces;
+using CRM.Models.Rest.BaseResponse;
+using CRM.Models.Rest.Lists;
+using CRM.Service.Repository.BaseServices.Interface;
+using CRM.Service.Repository.BaseServices.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using CRM.Database.Context;
-using CRM.Models.Database.Interfaces;
-using CRM.Models.Rest.BaseResponse;
-using CRM.Models.Rest.Lists;
-using CRM.Service.Repository.TeamServices.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
-namespace CRM.Service.Repository.TeamServices
+namespace CRM.Service.Repository.BaseServices
 {
     public class BaseListService<TReferenceEntity, TLinkEntity, TPrimaryKey> 
         : IBaseListService<TReferenceEntity, TLinkEntity, TPrimaryKey> 
@@ -25,6 +27,59 @@ namespace CRM.Service.Repository.TeamServices
             DbContext = dbContext;
         }
 
+        public async Task<BaseCollectionResponse<ListItem>> GetAll()
+        {
+            var query = DbContext.Set<TReferenceEntity>();
+
+            var data = await query.ToListAsync();
+
+            var response = new BaseCollectionResponse<ListItem>
+            {
+                Items = Mapper.Map<List<ListItem>>(data)
+            };
+
+            return response;
+        }
+
+        public async Task<BaseCollectionResponse<ListItem>> GetSelectedOnly(
+            Expression<Func<TReferenceEntity, TPrimaryKey>> referenceKeyProperty,
+            Expression<Func<TLinkEntity, TPrimaryKey>> joinProperty,
+            Expression<Func<TReferenceEntity, string>> textProperty,
+            Expression<Func<TLinkEntity, TPrimaryKey>> filterProperty,
+            TPrimaryKey filterValue
+        )
+        {
+            var meta = GetMetaData(referenceKeyProperty, joinProperty, filterProperty, textProperty);
+            var sql = CreateSqlListSelectedOnly(meta);
+            var data = await GetListItemsFromSql(filterValue, sql);
+
+            var response = new BaseCollectionResponse<ListItem>
+            {
+                Items = data
+            };
+
+            return response;
+        }
+
+        public async Task<BaseCollectionResponse<ListItem>> GetUnSelectedOnly(
+            Expression<Func<TReferenceEntity, TPrimaryKey>> referenceKeyProperty,
+            Expression<Func<TLinkEntity, TPrimaryKey>> joinProperty,
+            Expression<Func<TReferenceEntity, string>> textProperty,
+            Expression<Func<TLinkEntity, TPrimaryKey>> filterProperty,
+            TPrimaryKey filterValue
+        )
+        {
+            var meta = GetMetaData(referenceKeyProperty, joinProperty, filterProperty, textProperty);
+            var sql = CreateSqlListInSelectedOnly(meta);
+            var data = await GetListItemsFromSql(filterValue, sql);
+
+            var response = new BaseCollectionResponse<ListItem>
+            {
+                Items = data
+            };
+
+            return response;
+        }
 
         public async Task<BaseCollectionResponse<ListItem>> GetAllWithSelection(
             Expression<Func<TReferenceEntity, TPrimaryKey>> referenceKeyProperty,
@@ -34,8 +89,8 @@ namespace CRM.Service.Repository.TeamServices
             TPrimaryKey filterValue
             )
         {
-            var meta = CreateSqlForListItems(referenceKeyProperty, joinProperty, filterProperty, textProperty);
-            var sql = CreateSqlReferenceOuterJoin(meta);
+            var meta = GetMetaData(referenceKeyProperty, joinProperty, filterProperty, textProperty);
+            var sql = CreateSqlListWithSelectStatus(meta);
             var data = await GetListItemsFromSql(filterValue, sql);
 
             var response = new BaseCollectionResponse<ListItem>
@@ -82,7 +137,37 @@ namespace CRM.Service.Repository.TeamServices
             return item;
         }
 
-        private static string CreateSqlReferenceOuterJoin(TableJoinMetaData meta)
+        private static string CreateSqlListSelectedOnly(TableJoinMetaModel meta)
+        {
+            var sql = "" +
+                      $"SELECT  {meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName}	AS [id], " +
+                      $"	    {meta.ReferenceTableName}.{meta.ReferenceTableTextPropertyName} AS [name], " +
+                      $"		CAST (1 AS BIT) [selected] " +
+                      $"FROM	{meta.ReferenceTableName} " +
+                      $"LEFT OUTER JOIN	{meta.LinkTableName} " +
+                      $"ON		{meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName} = {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} " +
+                      $"AND		{meta.LinkTableName}.{meta.LinkTableFilterPropertyName} = @FilterValue " +
+                      $"WHERE	{meta.ReferenceTableName}.IsActive = 1 " +
+                      $"AND	    {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} IS NOT NULL ";
+            return sql;
+        }
+
+        private static string CreateSqlListInSelectedOnly(TableJoinMetaModel meta)
+        {
+            var sql = "" +
+                      $"SELECT  {meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName}	AS [id], " +
+                      $"	    {meta.ReferenceTableName}.{meta.ReferenceTableTextPropertyName} AS [name], " +
+                      $"		CAST (0 AS BIT) [selected] " +
+                      $"FROM	{meta.ReferenceTableName} " +
+                      $"LEFT OUTER JOIN	{meta.LinkTableName} " +
+                      $"ON		{meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName} = {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} " +
+                      $"AND		{meta.LinkTableName}.{meta.LinkTableFilterPropertyName} = @FilterValue " +
+                      $"WHERE	{meta.ReferenceTableName}.IsActive = 1 " +
+                      $"AND	    {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} IS NULL ";
+            return sql;
+        }
+
+        private static string CreateSqlListWithSelectStatus(TableJoinMetaModel meta)
         {
             var sql = "" +
                       $"SELECT  {meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName}	AS [id], " +
@@ -99,7 +184,7 @@ namespace CRM.Service.Repository.TeamServices
             return sql;
         }
 
-        private static TableJoinMetaData CreateSqlForListItems(
+        private static TableJoinMetaModel GetMetaData(
             Expression<Func<TReferenceEntity, TPrimaryKey>> referenceKeyProperty,
             Expression<Func<TLinkEntity, TPrimaryKey>> joinProperty,
             Expression<Func<TLinkEntity, TPrimaryKey>> filterProperty,
@@ -125,7 +210,7 @@ namespace CRM.Service.Repository.TeamServices
                 throw new ArgumentException($"${nameof(textProperty)} is not a valid member expression");
             }
 
-            var metaData = new TableJoinMetaData
+            var metaData = new TableJoinMetaModel
             {
                 ReferenceTableName = typeof(TReferenceEntity).Name,
                 LinkTableName = typeof(TLinkEntity).Name,

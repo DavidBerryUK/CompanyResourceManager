@@ -7,16 +7,16 @@ using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using Microsoft.EntityFrameworkCore;
 
-namespace CRM.Service.Repository.BaseCrudService.LowLevel
+namespace CRM.Service.Repository.BaseServices.LowLevel
 {
-    internal static class UpdateStatus<TEntity, TRestModel, TPrimaryKey>
+    internal static class Update<TEntity, TRestModel, TPrimaryKey>
             where TEntity : class, IDatabaseEntity<TPrimaryKey>
             where TRestModel : class, new()
     {
         public static async Task<BaseItemResponse<TRestModel>> UpdateAsync(
             CrmDatabaseContext dbContext,
             TPrimaryKey id,
-            bool isActive,
+            TRestModel model,
             Func<IQueryable<TEntity>, IQueryable<TEntity>> queryInclude,
             Func<IQueryable<TEntity>, TPrimaryKey, IQueryable<TEntity>> queryEqualsPrimaryKey)
         {
@@ -30,16 +30,20 @@ namespace CRM.Service.Repository.BaseCrudService.LowLevel
             if (data == null)
             {
                 response.ErrorMessage = $"{nameof(TEntity)} {id} not found";
+                return response;
             }
             else
             {
-                data.IsActive = isActive;
+                Mapper.Map(  model, data);
                 await dbContext.SaveChangesAsync();
-                response.Entity = Mapper.Map<TRestModel>(data);
             }
 
-            return response;
+            return await ReadItem<TEntity, TRestModel, TPrimaryKey>
+                .GetAsync(
+                    dbContext, 
+                    id, 
+                    queryInclude,
+                    queryEqualsPrimaryKey);
         }
     }
-
 }

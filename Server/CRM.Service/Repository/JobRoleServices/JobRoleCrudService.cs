@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using CRM.Database.Context;
+﻿using CRM.Database.Context;
 using CRM.Models.Database.JobRoles;
 using CRM.Models.Rest.JobRole;
-using CRM.Service.Repository.BaseCrudService;
+using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.JobRoleServices.Interfaces;
+using System;
+using System.Linq;
 
 namespace CRM.Service.Repository.JobRoleServices
 {

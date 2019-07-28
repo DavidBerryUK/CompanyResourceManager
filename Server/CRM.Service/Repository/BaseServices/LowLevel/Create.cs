@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CRM.Service.Repository.BaseCrudService.LowLevel
+namespace CRM.Service.Repository.BaseServices.LowLevel
 {
     internal static class Create<TEntity, TRestModel, TPrimaryKey>
             where TEntity : class, IDatabaseEntity<TPrimaryKey>
@@ -31,5 +31,4 @@ namespace CRM.Service.Repository.BaseCrudService.LowLevel
             return response;
         }
     }
-
 }

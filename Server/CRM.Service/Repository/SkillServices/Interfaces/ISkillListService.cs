@@ -1,13 +1,13 @@
-﻿using CRM.Models.Database.Teams;
+﻿using CRM.Models.Database.Skills;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.BaseServices.Interface;
 using System;
 using System.Threading.Tasks;
 
-namespace CRM.Service.Repository.TeamServices.Interfaces
+namespace CRM.Service.Repository.SkillServices.Interfaces
 {
-    public interface ITeamListService : IBaseListService<Team, PersonTeam, Guid>
+    public interface ISkillListService : IBaseListService<Skill, PersonSkill, Guid>
     {
         Task<BaseCollectionResponse<ListItem>> GetAllWithSelectionForPerson(Guid personId);
 

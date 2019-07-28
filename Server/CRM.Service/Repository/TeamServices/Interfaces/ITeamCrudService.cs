@@ -1,6 +1,6 @@
 ﻿using CRM.Models.Database.Teams;
 using CRM.Models.Rest.Team;
-using CRM.Service.Repository.BaseCrudService.Interface;
+using CRM.Service.Repository.BaseServices.Interface;
 using System;
 
 namespace CRM.Service.Repository.TeamServices.Interfaces

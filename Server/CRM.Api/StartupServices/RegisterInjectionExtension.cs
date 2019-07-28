@@ -26,15 +26,16 @@ namespace CRM.Api.StartupServices
                 throw new ArgumentNullException(nameof(services));
             }
 
-            //  person
+            //  Person
             services.AddTransient<IPersonSimpleQueryService, PersonSimpleQueryService>();
             services.AddTransient<IPersonCrudService, PersonCrudService>();
 
-            //  Job
+            //  Job Role
             services.AddTransient<IJobRoleCrudService, JobRoleCrudService>();
 
             //  Skills
             services.AddTransient<ISkillCrudService, SkillCrudService>();
+            services.AddTransient<ISkillListService, SkillListService>();
 
             //  Security Groups
             services.AddTransient<ISecurityGroupCrudService, SecurityGroupCrudService>();

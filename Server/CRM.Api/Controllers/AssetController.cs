@@ -12,7 +12,6 @@ namespace CRM.Api.Controllers
     [Route("api/asset")]
     public class AssetController : Controller
     {
-
         private readonly IAssetCrudService _assetCrudService;
 
         public AssetController(IAssetCrudService assetCrudService)

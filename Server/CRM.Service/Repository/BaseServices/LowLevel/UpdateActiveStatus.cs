@@ -1,21 +1,22 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CRM.Service.Repository.BaseCrudService.LowLevel
+namespace CRM.Service.Repository.BaseServices.LowLevel
 {
-    internal static class ReadItem<TEntity, TRestModel, TPrimaryKey>
-        where TEntity : class, IDatabaseEntity<TPrimaryKey>
-        where TRestModel : class, new()
+    internal static class UpdateStatus<TEntity, TRestModel, TPrimaryKey>
+            where TEntity : class, IDatabaseEntity<TPrimaryKey>
+            where TRestModel : class, new()
     {
-        public static async Task<BaseItemResponse<TRestModel>> GetAsync(
+        public static async Task<BaseItemResponse<TRestModel>> UpdateAsync(
             CrmDatabaseContext dbContext,
             TPrimaryKey id,
+            bool isActive,
             Func<IQueryable<TEntity>, IQueryable<TEntity>> queryInclude,
             Func<IQueryable<TEntity>, TPrimaryKey, IQueryable<TEntity>> queryEqualsPrimaryKey)
         {
@@ -30,10 +31,15 @@ namespace CRM.Service.Repository.BaseCrudService.LowLevel
             {
                 response.ErrorMessage = $"{nameof(TEntity)} {id} not found";
             }
-
-            response.Entity = Mapper.Map<TRestModel>(data);
+            else
+            {
+                data.IsActive = isActive;
+                await dbContext.SaveChangesAsync();
+                response.Entity = Mapper.Map<TRestModel>(data);
+            }
 
             return response;
         }
     }
+
 }

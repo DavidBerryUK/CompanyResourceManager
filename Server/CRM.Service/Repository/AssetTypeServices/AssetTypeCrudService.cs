@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using CRM.Database.Context;
+﻿using CRM.Database.Context;
 using CRM.Models.Database.Assets;
 using CRM.Models.Rest.AssetType;
 using CRM.Service.Repository.AssetTypeServices.Interfaces;
-using CRM.Service.Repository.BaseCrudService;
+using CRM.Service.Repository.BaseServices;
+using System;
+using System.Linq;
 
 namespace CRM.Service.Repository.AssetTypeServices
 {

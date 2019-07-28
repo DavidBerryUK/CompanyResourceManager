@@ -5,7 +5,7 @@ using CRM.Models.Rest.Lists;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CRM.Service.Repository.BaseCrudService.Interface
+namespace CRM.Service.Repository.BaseServices.Interface
 {
     public interface IBaseCrudService<TEntity, TSummary, TExtended,  TPrimaryKey> 
         where TEntity : class, IDatabaseEntity<TPrimaryKey> 
@@ -26,8 +26,6 @@ namespace CRM.Service.Repository.BaseCrudService.Interface
 
         Task<BaseItemResponse<TSummary>> GetItemAsSummaryAsync(TPrimaryKey id);
 
-        Task<BaseCollectionResponse<ListItem>> GetActiveAsListItemsAsync();
-
         Task<BaseItemResponse<TExtended>> GetItemAsExtendedAsync(TPrimaryKey id);
 
         Task<BaseItemResponse<TSummary>> UpdateActiveStatusAsync(TPrimaryKey id, bool isActive);
@@ -35,6 +33,8 @@ namespace CRM.Service.Repository.BaseCrudService.Interface
         Task<BaseItemResponse<TExtended>> UpdateAsync(TPrimaryKey id, TExtended model);
 
         Task<BaseItemResponse<TExtended>> CreateAsync(TExtended model);
+
+        Task<BaseCollectionResponse<ListItem>> GetActiveAsListItemsAsync();
 
         TPrimaryKey CreateNewPrimaryKey();
 

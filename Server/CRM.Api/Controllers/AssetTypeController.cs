@@ -34,7 +34,7 @@ namespace CRM.Api.Controllers
             return Ok(data);
         }
 
-        [HttpGet("items")]
+        [HttpGet("list")]
         public async Task<ActionResult<List<ListItem>>> ListActive()
         {
             var data = await _assetTypeCrudService.GetActiveAsListItemsAsync();

@@ -15,21 +15,26 @@ namespace CRM.Api.Controllers
     public class SkillController : Controller
     {
         private readonly ISkillCrudService _skillCrudService;
+        private readonly ISkillListService _skillListService;
         private readonly IPersonSimpleQueryService _personSimpleQueryService;
 
 
         public SkillController(
             ISkillCrudService skillCrudService,
-            IPersonSimpleQueryService personSimpleQueryService)
+            IPersonSimpleQueryService personSimpleQueryService, 
+            ISkillListService skillListService)
         {
             //
             // Validate Input Parameters
             //
             _skillCrudService = skillCrudService
-                                 ?? throw new ArgumentNullException(nameof(skillCrudService));
+                ?? throw new ArgumentNullException(nameof(skillCrudService));
 
             _personSimpleQueryService = personSimpleQueryService 
-                                ?? throw new ArgumentNullException(nameof(personSimpleQueryService));
+                ?? throw new ArgumentNullException(nameof(personSimpleQueryService));
+
+            _skillListService = skillListService
+                ?? throw new ArgumentNullException(nameof(skillListService));
         }
 
         [HttpGet("")]
@@ -54,16 +59,6 @@ namespace CRM.Api.Controllers
             }
 
             var data = await _personSimpleQueryService.GetWithFilterAsync(skillId: skillId);
-            return Ok(data);
-        }
-
-        [HttpGet("items")]
-        public async Task<ActionResult<List<ListItem>>> ListActive()
-        {
-            //
-            // Validate Input Parameters
-            //
-            var data = await _skillCrudService.GetActiveAsListItemsAsync();
             return Ok(data);
         }
 
@@ -163,5 +158,33 @@ namespace CRM.Api.Controllers
             return Ok(data);
         }
 
+        [HttpGet("list")]
+        public async Task<ActionResult<List<ListItem>>> ListAll()
+        {
+            var data = await _skillListService.GetAll();
+            return Ok(data);
+        }
+
+        [HttpGet("list/person/{personId}/all")]
+        public async Task<ActionResult<List<ListItem>>> ListAllWithSelection(Guid personId)
+        {
+            var data = await _skillListService.GetAllWithSelectionForPerson(personId);
+            return Ok(data);
+        }
+
+        [HttpGet("list/person/{personId}/selected")]
+        public async Task<ActionResult<List<ListItem>>> ListSelected(Guid personId)
+        {
+
+            var data = await _skillListService.GetSelectedForPerson(personId);
+            return Ok(data);
+        }
+
+        [HttpGet("list/person/{personId}/unselected")]
+        public async Task<ActionResult<List<ListItem>>> ListUnselected(Guid personId)
+        {
+            var data = await _skillListService.GetUnSelectedForPerson(personId);
+            return Ok(data);
+        }
     }
 }
