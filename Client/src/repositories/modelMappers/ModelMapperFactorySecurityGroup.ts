@@ -1,6 +1,6 @@
 import { IModelGenericMapper }                  from './interfaces/IModelGenericMapper';
-import ModelFactorySecurityGroupExtended       from '../modelFactories/ModelFactorySecurityGroupExtended';
-import ModelFactorySecurityGroupSummary        from '../modelFactories/ModelFactorySecurityGroupSummary';
+import ModelFactorySecurityGroupExtended        from '../modelFactories/ModelFactorySecurityGroupExtended';
+import ModelFactorySecurityGroupSummary         from '../modelFactories/ModelFactorySecurityGroupSummary';
 import ModelGenericMapper                       from './generic/ModelGenericMapper';
 import SecurityGroupExtendedModel               from '../models/securityGroup/SecurityGroupExtendedModel';
 import SecurityGroupSummaryModel                from '../models/securityGroup/SecurityGroupSummaryModel';

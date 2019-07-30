@@ -1,11 +1,11 @@
-import { ApiResponse }                      from '../../contracts/ApiResponseContract';
-import { ApiResponseContract }              from '../../contracts/ApiResponseContract';
-import { IModelGenericMapper }             from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
-import { IRepositoryReadList }              from './interfaces/IRepositoryReadList';
-import ApiBaseError                         from './ApiBaseError';
-import axios                                from 'axios';
-import BaseApiConfig                        from './ApiBaseConfig';
-import GenericCollectionModel               from '@/repositories/models/shared/collections/GenericCollectionModel';
+import { ApiResponse }                          from '../../contracts/ApiResponseContract';
+import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
+import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
+import { IRepositoryReadList }                  from './interfaces/IRepositoryReadList';
+import ApiBaseError                             from './ApiBaseError';
+import axios                                    from 'axios';
+import BaseApiConfig                            from './ApiBaseConfig';
+import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 
 export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList<T> {
 

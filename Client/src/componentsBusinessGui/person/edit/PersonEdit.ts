@@ -7,9 +7,9 @@ import EntityEditTemplateComponent              from '@/componentsCommonGui/enti
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
-import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
+import ListItemModel                            from '@/repositories/models/listItem/ListItemModel';
+import ModelMapperFactoryPerson                 from '@/repositories/modelMappers/ModelMapperFactoryPerson';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
-import ModelMapperFactoryPerson                from '@/repositories/modelMappers/ModelMapperFactoryPerson';
 import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 

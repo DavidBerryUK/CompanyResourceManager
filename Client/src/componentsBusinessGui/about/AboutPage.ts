@@ -1,8 +1,8 @@
-import Component                                  from 'vue-class-component';
-import Vue                                        from 'vue';
-import ComponentIconConstants                     from '@/constants/ComponentIconConstants';
-import ElementTitleWrapperComponent               from '@/componentsCommonGui/elementTitleComponent/ElementTitleWrapperComponent';
-import ElementPageWrapperComponent                from '@/componentsCommonGui/elementPageWrapper/ElementPageWrapperComponent';
+import Component                                from 'vue-class-component';
+import ComponentIconConstants                   from '@/constants/ComponentIconConstants';
+import ElementPageWrapperComponent              from '@/componentsCommonGui/elementPageWrapper/ElementPageWrapperComponent';
+import ElementTitleWrapperComponent             from '@/componentsCommonGui/elementTitleComponent/ElementTitleWrapperComponent';
+import Vue                                      from 'vue';
 
 @Component({
   components: {

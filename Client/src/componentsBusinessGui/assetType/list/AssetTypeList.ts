@@ -4,10 +4,10 @@ import AssetTypeSummmaryModel                   from '@/repositories/models/asse
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterAssetTypeService                   from '@/services/filters/assetTypeFilterService/FilterAssetTypeService';
+import ModelMapperFactoryAssetType              from '@/repositories/modelMappers/ModelMapperFactoryAssetType';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ModelMapperFactoryAssetType             from '@/repositories/modelMappers/ModelMapperFactoryAssetType';
 
 /**
  * Presents a list of Asset Types to the user that can be filtered

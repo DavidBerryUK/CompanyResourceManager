@@ -13,8 +13,8 @@
     </v-layout>
     <!-- HEADER -->
 
-    <!-- BODY -->
-    <div slot="body">
+    <!-- FORM -->
+    <div slot="form">
     
       <v-layout row>
         <v-flex xs4>Has Asset Badge</v-flex>
@@ -31,7 +31,7 @@
       </v-layout>
       
     </div>
-    <!-- BODY -->
+    <!-- FORM -->
 
   </crm-entity-view-template>
 </template>

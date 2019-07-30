@@ -1,6 +1,6 @@
 import { IModelGenericMapper }                  from './interfaces/IModelGenericMapper';
-import ModelFactorySkillExtended               from '../modelFactories/ModelFactorySkillExtended';
-import ModelFactorySkillSummary                from '../modelFactories/ModelFactorySkillSummary';
+import ModelFactorySkillExtended                from '../modelFactories/ModelFactorySkillExtended';
+import ModelFactorySkillSummary                 from '../modelFactories/ModelFactorySkillSummary';
 import ModelGenericMapper                       from './generic/ModelGenericMapper';
 import SkillExtendedModel                       from '@/repositories/models/skill/SkillExtendedModel';
 import SkillSummaryModel                        from '../models/skill/SkillSummaryModel';

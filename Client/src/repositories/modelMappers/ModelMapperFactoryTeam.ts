@@ -1,6 +1,6 @@
 import { IModelGenericMapper }                  from './interfaces/IModelGenericMapper';
-import ModelFactoryTeamExtended                from '../modelFactories/ModelFactoryTeamExtended';
-import ModelFactoryTeamSummary                 from '../modelFactories/ModelFactoryTeamSummary';
+import ModelFactoryTeamExtended                 from '../modelFactories/ModelFactoryTeamExtended';
+import ModelFactoryTeamSummary                  from '../modelFactories/ModelFactoryTeamSummary';
 import ModelGenericMapper                       from './generic/ModelGenericMapper';
 import TeamExtendedModel                        from '../models/team/TeamExtendedModel';
 import TeamSummaryModel                         from '../models/team/TeamSummaryModel';

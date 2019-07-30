@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar color="indigo" dark>      
+    <v-toolbar color="indigo" dark class='toolbar-fixed'>      
       <v-toolbar-title>{{title}}</v-toolbar-title>
       <v-toolbar-title  v-if="!isActive"  class="blue--text text--lighten-4">ARCHIVED</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -10,3 +10,7 @@
 
 <script lang='ts' src='./FormViewHeader.ts'>
 </script>
+
+<style lang="stylus" src="./FormViewHeader.styl">
+</style>
+

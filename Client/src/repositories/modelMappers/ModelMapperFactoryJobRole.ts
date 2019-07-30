@@ -1,8 +1,8 @@
 import { IModelGenericMapper }                  from './interfaces/IModelGenericMapper';
-import ModelFactoryJobRoleExtended             from '../modelFactories/ModelFactoryJobRoleExtended';
-import ModelFactoryJobRoleSummary              from '../modelFactories/ModelFactoryJobRoleSummary';
 import JobRoleExtendedModel                     from '@/repositories/models/jobRole/JobRoleExtendedModel';
 import JobRoleSummaryModel                      from '../models/jobRole/JobRoleSummaryModel';
+import ModelFactoryJobRoleExtended              from '../modelFactories/ModelFactoryJobRoleExtended';
+import ModelFactoryJobRoleSummary               from '../modelFactories/ModelFactoryJobRoleSummary';
 import ModelGenericMapper                       from './generic/ModelGenericMapper';
 
 export default class ModelMapperFactoryJobRole {

@@ -1,8 +1,7 @@
-import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
-import { IModelFactory }                       from './interfaces/IModelFactory';
+import ListItemModel                            from '@/repositories/models/listItem/ListItemModel';
+import { IModelFactory }                        from './interfaces/IModelFactory';
 
-export default class ModelFactoryListItem implements
-    IModelFactory<ListItemModel> {
+export default class ModelFactoryListItem implements IModelFactory<ListItemModel> {
 
     public create(): ListItemModel {
         return new ListItemModel();

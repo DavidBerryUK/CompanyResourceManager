@@ -4,8 +4,8 @@ import BaseEditPage                             from '@/componentsBusinessGui/ba
 import Component                                from 'vue-class-component';
 import EntityEditTemplateComponent              from '@/componentsCommonGui/entityEditTemplate/EntityEditTemplateComponent';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
+import ModelMapperFactorySecuityGroup           from '@/repositories/modelMappers/ModelMapperFactorySecurityGroup';
 import NavigationCrudSecurityGroup              from '@/routeNavigation/NavigationCrudSecurityGroup';
-import ModelMapperFactorySecuityGroup          from '@/repositories/modelMappers/ModelMapperFactorySecurityGroup';
 import SecurityGroupRepositoryFactory           from '@/repositories/factory/SecurityGroupRepositoryFactory';
 import SecurityGroupSummaryModel                from '@/repositories/models/securityGroup/SecurityGroupSummaryModel';
 

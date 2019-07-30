@@ -2,7 +2,7 @@ import { ApiResponse }                          from '../contracts/ApiResponseCo
 import { ApiResponseContract }                  from '../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../helpers/SuccessCallbackHelper';
 import { IApiModel }                            from '../models/interfaces/IApiModel';
-import { IModelGenericMapper }                 from '../modelMappers/interfaces/IModelGenericMapper';
+import { IModelGenericMapper }                  from '../modelMappers/interfaces/IModelGenericMapper';
 import { ISuccessCallback }                     from '../helpers/SuccessCallbackHelper';
 import ApiBaseEntityGetById                     from './lowlevel/BaseApiRepositoryReadItem';
 import BaseApiRepositoryCreateItem              from './lowlevel/BaseApiRepositoryCreateItem';

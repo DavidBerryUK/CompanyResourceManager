@@ -1,4 +1,4 @@
-import { IListFilterByText }                    from './../interfaces/FilterInterfaces';
+import { IListFilterByText }                    from '../interfaces/FilterInterfaces';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 import StringCompare                            from '@/utilities/stringMatch/StringCompare';

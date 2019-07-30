@@ -13,8 +13,8 @@
     </v-layout>
     <!-- HEADER -->
 
-    <!-- BODY -->
-    <div slot="body">
+    <!-- FORM -->
+    <div slot="form">
       <v-layout row>
         <v-flex xs12>
           <crm-label-data label="Name" :stringValue="model.name"></crm-label-data>
@@ -26,7 +26,7 @@
         </v-flex>
       </v-layout>
     </div>
-    <!-- BODY -->
+    <!-- FORM -->
 
   </crm-entity-view-template>
 </template>

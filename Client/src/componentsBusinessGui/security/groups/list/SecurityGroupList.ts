@@ -1,13 +1,13 @@
-import { IComponentMetaData }                     from '@/components/interfaces/ComponentMetaDataInterfaces';
-import BasePage                                   from '@/componentsBusinessGui/base/BasePage';
-import Component                                  from 'vue-class-component';
-import FilterSecurityGroupService                 from '@/services/filters/SecurityFilters/FilterSecurityGroupService';
-import NavigationCrudSecurityGroup                from '@/routeNavigation/NavigationCrudSecurityGroup';
-import NavigationListComponent                    from '@/componentsCommonGui/navigationList/NavigationListComponent';
-import NavigationListConfig                       from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ModelMapperFactorySecuityGroup            from '@/repositories/modelMappers/ModelMapperFactorySecurityGroup';
-import SecurityGroupRepositoryFactory             from '@/repositories/factory/SecurityGroupRepositoryFactory';
-import SecurityGroupSummaryModel                  from '@/repositories/models/securityGroup/SecurityGroupSummaryModel';
+import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
+import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
+import Component                                from 'vue-class-component';
+import FilterSecurityGroupService               from '@/services/filters/SecurityFilters/FilterSecurityGroupService';
+import ModelMapperFactorySecuityGroup           from '@/repositories/modelMappers/ModelMapperFactorySecurityGroup';
+import NavigationCrudSecurityGroup              from '@/routeNavigation/NavigationCrudSecurityGroup';
+import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
+import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
+import SecurityGroupRepositoryFactory           from '@/repositories/factory/SecurityGroupRepositoryFactory';
+import SecurityGroupSummaryModel                from '@/repositories/models/securityGroup/SecurityGroupSummaryModel';
 
 /**
  * Presents a list of Job Rols to the user that can be filtered

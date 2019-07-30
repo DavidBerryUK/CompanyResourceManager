@@ -9,9 +9,9 @@ import ContractListener                         from '@/repositories/contracts/C
 import EntityEditTemplateComponent              from '@/componentsCommonGui/entityEditTemplate/EntityEditTemplateComponent';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly';
-import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
+import ListItemModel                            from '@/repositories/models/listItem/ListItemModel';
+import ModelMapperFactoryAsset                  from '@/repositories/modelMappers/ModelMapperFactoryAsset';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
-import ModelMapperFactoryAsset                 from '@/repositories/modelMappers/ModelMapperFactoryAsset';
 
 // attribute indicates this is a component,
 //  this is where any sub components are also registered

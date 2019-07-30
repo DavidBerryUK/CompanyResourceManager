@@ -1,4 +1,4 @@
-import { IModelFactory }                       from './interfaces/IModelFactory';
+import { IModelFactory }                        from './interfaces/IModelFactory';
 import TeamExtendedModel                        from '../models/team/TeamExtendedModel';
 
 

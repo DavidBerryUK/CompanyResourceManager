@@ -148,7 +148,8 @@ namespace CRM.Service.Repository.BaseServices
                       $"ON		{meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName} = {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} " +
                       $"AND		{meta.LinkTableName}.{meta.LinkTableFilterPropertyName} = @FilterValue " +
                       $"WHERE	{meta.ReferenceTableName}.IsActive = 1 " +
-                      $"AND	    {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} IS NOT NULL ";
+                      $"AND	    {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} IS NOT NULL " +
+                      $"ORDER BY {meta.ReferenceTableName}.{meta.ReferenceTableTextPropertyName}";
             return sql;
         }
 
@@ -163,7 +164,8 @@ namespace CRM.Service.Repository.BaseServices
                       $"ON		{meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName} = {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} " +
                       $"AND		{meta.LinkTableName}.{meta.LinkTableFilterPropertyName} = @FilterValue " +
                       $"WHERE	{meta.ReferenceTableName}.IsActive = 1 " +
-                      $"AND	    {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} IS NULL ";
+                      $"AND	    {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} IS NULL " +
+                      $"ORDER BY {meta.ReferenceTableName}.{meta.ReferenceTableTextPropertyName}";
             return sql;
         }
 
@@ -180,7 +182,8 @@ namespace CRM.Service.Repository.BaseServices
                       $"LEFT OUTER JOIN	{meta.LinkTableName} " +
                       $"ON		{meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName} = {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} " +
                       $"AND		{meta.LinkTableName}.{meta.LinkTableFilterPropertyName} = @FilterValue " +
-                      $"WHERE	{meta.ReferenceTableName}.IsActive = 1 ";
+                      $"WHERE	{meta.ReferenceTableName}.IsActive = 1 " +
+                      $"ORDER BY {meta.ReferenceTableName}.{meta.ReferenceTableTextPropertyName}";
             return sql;
         }
 

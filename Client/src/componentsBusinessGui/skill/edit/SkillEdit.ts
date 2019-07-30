@@ -4,8 +4,8 @@ import BaseEditPage                             from '@/componentsBusinessGui/ba
 import Component                                from 'vue-class-component';
 import EntityEditTemplateComponent              from '@/componentsCommonGui/entityEditTemplate/EntityEditTemplateComponent';
 import FormEditHeader                           from '@/componentsCommonGui/formEditHeader/FormEditHeader';
+import ModelMapperFactorySkill                  from '@/repositories/modelMappers/ModelMapperFactorySkill';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
-import ModelMapperFactorySkill                 from '@/repositories/modelMappers/ModelMapperFactorySkill';
 import SkillRepositoryFactory                   from '@/repositories/factory/SkillRepositoryFactory';
 import SkillSummaryModel                        from '@/repositories/models/skill/SkillSummaryModel';
 

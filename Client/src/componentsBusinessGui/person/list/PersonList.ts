@@ -2,10 +2,10 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterPersonSummaryService               from '@/services/filters/personFilterService/FilterPersonSummaryService';
+import ModelMapperFactoryPerson                 from '@/repositories/modelMappers/ModelMapperFactoryPerson';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ModelMapperFactoryPerson                from '@/repositories/modelMappers/ModelMapperFactoryPerson';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 

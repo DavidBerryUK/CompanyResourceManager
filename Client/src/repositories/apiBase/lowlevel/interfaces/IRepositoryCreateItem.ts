@@ -1,6 +1,6 @@
-import { IModelGenericMapper }                 from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '@/repositories/helpers/SuccessCallbackHelper';
+import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { ISuccessCallback }                     from '@/repositories/helpers/SuccessCallbackHelper';
 
 export interface IRepositoryCreateItem<T> {

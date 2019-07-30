@@ -1,10 +1,10 @@
 <template>
-  <crm-entity-view-template 
-      title="Person" 
-      :isActive="model.isActive"
-      @onEdit="onEdit"
-      @onRestore="onRestore">
-
+  <crm-entity-view-template
+    title="Person"
+    :isActive="model.isActive"
+    @onEdit="onEdit"
+    @onRestore="onRestore"
+  >
     <!-- HEADER -->
     <v-layout row slot="header">
       <v-flex xs5>
@@ -13,8 +13,8 @@
     </v-layout>
     <!-- HEADER -->
 
-    <!-- BODY -->
-    <div slot="body">
+    <!-- FORM -->
+    <div slot="form">
       <v-layout row>
         <v-flex xs4>
           <crm-label-data label="Forename" :stringValue="model.forename"></crm-label-data>
@@ -32,8 +32,41 @@
         </v-flex>
       </v-layout>
     </div>
-    <!-- BODY -->
+    <!-- FORM -->
 
+    <!-- BODY -->
+    <div slot="body">
+      <v-layout row>        
+
+        <v-flex xs-6 pr-2>
+          <crm-list-items
+            title="Teams"
+            :repoDataSource="EnumRepositoryDataSource.TeamPerson"
+            :repoListMode="EnumRepositoryListMode.All"
+            :repoReferenceId="model.personId"
+            :listStyle="EnumListComponentStyle.list"
+            :valueDisplay="EnumListComponentValueDisplay.checkbox"            
+            :showTextFilter="EnumListTextFilter.inHeader"
+            :titleStyle="EnumListCompomentTitle.header"
+          ></crm-list-items>
+        </v-flex>
+
+        <v-flex xs-6>
+          <crm-list-items
+            title="Skills"
+            :repoDataSource="EnumRepositoryDataSource.SkillPerson"
+            :repoListMode="EnumRepositoryListMode.All"
+            :repoReferenceId="model.personId"
+            :listStyle="EnumListComponentStyle.list"
+            :valueDisplay="EnumListComponentValueDisplay.checkbox"            
+            :showTextFilter="EnumListTextFilter.inHeader"
+            :titleStyle="EnumListCompomentTitle.header"
+          ></crm-list-items>
+        </v-flex>
+
+      </v-layout>
+    </div>
+    <!-- BODY -->
   </crm-entity-view-template>
 </template>
 

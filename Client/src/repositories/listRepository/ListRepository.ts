@@ -1,22 +1,12 @@
-import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
-import ApiBase                                  from '@/repositories/apiBase/ApiBase';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
-import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
+import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
+import { EnumRepositoryDataSource }             from './ListRepositoryEnum';
+import { EnumRepositoryListMode }               from './ListRepositoryEnum';
+import ApiBase                                  from '@/repositories/apiBase/ApiBase';
+import ListItemModel                            from '@/repositories/models/listItem/ListItemModel';
+import ListRepositoryEnum                       from './ListRepositoryEnum';
 import ModelMapperFactoryListItem               from '@/repositories/modelMappers/ModelMapperFactoryListItem';
-
-export enum EnumRepositoryDataSource {
-    Skill,
-    SkillPerson,
-    Team,
-    TeamPerson,
-}
-
-export enum EnumRepositoryListMode {
-    Default,
-    All,
-    Selected,
-    UnSelected,
-}
+import BaseApiConfig                            from '@/repositories/apiBase/lowlevel/ApiBaseConfig';
 
 export default class ListRepository extends ApiBase {
 
@@ -26,6 +16,7 @@ export default class ListRepository extends ApiBase {
     private listEntityName: string;
     private referenceEntityName: string;
     private referenceId: string;
+    private baseUrl: string;
 
     public constructor(
         dataSource: EnumRepositoryDataSource,
@@ -35,10 +26,11 @@ export default class ListRepository extends ApiBase {
         super();
         this.repositoryDataSource = dataSource;
         this.listMode = listMode;
-        this.listEntityName = this.getListEntity(dataSource);
-        this.referenceEntityName = this.getListReference(dataSource);
-        this.mode = this.getListMode(listMode);
+        this.listEntityName = ListRepositoryEnum.getListEntity(dataSource);
+        this.referenceEntityName = ListRepositoryEnum.getListReference(dataSource);
+        this.mode = ListRepositoryEnum.getListMode(listMode);
         this.referenceId = referenceId;
+        this.baseUrl = `${BaseApiConfig.baseEndpoint}`;
 
         // Ensure the combination of parameters provided are valid
         // before performing any further procesing
@@ -61,9 +53,9 @@ export default class ListRepository extends ApiBase {
      */
     private createGetUrl(): string {
         if ( this.referenceEntityName === '') {
-            return `/api/${this.listEntityName}/list/`;
+            return `${this.baseUrl}api/${this.listEntityName}/list/`;
         }
-        return `/api/${this.listEntityName}/list/${this.referenceEntityName}/${this.mode}`;
+        return `${this.baseUrl}api/${this.listEntityName}/list/${this.referenceEntityName}/${this.referenceId}/${this.mode}`;
     }
 
     /**
@@ -89,59 +81,5 @@ export default class ListRepository extends ApiBase {
         if (this.referenceEntityName !== '' && this.referenceId === '') {
             throw new Error('If a reference entity is provided, a reference id must also be provied');
         }
-    }
-
-    /**
-     * @param listMode - show all, show only selected items, show only unselected items
-     */
-    private getListMode(listMode: EnumRepositoryListMode) {
-
-        switch (listMode) {
-            case EnumRepositoryListMode.Default:
-                return '';
-
-            case EnumRepositoryListMode.All:
-                return 'all';
-
-            case EnumRepositoryListMode.Selected:
-                return 'selected';
-
-            case EnumRepositoryListMode.UnSelected:
-                return 'unselected';
-        }
-
-        return '';
-    }
-
-    /**
-     * @param dataSource the primary entity that is used to create the list
-     */
-    private getListEntity(dataSource: EnumRepositoryDataSource): string {
-        switch (dataSource) {
-
-            case EnumRepositoryDataSource.Skill:
-            case EnumRepositoryDataSource.SkillPerson:
-                return 'skill';
-
-            case EnumRepositoryDataSource.Team:
-            case EnumRepositoryDataSource.TeamPerson:
-                return 'Team';
-        }
-
-        return '';
-    }
-
-    /**
-     * @param dataSource reference entity - determines what list items are selected
-     */
-    private getListReference(dataSource: EnumRepositoryDataSource): string {
-
-        switch (dataSource) {
-            case EnumRepositoryDataSource.TeamPerson:
-            case EnumRepositoryDataSource.SkillPerson:
-                return 'person';
-        }
-
-        return '';
     }
 }

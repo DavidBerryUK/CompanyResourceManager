@@ -1,4 +1,4 @@
-import { IModelFactory }                       from './interfaces/IModelFactory';
+import { IModelFactory }                        from './interfaces/IModelFactory';
 import TeamSummaryModel                         from '../models/team/TeamSummaryModel';
 
 export default class ModelFactoryTeamSummary implements

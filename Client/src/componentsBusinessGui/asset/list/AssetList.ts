@@ -4,10 +4,10 @@ import AssetSummaryModel                        from '@/repositories/models/asse
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterAssetSummaryService                from '@/services/filters/assetSummaryFilterService/FilterAssetSummaryService';
+import ModelMapperFactoryAsset                  from '@/repositories/modelMappers/ModelMapperFactoryAsset';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
-import ModelMapperFactoryAsset                 from '@/repositories/modelMappers/ModelMapperFactoryAsset';
 
 
 /**

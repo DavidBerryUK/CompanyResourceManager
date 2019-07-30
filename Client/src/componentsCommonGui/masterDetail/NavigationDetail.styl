@@ -1,25 +1,21 @@
-
 .layout-navigation-detail {
-    position: relative;
-    height:100%;
-    width:100%;
+	position: relative;
+	height: 100%;
+	width: 100%;
 
-    .navigation {
-        position:absolute;
-        top:0;
-        left:0;
-        bottom:0;
-        width:300px;
-        overflow-y: auto;
-    }
+	.navigation {
+		height: 100%;
+		max-height: calc(100% - 64px);
+		position: fixed;
+		width: 300px;
+		overflow-y: auto;
+	}
 
-    .detail {
-
-        position:absolute;
-        top:0;
-        left:300px;
-        right:0;
-        bottom:0;
-        }
-
+	.detail {
+		position: absolute;
+		top: 0;
+		left: 300px;
+		right: 0;
+		bottom: 0;
+	}
 }

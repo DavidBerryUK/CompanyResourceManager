@@ -1,5 +1,5 @@
-import { AxiosRequestConfig }               from 'axios';
-import ConfigurationService                 from '../../../services/configuration/ConfigurationService';
+import { AxiosRequestConfig }                   from 'axios';
+import ConfigurationService                     from '../../../services/configuration/ConfigurationService';
 
 //
 // Configuration helper,

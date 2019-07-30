@@ -1,6 +1,6 @@
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
-import { IModelGenericMapper }                 from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
+import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { IRepositoryReadItem }                  from './interfaces/IRepositoryReadItem';
 import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';

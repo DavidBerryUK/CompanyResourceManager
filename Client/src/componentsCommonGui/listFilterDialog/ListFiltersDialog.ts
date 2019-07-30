@@ -4,7 +4,6 @@ import { ICommonDialogInjectableView }          from '../dialogs/base/ICommonDia
 import { Prop }                                 from 'vue-property-decorator';
 import Component                                from 'vue-class-component';
 import ListFilterDialogState                    from './ListFilterDialogState';
-import ListItemComponent                        from '../itemList/ListItemComponent';
 import Vue                                      from 'vue';
 
 //
@@ -12,7 +11,6 @@ import Vue                                      from 'vue';
 //  this is where any sub components are also registered
 @Component({
   components: {
-    ListItemComponent,
   },
 })
 export default class ListFiltersDialog extends Vue implements ICommonDialogInjectableView {

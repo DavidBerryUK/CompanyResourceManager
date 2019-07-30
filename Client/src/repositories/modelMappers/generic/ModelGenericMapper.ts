@@ -1,4 +1,4 @@
-import { IModelFactory }                       from '@/repositories/modelFactories/interfaces/IModelFactory';
+import { IModelFactory }                        from '@/repositories/modelFactories/interfaces/IModelFactory';
 import { IModelGenericMapper }                  from '../interfaces/IModelGenericMapper';
 
 export default class ModelGenericMapper<T> implements IModelGenericMapper<T> {

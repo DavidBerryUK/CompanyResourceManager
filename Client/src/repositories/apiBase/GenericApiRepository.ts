@@ -6,7 +6,7 @@ import ApiBase                                  from '@/repositories/apiBase/Api
 import ApiBasePostWithCollectionResult          from '@/repositories/apiBase/lowlevel/ApiBasePostWithCollectionResult';
 import BaseApiConfig                            from '@/repositories/apiBase/lowlevel/ApiBaseConfig';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
-import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
+import ListItemModel                            from '@/repositories/models/ListItem/ListItemModel';
 import ModelMapperFactoryListItem               from '@/repositories/modelMappers/ModelMapperFactoryListItem';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import SuccessCallbackHelper                    from '@/repositories/helpers/SuccessCallbackHelper';

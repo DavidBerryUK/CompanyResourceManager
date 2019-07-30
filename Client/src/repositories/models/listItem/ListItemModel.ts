@@ -4,10 +4,12 @@ export default class ListItemModel implements IApiModel {
 
     public id: string;
     public name: string;
+    public selected: boolean | undefined;
 
     constructor() {
         this.id = '';
         this.name = '';
+        this.selected = undefined;
     }
 
     get entityName(): string {
@@ -24,5 +26,16 @@ export default class ListItemModel implements IApiModel {
 
     get entitySortValue(): any {
         return `${this.name}`;
+    }
+
+    get selectedAsText(): string {
+
+        if ( this.selected === true) {
+            return 'yes';
+        }
+        if ( this.selected === false) {
+            return 'no';
+        }
+        return '';
     }
 }

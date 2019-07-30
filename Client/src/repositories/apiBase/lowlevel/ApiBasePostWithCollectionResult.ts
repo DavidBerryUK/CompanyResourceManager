@@ -1,10 +1,10 @@
-import { ApiResponse }                      from '../../contracts/ApiResponseContract';
-import { ApiResponseContract}               from '../../contracts/ApiResponseContract';
-import { IModelGenericMapper }             from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
-import ApiBaseError                         from './ApiBaseError';
-import axios                                from 'axios';
-import BaseApiConfig                        from './ApiBaseConfig';
-import GenericCollectionModel               from '@/repositories/models/shared/collections/GenericCollectionModel';
+import { ApiResponse }                          from '../../contracts/ApiResponseContract';
+import { ApiResponseContract}                   from '../../contracts/ApiResponseContract';
+import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
+import ApiBaseError                             from './ApiBaseError';
+import axios                                    from 'axios';
+import BaseApiConfig                            from './ApiBaseConfig';
+import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 
 /**
  * Post message to api endpoint and accept collection

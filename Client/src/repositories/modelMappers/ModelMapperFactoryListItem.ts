@@ -1,6 +1,6 @@
 import { IModelGenericMapper }                  from './interfaces/IModelGenericMapper';
-import ModelFactoryListItem                    from '../modelFactories/ModelFactoryListItem';
-import ListItemModel                            from '@/repositories/models/shared/collections/ListItemModel';
+import ListItemModel                            from '@/repositories/models/listitem/ListItemModel';
+import ModelFactoryListItem                     from '../modelFactories/ModelFactoryListItem';
 import ModelGenericMapper                       from './generic/ModelGenericMapper';
 
 export default class ModelMapperFactoryListItem {

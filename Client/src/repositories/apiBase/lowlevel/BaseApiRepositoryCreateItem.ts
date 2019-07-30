@@ -1,7 +1,7 @@
-import { IModelGenericMapper } from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../../helpers/SuccessCallbackHelper';
+import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { IRepositoryCreateItem }                from './interfaces/IRepositoryCreateItem';
 import { ISuccessCallback }                     from '../../helpers/SuccessCallbackHelper';
 import { ValidationMessage }                    from '../../contracts/ApiResponseContract';
