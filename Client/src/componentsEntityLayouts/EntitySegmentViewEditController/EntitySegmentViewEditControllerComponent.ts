@@ -13,7 +13,7 @@ enum EnumControllerMode {
 export default class EntitySegmentViewEditControllerComponent extends Vue {
 
     @Prop() public title!: string;
-    @Prop() public model!: EntityPageModel<IApiModel>;
+    @Prop() public entityModel!: EntityPageModel<IApiModel>;
 
     private mode: EnumControllerMode = EnumControllerMode.viewing;
 

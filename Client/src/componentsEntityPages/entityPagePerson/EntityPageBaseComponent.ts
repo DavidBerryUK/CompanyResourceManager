@@ -41,6 +41,12 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
         this.getData();
     }
 
+    @Watch('entityModel.entity', { deep: true })
+    public onModelChanged(newValue: T, oldValue: T) {
+      // check to see if the object has returned to its original value
+      this.entityModel.changeTracker.evaluateHasObjectChanged(this.entityModel.entity);
+    }
+
     @Watch('id')
     public watchPropertyId() {
         console.log('EntityPageBaseComponent:id updated');
@@ -70,6 +76,7 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
 
                 if (data !== null) {
                     this.entityModel.entity = data as E;
+                    this.entityModel.resetTracker();
                 }
 
                 this.$forceUpdate();

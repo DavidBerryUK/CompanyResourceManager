@@ -9,7 +9,7 @@
           <i class="fas fa-edit fa-2x"></i>
         </v-btn>
         <v-btn v-if="isEditing" color="error" @click="onSave">Cancel</v-btn>
-        <v-btn v-if="isEditing" color="info" @click="onSave">Save</v-btn>
+        <v-btn v-if="isEditing" color="info" :disabled="entityModel.modelHasNoChanges" @click="onSave">Save</v-btn>
       </v-toolbar>
 
       <v-card>
