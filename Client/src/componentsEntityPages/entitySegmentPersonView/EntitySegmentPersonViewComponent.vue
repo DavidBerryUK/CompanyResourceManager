@@ -2,18 +2,18 @@
     <div>
      <v-layout row>
         <v-flex xs4>
-          <crm-label-data label="Forename" :stringValue="entityModel.forename"></crm-label-data>
+          <crm-label-data label="Forename" :stringValue="entityModel.entity.forename"></crm-label-data>
         </v-flex>
         <v-flex xs4>
-          <crm-label-data label="Surname" :stringValue="entityModel.surname"></crm-label-data>
+          <crm-label-data label="Surname" :stringValue="entityModel.entity.surname"></crm-label-data>
         </v-flex>
         <v-flex xs4>
-          <crm-label-data label="Email Address" :stringValue="entityModel.email"></crm-label-data>
+          <crm-label-data label="Email Address" :stringValue="entityModel.entity.email"></crm-label-data>
         </v-flex>
       </v-layout>
       <v-layout row>
         <v-flex xs12>
-          <crm-label-data label="Job Role" :stringValue="entityModel.jobRoleName"></crm-label-data>
+          <crm-label-data label="Job Role" :stringValue="entityModel.entity.jobRoleName"></crm-label-data>
         </v-flex>
       </v-layout>
     </div>

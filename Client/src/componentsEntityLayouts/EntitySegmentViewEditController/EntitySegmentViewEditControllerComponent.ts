@@ -35,6 +35,7 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
 
     public onSave() {
         this.mode = EnumControllerMode.viewing;
+        this.$emit('onSaveRequested');
     }
 }
 

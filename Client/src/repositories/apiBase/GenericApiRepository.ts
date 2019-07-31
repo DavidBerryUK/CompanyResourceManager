@@ -87,7 +87,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   //
   public getActiveList(): ApiResponse<GenericCollectionModel<ListItemModel>> {
     return this.baseGetAll<ListItemModel>(
-      `${this.baseUrl}/items`,
+      `${this.baseUrl}/list`,
       ModelMapperFactoryListItem.createMapper());
   }
 

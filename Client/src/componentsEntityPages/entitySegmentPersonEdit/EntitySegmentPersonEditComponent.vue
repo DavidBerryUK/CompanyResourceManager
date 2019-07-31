@@ -4,7 +4,7 @@
         <v-flex xs4 pr-4>
           <v-text-field
             label="Forename"
-            v-model="entityModel.forename"
+            v-model="entityModel.entity.forename"
             v-validate="'required|min:2|max:100'"
             data-vv-name="Forename"
             required
@@ -15,7 +15,7 @@
         <v-flex xs4 pr-4>
           <v-text-field
             label="Surname"
-            v-model="entityModel.surname"
+            v-model="entityModel.entity.surname"
             v-validate="'required|min:2|max:100'"
             data-vv-name="Surname"
             required
@@ -26,7 +26,7 @@
         <v-flex xs4>
           <v-text-field
             label="Email Address"
-            v-model="entityModel.email"
+            v-model="entityModel.entity.email"
             v-validate="'required'"
             data-vv-name="Email"
             required
@@ -38,7 +38,7 @@
       <v-layout row>
         <v-flex xs4 pr-4>
           <v-select
-            :items="jobRoleList.items"
+            :items="this.entityModel.jobRolesList"
             label="Job Role"
             item-value="id"
             item-text="name"
@@ -46,7 +46,7 @@
             data-vv-name="Job Role"
             v-validate="'required'"
             :error-messages="errors.collect('Job Role')"
-            v-model="entityModel.jobRoleId"
+            v-model="entityModel.entity.jobRoleId"
           ></v-select>
         </v-flex>
       </v-layout>

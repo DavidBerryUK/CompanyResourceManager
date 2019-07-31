@@ -17,6 +17,9 @@ export default class LabelDataReadOnly extends Vue {
     @Prop()
     public numberValue?: number;
 
+    @Prop()
+    public labelColor?: string;
+
     public displayValue: string = '';
 
     private oneTimeBind: boolean;

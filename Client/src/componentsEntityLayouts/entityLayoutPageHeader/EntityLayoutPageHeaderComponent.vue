@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar color="indigo" dark class='toolbar-fixed'>      
+<v-toolbar color="indigo" dark class='toolbar-fixed'>      
       <v-toolbar-title>{{entityModel.headerTitle}}</v-toolbar-title>
       <v-toolbar-title  v-if="showIsArchived"  class="blue--text text--lighten-4">ARCHIVED</v-toolbar-title>
       <v-spacer></v-spacer>

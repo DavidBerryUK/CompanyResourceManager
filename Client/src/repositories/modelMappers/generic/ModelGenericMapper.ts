@@ -10,15 +10,7 @@ export default class ModelGenericMapper<T> implements IModelGenericMapper<T> {
     }
 
     public mapToEntity(item: any): T {
-
         const response = Object.assign(this.ModelFactory.create(), item);
-
-        console.log('ModelGenericMapper:mapToEntity');
-        console.log('item input');
-        console.log(item);
-        console.log('item output');
-        console.log(response);
-
         return response;
     }
 

@@ -1,26 +1,58 @@
 <template>
-  <crm-entity-layout-page-template :entityModel="entityModel">    
+  <crm-entity-layout-page-template :entityModel="entityModel">
 
     <!-- HEADER -->
     <div slot="header">
-          <v-layout row slot="header">
-      <v-flex >
-        <crm-label-data label="Person Name" :stringValue="entityModel.forename + ' ' + entityModel.surname"></crm-label-data>
-      </v-flex>
-    </v-layout>
+      <v-layout row slot="header">
+          <crm-label-data 
+            label="Person Name"             
+            :stringValue="entityModel.entity.forename + ' ' + entityModel.entity.surname"></crm-label-data>
+      </v-layout>
     </div>
-    <!-- HEADER -->    
-
     <!-- HEADER -->
+
+    <!-- BODY -->
     <div slot="body">
-       <!-- PERSON SEGMENT VIEW CONTROLER -->
-    <crm-entity-segment-view-edit-controller :entityModel="entityModel" title="Person Details">
+
+      <h2>IsLoading : {{entityModel.isLoading}}</h2>
+      <!-- PERSON - VIEW EDIT MAIN DETAILS -->
+      <crm-entity-segment-view-edit-controller :entityModel="entityModel" title="Person Details" @onSaveRequested="onSaveRequested">
         <crm-entity-segment-person-view slot="view" :entityModel="entityModel" />
         <crm-entity-segment-person-edit slot="edit" :entityModel="entityModel" />
-    </crm-entity-segment-view-edit-controller>
-    <!-- PERSON SEGMENT VIEW CONTROLER -->
+      </crm-entity-segment-view-edit-controller>
+      <!-- PERSON - VIEW EDIT MAIN DETAILS -->
+
+      <v-layout row pt-2 pb-2>         
+
+        <v-flex xs-6 pr-2>
+          <crm-list-items
+            title="Teams"
+            :repoDataSource="EnumRepositoryDataSource.TeamPerson"
+            :repoListMode="EnumRepositoryListMode.All"
+            :repoReferenceId="entityModel.id"
+            :listStyle="EnumListComponentStyle.list"
+            :valueDisplay="EnumListComponentValueDisplay.checkbox"            
+            :showTextFilter="EnumListTextFilter.inHeader"
+            :titleStyle="EnumListCompomentTitle.header"
+          ></crm-list-items>
+        </v-flex>
+
+        <v-flex xs-6>
+          <crm-list-items
+            title="Skills"
+            :repoDataSource="EnumRepositoryDataSource.SkillPerson"
+            :repoListMode="EnumRepositoryListMode.All"
+            :repoReferenceId="entityModel.id"
+            :listStyle="EnumListComponentStyle.list"
+            :valueDisplay="EnumListComponentValueDisplay.checkbox"            
+            :showTextFilter="EnumListTextFilter.inHeader"
+            :titleStyle="EnumListCompomentTitle.header"
+          ></crm-list-items>
+        </v-flex>
+
+      </v-layout>
     </div>
-    <!-- HEADER -->
+    <!-- BODY -->
 
   </crm-entity-layout-page-template>
 </template>

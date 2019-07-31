@@ -83,7 +83,6 @@ export default class ListItemComponent extends Vue {
   }
 
   public mounted() {
-    console.log('ListItem Component - Mounted');
     if ( this.repoDataSource !== EnumRepositoryDataSource.None ) {
       this.getData();
     }
@@ -157,7 +156,6 @@ export default class ListItemComponent extends Vue {
    * @param list - list of words
    */
   private listAsWords(list: Array<ListItemModel>, useAnd: boolean = false): string {
-    console.log(`useAnd:${useAnd}`);
     const count = list.length;
     let message = '';
     for (let index = 0; index < count; index++) {
@@ -174,15 +172,7 @@ export default class ListItemComponent extends Vue {
   }
 
   private getData() {
-    console.log('Get Data');
-
-    console.log('ListItemComponent - getData');
-    console.log(`ListItemComponent - repoDataSource:${this.repoDataSource}`);
-    console.log(`ListItemComponent - repoListMode:${this.repoListMode}`);
-    console.log(`ListItemComponent - repoReferenceId:${this.repoReferenceId}`);
-
     if (this.repoReferenceId === '') {
-      console.log(`ListItemComponent - no reference provided - returning.`);
       this.isLoading = false;
       return;
     }
@@ -194,15 +184,12 @@ export default class ListItemComponent extends Vue {
       this.repoListMode,
       this.repoReferenceId);
 
-    console.log('ListItemComponent - Repository-begin');
     repository.get()
     .onSuccess((list: GenericCollectionModel<ListItemModel>) => {
-        console.log('ListItemComponent - Repository-success');
         this.useRepoData = true;
         this.repoListData = new ListItemCollectionModel(list.items);
     })
     .then(() => {
-      console.log('ListItemComponent - Repository-then');
       this.isLoading = false;
     });
   }
