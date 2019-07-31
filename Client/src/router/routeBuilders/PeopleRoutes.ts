@@ -1,3 +1,4 @@
+import EntityPagePersonComponent                from '@/componentsEntityPages/entityPagePerson/EntityPagePersonComponent';
 import { RouteConfig }                          from 'vue-router';
 import MasterDetailPage                         from '@/componentsCommonGui/masterDetail/MasterDetailPage.vue';
 import PersonEdit                               from '@/componentsBusinessGui/person/edit/PersonEdit.vue';
@@ -20,13 +21,12 @@ export default class PeopleRoutes {
                 navigation: PersonList,
               },
             },
-
             {
               name: 'PersonView',
               path: ':id/view',
               components: {
                 navigation: PersonList,
-                detail: PersonView,
+                detail: EntityPagePersonComponent, // PersonView,
               },
               props: {
                 navigation: true,
