@@ -8,7 +8,8 @@ import PersonExtendedModel                      from '@/repositories/models/pers
 import Vue                                      from 'vue';
 
 @Component
-export default class EntitySegmentPersonEditComponent extends EntitySegmentBase<PersonExtendedModel> {
+export default class EntitySegmentPersonEditComponent
+    extends EntitySegmentBase<PersonExtendedModel> {
 
     @Prop() public entityModel!: EntityPageModel<PersonExtendedModel>;
 
@@ -18,13 +19,6 @@ export default class EntitySegmentPersonEditComponent extends EntitySegmentBase<
         super();
     }
 
-    public onValidate() {
-        console.log('validate person testing');
-
-        this.$validator.validate().then((result) => {
-            console.log(result);
-        });
-    }
 }
 
 Vue.component('crm-entity-segment-person-edit', EntitySegmentPersonEditComponent);

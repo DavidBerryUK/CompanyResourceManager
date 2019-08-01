@@ -43,8 +43,46 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
     }
 
     public onSave() {
-        this.mode = EnumControllerMode.viewing;
-        this.$emit('onSave');
+
+        // Search all sub forms for the one that supports editing.
+        // If validates, then save.
+        console.log('EntitySegmentViewEditController-> begin validation attempt');
+
+        console.log('');
+        console.log('!!!');
+
+
+        // const editInstance = this.$scopedSlots.edit()[0].componentInstance as Vue;
+        const editSlot = this.$scopedSlots.edit;
+        if ( editSlot !==  undefined ) {
+            const vnode = editSlot([]);
+            if ( vnode !== undefined) {
+                const componentInstance = vnode[0].componentInstance;
+                console.log(componentInstance);
+                if (componentInstance !== undefined) {
+                componentInstance.$validator.validate().then((response) => {
+                    console.log(`validation response:${response}`);
+                });
+            }
+            }
+        }
+
+        // editInstance.$validator.validate().then((response) => {
+        //     console.log(response);
+        // });
+
+        console.log('!!!');
+        // const edit = this.$scopedSlots;
+        // if ( edit !== null && edit !== undefined ) {
+        //     console.log(edit);
+
+
+        //     // if ( edit.componentInstance  !== null) {
+        //         // edit.componentInstance.validate().then((response) => { console.log('validated')})
+        //     // }
+        // }
+        console.log('');
+        console.log('');
     }
 
     /**

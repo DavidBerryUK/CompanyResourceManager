@@ -1,6 +1,5 @@
 <template>
     <div>
-      <v-btn @click="onValidate">Validate</v-btn>
       <v-layout row>
         <v-flex xs4 pr-4>
           <v-text-field
