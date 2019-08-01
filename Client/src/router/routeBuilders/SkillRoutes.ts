@@ -1,8 +1,8 @@
 import { RouteConfig }                          from 'vue-router';
 import MasterDetailPage                         from '@/componentsCommonGui/masterDetail/MasterDetailPage.vue';
-import SkillEdit                                from '@/componentsBusinessGui/skill/edit/SkillEdit';
 import SkillList                                from '@/componentsBusinessGui/skill/list/SkillList';
-import SkillView                                from '@/componentsBusinessGui/skill/view/SkillView';
+import EntityPageSkillComponent                 from '@/componentsBusinessGui/skill/detail/detailPage/EntityPageSkillComponent';
+
 
 export default class SkillRoutes {
 
@@ -26,20 +26,7 @@ export default class SkillRoutes {
               path: ':id/view',
               components: {
                 navigation: SkillList,
-                detail: SkillView,
-              },
-              props: {
-                navigation: true,
-                detail: true,
-              },
-            },
-
-            {
-              name: 'SkillEdit',
-              path: ':id/edit',
-              components: {
-                navigation: SkillList,
-                detail: SkillEdit,
+                detail: EntityPageSkillComponent,
               },
               props: {
                 navigation: true,
