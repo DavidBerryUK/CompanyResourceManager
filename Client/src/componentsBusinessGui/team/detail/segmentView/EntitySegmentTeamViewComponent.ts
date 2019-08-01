@@ -11,8 +11,8 @@ export default class EntitySegmentTeamViewComponent extends EntitySegmentBase<Te
     implements IComponentMetaData {
 
     // IComponentMetaData
-    public componentName: string = 'Team View ane Edit';
-    public componentDescription: string = 'Enables the user to view and Edit Teams';
+    public componentName: string = 'Team View';
+    public componentDescription: string = 'Enables the user to view Teams';
     // IComponentMetaData
 
     @Prop() public entityModel!: EntityPageModel<TeamExtendedModel>;

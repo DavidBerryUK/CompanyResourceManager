@@ -4,6 +4,6 @@ import NavigationBaseCrud                       from './base/NavigationBaseCrud'
 export default class NavigationCrudJobRole extends NavigationBaseCrud implements INavigationCrud  {
 
     constructor() {
-        super('JobRoleView', 'JobRoleEdit', 'JobRoleEdit');
+        super('JobRoleView', 'JobRoleNew');
     }
 }
