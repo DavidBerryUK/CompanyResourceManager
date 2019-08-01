@@ -77,7 +77,6 @@ export default class EntityPagePersonComponent
   }
 
   public onArchive() {
-    console.log('EntityPagePersonComponent');
     super.onArchive();
   }
 

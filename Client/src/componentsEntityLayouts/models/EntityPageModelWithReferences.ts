@@ -5,5 +5,6 @@ import ListItemModel                            from '@/repositories/models/list
 export default class EntityPageModelWithReferences<T extends IApiModel> extends EntityPageModel<T> {
 
     public jobRolesList: Array<ListItemModel> = new Array<ListItemModel>();
+    public AssetTypesList: Array<ListItemModel> = new Array<ListItemModel>();
 
 }
