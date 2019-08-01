@@ -1,8 +1,7 @@
 import { RouteConfig }                          from 'vue-router';
-import AssetTypeEdit                            from '@/componentsBusinessGui/assetType/edit/AssetTypeEdit.vue';
 import AssetTypeList                            from '@/componentsBusinessGui/assetType/list/AssetTypeList.vue';
-import AssetTypeView                            from '@/componentsBusinessGui/assetType/view/AssetTypeView.vue';
 import MasterDetailPage                         from '@/componentsCommonGui/masterDetail/MasterDetailPage.vue';
+import EntityPageAssetTypeComponent from '@/componentsBusinessGui/assetType/detail/detailPage/EntityPageAssetTypeComponent';
 
 export default class AssetTypeRoutes {
 
@@ -26,20 +25,7 @@ export default class AssetTypeRoutes {
               path: ':id/view',
               components: {
                 navigation: AssetTypeList,
-                detail: AssetTypeView,
-              },
-              props: {
-                navigation: true,
-                detail: true,
-              },
-            },
-
-            {
-              name: 'AssetTypeEdit',
-              path: ':id/edit',
-              components: {
-                navigation: AssetTypeList,
-                detail: AssetTypeEdit,
+                detail: EntityPageAssetTypeComponent,
               },
               props: {
                 navigation: true,
