@@ -1,3 +1,4 @@
+import { ApiResponseContract } from './../contracts/ApiResponseContract';
 import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '@/repositories/helpers/SuccessCallbackHelper';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
@@ -96,6 +97,14 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   /// will return null if no itemh is found
   ///
   public getById(id: string): ApiResponse<E> {
+
+    if ( id === 'new') {
+      const data = this.objectExtendedEntitytMapper.mapToEntity({});
+      const contract = new ApiResponseContract<E>();
+      contract.publishSuccess(data);
+      return contract.responder;
+    }
+
     return this.baseGetById(
       this.baseUrl + '/' + id,
       this.objectExtendedEntitytMapper);

@@ -31,6 +31,18 @@ export default class PeopleRoutes {
                 detail: true,
               },
             },
+            {
+              name: 'PersonNew',
+              path: 'new',
+              components: {
+                navigation: PersonList,
+                detail: EntityPagePersonComponent, // PersonView,
+              },
+              props: {
+                navigation: true,
+                detail: true,
+              },
+            },
           ],
         };
         return route;
