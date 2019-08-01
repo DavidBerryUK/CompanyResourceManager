@@ -21,7 +21,7 @@
       <!-- JOB ROLE - VIEW EDIT MAIN DETAILS -->
       <crm-entity-segment-view-edit-controller 
           :entityModel="entityModel" 
-          title="Person Details" 
+          title="Job Role Details" 
           @onSave="onSave"
           @onEditBegins="onEditBegins"
           @onCancel="onCancel">
