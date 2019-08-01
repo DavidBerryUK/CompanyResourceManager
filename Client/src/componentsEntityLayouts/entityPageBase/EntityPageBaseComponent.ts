@@ -3,7 +3,7 @@ import { EnumModalIcon }                        from '../../componentsCommonGui/
 import { EnumModalWidth }                       from '../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
-import { IDataIsActive }                        from './../../repositories/models/interfaces/IDataIsActive';
+import { IDataIsActive }                        from '../../repositories/models/interfaces/IDataIsActive';
 import { IModelFactory }                        from '@/repositories/modelFactories/interfaces/IModelFactory';
 import { IRouteBeforeNavigationCheck }          from '@/router/interfaces/NavigationCheckInterfaces';
 import { Prop }                                 from  'vue-property-decorator';
@@ -11,7 +11,7 @@ import { ValidationMessage }                    from '@/repositories/contracts/A
 import { Watch }                                from 'vue-property-decorator';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import ContractListener                         from '@/repositories/contracts/ContractListener';
-import EntityPageModel                          from '../../componentsEntityLayouts/models/EntityPageModel';
+import EntityPageModel                          from '../models/EntityPageModel';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import IsActiveDataInterfaceGuards              from '@/repositories/models/interfaces/IDataIsActive';
 import Vue from 'vue';

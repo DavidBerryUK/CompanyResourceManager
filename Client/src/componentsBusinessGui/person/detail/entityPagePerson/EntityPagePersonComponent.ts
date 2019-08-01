@@ -1,14 +1,14 @@
-import { IRouteBeforeNavigationCheck } from '@/router/interfaces/NavigationCheckInterfaces';
 import { EnumListCompomentTitle }               from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListComponentStyle }               from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListComponentValueDisplay }        from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListTextFilter }                   from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumRepositoryDataSource }             from '@/repositories/listRepository/ListRepositoryEnum';
 import { EnumRepositoryListMode }               from '@/repositories/listRepository/ListRepositoryEnum';
+import { IRouteBeforeNavigationCheck }          from '@/router/interfaces/NavigationCheckInterfaces';
 import Component                                from 'vue-class-component';
 import ContractListener                         from '@/repositories/contracts/ContractListener';
 import EntityLayoutPageTemplateComponent        from '@/componentsEntityLayouts/entityLayoutPageTemplate/EntityLayoutPageTemplateComponent';
-import EntityPageBaseComponent                  from './EntityPageBaseComponent';
+import EntityPageBaseComponent                  from '../../../../componentsEntityLayouts/entityPageBase/EntityPageBaseComponent';
 import EntityPageModelWithReferences            from '@/componentsEntityLayouts/models/EntityPageModelWithReferences';
 import EntitySegmentPersonEdit                  from '../entitySegmentPersonEdit/EntitySegmentPersonEditComponent';
 import EntitySegmentPersonView                  from '../entitySegmentPersonView/EntitySegmentPersonViewComponent';
