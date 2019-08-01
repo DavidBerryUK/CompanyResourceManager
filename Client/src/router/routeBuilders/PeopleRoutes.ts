@@ -1,5 +1,5 @@
-import EntityPagePersonComponent                from '@/componentsBusinessGui/person/detail/entityPagePerson/EntityPagePersonComponent';
 import { RouteConfig }                          from 'vue-router';
+import EntityPagePersonComponent                from '@/componentsBusinessGui/person/detail/detailPage/EntityPagePersonComponent';
 import MasterDetailPage                         from '@/componentsCommonGui/masterDetail/MasterDetailPage.vue';
 import PersonList                               from '@/componentsBusinessGui/person/list/PersonList.vue';
 

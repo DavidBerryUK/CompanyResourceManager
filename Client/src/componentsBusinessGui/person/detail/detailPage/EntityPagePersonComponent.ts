@@ -10,8 +10,8 @@ import ContractListener                         from '@/repositories/contracts/C
 import EntityLayoutPageTemplateComponent        from '@/componentsEntityLayouts/entityLayoutPageTemplate/EntityLayoutPageTemplateComponent';
 import EntityPageBaseComponent                  from '../../../../componentsEntityLayouts/entityPageBase/EntityPageBaseComponent';
 import EntityPageModelWithReferences            from '@/componentsEntityLayouts/models/EntityPageModelWithReferences';
-import EntitySegmentPersonEdit                  from '../entitySegmentPersonEdit/EntitySegmentPersonEditComponent';
-import EntitySegmentPersonView                  from '../entitySegmentPersonView/EntitySegmentPersonViewComponent';
+import EntitySegmentPersonEdit                  from '../segmentEdit/EntitySegmentPersonEditComponent';
+import EntitySegmentPersonView                  from '../segmentView/EntitySegmentPersonViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';

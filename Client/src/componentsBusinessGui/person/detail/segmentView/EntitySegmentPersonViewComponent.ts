@@ -2,7 +2,7 @@ import { Component }                            from 'vue-property-decorator';
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import { Prop }                                 from 'vue-property-decorator';
 import EntityPageModel                          from '../../../../componentsEntityLayouts/models/EntityPageModel';
-import EntitySegmentBase                        from '../../../../componentsEntityLayouts/entitySegmentBase/EntitySegmentBase';
+import EntitySegmentBase                  from '../../../../componentsEntityLayouts/entitySegmentBase/EntitySegmentBase';
 import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
 import Vue                                      from 'vue';
 

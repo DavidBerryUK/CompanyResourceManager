@@ -86,10 +86,6 @@ export default class ModelUpdateNotifications<  T extends IApiModel>  {
     }
 
     public publishItemUpdated(model: T) {
-        console.log('**************************');
-        console.log('* Publish that item has been updated');
-        console.log(model);
-        console.log('**************************');
         this.subscribersItemUpdated.forEach((subscriber) => { subscriber.callback(model); });
     }
 
