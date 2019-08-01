@@ -169,7 +169,19 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
                     .onSuccess((data: E) => {
                         // reset the model change tracker, this will
                         // disable the save button
-                        this.entityModel.resetTracker();
+
+                        if (data !== null) {
+                            this.entityModel.entity = data as E;
+                            this.entityModel.resetTracker();
+
+                            if (IsActiveDataInterfaceGuards.doesSupportIDataIsActive(this.entityModel.entity)) {
+                                const isActiveDataSet = this.entityModel.entity as IDataIsActive;
+                                this.entityModel.canArchive = true;
+                                this.entityModel.isActive = isActiveDataSet.isActive;
+                            } else {
+                                this.entityModel.canArchive = false;
+                            }
+                        }
                     })
 
                     .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
