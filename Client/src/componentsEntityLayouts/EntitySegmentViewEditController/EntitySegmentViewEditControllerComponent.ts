@@ -53,7 +53,11 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
      */
     @Watch('entityModel.entity.entityKey')
     private watchIdChanges() {
-        this.mode = EnumControllerMode.viewing;
+        if ( this.entityModel.isNewRecord ) {
+            this.mode = EnumControllerMode.editing;
+        } else {
+            this.mode = EnumControllerMode.viewing;
+        }
     }
 
 }

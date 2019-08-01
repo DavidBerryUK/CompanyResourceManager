@@ -23,4 +23,12 @@ export default class EntityPageModel<T extends IApiModel> {
     public get modelHasNoChanges(): boolean {
         return !this.changeTracker.hasObjectChanged;
     }
+
+    public get isNewRecord(): boolean {
+        return this.id === 'new';
+    }
+
+    public get isExistingRecord(): boolean {
+        return this.id !== 'new';
+    }
 }

@@ -11,7 +11,7 @@ export default class PersonSummaryModel implements IApiModel {
     public isActive: boolean;
 
     constructor() {
-        this.personId = '';
+        this.personId = '00000000-0000-0000-0000-000000000000';
         this.forename = '';
         this.surname = '';
         this.email = '';

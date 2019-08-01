@@ -14,7 +14,7 @@ import ContractListener                         from '@/repositories/contracts/C
 import EntityPageModel                          from '../models/EntityPageModel';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import IsActiveDataInterfaceGuards              from '@/repositories/models/interfaces/IDataIsActive';
-import Vue from 'vue';
+import Vue                                      from 'vue';
 
 /**
  * E = EntityType
@@ -161,8 +161,10 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
         // do nothing and wait for the user to correct the
         // validation issues
         //
-        this.$validator.validateAll().then((result) => {
+        this.$validator.validate().then((result) => {
 
+            console.log('validator result');
+            console.log(result);
             if (result) {
                 // save data to server
                 this.repository.save(this.entityModel.entity)

@@ -1,5 +1,6 @@
 <template>
     <div>
+      <v-btn @click="onValidate">Validate</v-btn>
       <v-layout row>
         <v-flex xs4 pr-4>
           <v-text-field
@@ -45,7 +46,7 @@
           <v-text-field
             label="Email Address"
             v-model="entityModel.entity.email"
-            v-validate="'required'"
+            v-validate="'required|min:2|max:200|email'"
             data-vv-name="Email"
             required
             :error-messages="errors.collect('Email')"

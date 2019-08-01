@@ -30,7 +30,7 @@
       </crm-entity-segment-view-edit-controller>
       <!-- PERSON - VIEW EDIT MAIN DETAILS -->
 
-      <v-layout row pt-2 pb-2>         
+      <v-layout v-if="entityModel.isExistingRecord" row pt-2 pb-2>         
 
         <v-flex xs-6 pr-2>
           <crm-list-items

@@ -17,6 +17,14 @@ export default class EntitySegmentPersonEditComponent extends EntitySegmentBase<
     constructor() {
         super();
     }
+
+    public onValidate() {
+        console.log('validate person testing');
+
+        this.$validator.validate().then((result) => {
+            console.log(result);
+        });
+    }
 }
 
 Vue.component('crm-entity-segment-person-edit', EntitySegmentPersonEditComponent);
