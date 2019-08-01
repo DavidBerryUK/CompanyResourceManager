@@ -1,3 +1,4 @@
+import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
 import Component                                from 'vue-class-component';
 import { IApiModel }                            from '../../repositories/models/interfaces/IApiModel';
 import { Prop }                                 from 'vue-property-decorator';
@@ -8,6 +9,7 @@ import EntityLayoutPageHeaderComponent          from '../entityLayoutPageHeader/
 @Component({
     components: {
         EntityLayoutPageHeaderComponent,
+        LabelDataReadOnly,
     },
   })
 export default class EntityLayoutPageTemplateComponent extends Vue {

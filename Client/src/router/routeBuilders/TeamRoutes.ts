@@ -1,8 +1,7 @@
 import { RouteConfig }                          from 'vue-router';
 import MasterDetailPage                         from '@/componentsCommonGui/masterDetail/MasterDetailPage.vue';
-import TeamEdit                                 from '@/componentsBusinessGui/team/edit/TeamEdit';
 import TeamList                                 from '@/componentsBusinessGui/team/list/TeamList';
-import TeamView                                 from '@/componentsBusinessGui/team/view/TeamView';
+import EntityPageTeamComponent                  from '@/componentsBusinessGui/team/detail/detailPage/EntityPageTeamComponent';
 
 export default class TeamRoutes {
 
@@ -26,20 +25,7 @@ export default class TeamRoutes {
               path: ':id/view',
               components: {
                 navigation: TeamList,
-                detail: TeamView,
-              },
-              props: {
-                navigation: true,
-                detail: true,
-              },
-            },
-
-            {
-              name: 'TeamEdit',
-              path: ':id/edit',
-              components: {
-                navigation: TeamList,
-                detail: TeamEdit,
+                detail: EntityPageTeamComponent,
               },
               props: {
                 navigation: true,
