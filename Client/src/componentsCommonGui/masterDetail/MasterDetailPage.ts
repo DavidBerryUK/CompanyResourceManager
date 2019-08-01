@@ -9,6 +9,7 @@ import ElementTitleWrapperComponent             from '@/componentsCommonGui/elem
 import NavigationCheckInterfaceGuards           from '@/router/interfaces/NavigationCheckInterfaces';
 import Vue                                      from 'vue';
 
+
 @Component({
   components: {
     ElementTitleWrapperComponent,
@@ -54,24 +55,18 @@ export default class MasterDetailPage extends Vue {
      }
 
      private doAllTheChecking(next: any) {
-      // console.log("MasterDetailPage - do All the Checking");
+       console.log('MasterDetailPage - do All the Checking');
 
        let doNeedToAskForPermission = false;
 
        // console.log("checking children in the view: count=" + this.$children.length);
        this.$children.forEach((child: Vue) => {
-        //  if ( ComponentMetaDataInterfaceGuards.doesSupportIComponentMetaData(child) ) {
-        //    //console.log("checking for navigation guards on " + child.componentName);
-        //  }
-        //  else{
-        //    //console.log("checking for navigation guards on ");
-        //  }
 
-         if ( NavigationCheckInterfaceGuards.doesSupportIRouteBeforeNavigationCheck(child)) {
-           const canClose = child.canCloseComponentBeforeNavigation();
-           if (canClose === false) {
-             doNeedToAskForPermission = true;
-           }
+          if ( NavigationCheckInterfaceGuards.doesSupportIRouteBeforeNavigationCheck(child)) {
+            const canClose = child.canCloseComponentBeforeNavigation();
+            if (canClose === false) {
+              doNeedToAskForPermission = true;
+            }
          }
        });
 

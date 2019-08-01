@@ -1,18 +1,19 @@
-import { EnumModalButton } from '../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
-import { EnumModalIcon } from '../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
-import { EnumModalWidth } from '../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
-import { IApiModel } from '@/repositories/models/interfaces/IApiModel';
-import { IComponentMetaData } from '@/components/interfaces/ComponentMetaDataInterfaces';
-import { IDataIsActive } from './../../repositories/models/interfaces/IDataIsActive';
-import { IModelFactory } from '@/repositories/modelFactories/interfaces/IModelFactory';
-import { Prop } from 'vue-property-decorator';
-import { ValidationMessage } from '@/repositories/contracts/ApiResponseContract';
-import { Watch } from 'vue-property-decorator';
-import CommonAppDialogController from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
-import ContractListener from '@/repositories/contracts/ContractListener';
-import EntityPageModel from '../../componentsEntityLayouts/models/EntityPageModel';
-import GenericApiRepository from '@/repositories/apiBase/GenericApiRepository';
-import IsActiveDataInterfaceGuards from '@/repositories/models/interfaces/IDataIsActive';
+import { EnumModalButton }                      from '../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
+import { EnumModalIcon }                        from '../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
+import { EnumModalWidth }                       from '../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
+import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
+import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
+import { IDataIsActive }                        from './../../repositories/models/interfaces/IDataIsActive';
+import { IModelFactory }                        from '@/repositories/modelFactories/interfaces/IModelFactory';
+import { IRouteBeforeNavigationCheck }          from '@/router/interfaces/NavigationCheckInterfaces';
+import { Prop }                                 from  'vue-property-decorator';
+import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
+import { Watch }                                from 'vue-property-decorator';
+import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
+import ContractListener                         from '@/repositories/contracts/ContractListener';
+import EntityPageModel                          from '../../componentsEntityLayouts/models/EntityPageModel';
+import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
+import IsActiveDataInterfaceGuards              from '@/repositories/models/interfaces/IDataIsActive';
 import Vue from 'vue';
 
 /**
@@ -20,7 +21,7 @@ import Vue from 'vue';
  * T = EntityPageModel
  */
 export default class EntityPageBaseComponent<E extends IApiModel, T extends EntityPageModel<E>>
-    extends Vue implements IComponentMetaData {
+    extends Vue implements IComponentMetaData, IRouteBeforeNavigationCheck {
 
     @Prop() public id!: string;
 
@@ -84,7 +85,18 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
         this.dataArchive();
     }
 
-
+     // IRouteBeforeNavigationCheck
+  //
+  // this is called by the router before navigation to ensure its ok
+  // to navigate away from this screen
+  //
+  public canCloseComponentBeforeNavigation(): boolean {
+    if (this.entityModel.changeTracker != null) {
+      return this.entityModel.changeTracker.isObjectSameAsOriginal;
+    }
+    return false;
+  }
+  // IRouteBeforeNavigationCheck
 
     /**
      * This is a place holder that can be overridden by subclasses.

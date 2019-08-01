@@ -1,3 +1,4 @@
+import { IRouteBeforeNavigationCheck } from '@/router/interfaces/NavigationCheckInterfaces';
 import { EnumListCompomentTitle }               from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListComponentStyle }               from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListComponentValueDisplay }        from '@/componentsCommonGui/listItem/ListItemComponentEnums';
@@ -28,7 +29,9 @@ import PersonRepositoryFactory                  from '@/repositories/factory/Per
     EntitySegmentViewEditControllerComponent,
   },
 })
-export default class EntityPagePersonComponent extends EntityPageBaseComponent<PersonExtendedModel, EntityPageModelWithReferences<PersonExtendedModel>> {
+export default class EntityPagePersonComponent
+  extends EntityPageBaseComponent<PersonExtendedModel, EntityPageModelWithReferences<PersonExtendedModel>>
+  implements IRouteBeforeNavigationCheck {
 
   public EnumListCompomentTitle = EnumListCompomentTitle;
   public EnumListComponentStyle = EnumListComponentStyle;
@@ -74,6 +77,7 @@ export default class EntityPagePersonComponent extends EntityPageBaseComponent<P
   }
 
   public onArchive() {
+    console.log('EntityPagePersonComponent');
     super.onArchive();
   }
 
