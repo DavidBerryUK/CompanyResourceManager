@@ -57,13 +57,27 @@ export default class EntityPagePersonComponent extends EntityPageBaseComponent<P
       .getActiveList()
       .onSuccess((list: GenericCollectionModel<ListItemModel>) => {
         this.entityModel.jobRolesList = list.items;
-        console.log('loading job roles');
-        console.log(this.entityModel);
       })
       .contractListener(contractListener);
   }
 
-  public onSaveRequested() {
-    super.onSaveRequested();
+  public onCancel() {
+    super.onCancel();
+  }
+
+  public onEditBegins() {
+    super.onEditBegins();
+  }
+
+  public onSave() {
+    super.onSave();
+  }
+
+  public onArchive() {
+    super.onArchive();
+  }
+
+  public onRestore() {
+    super.onRestore();
   }
 }

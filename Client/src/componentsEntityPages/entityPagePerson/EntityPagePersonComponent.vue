@@ -1,11 +1,14 @@
 <template>
-  <crm-entity-layout-page-template :entityModel="entityModel">
+  <crm-entity-layout-page-template
+    :entityModel="entityModel"
+    @onArchive="onArchive"
+    @onRestore="onRestore">
 
     <!-- HEADER -->
     <div slot="header">
       <v-layout row slot="header">
           <crm-label-data 
-            label="Person Name"             
+            label="Person Name"          
             :stringValue="entityModel.entity.forename + ' ' + entityModel.entity.surname"></crm-label-data>
       </v-layout>
     </div>
@@ -16,7 +19,12 @@
 
       <h2>IsLoading : {{entityModel.isLoading}}</h2>
       <!-- PERSON - VIEW EDIT MAIN DETAILS -->
-      <crm-entity-segment-view-edit-controller :entityModel="entityModel" title="Person Details" @onSaveRequested="onSaveRequested">
+      <crm-entity-segment-view-edit-controller 
+          :entityModel="entityModel" 
+          title="Person Details" 
+          @onSave="onSave"
+          @onEditBegins="onEditBegins"
+          @onCancel="onCancel">
         <crm-entity-segment-person-view slot="view" :entityModel="entityModel" />
         <crm-entity-segment-person-edit slot="edit" :entityModel="entityModel" />
       </crm-entity-segment-view-edit-controller>

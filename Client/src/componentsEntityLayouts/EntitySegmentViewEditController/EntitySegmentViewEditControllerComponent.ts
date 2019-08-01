@@ -15,6 +15,8 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
     @Prop() public title!: string;
     @Prop() public entityModel!: EntityPageModel<IApiModel>;
 
+    private entityBackup: string = '';
+
     private mode: EnumControllerMode = EnumControllerMode.viewing;
 
     constructor() {
@@ -29,14 +31,21 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
         return this.mode === EnumControllerMode.editing;
     }
 
+    public onCancel() {
+        this.mode = EnumControllerMode.viewing;
+        this.$emit('onCancel');
+    }
+
     public onEdit() {
         this.mode = EnumControllerMode.editing;
+        this.$emit('onEditBegins');
     }
 
     public onSave() {
         this.mode = EnumControllerMode.viewing;
-        this.$emit('onSaveRequested');
+        this.$emit('onSave');
     }
+
 }
 
 Vue.component('crm-entity-segment-view-edit-controller', EntitySegmentViewEditControllerComponent);

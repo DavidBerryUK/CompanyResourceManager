@@ -17,6 +17,16 @@ export default class EntityLayoutPageTemplateComponent extends Vue {
     constructor() {
         super();
     }
+
+    /** Event Handler - User has pressed the restore button */
+    public onRestore() {
+        this.$emit('onRestore');
+    }
+
+    /** Event Handler - User has pressed the archive button */
+    public onArchive() {
+        this.$emit('onArchive');
+    }
 }
 
 Vue.component('crm-entity-layout-page-template', EntityLayoutPageTemplateComponent);

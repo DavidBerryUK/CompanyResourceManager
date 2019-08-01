@@ -159,10 +159,6 @@ export default class NavigationListComponent extends Vue  implements IComponentM
         this.updateList(model, true);
       })
       .onItemUpdated(this, (model: IApiModel) => {
-        console.log('**************************************');
-        console.log('ListenToModelUpdated:onItemUpdated:');
-        console.log(model);
-        console.log('**************************************');
         this.updateList(model, false);
       })
       .onItemDeleted(this, (model: IApiModel) => {
@@ -172,8 +168,6 @@ export default class NavigationListComponent extends Vue  implements IComponentM
         this.updateList(model, false);
       })
       .onItemDeactivated(this, (model: IApiModel) => {
-        console.log('OnItemDeactivated');
-        console.log(model);
         this.updateList(model, false);
       });
   }

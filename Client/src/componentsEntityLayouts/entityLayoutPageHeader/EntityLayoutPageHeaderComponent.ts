@@ -13,6 +13,16 @@ export default class EntityLayoutPageHeaderComponent extends Vue {
         super();
     }
 
+    /** Event Handler - the user has pressed the archive button */
+    public onArchive() {
+        this.$emit('onArchive');
+    }
+
+    /** Event Handler - the user has pressed the restore button */
+    public onRestore() {
+        this.$emit('onRestore');
+    }
+
     public get showIsActive() {
         if ( this.entityModel.canArchive === false ) {
             return false;

@@ -2,7 +2,10 @@
   <div class="form-style">
 
     <!-- PAGE HEADER -->
-    <crm-entity-layout-page-header :entityModel="entityModel"/>
+    <crm-entity-layout-page-header 
+      :entityModel="entityModel"
+      @onArchive="onArchive"
+      @onRestore="onRestore"/>
     <!-- PAGE HEADER -->
 
     <div class="form-body">

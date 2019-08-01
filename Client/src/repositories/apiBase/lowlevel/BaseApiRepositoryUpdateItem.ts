@@ -49,18 +49,9 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
                     }
 
                     if (response.data.entity) {
-
                         const mappedModel = convertor.mapToEntity(response.data.entity);
-
-                        console.log('Item Updated');
-                        console.log('Item returned');
-                        console.log(response.data.entity);
-                        console.log('mapped moddel');
-                        console.log(mappedModel);
-
                         successCallback( mappedModel, successType);
                         contract.publishSuccess(mappedModel);
-
                     } else {
                         contract.publishFailure('No data entity returned');
                     }
