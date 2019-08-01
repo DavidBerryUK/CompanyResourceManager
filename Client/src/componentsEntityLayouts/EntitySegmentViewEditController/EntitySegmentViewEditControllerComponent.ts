@@ -1,6 +1,7 @@
 import { Component }                            from 'vue-property-decorator';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { Prop }                                 from 'vue-property-decorator';
+import { Watch }                                from 'vue-property-decorator';
 import EntityPageModel                          from '../models/EntityPageModel';
 import Vue                                      from 'vue';
 
@@ -44,6 +45,15 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
     public onSave() {
         this.mode = EnumControllerMode.viewing;
         this.$emit('onSave');
+    }
+
+    /**
+     * Watch the id of the record, it this changes it means that another record has loaded
+     * And the edit mode should return to EnumControllerMode.viewing.
+     */
+    @Watch('entityModel.entity.entityKey')
+    private watchIdChanges() {
+        this.mode = EnumControllerMode.viewing;
     }
 
 }

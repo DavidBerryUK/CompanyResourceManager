@@ -1,4 +1,4 @@
-import Component                                 from 'vue-class-component';
+import Component                                from 'vue-class-component';
 import { IApiModel }                            from '../../repositories/models/interfaces/IApiModel';
 import { Prop }                                 from 'vue-property-decorator';
 import EntityPageModel                          from '../models/EntityPageModel';

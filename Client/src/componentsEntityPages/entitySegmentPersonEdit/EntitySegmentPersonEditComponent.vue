@@ -12,7 +12,7 @@
           >></v-text-field>
         </v-flex>
 
-        <v-flex xs4 pr-4>
+        <v-flex xs4>
           <v-text-field
             label="Surname"
             v-model="entityModel.entity.surname"
@@ -23,16 +23,7 @@
           >></v-text-field>
         </v-flex>
 
-        <v-flex xs4>
-          <v-text-field
-            label="Email Address"
-            v-model="entityModel.entity.email"
-            v-validate="'required'"
-            data-vv-name="Email"
-            required
-            :error-messages="errors.collect('Email')"
-          ></v-text-field>
-        </v-flex>
+        
       </v-layout>
 
       <v-layout row>
@@ -49,6 +40,18 @@
             v-model="entityModel.entity.jobRoleId"
           ></v-select>
         </v-flex>
+
+        <v-flex xs4>
+          <v-text-field
+            label="Email Address"
+            v-model="entityModel.entity.email"
+            v-validate="'required'"
+            data-vv-name="Email"
+            required
+            :error-messages="errors.collect('Email')"
+          ></v-text-field>
+        </v-flex>
+
       </v-layout>
     </div>
 </template>
