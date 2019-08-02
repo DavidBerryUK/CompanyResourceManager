@@ -21,8 +21,9 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
 
     private mode: EnumControllerMode = EnumControllerMode.viewing;
 
-    constructor() {
-        super();
+    public mounted() {
+        console.log(`EntitySegmentViewEditControllerComponent-mounted:${this.entityModel.entity.entityKey}`);
+        this.evaluateDefaultViewMode();
     }
 
     public get isViewing(): boolean {
@@ -49,7 +50,6 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
         //
         const editVueInstance = VueUtilities.getNamedSlotInstance(this, 'edit');
         if ( editVueInstance !== null ) {
-            console.log(editVueInstance);
             editVueInstance.$validator.validate().then((response) => {
                 if ( response ) {
                     this.$emit('onSave');
@@ -63,10 +63,18 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
      * And the edit mode should return to EnumControllerMode.viewing.
      */
     @Watch('entityModel.entity.entityKey')
-    private watchIdChanges() {
+    public watchIdChanges() {
+        console.log(`EntitySegmentViewEditControllerComponent-WatchIdChanged:${this.entityModel.entity.entityKey}`);
+        this.evaluateDefaultViewMode();
+    }
+
+    private evaluateDefaultViewMode() {
+        console.log(`EntitySegmentViewEditControllerComponent-evaluateDefaultViewMode:${this.entityModel.entity.entityKey}`);
         if ( this.entityModel.isNewRecord ) {
+            console.log('mode = editing');
             this.mode = EnumControllerMode.editing;
         } else {
+            console.log('mode = viewing');
             this.mode = EnumControllerMode.viewing;
         }
     }
