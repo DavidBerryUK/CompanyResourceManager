@@ -32,7 +32,7 @@ export default class TeamRoutes {
               },
             },
             {
-              name: 'TeamView',
+              name: 'TeamNew',
               path: 'new',
               components: {
                 navigation: TeamList,

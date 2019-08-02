@@ -32,7 +32,7 @@ export default class AssetRoutes {
               },
             },
             {
-              name: 'AssetView',
+              name: 'AssetNew',
               path: 'new',
               components: {
                 navigation: AssetList,

@@ -33,7 +33,7 @@ export default class SkillRoutes {
               },
             },
             {
-              name: 'SkillView',
+              name: 'SkillNew',
               path: 'new',
               components: {
                 navigation: SkillList,

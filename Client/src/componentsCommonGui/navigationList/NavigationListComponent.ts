@@ -156,18 +156,23 @@ export default class NavigationListComponent extends Vue  implements IComponentM
   private listenToModelUpdates() {
     NotificationFactory.instance.getNotificationInstance<IApiModel>(this.configuration.summaryEntityName)
       .onItemCreated(this, (model: IApiModel) => {
+        // console.log('[1] Navigation List Component - list to updates - item created');
         this.updateList(model, true);
       })
       .onItemUpdated(this, (model: IApiModel) => {
+        // console.log('[2] Navigation List Component - list to updates - item updated');
         this.updateList(model, false);
       })
       .onItemDeleted(this, (model: IApiModel) => {
+        // console.log('[3] Navigation List Component - list to updates - item deleted');
         this.updateList(model, false);
       })
       .onItemActivated(this, (model: IApiModel) => {
+        // console.log('[4] Navigation List Component - list to updates - item activated');
         this.updateList(model, false);
       })
       .onItemDeactivated(this, (model: IApiModel) => {
+        // console.log('[5] Navigation List Component - list to updates - item deactivated');
         this.updateList(model, false);
       });
   }

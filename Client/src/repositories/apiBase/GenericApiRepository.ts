@@ -124,7 +124,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
       model,
       this.objectExtendedEntitytMapper,
       (returnedModel, successType) => {
-        this.savedModel(this.entityName, returnedModel, successType);
+        this.publishModelSavedNotification(this.entityName, returnedModel, successType);
       });
 
   }
@@ -135,7 +135,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
       this.objectSummaryEntitytMapper,
       EnumSuccessType.DeActivatedOk,
       (model, successType) => {
-        this.savedModel(this.entityName, model, successType);
+        this.publishModelSavedNotification(this.entityName, model, successType);
       });
 
   }
@@ -146,7 +146,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
       this.objectSummaryEntitytMapper,
       EnumSuccessType.ActivatedOk,
       (model, successType) => {
-        this.savedModel(this.entityName, model, successType);
+        this.publishModelSavedNotification(this.entityName, model, successType);
       });
 
   }
@@ -159,7 +159,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
    * @param model the model after has been updated
    * @param successType Success Type
    */
-  private savedModel(
+  private publishModelSavedNotification(
     entityName: string,
     model: S | E,
     successType: EnumSuccessType) {
@@ -168,7 +168,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
     switch (successType) {
 
       case EnumSuccessType.CreatedOk:
-        notificationHandler.publishItemActivated(model);
+        notificationHandler.publishItemCreated(model);
         break;
 
       case EnumSuccessType.UpdatedOk:

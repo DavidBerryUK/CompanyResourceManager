@@ -32,7 +32,7 @@ export default class SecurityGroupRoutes {
               },
             },
             {
-              name: 'SecurityGroupView',
+              name: 'SecurityGroupNew',
               path: 'new',
               components: {
                 navigation: SecurityGroupList,

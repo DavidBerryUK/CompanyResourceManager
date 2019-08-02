@@ -32,7 +32,7 @@ export default class JobRoleRoutes {
               },
             },
             {
-              name: 'JobRoleView',
+              name: 'JobRoleNew',
               path: 'new',
               components: {
                 navigation: JobRoleList,
