@@ -14,5 +14,7 @@ namespace CRM.Service.Repository.SkillServices.Interfaces
         Task<BaseCollectionResponse<ListItem>> GetSelectedForPerson(Guid personId);
 
         Task<BaseCollectionResponse<ListItem>> GetUnSelectedForPerson(Guid personId);
+
+        Task Update(Guid skillId, Guid personId, bool selected);
     }
 }

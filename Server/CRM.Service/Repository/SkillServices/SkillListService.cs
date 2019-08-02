@@ -55,5 +55,18 @@ namespace CRM.Service.Repository.SkillServices
 
             return response;
         }
+
+        public async Task Update(Guid skillId, Guid personId, bool selected)
+        {
+            await Update(
+                key1 => key1.SkillId,
+                key2 => key2.PersonId,
+                skillId,
+                personId,
+                selected
+            );
+
+            return;
+        }
     }
 }

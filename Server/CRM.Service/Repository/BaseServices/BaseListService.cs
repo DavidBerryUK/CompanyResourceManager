@@ -189,10 +189,6 @@ namespace CRM.Service.Repository.BaseServices
                 Name = reader.GetString(1),
                 Selected = reader.GetBoolean(2)
             };
-
-
-
-
             return item;
         }
 
