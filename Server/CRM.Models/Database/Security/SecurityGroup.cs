@@ -28,7 +28,11 @@ namespace CRM.Models.Database.Security
         public ICollection<SecurityGroupSecurityPermission> NavSecurityGroupSecurityPermission { get; set; }
 
         // Interface IDatabaseEntity
-        public Guid PrimaryKey => this.SecurityGroupId;
+        public Guid PrimaryKey
+        {
+            get => this.SecurityGroupId;
+            set => this.SecurityGroupId = value;
+        }
         // Interface IDatabaseEntity
     }
 }

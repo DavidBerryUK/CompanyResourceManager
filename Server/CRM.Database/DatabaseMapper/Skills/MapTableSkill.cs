@@ -42,6 +42,8 @@ namespace CRM.Database.DatabaseMapper.Skills
                 entity.HasMany(many => many.NavPersonSkills)
                     .WithOne(one => one.NavSkill)
                     .HasForeignKey(foreignKey => foreignKey.SkillId);
+
+                entity.Ignore(o => o.PrimaryKey);
             });
         }
     }

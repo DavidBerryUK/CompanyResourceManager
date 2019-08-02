@@ -65,11 +65,17 @@ export default class ApiBase {
 
         const contract = new ApiResponseContract<T>();
 
-        if (model.entityKey == null || model.entityKey === '' || model.entityKey === '00000000-0000-0000-0000-000000000000') {
+        // if the entity is new, then perform a POST
+        //
+        if (model.entityKey == null ||
+            model.entityKey === '' ||
+            model.entityKey === '00000000-0000-0000-0000-000000000000') {
             const servicePost = new BaseApiRepositoryCreateItem<T>();
             return servicePost.post(baseUrl, model, convertor, EnumSuccessType.CreatedOk, successCallback);
         }
 
+        // the entity already has a primary key - perform a PUT to update
+        //
         const servicePut = new BaseApiRepositoryUpdateItem<T>();
         return servicePut.put(
             `${baseUrl}/${model.entityKey}`,

@@ -47,7 +47,11 @@ namespace CRM.Models.Database.Persons
 
 
         // Interface IDatabaseEntity
-        public Guid PrimaryKey => this.PersonId;
+        public Guid PrimaryKey
+        {
+            get => this.PersonId;
+            set => this.PersonId = value;
+        }
         // Interface IDatabaseEntity
     }
 }

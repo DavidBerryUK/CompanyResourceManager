@@ -32,6 +32,7 @@ namespace CRM.Database.DatabaseMapper.Securities
                 entity.Property(e => e.SecurityGroupId)
                     .IsRequired()
                     .ValueGeneratedNever();
+
             });
         }
     }

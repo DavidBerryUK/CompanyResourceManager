@@ -23,7 +23,11 @@ namespace CRM.Models.Database.JobRoles
         public ICollection<Person> NavPerson { get; set; }
 
         // Interface IDatabaseEntity
-        public Guid PrimaryKey => this.JobRoleId;
+        public Guid PrimaryKey
+        {
+            get => this.JobRoleId;
+            set => this.JobRoleId = value;
+        }
         // Interface IDatabaseEntity
     }
 }

@@ -20,10 +20,21 @@ export default class SkillRoutes {
                 navigation: SkillList,
               },
             },
-
             {
               name: 'SkillView',
               path: ':id/view',
+              components: {
+                navigation: SkillList,
+                detail: EntityPageSkillComponent,
+              },
+              props: {
+                navigation: true,
+                detail: true,
+              },
+            },
+            {
+              name: 'SkillView',
+              path: 'new',
               components: {
                 navigation: SkillList,
                 detail: EntityPageSkillComponent,

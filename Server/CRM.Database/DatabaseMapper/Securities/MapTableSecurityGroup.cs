@@ -51,6 +51,8 @@ namespace CRM.Database.DatabaseMapper.Securities
                 entity.HasMany(many => many.NavSecurityGroupSecurityPermission)
                   .WithOne(one => one.NavSecurityGroup)
                   .HasForeignKey(foreignKey => foreignKey.SecurityGroupId);
+
+                entity.Ignore(o => o.PrimaryKey);
             });
         }
     }

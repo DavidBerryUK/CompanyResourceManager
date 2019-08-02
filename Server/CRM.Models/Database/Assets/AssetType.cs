@@ -26,7 +26,11 @@ namespace CRM.Models.Database.Assets
         public ICollection<Asset> NavAssets { get; set; }
 
         // Interface IDatabaseEntity
-        public Guid PrimaryKey => this.AssetTypeId;
+        public Guid PrimaryKey
+        {
+            get => this.AssetTypeId;
+            set => this.AssetTypeId = value;
+        }
         // Interface IDatabaseEntity
     }
 }

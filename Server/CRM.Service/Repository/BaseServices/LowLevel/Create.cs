@@ -15,10 +15,13 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
         public static async Task<BaseItemResponse<TRestModel>> CreateAsync(
             CrmDatabaseContext dbContext,
             TRestModel model,
+            TPrimaryKey primaryKey,
             Func<IQueryable<TEntity>, IQueryable<TEntity>> queryInclude,
             Func<IQueryable<TEntity>, TPrimaryKey, IQueryable<TEntity>> queryEqualsPrimaryKey)
         {
             var entity = Mapper.Map<TEntity>(model);
+            entity.PrimaryKey = primaryKey;
+            entity.IsActive = true;
             await dbContext.AddAsync(entity);
             await dbContext.SaveChangesAsync();
 

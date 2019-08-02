@@ -19,10 +19,21 @@ export default class SecurityGroupRoutes {
                 navigation: SecurityGroupList,
               },
             },
-
             {
               name: 'SecurityGroupView',
               path: ':id/view',
+              components: {
+                navigation: SecurityGroupList,
+                detail: EntityPageSecurityGroupComponent,
+              },
+              props: {
+                navigation: true,
+                detail: true,
+              },
+            },
+            {
+              name: 'SecurityGroupView',
+              path: 'new',
               components: {
                 navigation: SecurityGroupList,
                 detail: EntityPageSecurityGroupComponent,

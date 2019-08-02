@@ -19,10 +19,21 @@ export default class TeamRoutes {
                 navigation: TeamList,
               },
             },
-
             {
               name: 'TeamView',
               path: ':id/view',
+              components: {
+                navigation: TeamList,
+                detail: EntityPageTeamComponent,
+              },
+              props: {
+                navigation: true,
+                detail: true,
+              },
+            },
+            {
+              name: 'TeamView',
+              path: 'new',
               components: {
                 navigation: TeamList,
                 detail: EntityPageTeamComponent,

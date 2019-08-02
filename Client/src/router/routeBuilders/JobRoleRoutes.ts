@@ -19,10 +19,21 @@ export default class JobRoleRoutes {
                 navigation: JobRoleList,
               },
             },
-
             {
               name: 'JobRoleView',
               path: ':id/view',
+              components: {
+                navigation: JobRoleList,
+                detail: EntityPageJobRoleComponent,
+              },
+              props: {
+                navigation: true,
+                detail: true,
+              },
+            },
+            {
+              name: 'JobRoleView',
+              path: 'new',
               components: {
                 navigation: JobRoleList,
                 detail: EntityPageJobRoleComponent,

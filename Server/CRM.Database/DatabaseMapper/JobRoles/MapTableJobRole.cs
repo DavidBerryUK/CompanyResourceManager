@@ -38,6 +38,8 @@ namespace CRM.Database.DatabaseMapper.JobRoles
                 entity.HasMany(many => many.NavPerson)
                     .WithOne(one => one.NavJobRole)
                     .HasForeignKey(key => key.JobRoleId);
+
+                entity.Ignore(o => o.PrimaryKey);
             });
         }
     }

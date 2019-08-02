@@ -65,6 +65,8 @@ namespace CRM.Database.DatabaseMapper.Persons
                 entity.HasMany(many => many.NavWorkflowInstanceEvents)
                     .WithOne(one => one.NavPerson)
                     .HasForeignKey(foreignKey => foreignKey.PersonId);
+
+                entity.Ignore(o => o.PrimaryKey);
             });
         }
     }

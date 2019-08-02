@@ -41,6 +41,8 @@ namespace CRM.Database.DatabaseMapper.Assets
                 entity.HasMany(many => many.NavPersonAssets)
                     .WithOne(one => one.NavAsset)
                     .HasForeignKey(foreignKey => foreignKey.AssetId);
+
+                entity.Ignore(o => o.PrimaryKey);
             });
         }
     }

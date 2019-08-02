@@ -19,10 +19,21 @@ export default class AssetTypeRoutes {
                 navigation: AssetTypeList,
               },
             },
-
             {
               name: 'AssetTypeView',
               path: ':id/view',
+              components: {
+                navigation: AssetTypeList,
+                detail: EntityPageAssetTypeComponent,
+              },
+              props: {
+                navigation: true,
+                detail: true,
+              },
+            },
+            {
+              name: 'AssetTypeView',
+              path: 'new',
               components: {
                 navigation: AssetTypeList,
                 detail: EntityPageAssetTypeComponent,

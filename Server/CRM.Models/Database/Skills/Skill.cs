@@ -24,7 +24,11 @@ namespace CRM.Models.Database.Skills
         public ICollection<PersonSkill>  NavPersonSkills { get; set; }
 
         // Interface IDatabaseEntity
-        public Guid PrimaryKey => this.SkillId;
+        public Guid PrimaryKey
+        {
+            get => this.SkillId;
+            set => this.SkillId = value;
+        }
         // Interface IDatabaseEntity
     }
 }

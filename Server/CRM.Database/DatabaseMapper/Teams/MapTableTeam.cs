@@ -46,6 +46,8 @@ namespace CRM.Database.DatabaseMapper.Teams
                 entity.HasMany(many => many.NavSecurityGroupTeams)
                    .WithOne(one => one.NavTeam)
                    .HasForeignKey(foreignKey => foreignKey.TeamId);
+
+                entity.Ignore(o => o.PrimaryKey);
             });
         }
     }

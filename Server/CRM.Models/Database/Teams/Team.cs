@@ -27,7 +27,11 @@ namespace CRM.Models.Database.Teams
         public ICollection<SecurityGroupTeam> NavSecurityGroupTeams { get; set; }
 
         // Interface IDatabaseEntity
-        public Guid PrimaryKey => this.TeamId;
+        public Guid PrimaryKey
+        {
+            get => this.TeamId;
+            set => this.TeamId = value;
+        }
         // Interface IDatabaseEntity
     }
 }

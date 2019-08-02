@@ -49,6 +49,8 @@ namespace CRM.Database.DatabaseMapper.Workflows
                     .WithOne(one => one.NavWorkflow)
                     .HasForeignKey(key => key.WorkflowId);
 
+                entity.Ignore(o => o.PrimaryKey);
+
             });
         }
 

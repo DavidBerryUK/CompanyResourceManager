@@ -27,7 +27,11 @@ namespace CRM.Models.Database.Workflow
         public ICollection<WorkflowNode> NavWorkflowNodes { get; set; }
 
         // Interface IDatabaseEntity
-        public Guid PrimaryKey => this.WorkflowId;
+        public Guid PrimaryKey
+        {
+            get => this.WorkflowId;
+            set => this.WorkflowId = value;
+        }
         // Interface IDatabaseEntity
     }
 }

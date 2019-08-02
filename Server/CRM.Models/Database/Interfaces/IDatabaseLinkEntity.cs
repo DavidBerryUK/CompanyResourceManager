@@ -2,7 +2,7 @@
 {
     public interface IDatabaseEntity<TPrimaryKey>
     {
-        TPrimaryKey PrimaryKey { get;}
+        TPrimaryKey PrimaryKey { get; set; }
         bool IsActive { get; set; }
     }
 }

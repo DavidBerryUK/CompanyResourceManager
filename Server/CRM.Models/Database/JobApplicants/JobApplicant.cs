@@ -23,9 +23,11 @@ namespace CRM.Models.Database.JobApplicants
         public WorkflowInstance NavWorkflowInstance { get; set; }
 
         // Interface IDatabaseEntity
-        public Guid PrimaryKey => this.JobApplicantId;
-
-        // TODO: is this needed?
+        public Guid PrimaryKey
+        {
+            get => this.JobApplicantId;
+            set => this.JobApplicantId = value;
+        }
         public bool IsActive { get; set; }
 
         // Interface IDatabaseEntity

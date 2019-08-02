@@ -146,6 +146,7 @@ namespace CRM.Service.Repository.BaseServices
                     .CreateAsync(
                         _dbContext,
                         model,
+                        CreateNewPrimaryKey(),
                     QueryExtendedInclude,
                     QueryEqualsPrimaryKey);
 

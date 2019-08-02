@@ -24,7 +24,7 @@ export default class PeopleRoutes {
               path: ':id/view',
               components: {
                 navigation: PersonList,
-                detail: EntityPagePersonComponent, // PersonView,
+                detail: EntityPagePersonComponent,
               },
               props: {
                 navigation: true,
@@ -36,7 +36,7 @@ export default class PeopleRoutes {
               path: 'new',
               components: {
                 navigation: PersonList,
-                detail: EntityPagePersonComponent, // PersonView,
+                detail: EntityPagePersonComponent,
               },
               props: {
                 navigation: true,

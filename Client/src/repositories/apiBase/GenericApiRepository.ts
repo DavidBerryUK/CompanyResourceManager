@@ -98,13 +98,17 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   ///
   public getById(id: string): ApiResponse<E> {
 
-    if ( id === 'new') {
+    console.log(`get by id:${id}`);
+    if (  id === '00000000-0000-0000-0000-000000000000' ||
+          id === 'new') {
+      console.log('return new object');
       const data = this.objectExtendedEntitytMapper.mapToEntity({});
       const contract = new ApiResponseContract<E>();
       contract.publishSuccess(data);
       return contract.responder;
     }
 
+    console.log(`baseGetById(${id})`);
     return this.baseGetById(
       this.baseUrl + '/' + id,
       this.objectExtendedEntitytMapper);

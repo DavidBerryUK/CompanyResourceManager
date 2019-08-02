@@ -4,6 +4,7 @@ import { Prop }                                 from 'vue-property-decorator';
 import { Watch }                                from 'vue-property-decorator';
 import EntityPageModel                          from '../models/EntityPageModel';
 import Vue                                      from 'vue';
+import VueUtilities                             from '@/utilities/vueUtilities/VueUtilities';
 
 enum EnumControllerMode {
     viewing,
@@ -43,46 +44,18 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
     }
 
     public onSave() {
-
-        // Search all sub forms for the one that supports editing.
-        // If validates, then save.
-        console.log('EntitySegmentViewEditController-> begin validation attempt');
-
-        console.log('');
-        console.log('!!!');
-
-
-        // const editInstance = this.$scopedSlots.edit()[0].componentInstance as Vue;
-        const editSlot = this.$scopedSlots.edit;
-        if ( editSlot !==  undefined ) {
-            const vnode = editSlot([]);
-            if ( vnode !== undefined) {
-                const componentInstance = vnode[0].componentInstance;
-                console.log(componentInstance);
-                if (componentInstance !== undefined) {
-                componentInstance.$validator.validate().then((response) => {
-                    console.log(`validation response:${response}`);
-                });
-            }
-            }
+        // Get the component in the Edit Slot and validate it. If the validation is ok
+        // then emit the 'onSave' message to tell the host page to save the entity
+        //
+        const editVueInstance = VueUtilities.getNamedSlotInstance(this, 'edit');
+        if ( editVueInstance !== null ) {
+            console.log(editVueInstance);
+            editVueInstance.$validator.validate().then((response) => {
+                if ( response ) {
+                    this.$emit('onSave');
+                }
+            });
         }
-
-        // editInstance.$validator.validate().then((response) => {
-        //     console.log(response);
-        // });
-
-        console.log('!!!');
-        // const edit = this.$scopedSlots;
-        // if ( edit !== null && edit !== undefined ) {
-        //     console.log(edit);
-
-
-        //     // if ( edit.componentInstance  !== null) {
-        //         // edit.componentInstance.validate().then((response) => { console.log('validated')})
-        //     // }
-        // }
-        console.log('');
-        console.log('');
     }
 
     /**

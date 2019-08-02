@@ -7,7 +7,7 @@ export default class ListItemModel implements IApiModel {
     public selected: boolean | undefined;
 
     constructor() {
-        this.id = '';
+        this.id = '00000000-0000-0000-0000-000000000000';
         this.name = '';
         this.selected = undefined;
     }

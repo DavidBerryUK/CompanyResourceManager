@@ -31,6 +31,18 @@ export default class AssetRoutes {
                 detail: true,
               },
             },
+            {
+              name: 'AssetView',
+              path: 'new',
+              components: {
+                navigation: AssetList,
+                detail: EntityPageAssetComponent,
+              },
+              props: {
+                navigation: true,
+                detail: true,
+              },
+            },
           ],
         };
 
