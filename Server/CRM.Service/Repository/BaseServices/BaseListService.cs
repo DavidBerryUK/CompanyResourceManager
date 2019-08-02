@@ -15,8 +15,8 @@ using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices
 {
-    public class BaseListService<TReferenceEntity, TLinkEntity, TPrimaryKey> 
-        : IBaseListService<TReferenceEntity, TLinkEntity, TPrimaryKey> 
+    public class BaseListService<TReferenceEntity, TLinkEntity, TPrimaryKey>
+        : IBaseListService<TReferenceEntity, TLinkEntity, TPrimaryKey>
         where TReferenceEntity : class, IDatabaseEntity<TPrimaryKey>
         where TLinkEntity : class, IDatabaseLinkEntity<TPrimaryKey>
     {
@@ -41,13 +41,54 @@ namespace CRM.Service.Repository.BaseServices
             return response;
         }
 
+        public async Task Update(
+                Expression<Func<TLinkEntity, TPrimaryKey>> linkTableKey1Property,
+                Expression<Func<TLinkEntity, TPrimaryKey>> linkTableKey2Property,
+                TPrimaryKey key1Value,
+                TPrimaryKey key2Value,
+                bool selected)
+        {
+            var meta = GetMetaData(linkTableKey1Property, linkTableKey2Property);
+
+            var sql = selected ? CreateSqlToInsertListItem(meta) : CreateSqlToDeleteListItem(meta);
+
+            await ExecuteNoResultSql(sql, key1Value, key2Value);
+        }
+
+        private static string CreateSqlToDeleteListItem(TableJoinMetaModel meta)
+        {
+            var sql = "DELETE " +
+                      $"FROM    {meta.LinkTableName} " +
+                      $"WHERE   {meta.LinkTableName}.{meta.LinkTableJoinKey1PropertyName} = @Key1 " +
+                      $"AND		{meta.LinkTableName}.{meta.LinkTableJoinKey2PropertyName} = @Key2";
+                      
+            return sql;
+        }
+
+        private static string CreateSqlToInsertListItem(TableJoinMetaModel meta)
+        {
+            var sql =
+                $"IF NOT EXISTS ( " +
+                $" SELECT * FROM {meta.LinkTableName} " +
+                $"  WHERE {meta.LinkTableJoinKey1PropertyName} = @Key1 " +
+                $"  AND   {meta.LinkTableJoinKey2PropertyName} = @Key2 " +
+                $") " +
+                $"BEGIN " +
+                $"  INSERT INTO {meta.LinkTableName} " +
+                $"  ({meta.LinkTableJoinKey1PropertyName}, {meta.LinkTableJoinKey2PropertyName} ) " +
+                $"  VALUES ( @Key1, @Key2 ) " +
+                $"END ";
+
+            return sql;
+        }
+
         public async Task<BaseCollectionResponse<ListItem>> GetSelectedOnly(
-            Expression<Func<TReferenceEntity, TPrimaryKey>> referenceKeyProperty,
-            Expression<Func<TLinkEntity, TPrimaryKey>> joinProperty,
-            Expression<Func<TReferenceEntity, string>> textProperty,
-            Expression<Func<TLinkEntity, TPrimaryKey>> filterProperty,
-            TPrimaryKey filterValue
-        )
+                Expression<Func<TReferenceEntity, TPrimaryKey>> referenceKeyProperty,
+                Expression<Func<TLinkEntity, TPrimaryKey>> joinProperty,
+                Expression<Func<TReferenceEntity, string>> textProperty,
+                Expression<Func<TLinkEntity, TPrimaryKey>> filterProperty,
+                TPrimaryKey filterValue
+            )
         {
             var meta = GetMetaData(referenceKeyProperty, joinProperty, filterProperty, textProperty);
             var sql = CreateSqlListSelectedOnly(meta);
@@ -109,7 +150,7 @@ namespace CRM.Service.Repository.BaseServices
                 var parameterFilter = new SqlParameter("@FilterValue", filterValue);
                 command.CommandText = sql;
                 command.Parameters.Add(parameterFilter);
-                DbContext.Database.OpenConnection();
+                await DbContext.Database.OpenConnectionAsync();
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
@@ -117,9 +158,27 @@ namespace CRM.Service.Repository.BaseServices
                         data.Add(GetLineItemFromReader(reader));
                     }
                 }
+
+                DbContext.Database.CloseConnection();
             }
 
             return data;
+        }
+
+        private async Task ExecuteNoResultSql(string sql, TPrimaryKey key1Value, TPrimaryKey key2Value)
+        {
+            using (var command = DbContext.Database.GetDbConnection().CreateCommand())
+            {
+                await DbContext.Database.OpenConnectionAsync();
+                command.CommandText = sql;
+                var parameterKey1 = new SqlParameter("@Key1", key1Value);
+                var parameterKey2 = new SqlParameter("@Key2", key2Value);
+                command.Parameters.Add(parameterKey1);
+                command.Parameters.Add(parameterKey2);
+                await command.ExecuteNonQueryAsync();
+
+                DbContext.Database.CloseConnection();
+            }
         }
 
         private static ListItem GetLineItemFromReader(DbDataReader reader)
@@ -221,6 +280,29 @@ namespace CRM.Service.Repository.BaseServices
                 LinkTableJoinPropertyName = joinFieldMember.Member.Name,
                 LinkTableFilterPropertyName = filterFieldMember.Member.Name,
                 ReferenceTableTextPropertyName = textFieldMember.Member.Name
+            };
+            return metaData;
+        }
+
+        private static TableJoinMetaModel GetMetaData(
+            Expression<Func<TLinkEntity, TPrimaryKey>> linkTableKey1Property,
+            Expression<Func<TLinkEntity, TPrimaryKey>> linkTableKey2Property)
+        {
+            if (!(linkTableKey1Property.Body is MemberExpression linkTableKey1FieldMember))
+            {
+                throw new ArgumentException($"${nameof(linkTableKey1FieldMember)} is not a valid member expression");
+            }
+
+            if (!(linkTableKey2Property.Body is MemberExpression linkTableKey2FieldMember))
+            {
+                throw new ArgumentException($"${nameof(linkTableKey2FieldMember)} is not a valid member expression");
+            }
+
+            var metaData = new TableJoinMetaModel
+            {
+                LinkTableName = typeof(TLinkEntity).Name,
+                LinkTableJoinKey1PropertyName = linkTableKey1FieldMember.Member.Name,
+                LinkTableJoinKey2PropertyName = linkTableKey2FieldMember.Member.Name,
             };
             return metaData;
         }

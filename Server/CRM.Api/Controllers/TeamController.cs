@@ -165,5 +165,12 @@ namespace CRM.Api.Controllers
             var data = await _teamListService.GetUnSelectedForPerson(personId);
             return Ok(data);
         }
+
+        [HttpPut("{teamId}/person/{personId}/{selected}")]
+        public async Task<ActionResult<List<ListItem>>> ListUnselected(Guid teamId, Guid personId, bool selected)
+        {
+            await _teamListService.Update(teamId, personId, selected);
+            return Ok();
+        }
     }
 }

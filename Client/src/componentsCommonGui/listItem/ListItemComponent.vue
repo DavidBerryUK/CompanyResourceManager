@@ -70,8 +70,8 @@
                 <v-list-tile-title v-html="item.name"></v-list-tile-title>
               </v-list-tile-content>
               <v-list-tile-action>
-                <v-checkbox v-if="isValueCheckboxVisible" v-model="item.selected"></v-checkbox>
-                <v-switch v-if="isValueSwitchVisible" v-model="item.selected"></v-switch>
+                <v-checkbox v-if="isValueCheckboxVisible" v-model="item.selected" @change="itemValueChange(item)"></v-checkbox>
+                <v-switch v-if="isValueSwitchVisible" v-model="item.selected" @change="itemValueChange(item)"></v-switch>
                 <div v-if="isValueTextVisible">{{item.selectedAsText}}</div>
               </v-list-tile-action>
             </v-list-tile>

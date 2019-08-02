@@ -55,5 +55,19 @@ namespace CRM.Service.Repository.TeamServices
 
             return response;
         }
+
+        public async Task Update(Guid teamId, Guid personId, bool selected)
+        {
+            await Update(
+                key1 => key1.TeamId,
+                key2 => key2.PersonId,
+                teamId,
+                personId,
+                selected
+            );
+
+            return;
+        }
+
     }
 }

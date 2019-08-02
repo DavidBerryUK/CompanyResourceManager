@@ -39,6 +39,9 @@ export default class ListItemComponent extends Vue {
   @Prop({default: EnumListTextFilter.none})
   public showTextFilter!: EnumListTextFilter;
 
+  @Prop({default: true})
+  public realtimeUpdates!: boolean;
+
   /**
    * Optional Repository Parameter - component can
    * load data directly from api
@@ -70,6 +73,8 @@ export default class ListItemComponent extends Vue {
 
   private useRepoData: boolean = false;
 
+  private listRepository!: ListRepository;
+
   private get listData(): Array<ListItemModel> {
     if ( this.useRepoData ) {
       return this.repoListData.all;
@@ -90,6 +95,18 @@ export default class ListItemComponent extends Vue {
 
   get listFiltered(): Array<ListItemModel> {
     return  this.filterListItemService.filterWithRankings(this.listFilterText, this.listData);
+  }
+
+  public itemValueChange(item: ListItemModel) {
+    this.listRepository.updateItem(item)
+      .onSuccess((data: ListItemModel) => {
+        console.log(`[ListItemComponent:itemUpdateValue] - response - success `);
+        console.log(data);
+      }).onFailed((error: string) => {
+        console.log(`[ListItemComponent:itemUpdateValue] - reponse failed ${error}`);
+      }).then(() => {
+        console.log(`[ListItemComponent:itemUpdateValue] - response - then `);
+      });
   }
 
   public get isHeaderStyleHeader(): boolean {
@@ -179,12 +196,12 @@ export default class ListItemComponent extends Vue {
 
     this.isLoading = true;
 
-    const repository = new ListRepository(
+    this.listRepository = new ListRepository(
       this.repoDataSource,
       this.repoListMode,
       this.repoReferenceId);
 
-    repository.get()
+    this.listRepository.get()
     .onSuccess((list: GenericCollectionModel<ListItemModel>) => {
         this.useRepoData = true;
         this.repoListData = new ListItemCollectionModel(list.items);

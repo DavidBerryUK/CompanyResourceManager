@@ -8,5 +8,7 @@
         public string ReferenceTableTextPropertyName { get; set; }
         public string LinkTableJoinPropertyName { get; set; }
         public string LinkTableFilterPropertyName { get; set; }
+        public string LinkTableJoinKey1PropertyName { get; set; }
+        public string LinkTableJoinKey2PropertyName { get; set; }
     }
 }

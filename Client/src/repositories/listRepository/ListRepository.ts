@@ -7,6 +7,7 @@ import ListItemModel                            from '@/repositories/models/list
 import ListRepositoryEnum                       from './ListRepositoryEnum';
 import ModelMapperFactoryListItem               from '@/repositories/modelMappers/ModelMapperFactoryListItem';
 import BaseApiConfig                            from '@/repositories/apiBase/lowlevel/ApiBaseConfig';
+import { EnumSuccessType } from '../helpers/SuccessCallbackHelper';
 
 export default class ListRepository extends ApiBase {
 
@@ -43,6 +44,33 @@ export default class ListRepository extends ApiBase {
     public get(): ApiResponse<GenericCollectionModel<ListItemModel>> {
       const data = this.baseGetAll(this.createGetUrl(), ModelMapperFactoryListItem.createMapper());
       return data;
+    }
+
+    public updateItem(item: ListItemModel): ApiResponse<ListItemModel> {
+
+        console.log(`ListRepository:UpdateItem`);
+        console.log(`id:        ${item.id}`);
+        console.log(`name:      ${item.name}`);
+        console.log(`selected:  ${item.selected}`);
+        console.log(`----------------------------------`);
+
+        if ( item.selected !== undefined ) {
+            const url = this.createUpdateUrl(item.entityKey, item.selected);
+            const response = this.basePutWithNoModel (
+                url,
+                ModelMapperFactoryListItem.createMapper(),
+                EnumSuccessType.UpdatedOk,
+                (model, successType) => {});
+            return response;
+        }
+        throw new Error('item model does not have a valid selected value');
+    }
+
+    private createUpdateUrl(keyId: string, selected: boolean): string {
+        if ( this.referenceEntityName === '') {
+            throw new Error('List Repository cannot update items when entity name is blank');
+        }
+        return `${this.baseUrl}api/${this.listEntityName}/${keyId}/${this.referenceEntityName}/${this.referenceId}/${selected}`;
     }
 
     /**

@@ -14,5 +14,7 @@ namespace CRM.Service.Repository.TeamServices.Interfaces
         Task<BaseCollectionResponse<ListItem>> GetSelectedForPerson(Guid personId);
 
         Task<BaseCollectionResponse<ListItem>> GetUnSelectedForPerson(Guid personId);
+
+        Task Update(Guid teamId, Guid personId, bool selected);
     }
 }
