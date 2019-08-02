@@ -13,6 +13,7 @@ import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/listitem/ListItemModel';
 import ModelFactoryAssetExtended                from '@/repositories/modelFactories/ModelFactoryAssetExtended';
+import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 
 @Component({
   components: {
@@ -30,7 +31,8 @@ export default class EntityPageAssetComponent
     super(
       new EntityPageModelWithReferences(),
       AssetRepositoryFactory.getRepository(),
-      new ModelFactoryAssetExtended());
+      new ModelFactoryAssetExtended(),
+      new NavigationCrudAsset());
 
     this.entityModel.headerTitle = 'Asset';
     this.entityModel.canArchive = true;

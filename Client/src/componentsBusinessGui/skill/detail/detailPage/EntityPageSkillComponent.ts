@@ -6,10 +6,10 @@ import EntityPageModelWithReferences            from '@/componentsEntityLayouts/
 import EntitySegmentSkillEditComponent          from '../segmentEdit/EntitySegmentSkillEditComponent';
 import EntitySegmentSkillViewComponent          from '../segmentView/EntitySegmentSkillViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
+import ModelFactorySkillExtended                from '@/repositories/modelFactories/ModelFactorySkillExtended';
+import NavigationCrudSkill                      from '@/routeNavigation/NavigationCrudSkill';
 import SkillExtendedModel                       from '@/repositories/models/skill/SkillExtendedModel';
 import SkillRepositoryFactory                   from '@/repositories/factory/SkillRepositoryFactory';
-import ModelFactorySkillExtended                from '@/repositories/modelFactories/ModelFactorySkillExtended';
-
 
 @Component({
   components: {
@@ -27,7 +27,8 @@ export default class EntityPageSkillComponent
     super(
       new EntityPageModelWithReferences(),
       SkillRepositoryFactory.getRepository(),
-      new ModelFactorySkillExtended());
+      new ModelFactorySkillExtended(),
+      new NavigationCrudSkill());
 
     this.entityModel.headerTitle = 'Skill';
     this.entityModel.canArchive = true;

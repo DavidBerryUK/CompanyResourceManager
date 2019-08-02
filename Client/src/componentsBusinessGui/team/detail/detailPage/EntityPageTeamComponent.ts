@@ -7,6 +7,7 @@ import EntitySegmentTeamEditComponent           from '../segmentEdit/EntitySegme
 import EntitySegmentTeamViewComponent           from '../segmentView/EntitySegmentTeamViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
 import ModelFactoryTeamExtended                 from '@/repositories/modelFactories/ModelFactoryTeamExtended';
+import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 import TeamExtendedModel                        from '@/repositories/models/team/TeamExtendedModel';
 import TeamRepositoryFactory                    from '@/repositories/factory/TeamRepositoryFactory';
 
@@ -26,7 +27,8 @@ export default class EntityPageTeamComponent
     super(
       new EntityPageModelWithReferences(),
       TeamRepositoryFactory.getRepository(),
-      new ModelFactoryTeamExtended());
+      new ModelFactoryTeamExtended(),
+      new NavigationCrudAsset());
 
     this.entityModel.headerTitle = 'Team';
     this.entityModel.canArchive = true;

@@ -65,7 +65,6 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   //
   public getAllAsSummary():
     ApiResponse<GenericCollectionModel<S>> {
-
     return this.baseGetAll<S>(
       this.baseUrl,
       this.objectSummaryEntitytMapper);

@@ -9,7 +9,7 @@ import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/
 import JobRoleExtendedModel                     from '@/repositories/models/jobRole/JobRoleExtendedModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import ModelFactoryJobRoleExtended              from '@/repositories/modelFactories/ModelFactoryJobRoleExtended';
-
+import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
 
 @Component({
   components: {
@@ -27,7 +27,8 @@ export default class EntityPageJobRoleComponent
     super(
       new EntityPageModelWithReferences(),
       JobRoleRepositoryFactory.getRepository(),
-      new ModelFactoryJobRoleExtended());
+      new ModelFactoryJobRoleExtended(),
+      new NavigationCrudJobRole());
 
     this.entityModel.headerTitle = 'Job Roles';
     this.entityModel.canArchive = true;

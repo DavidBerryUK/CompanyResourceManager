@@ -1,3 +1,5 @@
+import { IModelGenericMapper } from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
+import { INavigationCrud } from './../../routeNavigation/interfaces/INavigationCrud';
 import { EnumModalButton }                      from '../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
 import { EnumModalIcon }                        from '../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
 import { EnumModalWidth }                       from '../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
@@ -29,6 +31,7 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
     public backupOfEntityModel?: E;
 
     public repository: GenericApiRepository<any, E, any>;
+    public crudNavigator!: INavigationCrud;
 
     // IComponentMetaData
     public componentName: string = 'EntityPageBaseComponent';
@@ -40,13 +43,15 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
     constructor(
         entityPageModel: T,
         repository: GenericApiRepository<any, E, any>,
-        modelFactory: IModelFactory<E>) {
+        modelFactory: IModelFactory<E>,
+        crudNavigator: INavigationCrud) {
         super();
         this.modelFactory = modelFactory;
         this.entityModel = entityPageModel;
         this.repository = repository;
         this.entityModel.id = this.id;
         this.entityModel.entity = this.modelFactory.create();
+        this.crudNavigator = crudNavigator;
         this.dataGet();
     }
 
@@ -163,26 +168,19 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
         //
         this.$validator.validate().then((result) => {
 
-            console.log('validator result');
-            console.log(result);
             if (result) {
                 // save data to server
                 this.repository.save(this.entityModel.entity)
+
                     .onSuccess((data: E) => {
                         // reset the model change tracker, this will
                         // disable the save button
 
                         if (data !== null) {
                             this.entityModel.entity = data as E;
+                            // stop the framework asking if it's ok to swap screens.
                             this.entityModel.resetTracker();
-
-                            if (IsActiveDataInterfaceGuards.doesSupportIDataIsActive(this.entityModel.entity)) {
-                                const isActiveDataSet = this.entityModel.entity as IDataIsActive;
-                                this.entityModel.canArchive = true;
-                                this.entityModel.isActive = isActiveDataSet.isActive;
-                            } else {
-                                this.entityModel.canArchive = false;
-                            }
+                            this.crudNavigator.gotoViewPage(this, this.entityModel.entity.entityKey);
                         }
                     })
 

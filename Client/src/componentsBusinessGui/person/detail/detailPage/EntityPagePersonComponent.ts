@@ -17,6 +17,7 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import ListItemModel                            from '@/repositories/models/listitem/ListItemModel';
 import ModelFactoryPersonExtended               from '@/repositories/modelFactories/ModelFactoryPersonExtended';
+import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';
 
@@ -44,7 +45,8 @@ export default class EntityPagePersonComponent
     super(
       new EntityPageModelWithReferences(),
       PersonRepositoryFactory.getRepository(),
-      new ModelFactoryPersonExtended());
+      new ModelFactoryPersonExtended(),
+      new NavigationCrudPerson());
 
     this.entityModel.headerTitle = 'Person';
     this.entityModel.canArchive = true;

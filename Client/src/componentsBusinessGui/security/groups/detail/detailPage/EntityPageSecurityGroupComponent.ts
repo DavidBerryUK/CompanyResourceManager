@@ -7,6 +7,7 @@ import EntitySegmentSecurityGroupEditComponent  from '../segmentEdit/EntitySegme
 import EntitySegmentSecurityGroupViewComponent  from '../segmentView/EntitySegmentSecurityGroupViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
 import ModelFactorySecurityGroupExtended        from '@/repositories/modelFactories/ModelFactorySecurityGroupExtended';
+import NavigationCrudSecurityGroup              from '@/routeNavigation/NavigationCrudSecurityGroup';
 import SecurityGroupExtendedModel               from '@/repositories/models/securityGroup/SecurityGroupExtendedModel';
 import SecurityGroupRepositoryFactory           from '@/repositories/factory/SecurityGroupRepositoryFactory';
 
@@ -26,7 +27,8 @@ export default class EntityPageSecurityGroupComponent
     super(
       new EntityPageModelWithReferences(),
       SecurityGroupRepositoryFactory.getRepository(),
-      new ModelFactorySecurityGroupExtended());
+      new ModelFactorySecurityGroupExtended(),
+      new NavigationCrudSecurityGroup());
 
     this.entityModel.headerTitle = 'Security Group';
     this.entityModel.canArchive = true;

@@ -9,6 +9,7 @@ import EntitySegmentAssetTypeEditComponent      from '../segmentEdit/EntitySegme
 import EntitySegmentAssetTypeViewComponent      from '../segmentView/EntitySegmentAssetTypeViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
 import ModelFactoryAssetTypeExtended            from '@/repositories/modelFactories/ModelFactoryAssetTypeExtended';
+import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 
 @Component({
   components: {
@@ -26,7 +27,8 @@ export default class EntityPageAssetTypeComponent
     super(
       new EntityPageModelWithReferences(),
       AssetTypeRepositoryFactory.getRepository(),
-      new ModelFactoryAssetTypeExtended());
+      new ModelFactoryAssetTypeExtended(),
+      new NavigationCrudAssetType());
 
     this.entityModel.headerTitle = 'Asset Types';
     this.entityModel.canArchive = true;
