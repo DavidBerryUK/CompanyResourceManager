@@ -14,7 +14,8 @@ CREATE TABLE [dbo].[JobApplicant](
 	[Title]					[NVARCHAR](20)		NULL,
 	[Forename]				[NVARCHAR](200)		NOT NULL,
 	[MiddleNames]			[NVARCHAR](200)		NULL,
-	[Surname]				[NVARCHAR](200)		NOT NULL
+	[Surname]				[NVARCHAR](200)		NOT NULL,
+	[ContactGroupId]		[uniqueidentifier]	NULL,
  CONSTRAINT [PK_JobApplicantId] PRIMARY KEY CLUSTERED 
 (
 	[JobApplicantId] ASC
@@ -23,8 +24,27 @@ CREATE TABLE [dbo].[JobApplicant](
 
 GO
 
-ALTER TABLE [dbo].[JobApplicant]  WITH CHECK ADD  
-CONSTRAINT [FK_JobApplicant_WorkflowInstance] FOREIGN KEY([WorkflowInstanceId])
-REFERENCES [dbo].[WorkflowInstance] ([WorkflowInstanceId])
+ALTER TABLE JobApplicant ADD CONSTRAINT 
+	FK_JobApplicant_WorkflowInstance
+	FOREIGN KEY
+	(
+		WorkflowInstanceId
+	)
+	REFERENCES WorkflowInstance
+	(
+		WorkflowInstanceId
+	)
 
+GO
+
+
+ALTER TABLE JobApplicant  ADD CONSTRAINT 
+	FK_JobApplicant_ContactGroup FOREIGN KEY
+	(
+		ContactGroupId
+	)
+	REFERENCES ContactGroup
+	(
+		ContactGroupId
+	)
 GO

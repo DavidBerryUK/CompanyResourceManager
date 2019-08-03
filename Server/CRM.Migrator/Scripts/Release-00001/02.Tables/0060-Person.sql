@@ -8,12 +8,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Person] (
-	[PersonId]	[uniqueidentifier]	NOT NULL,
-	[JobRoleId] [uniqueidentifier]	NOT NULL,
-	[Forename]	[nvarchar](200)		NOT NULL,
-	[Surname]	[nvarchar](200)		NOT NULL,
-	[Email]		[nvarchar](500)		NULL,
-	[IsActive]	[bit]				NOT NULL,
+	[PersonId]			[uniqueidentifier]	NOT NULL,
+	[JobRoleId]			[uniqueidentifier]	NOT NULL,
+	[Forename]			[nvarchar](200)		NOT NULL,
+	[Surname]			[nvarchar](200)		NOT NULL,
+	[Email]				[nvarchar](500)		NULL,
+	[ContactGroupId]	[uniqueidentifier]	NULL,
+	[IsActive]			[bit]				NOT NULL,
 
  CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED 
 (
@@ -37,3 +38,13 @@ ALTER TABLE dbo.Person ADD CONSTRAINT
 
 GO
 
+ALTER TABLE Person  ADD CONSTRAINT 
+	FK_Person_ContactGroup FOREIGN KEY
+	(
+		[ContactGroupId]
+	)
+	REFERENCES ContactGroup
+	(
+		ContactGroupId
+	)
+GO
