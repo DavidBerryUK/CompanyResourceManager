@@ -4,6 +4,8 @@ export enum EnumRepositoryDataSource {
     SkillPerson,
     Team,
     TeamPerson,
+    SecurityGroup,
+    SecurityGroupPerson,
 }
 
 export enum EnumRepositoryListMode {
@@ -45,11 +47,15 @@ export default class ListRepositoryEnum {
 
             case EnumRepositoryDataSource.Skill:
             case EnumRepositoryDataSource.SkillPerson:
-                return 'skill';
+                return 'Skill';
 
             case EnumRepositoryDataSource.Team:
             case EnumRepositoryDataSource.TeamPerson:
                 return 'Team';
+
+            case EnumRepositoryDataSource.SecurityGroup:
+            case EnumRepositoryDataSource.SecurityGroupPerson:
+                return 'Security/Group';
         }
 
         return '';
@@ -63,7 +69,8 @@ export default class ListRepositoryEnum {
         switch (dataSource) {
             case EnumRepositoryDataSource.TeamPerson:
             case EnumRepositoryDataSource.SkillPerson:
-                return 'person';
+            case EnumRepositoryDataSource.SecurityGroupPerson:
+                return 'Person';
         }
 
         return '';

@@ -9,7 +9,7 @@
     <!-- PAGE HEADER -->
 
     <div class="form-body">
-      <v-card dark color="rgb(63,81,181,0.85)" class="form-header-sticky">
+      <v-card dark color="rgb(63,81,181,0.83)" class="form-header-sticky">
         <v-container fluid pl-4 pr-4 pt-1 pb-1>
           <!-- --->
           <slot name="header"></slot>

@@ -3,6 +3,7 @@ using CRM.Models.Database.Teams;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.BaseServices;
+using CRM.Service.Repository.BaseServices.DirectSql;
 using CRM.Service.Repository.TeamServices.Interfaces;
 using System;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace CRM.Service.Repository.TeamServices
     public class TeamListService : BaseListService<Team,PersonTeam,Guid>, ITeamListService
     {
 
-        public TeamListService(CrmDatabaseContext dbContext) : base(dbContext)
+        public TeamListService(IDirectSqlServices<Guid> directSqlServices, CrmDatabaseContext dbContext) : base(dbContext, directSqlServices)
         {
 
         }

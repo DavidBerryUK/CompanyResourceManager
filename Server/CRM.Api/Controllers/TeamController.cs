@@ -166,7 +166,7 @@ namespace CRM.Api.Controllers
             return Ok(data);
         }
 
-        [HttpPut("{teamId}/person/{personId}/{selected}")]
+        [HttpPut("list/{teamId}/person/{personId}/{selected}")]
         public async Task<ActionResult<List<ListItem>>> ListUnselected(Guid teamId, Guid personId, bool selected)
         {
             await _teamListService.Update(teamId, personId, selected);

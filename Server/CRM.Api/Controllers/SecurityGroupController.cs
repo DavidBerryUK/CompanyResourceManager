@@ -15,15 +15,20 @@ namespace CRM.Api.Controllers
     public class SecurityGroupController : Controller
     {
         private readonly ISecurityGroupCrudService _securityGroupCrudService;
+        private readonly ISecurityGroupListService _securityGroupListService;
 
         public SecurityGroupController(
-            ISecurityGroupCrudService securityGroupCrudService)
+            ISecurityGroupCrudService securityGroupCrudService,
+            ISecurityGroupListService securityGroupListService)
         {
             //
             // Validate Input Parameters
             //
             _securityGroupCrudService = securityGroupCrudService
-                                 ?? throw new ArgumentNullException(nameof(securityGroupCrudService));
+                ?? throw new ArgumentNullException(nameof(securityGroupCrudService));
+
+            _securityGroupListService = securityGroupListService
+                ?? throw new ArgumentNullException(nameof(securityGroupListService));
         }
 
         [HttpGet("")]
@@ -33,16 +38,6 @@ namespace CRM.Api.Controllers
             // Validate Input Parameters
             //
             var data = await _securityGroupCrudService.GetAllAsSummaryAsync();
-            return Ok(data);
-        }
-
-        [HttpGet("list")]
-        public async Task<ActionResult<List<ListItem>>> ListActive()
-        {
-            //
-            // Validate Input Parameters
-            //
-            var data = await _securityGroupCrudService.GetActiveAsListItemsAsync();
             return Ok(data);
         }
 
@@ -140,6 +135,43 @@ namespace CRM.Api.Controllers
 
             var data = await _securityGroupCrudService.UpdateActiveStatusAsync(securityGroupId, true);
             return Ok(data);
+        }
+
+
+        [HttpGet("list")]
+        public async Task<ActionResult<List<ListItem>>> ListAll()
+        {
+            var data = await _securityGroupListService.GetAll();
+            return Ok(data);
+        }
+
+        [HttpGet("list/person/{personId}/all")]
+        public async Task<ActionResult<List<ListItem>>> ListAllWithSelection(Guid personId)
+        {
+            var data = await _securityGroupListService.GetAllWithSelectionForPerson(personId);
+            return Ok(data);
+        }
+
+        [HttpGet("list/person/{personId}/selected")]
+        public async Task<ActionResult<List<ListItem>>> ListSelected(Guid personId)
+        {
+
+            var data = await _securityGroupListService.GetSelectedForPerson(personId);
+            return Ok(data);
+        }
+
+        [HttpGet("list/person/{personId}/unselected")]
+        public async Task<ActionResult<List<ListItem>>> ListUnselected(Guid personId)
+        {
+            var data = await _securityGroupListService.GetUnSelectedForPerson(personId);
+            return Ok(data);
+        }
+
+        [HttpPut("list/{securityGroupId}/person/{personId}/{selected}")]
+        public async Task<ActionResult<List<ListItem>>> ListUnselected(Guid securityGroupId, Guid personId, bool selected)
+        {
+            await _securityGroupListService.Update(securityGroupId, personId, selected);
+            return Ok();
         }
     }
 }

@@ -32,7 +32,7 @@
 
       <v-layout v-if="entityModel.isExistingRecord" row pt-2 pb-2>         
 
-        <v-flex xs-6 pr-2>
+        <v-flex xs-4 pr-2>
           <crm-list-items
             title="Teams"
             :repoDataSource="EnumRepositoryDataSource.TeamPerson"
@@ -45,10 +45,23 @@
           ></crm-list-items>
         </v-flex>
 
-        <v-flex xs-6>
+        <v-flex xs-4 pr-2>
           <crm-list-items
             title="Skills"
             :repoDataSource="EnumRepositoryDataSource.SkillPerson"
+            :repoListMode="EnumRepositoryListMode.All"
+            :repoReferenceId="entityModel.id"
+            :listStyle="EnumListComponentStyle.list"
+            :valueDisplay="EnumListComponentValueDisplay.checkbox"            
+            :showTextFilter="EnumListTextFilter.inHeader"
+            :titleStyle="EnumListCompomentTitle.header"
+          ></crm-list-items>
+        </v-flex>
+
+        <v-flex xs-4 pr-2>
+          <crm-list-items
+            title="Security"
+            :repoDataSource="EnumRepositoryDataSource.SecurityGroupPerson"
             :repoListMode="EnumRepositoryListMode.All"
             :repoReferenceId="entityModel.id"
             :listStyle="EnumListComponentStyle.list"

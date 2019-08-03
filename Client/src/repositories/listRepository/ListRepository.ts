@@ -1,18 +1,16 @@
-import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
 import { EnumRepositoryDataSource }             from './ListRepositoryEnum';
 import { EnumRepositoryListMode }               from './ListRepositoryEnum';
+import { EnumSuccessType }                      from '../helpers/SuccessCallbackHelper';
 import ApiBase                                  from '@/repositories/apiBase/ApiBase';
+import BaseApiConfig                            from '@/repositories/apiBase/lowlevel/ApiBaseConfig';
+import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/listItem/ListItemModel';
 import ListRepositoryEnum                       from './ListRepositoryEnum';
 import ModelMapperFactoryListItem               from '@/repositories/modelMappers/ModelMapperFactoryListItem';
-import BaseApiConfig                            from '@/repositories/apiBase/lowlevel/ApiBaseConfig';
-import { EnumSuccessType } from '../helpers/SuccessCallbackHelper';
 
 export default class ListRepository extends ApiBase {
 
-    private repositoryDataSource: EnumRepositoryDataSource;
-    private listMode: EnumRepositoryListMode;
     private mode: string;
     private listEntityName: string;
     private referenceEntityName: string;
@@ -25,8 +23,6 @@ export default class ListRepository extends ApiBase {
         referenceId: string = '') {
 
         super();
-        this.repositoryDataSource = dataSource;
-        this.listMode = listMode;
         this.listEntityName = ListRepositoryEnum.getListEntity(dataSource);
         this.referenceEntityName = ListRepositoryEnum.getListReference(dataSource);
         this.mode = ListRepositoryEnum.getListMode(listMode);
@@ -47,13 +43,6 @@ export default class ListRepository extends ApiBase {
     }
 
     public updateItem(item: ListItemModel): ApiResponse<ListItemModel> {
-
-        console.log(`ListRepository:UpdateItem`);
-        console.log(`id:        ${item.id}`);
-        console.log(`name:      ${item.name}`);
-        console.log(`selected:  ${item.selected}`);
-        console.log(`----------------------------------`);
-
         if ( item.selected !== undefined ) {
             const url = this.createUpdateUrl(item.entityKey, item.selected);
             const response = this.basePutWithNoModel (
@@ -70,7 +59,7 @@ export default class ListRepository extends ApiBase {
         if ( this.referenceEntityName === '') {
             throw new Error('List Repository cannot update items when entity name is blank');
         }
-        return `${this.baseUrl}api/${this.listEntityName}/${keyId}/${this.referenceEntityName}/${this.referenceId}/${selected}`;
+        return `${this.baseUrl}api/${this.listEntityName}/list/${keyId}/${this.referenceEntityName}/${this.referenceId}/${selected}`;
     }
 
     /**

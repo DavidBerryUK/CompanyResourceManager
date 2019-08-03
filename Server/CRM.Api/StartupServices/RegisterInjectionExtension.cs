@@ -4,6 +4,7 @@ using CRM.Service.Repository.AssetServices;
 using CRM.Service.Repository.AssetServices.Interfaces;
 using CRM.Service.Repository.AssetTypeServices;
 using CRM.Service.Repository.AssetTypeServices.Interfaces;
+using CRM.Service.Repository.BaseServices.DirectSql;
 using CRM.Service.Repository.JobRoleServices;
 using CRM.Service.Repository.JobRoleServices.Interfaces;
 using CRM.Service.Repository.PersonServices;
@@ -39,6 +40,7 @@ namespace CRM.Api.StartupServices
 
             //  Security Groups
             services.AddTransient<ISecurityGroupCrudService, SecurityGroupCrudService>();
+            services.AddTransient<ISecurityGroupListService, SecurityGroupListService>();
 
             //  Teams
             services.AddTransient<ITeamCrudService, TeamCrudService>();
@@ -50,6 +52,10 @@ namespace CRM.Api.StartupServices
             // Assets
             services.AddTransient<IAssetCrudService, AssetCrudService>();
             services.AddTransient<IAssetTypeCrudService, AssetTypeCrudService>();
+
+            //
+            services.AddTransient(typeof(IDirectSqlServices<>), typeof(DirectSqlServices<>));
+            
         }
     }
 }
