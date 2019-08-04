@@ -7,7 +7,7 @@ import ModelMapperFactoryAsset                  from '@/repositories/modelMapper
 export default class AssetRepositoryFactory {
 
     //
-    // create a Asset Respository using the generic base repository class
+    // create a Asset Repository using the generic base repository class
     //  this repository supports all the basic CRUD operations as well
     //  as providing a filtered object list ( providing the server supports the functionality )
     public static getRepository(): GenericApiRepository<AssetSummaryModel, AssetExtendedModel, ListFilterWithArchiveFlag> {

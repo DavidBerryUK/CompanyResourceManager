@@ -11,9 +11,9 @@ export default class VueUtilities {
         // tslint:disable-next-line: no-string-literal
         const editSlot = vueInstance.$scopedSlots[slotName];
         if (editSlot !== undefined) {
-            const vnode = editSlot([]);
-            if (vnode !== undefined) {
-                const componentInstance = vnode[0].componentInstance;
+            const node = editSlot([]);
+            if (node !== undefined) {
+                const componentInstance = node[0].componentInstance;
                 if ( componentInstance !== undefined) {
                     return componentInstance;
                 }

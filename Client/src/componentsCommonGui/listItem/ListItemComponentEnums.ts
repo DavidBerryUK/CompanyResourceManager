@@ -5,7 +5,7 @@ export enum EnumListComponentStyle {
     wordsCsvWithAnd,
 }
 
-export enum EnumListCompomentTitle {
+export enum EnumListComponentTitle {
     none,
     simple,
     listHeader,

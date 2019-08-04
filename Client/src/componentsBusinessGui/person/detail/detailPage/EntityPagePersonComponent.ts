@@ -1,4 +1,4 @@
-import { EnumListCompomentTitle }               from '@/componentsCommonGui/listItem/ListItemComponentEnums';
+import { EnumListComponentTitle }               from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListComponentStyle }               from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListComponentValueDisplay }        from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListTextFilter }                   from '@/componentsCommonGui/listItem/ListItemComponentEnums';
@@ -34,7 +34,7 @@ export default class EntityPagePersonComponent
   extends EntityPageBaseComponent<PersonExtendedModel, EntityPageModelWithReferences<PersonExtendedModel>>
   implements IRouteBeforeNavigationCheck {
 
-  public EnumListCompomentTitle = EnumListCompomentTitle;
+  public EnumListComponentTitle = EnumListComponentTitle;
   public EnumListComponentStyle = EnumListComponentStyle;
   public EnumListComponentValueDisplay = EnumListComponentValueDisplay;
   public EnumListTextFilter = EnumListTextFilter;

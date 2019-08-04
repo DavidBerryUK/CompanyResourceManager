@@ -7,7 +7,7 @@ import SkillSummaryModel                        from '@/repositories/models/skil
 export default class SkillRepositoryFactory {
 
     //
-    // create a Skill Respository using the generic base repository class
+    // create a Skill Repository using the generic base repository class
     //  this repository supports all the basic CRUD operations as well
     //  as providing a filtered object list ( providing the server supports the functionality )
     public static getRepository(): GenericApiRepository<SkillSummaryModel, SkillExtendedModel, ListFilterWithArchiveFlag> {

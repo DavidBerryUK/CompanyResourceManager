@@ -78,18 +78,18 @@ export class ApiContractListenerContract {
  * Note that all callback as stored in an array as the developer
  * may wish to listen to the same event is different places.
  *
- * Also note the stored of imediateSuccess etc. This is for when
+ * Also note the stored of immediateSuccess etc. This is for when
  * a message has been published, such as a success state, before
  * a subscriber has been registered. e.g.
  *
  *  api.save()
- *     .onSucces(....)
+ *     .onSuccess(....)
  *     .onFailure(...)
  *
  * in this example the save command is executed immediately, then
- * control flow passed back to parsing the contract registraction of
+ * control flow passed back to parsing the contract registration of
  * 'onSuccess' then 'onFailure'. Should the save raise a success before
- * the contract registration, then event will be stored and raised imediately
+ * the contract registration, then event will be stored and raised immediately
  * as soon as the registration is processed.
  *
  * @export
@@ -97,10 +97,10 @@ export class ApiContractListenerContract {
  * @template T
  */
 export class ApiCallbackHandles<T> {
-    public imediateSuccess: T | null;
-    public imediateValidationErrors: ValidationMessage[];
-    public imediateLocked: T | null;
-    public imediateFail: string;
+    public immediateSuccess: T | null;
+    public immediateValidationErrors: ValidationMessage[];
+    public immediateLocked: T | null;
+    public immediateFail: string;
 
     public callbackSuccess: Array<ICallBackSuccess<T>>;
     public callbackValidationErrors: ICallBackValidationErrors[];
@@ -110,10 +110,10 @@ export class ApiCallbackHandles<T> {
 
 
     constructor() {
-        this.imediateSuccess = null;
-        this.imediateLocked = null;
-        this.imediateFail = '';
-        this.imediateValidationErrors = new Array<ValidationMessage>();
+        this.immediateSuccess = null;
+        this.immediateLocked = null;
+        this.immediateFail = '';
+        this.immediateValidationErrors = new Array<ValidationMessage>();
         this.callbackSuccess = new Array<ICallBackSuccess<T>>();
         this.callbackValidationErrors = new Array<ICallBackValidationErrors>();
         this.callbackOnFail = new Array<ICallBackOnFail>();
@@ -133,7 +133,7 @@ export class ApiCallbackHandles<T> {
  *
  * Should an event have been raised before the subscriber have had opportunity
  * to register, that event will have been 'buffered' and be returned
- * imediately to the newly registred subscriber
+ * immediately to the newly registered subscriber
  *
  * @export
  * @class ApiResponse
@@ -177,11 +177,11 @@ export class ApiResponse<T> {
 
         this.callbackHandles.callbackSuccess.push(callback);
 
-        if (this.callbackHandles.imediateSuccess) {
+        if (this.callbackHandles.immediateSuccess) {
 
             if (this.callbackHandles.callbackSuccess) {
                 this.callbackHandles.callbackSuccess.forEach((handler) => {
-                    handler(this.callbackHandles.imediateSuccess as T);
+                    handler(this.callbackHandles.immediateSuccess as T);
                 });
             }
 
@@ -204,9 +204,9 @@ export class ApiResponse<T> {
 
         this.callbackHandles.callbackValidationErrors.push(callback);
 
-        if (this.callbackHandles.imediateValidationErrors) {
+        if (this.callbackHandles.immediateValidationErrors) {
 
-            this.callbackHandles.callbackValidationErrors.forEach((handler) => { handler(this.callbackHandles.imediateValidationErrors); });
+            this.callbackHandles.callbackValidationErrors.forEach((handler) => { handler(this.callbackHandles.immediateValidationErrors); });
 
             if (this.callbackHandles.listener) {
                 this.callbackHandles.listener.contractListener.notifyCompletion(true);
@@ -226,8 +226,8 @@ export class ApiResponse<T> {
     public onFailed(callback: ICallBackOnFail): ApiResponse<T> {
         this.callbackHandles.callbackOnFail.push(callback);
 
-        if (this.callbackHandles.imediateFail) {
-            this.callbackHandles.callbackOnFail.forEach((handler) => { handler(this.callbackHandles.imediateFail); });
+        if (this.callbackHandles.immediateFail) {
+            this.callbackHandles.callbackOnFail.forEach((handler) => { handler(this.callbackHandles.immediateFail); });
 
             if (this.callbackHandles.listener) {
                 this.callbackHandles.listener.contractListener.notifyCompletion(false);
@@ -247,11 +247,11 @@ export class ApiResponse<T> {
     public contractListener(callback: ContractListener): ApiResponse<T> {
         this.callbackHandles.listener = new ApiContractListenerContract(this, callback);
 
-        if (this.callbackHandles.imediateSuccess) {
+        if (this.callbackHandles.immediateSuccess) {
             this.callbackHandles.listener.contractListener.notifyCompletion(true);
         }
 
-        if (this.callbackHandles.imediateFail) {
+        if (this.callbackHandles.immediateFail) {
             this.callbackHandles.listener.contractListener.notifyCompletion(false);
         }
 
@@ -264,7 +264,7 @@ export class ApiResponse<T> {
  * this is the low level API such as 'saveModelToRest' or 'loadListFromRest'.
  *
  * the publisher can then publish strongly typed messages such as
- *  'publishSucccess' or 'publishFailure'
+ *  'publishSuccess' or 'publishFailure'
  *
  * @export
  * @class ApiResponseContract
@@ -294,7 +294,7 @@ export class ApiResponseContract<T>  {
                 this.handers.callbackSuccess.forEach((handler) => { handler(data); });
                 this.publishThen();
             } else {
-                this.handers.imediateSuccess = data;
+                this.handers.immediateSuccess = data;
             }
             if (this.handers.listener) {
                 this.handers.listener.contractListener.notifyCompletion(true);
@@ -314,7 +314,7 @@ export class ApiResponseContract<T>  {
                 this.handers.callbackValidationErrors.forEach((handler) => { handler(messages); });
                 this.publishThen();
             } else {
-                this.handers.imediateValidationErrors = messages;
+                this.handers.immediateValidationErrors = messages;
             }
             if (this.handers.listener) {
                 this.handers.listener.contractListener.notifyCompletion(true);
@@ -334,7 +334,7 @@ export class ApiResponseContract<T>  {
                 this.handers.callbackOnFail.forEach((handler) => { handler(error); });
                 this.publishThen();
             } else {
-                this.handers.imediateFail = error;
+                this.handers.immediateFail = error;
             }
             if (this.handers.listener) {
                 this.handers.listener.contractListener.notifyCompletion(false);

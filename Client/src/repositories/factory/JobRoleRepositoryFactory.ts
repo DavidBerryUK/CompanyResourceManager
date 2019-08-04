@@ -7,7 +7,7 @@ import ModelMapperFactoryJobRole                from '@/repositories/modelMapper
 export default class JobRoleRepositoryFactory {
 
     //
-    // create a Job Role Respository using the generic base repository class
+    // create a Job Role Repository using the generic base repository class
     //  this repository supports all the basic CRUD operations as well
     //  as providing a filtered object list ( providing the server supports the functionality )
     public static getRepository(): GenericApiRepository<JobRoleSummaryModel, JobRoleExtendedModel, ListFilterWithArchiveFlag> {
