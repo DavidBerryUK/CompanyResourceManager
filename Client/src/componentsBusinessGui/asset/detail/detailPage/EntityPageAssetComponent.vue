@@ -8,7 +8,7 @@
     <div slot="header">
       <v-layout row slot="header">
           <crm-label-data 
-            label="Asset Type"          
+            label="Asset"          
             :stringValue="entityModel.entity.description"></crm-label-data>
       </v-layout>
     </div>

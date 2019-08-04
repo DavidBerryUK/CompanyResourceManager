@@ -8,7 +8,7 @@
     <div slot="header">
       <v-layout row slot="header">
           <crm-label-data 
-            label="Job Role"          
+            label="Team"          
             :stringValue="entityModel.entity.name"></crm-label-data>
       </v-layout>
     </div>
