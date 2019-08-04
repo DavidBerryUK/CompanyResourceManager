@@ -7,6 +7,7 @@ export default class ComponentIconConstants {
     public static AssetTypesListIcon: string = 'fas fa-desktop';
     public static AssetsListIcon: string = 'fas fa-desktop';
     public static SkillListIcon: string = 'fab fa-leanpub';
+    public static ContactTyleListIcon: string = 'far fa-address-card';
     public static TeamListIcon: string = 'fas fa-users';
 
     public static DevelopmentListIcon: string = 'fas fa-code-branch';

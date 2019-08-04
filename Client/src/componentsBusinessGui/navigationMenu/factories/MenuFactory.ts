@@ -12,6 +12,7 @@ export default class MenuFactory {
         menuItems.push(this.peopleMenu());
         menuItems.push(this.assetMenu());
         menuItems.push(this.securityMenu());
+        menuItems.push(this.referenceMenu());
         menuItems.push(this.developmentMenu());
 
         return menuItems;
@@ -20,8 +21,6 @@ export default class MenuFactory {
     private static peopleMenu(): MenuItem {
         const menuItem = new MenuItem('People', '', '');
         menuItem.subMenus.push(new MenuItem('List', 'person', `fa-2x ${ComponentIconConstants.StaffListIcon}`));
-        menuItem.subMenus.push(new MenuItem('Roles', 'jobrole', `fa-2x ${ComponentIconConstants.StaffListIcon}`));
-        menuItem.subMenus.push(new MenuItem('Skills', 'skill', `fa-2x ${ComponentIconConstants.SkillListIcon}`));
         menuItem.subMenus.push(new MenuItem('Teams', 'team', `fa-2x ${ComponentIconConstants.TeamListIcon}`));
         menuItem.active = true;
         return menuItem;
@@ -36,7 +35,6 @@ export default class MenuFactory {
 
     private static assetMenu(): MenuItem {
         const menuItem = new MenuItem('Assets', '', '');
-        menuItem.subMenus.push(new MenuItem('Types', 'AssetType', `fa-2x ${ComponentIconConstants.AssetTypesListIcon}`));
         menuItem.subMenus.push(new MenuItem('Assets', 'Asset', `fa-2x ${ComponentIconConstants.AssetsListIcon}`));
         menuItem.active = false;
         return menuItem;
@@ -46,6 +44,16 @@ export default class MenuFactory {
         const menuItem = new MenuItem('Development', '', '');
         menuItem.subMenus.push(new MenuItem('Development', 'development', `fa-2x ${ComponentIconConstants.DevelopmentListIcon}`));
         menuItem.active = false;
+        return menuItem;
+    }
+
+    private static referenceMenu(): MenuItem {
+        const menuItem = new MenuItem('Reference', '', '');
+        menuItem.subMenus.push(new MenuItem('Asset Types', 'AssetType', `fa-2x ${ComponentIconConstants.AssetTypesListIcon}`));
+        menuItem.subMenus.push(new MenuItem('Roles', 'jobrole', `fa-2x ${ComponentIconConstants.StaffListIcon}`));
+        menuItem.subMenus.push(new MenuItem('Skills', 'skill', `fa-2x ${ComponentIconConstants.SkillListIcon}`));
+        menuItem.subMenus.push(new MenuItem('Contact Types', 'contactType', `fa-2x ${ComponentIconConstants.ContactTyleListIcon}`));
+        menuItem.active = true;
         return menuItem;
     }
 

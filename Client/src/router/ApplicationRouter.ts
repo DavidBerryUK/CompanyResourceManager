@@ -1,6 +1,7 @@
 import AboutRoutes                            from './routeBuilders/AboutRoutes';
 import AssetRoutes                            from './routeBuilders/AssetRoutes';
 import AssetTypeRoutes                        from './routeBuilders/AssetTypeRoutes';
+import ContactTypeRoutes                      from './routeBuilders/ContactTypeRoutes';
 import DevelopmentRoutes                      from './routeBuilders/DevelopmentRoutes';
 import HomeRoutes                             from './routeBuilders/HomeRoutes';
 import JobRoleRoutes                          from './routeBuilders/JobRoleRoutes';
@@ -25,6 +26,7 @@ export default class ApplicationRouter extends Router {
         AboutRoutes.register(),
         AssetRoutes.register(),
         AssetTypeRoutes.register(),
+        ContactTypeRoutes.register(),
         DevelopmentRoutes.register(),
         HomeRoutes.register(),
         JobRoleRoutes.register(),

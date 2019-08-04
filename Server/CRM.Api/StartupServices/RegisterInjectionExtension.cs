@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using CRM.Service.Repository.AssetServices;
+﻿using CRM.Service.Repository.AssetServices;
 using CRM.Service.Repository.AssetServices.Interfaces;
 using CRM.Service.Repository.AssetTypeServices;
 using CRM.Service.Repository.AssetTypeServices.Interfaces;
 using CRM.Service.Repository.BaseServices.DirectSql;
+using CRM.Service.Repository.ContractServices;
+using CRM.Service.Repository.ContractServices.Interfaces;
 using CRM.Service.Repository.JobRoleServices;
 using CRM.Service.Repository.JobRoleServices.Interfaces;
 using CRM.Service.Repository.PersonServices;
@@ -15,6 +15,8 @@ using CRM.Service.Repository.SkillServices;
 using CRM.Service.Repository.SkillServices.Interfaces;
 using CRM.Service.Repository.TeamServices;
 using CRM.Service.Repository.TeamServices.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace CRM.Api.StartupServices
 {
@@ -52,6 +54,9 @@ namespace CRM.Api.StartupServices
             // Assets
             services.AddTransient<IAssetCrudService, AssetCrudService>();
             services.AddTransient<IAssetTypeCrudService, AssetTypeCrudService>();
+
+            // Contacts
+            services.AddTransient<IContactTypeCrudService, ContactTypeCrudService>();
 
             //
             services.AddTransient(typeof(IDirectSqlServices<>), typeof(DirectSqlServices<>));

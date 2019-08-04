@@ -3,7 +3,7 @@ import ModelFactorySkillExtended                from '../modelFactories/ModelFac
 import ModelFactorySkillSummary                 from '../modelFactories/ModelFactorySkillSummary';
 import ModelGenericMapper                       from './generic/ModelGenericMapper';
 import SkillExtendedModel                       from '@/repositories/models/skill/SkillExtendedModel';
-import SkillSummaryModel                        from '../models/skill/SkillSummaryModel';
+import SkillSummaryModel                        from '@/repositories/models/skill/SkillSummaryModel';
 
 export default class ModelMapperFactorySkill {
 

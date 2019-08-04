@@ -9,7 +9,8 @@ GO
 
 CREATE TABLE [dbo].[ContactType](
 	[ContactTypeId]		[UNIQUEIDENTIFIER]	NOT NULL,
-	[Name]				[NVARCHAR](20)		NOT NULL,	
+	[Name]				[NVARCHAR](20)		NOT NULL,
+	[IsActive]			[BIT]				NOT NULL,
  CONSTRAINT [PK_ContactType] PRIMARY KEY CLUSTERED 
 (
 	[ContactTypeId] ASC

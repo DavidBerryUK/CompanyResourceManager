@@ -11,7 +11,8 @@ CREATE TABLE [dbo].[Contact](
 	[ContactId]			[UNIQUEIDENTIFIER]	NOT NULL,
 	[ContactGroupId]	[UNIQUEIDENTIFIER]	NOT NULL,
 	[ContactTypeId]		[UNIQUEIDENTIFIER]	NOT NULL,
-	[Name]				[NVARCHAR](20)		NOT NULL,	
+	[Value]				[NVARCHAR](250)		NOT NULL,	
+	[IsActive]			[BIT]				NOT NULL,
  CONSTRAINT [PK_Contact] PRIMARY KEY CLUSTERED 
 (
 	[ContactId] ASC

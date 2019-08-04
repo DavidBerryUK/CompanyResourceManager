@@ -22,7 +22,6 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
     private mode: EnumControllerMode = EnumControllerMode.viewing;
 
     public mounted() {
-        console.log(`EntitySegmentViewEditControllerComponent-mounted:${this.entityModel.entity.entityKey}`);
         this.evaluateDefaultViewMode();
     }
 
@@ -64,17 +63,13 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
      */
     @Watch('entityModel.entity.entityKey')
     public watchIdChanges() {
-        console.log(`EntitySegmentViewEditControllerComponent-WatchIdChanged:${this.entityModel.entity.entityKey}`);
         this.evaluateDefaultViewMode();
     }
 
     private evaluateDefaultViewMode() {
-        console.log(`EntitySegmentViewEditControllerComponent-evaluateDefaultViewMode:${this.entityModel.entity.entityKey}`);
         if ( this.entityModel.isNewRecord ) {
-            console.log('mode = editing');
             this.mode = EnumControllerMode.editing;
         } else {
-            console.log('mode = viewing');
             this.mode = EnumControllerMode.viewing;
         }
     }

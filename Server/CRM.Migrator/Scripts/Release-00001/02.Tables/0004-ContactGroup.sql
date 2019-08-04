@@ -10,7 +10,8 @@ GO
 CREATE TABLE [dbo].[ContactGroup](
 	[ContactGroupId]		[UNIQUEIDENTIFIER]	NOT NULL,
 	[PreferredContactId]	[UNIQUEIDENTIFIER]	NULL,	
-	[Notes]					[NVARCHAR](100)		NOT NULL,	
+	[Notes]					[NVARCHAR](500)		NOT NULL,	
+	[IsActive]				[BIT]				NOT NULL,
  CONSTRAINT [PK_ContactGroup] PRIMARY KEY CLUSTERED 
 (
 	[ContactGroupId] ASC

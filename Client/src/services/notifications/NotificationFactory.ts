@@ -3,6 +3,7 @@ import { IApiModel }                            from '@/repositories/models/inte
 import { IComponentMetaData }                   from '../../components/interfaces/ComponentMetaDataInterfaces';
 import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
 import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
+import ContactTypeSummaryModel                  from '@/repositories/models/contactType/ContactTypeSummaryModel';
 import GenericNotifications                     from './GenericNotifications';
 import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import ModelUpdateNotifications                 from './ModelUpdateNotifications';
@@ -36,6 +37,7 @@ export default class NotificationFactory {
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<SecurityGroupSummaryModel>(new SecurityGroupSummaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<TeamSummaryModel>(new TeamSummaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<SkillSummaryModel>(new SkillSummaryModel().entityName));
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<ContactTypeSummaryModel>(new ContactTypeSummaryModel().entityName));
         }
         return this.factoryInstance;
     }

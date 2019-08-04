@@ -109,6 +109,9 @@
     <None Update="Scripts\Release-00001\02.Tables\0600-SecurityPermission.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Scripts\Release-00001\06.Data\025 ContactTypes.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Scripts\Release-00001\06.Data\040 Skill.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

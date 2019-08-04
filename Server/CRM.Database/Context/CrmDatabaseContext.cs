@@ -1,5 +1,7 @@
 ﻿using CRM.Database.DatabaseMapper.Interfaces;
 using CRM.Models.Database.Assets;
+using CRM.Models.Database.Contacts;
+using CRM.Models.Database.JobApplicants;
 using CRM.Models.Database.JobRoles;
 using CRM.Models.Database.Persons;
 using CRM.Models.Database.Security;
@@ -8,7 +10,6 @@ using CRM.Models.Database.Teams;
 using CRM.Utilities.Reflection;
 using Microsoft.EntityFrameworkCore;
 using System;
-using CRM.Models.Database.JobApplicants;
 
 namespace CRM.Database.Context
 {
@@ -28,7 +29,7 @@ namespace CRM.Database.Context
             //
             if (modelBuilder == null)
             {
-                throw new ArgumentNullException(nameof (modelBuilder));
+                throw new ArgumentNullException(nameof(modelBuilder));
             }
 
             var mappers = new ClassListFactory().CreateListOfClassesWithInterface<IDatabaseTableMapperConfig>(GetType().Assembly);
@@ -50,5 +51,8 @@ namespace CRM.Database.Context
         public virtual DbSet<SecurityPermission> SecurityPermissions { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<ContactType> ContactTypes { get; set; }
+        public virtual DbSet<ContactGroup> ContactGroups { get; set; }
     }
 }
