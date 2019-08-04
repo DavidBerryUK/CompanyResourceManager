@@ -58,7 +58,7 @@
           ></crm-list-items>
         </v-flex>
 
-        <v-flex xs-4 pr-2>
+        <v-flex xs-4>
           <crm-list-items
             title="Security"
             :repoDataSource="EnumRepositoryDataSource.SecurityGroupPerson"

@@ -9,6 +9,7 @@ export default class EntityPageModel<T extends IApiModel> {
     public canArchive: boolean = false;
     public isActive: boolean = false;
     public isLoading: boolean = false;
+    public isEditing: boolean = false;
     public entity!: T;
     public changeTracker: DeepObjectComparator = new DeepObjectComparator({});
 

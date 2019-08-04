@@ -6,11 +6,6 @@ import EntityPageModel                          from '../models/EntityPageModel'
 import Vue                                      from 'vue';
 import VueUtilities                             from '@/utilities/vueUtilities/VueUtilities';
 
-enum EnumControllerMode {
-    viewing,
-    editing,
-}
-
 @Component
 export default class EntitySegmentViewEditControllerComponent extends Vue {
 
@@ -19,27 +14,25 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
 
     private entityBackup: string = '';
 
-    private mode: EnumControllerMode = EnumControllerMode.viewing;
-
     public mounted() {
         this.evaluateDefaultViewMode();
     }
 
     public get isViewing(): boolean {
-        return this.mode === EnumControllerMode.viewing;
+        return !this.entityModel.isEditing;
     }
 
     public get isEditing(): boolean {
-        return this.mode === EnumControllerMode.editing;
+        return this.entityModel.isEditing;
     }
 
     public onCancel() {
-        this.mode = EnumControllerMode.viewing;
+        this.entityModel.isEditing = false;
         this.$emit('onCancel');
     }
 
     public onEdit() {
-        this.mode = EnumControllerMode.editing;
+        this.entityModel.isEditing = true;
         this.$emit('onEditBegins');
     }
 
@@ -68,9 +61,9 @@ export default class EntitySegmentViewEditControllerComponent extends Vue {
 
     private evaluateDefaultViewMode() {
         if ( this.entityModel.isNewRecord ) {
-            this.mode = EnumControllerMode.editing;
+            this.entityModel.isEditing = true;
         } else {
-            this.mode = EnumControllerMode.viewing;
+            this.entityModel.isEditing = false;
         }
     }
 

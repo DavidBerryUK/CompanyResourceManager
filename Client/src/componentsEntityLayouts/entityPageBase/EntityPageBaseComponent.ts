@@ -1,5 +1,3 @@
-import { IModelGenericMapper } from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
-import { INavigationCrud } from './../../routeNavigation/interfaces/INavigationCrud';
 import { EnumModalButton }                      from '../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
 import { EnumModalIcon }                        from '../../componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogOptions';
 import { EnumModalWidth }                       from '../../componentsCommonGui/dialogs/constants/StandardDialogWidth';
@@ -7,6 +5,7 @@ import { IApiModel }                            from '@/repositories/models/inte
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import { IDataIsActive }                        from '../../repositories/models/interfaces/IDataIsActive';
 import { IModelFactory }                        from '@/repositories/modelFactories/interfaces/IModelFactory';
+import { INavigationCrud }                      from './../../routeNavigation/interfaces/INavigationCrud';
 import { IRouteBeforeNavigationCheck }          from '@/router/interfaces/NavigationCheckInterfaces';
 import { Prop }                                 from  'vue-property-decorator';
 import { ValidationMessage }                    from '@/repositories/contracts/ApiResponseContract';
@@ -180,6 +179,7 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
                             this.entityModel.entity = data as E;
                             // stop the framework asking if it's ok to swap screens.
                             this.entityModel.resetTracker();
+                            this.entityModel.isEditing = false;
                             this.crudNavigator.gotoViewPage(this, this.entityModel.entity.entityKey);
                         }
                     })
