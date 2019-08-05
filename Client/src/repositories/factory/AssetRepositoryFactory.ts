@@ -2,7 +2,8 @@ import AssetExtendedModel                       from '@/repositories/models/asse
 import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelMapperFactoryAsset                  from '@/repositories/modelMappers/ModelMapperFactoryAsset';
+import ModelFactoryAssetExtended                from '@/repositories/modelFactories/ModelFactoryAssetExtended';
+import ModelFactoryAssetSummary                 from '../modelFactories/ModelFactoryAssetSummary';
 
 export default class AssetRepositoryFactory {
 
@@ -13,8 +14,8 @@ export default class AssetRepositoryFactory {
     public static getRepository(): GenericApiRepository<AssetSummaryModel, AssetExtendedModel, ListFilterWithArchiveFlag> {
         const repository = new GenericApiRepository<AssetSummaryModel, AssetExtendedModel, ListFilterWithArchiveFlag>(
             'api/asset',
-            ModelMapperFactoryAsset.createSummaryMapper(),
-            ModelMapperFactoryAsset.createExtendedMapper());
+            new ModelFactoryAssetSummary(),
+            new ModelFactoryAssetExtended());
         return repository;
     }
 }

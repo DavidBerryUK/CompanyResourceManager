@@ -1,13 +1,14 @@
+import { IModelFactory }                        from '@/repositories/modelFactories/interfaces/IModelFactory';
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../../helpers/SuccessCallbackHelper';
-import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { IRepositoryCreateItem }                from './interfaces/IRepositoryCreateItem';
 import { ISuccessCallback }                     from '../../helpers/SuccessCallbackHelper';
 import { ValidationMessage }                    from '../../contracts/ApiResponseContract';
 import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
 import BaseApiConfig                            from './ApiBaseConfig';
+import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 
 export default class BaseApiRepositoryCreateItem<T> implements IRepositoryCreateItem<T> {
 
@@ -28,7 +29,7 @@ export default class BaseApiRepositoryCreateItem<T> implements IRepositoryCreate
      */
     public post( baseUrl: string,
                  entityModel: T,
-                 convertor: IModelGenericMapper<T>,
+                 modelFactory: IModelFactory<T>,
                  successNotificationType: EnumSuccessType,
                  successCallback: ISuccessCallback<T>)
                     : ApiResponse<T> {
@@ -52,7 +53,7 @@ export default class BaseApiRepositoryCreateItem<T> implements IRepositoryCreate
                     }
 
                     if (response.data.entity) {
-                        const model = convertor.mapToEntity(response.data.entity);
+                        const model = ObjectMapper.MapItem<T>( response.data.entity, modelFactory);
                         successCallback(model, successNotificationType);
                         contract.publishSuccess(model);
                     } else {

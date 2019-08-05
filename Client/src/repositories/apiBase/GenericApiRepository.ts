@@ -1,14 +1,14 @@
-import { ApiResponseContract } from './../contracts/ApiResponseContract';
 import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
+import { ApiResponseContract }                  from './../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '@/repositories/helpers/SuccessCallbackHelper';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
-import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
+import { IModelFactory }                        from '../modelFactories/interfaces/IModelFactory';
 import ApiBase                                  from '@/repositories/apiBase/ApiBase';
 import ApiBasePostWithCollectionResult          from '@/repositories/apiBase/lowlevel/ApiBasePostWithCollectionResult';
 import BaseApiConfig                            from '@/repositories/apiBase/lowlevel/ApiBaseConfig';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/ListItem/ListItemModel';
-import ModelMapperFactoryListItem               from '@/repositories/modelMappers/ModelMapperFactoryListItem';
+import ModelFactoryListItem                     from '../modelFactories/ModelFactoryListItem';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import SuccessCallbackHelper                    from '@/repositories/helpers/SuccessCallbackHelper';
 
@@ -36,27 +36,27 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   public entityName: string;
 
   private baseUrl: string = '';
-  private objectSummaryEntitytMapper: IModelGenericMapper<S>;
-  private objectExtendedEntitytMapper: IModelGenericMapper<E>;
+  private objectSummaryModelFactory: IModelFactory<S>;
+  private objectExtendedModelFactory: IModelFactory<E>;
 
 
   public constructor(
     endpoint: string,
-    objectSummaryEntitytMapper: IModelGenericMapper<S>,
-    objectExtendedEntitytMapper: IModelGenericMapper<E>) {
+    objectSummaryModelFactory: IModelFactory<S>,
+    objectExtendedModelFactory: IModelFactory<E>) {
     super();
 
-    if ( objectSummaryEntitytMapper === null || objectSummaryEntitytMapper === undefined ) {
-      throw new Error('Can not create GenericApiRepository without an Summary Object Mapper');
+    if ( objectSummaryModelFactory === null || objectSummaryModelFactory === undefined ) {
+      throw new Error('Can not create GenericApiRepository without an Summary Object Factory');
     }
 
-    if ( objectExtendedEntitytMapper === null || objectExtendedEntitytMapper === undefined ) {
-      throw new Error('Can not create GenericApiRepository without an Extended Object Mapper');
+    if ( objectExtendedModelFactory === null || objectExtendedModelFactory === undefined ) {
+      throw new Error('Can not create GenericApiRepository without an Extended Object Factory');
     }
 
-    this.objectSummaryEntitytMapper = objectSummaryEntitytMapper;
-    this.objectExtendedEntitytMapper = objectExtendedEntitytMapper;
-    this.entityName = this.objectSummaryEntitytMapper.mapToEntity({}).entityName;
+    this.objectSummaryModelFactory = objectSummaryModelFactory;
+    this.objectExtendedModelFactory = objectExtendedModelFactory;
+    this.entityName = this.objectExtendedModelFactory.create().entityName;
     this.baseUrl = `${BaseApiConfig.baseEndpoint}${endpoint}`;
   }
 
@@ -67,7 +67,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
     ApiResponse<GenericCollectionModel<S>> {
     return this.baseGetAll<S>(
       this.baseUrl,
-      this.objectSummaryEntitytMapper);
+      this.objectExtendedModelFactory);
   }
 
   //
@@ -79,7 +79,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
     return ApiBasePostWithCollectionResult.post(
       `${this.baseUrl}/filtered`,
       filter,
-      this.objectSummaryEntitytMapper);
+      this.objectSummaryModelFactory);
 
   }
 
@@ -88,7 +88,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   public getActiveList(): ApiResponse<GenericCollectionModel<ListItemModel>> {
     return this.baseGetAll<ListItemModel>(
       `${this.baseUrl}/list`,
-      ModelMapperFactoryListItem.createMapper());
+      new ModelFactoryListItem());
   }
 
   ///
@@ -100,7 +100,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
     if (  id === '00000000-0000-0000-0000-000000000000' ||
           id === 'new') {
 
-      const data = this.objectExtendedEntitytMapper.mapToEntity({});
+      const data = this.objectExtendedModelFactory.create();
       const contract = new ApiResponseContract<E>();
       contract.publishSuccess(data);
       return contract.responder;
@@ -108,7 +108,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
 
     return this.baseGetById(
       this.baseUrl + '/' + id,
-      this.objectExtendedEntitytMapper);
+      this.objectExtendedModelFactory);
 
   }
 
@@ -120,7 +120,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
     return this.baseSave(
       this.baseUrl,
       model,
-      this.objectExtendedEntitytMapper,
+      this.objectExtendedModelFactory,
       (returnedModel, successType) => {
         this.publishModelSavedNotification(this.entityName, returnedModel, successType);
       });
@@ -130,7 +130,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   public deactivate(id: string): ApiResponse<S> {
     return this.basePutWithNoModel(
       `${this.baseUrl}/${id}/deactivate`,
-      this.objectSummaryEntitytMapper,
+      this.objectSummaryModelFactory,
       EnumSuccessType.DeActivatedOk,
       (model, successType) => {
         this.publishModelSavedNotification(this.entityName, model, successType);
@@ -141,7 +141,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   public activate(id: string): ApiResponse<S> {
     return this.basePutWithNoModel(
       `${this.baseUrl}/${id}/activate`,
-      this.objectSummaryEntitytMapper,
+      this.objectSummaryModelFactory,
       EnumSuccessType.ActivatedOk,
       (model, successType) => {
         this.publishModelSavedNotification(this.entityName, model, successType);

@@ -2,7 +2,7 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterTeamService                        from '@/services/filters/TeamFilterService/FilterTeamService';
-import ModelMapperFactoryTeam                   from '@/repositories/modelMappers/ModelMapperFactoryTeam';
+import ModelFactoryTeamSummary                  from '@/repositories/modelFactories/ModelFactoryTeamSummary';
 import NavigationCrudTeam                       from '@/routeNavigation/NavigationCrudTeam';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
@@ -34,7 +34,7 @@ export default class TeamList extends BasePage implements IComponentMetaData {
     'Teams',                                      // Title
     new NavigationCrudTeam(),                    // Team Navigation Provider
     TeamRepositoryFactory.getRepository(),        // Team Repository Provider
-    ModelMapperFactoryTeam.createSummaryMapper(), // Map Java Object to Typescript Team Object
+    new ModelFactoryTeamSummary(),                // Model Factory for Typescript Team Object
     new FilterTeamService(),                      // Filter Team list (user text search)
     (data: TeamSummaryModel) => `${data.name}`,   // Format of text for cell line 1 (header)
     (data: TeamSummaryModel) => ``,               // Format of text for cell line 2 (body)

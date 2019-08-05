@@ -1,8 +1,9 @@
+
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterSecurityGroupService               from '@/services/filters/SecurityFilters/FilterSecurityGroupService';
-import ModelMapperFactorySecuityGroup           from '@/repositories/modelMappers/ModelMapperFactorySecurityGroup';
+import ModelFactorySecurityGroupSummary         from '@/repositories/modelFactories/ModelFactorySecurityGroupSummary';
 import NavigationCrudSecurityGroup              from '@/routeNavigation/NavigationCrudSecurityGroup';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
@@ -34,7 +35,7 @@ export default class SecurityGroupList extends BasePage implements IComponentMet
     'Security Groups',                                          // Title
     new NavigationCrudSecurityGroup(),                          // Security Group Navigation Provider
     SecurityGroupRepositoryFactory.getRepository(),             // Security Group Repository Provider
-    ModelMapperFactorySecuityGroup.createSummaryMapper(),      // Map Java Object to Typescript Security Group Object
+    new ModelFactorySecurityGroupSummary(),                     // Map Java Object to Typescript Security Group Object
     new FilterSecurityGroupService(),                           // Filter Security Group list (user text search)
     (data: SecurityGroupSummaryModel) => `${data.name}`,        // Format of text for cell line 1 (header)
     (data: SecurityGroupSummaryModel) => `${data.description}`, // Format of text for cell line 2 (body)

@@ -4,7 +4,7 @@ import Component                                from 'vue-class-component';
 import FilterJobRoleService                     from '@/services/filters/JobRoleFilterService/FilterJobRoleService';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
-import ModelMapperFactoryJobRole                from '@/repositories/modelMappers/ModelMapperFactoryJobRole';
+import ModelFactoryJobRoleSummary               from '@/repositories/modelFactories/ModelFactoryJobRoleSummary';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
@@ -34,7 +34,7 @@ export default class JobRoleList extends BasePage implements IComponentMetaData 
     'Job Roles',                                    // Title
     new NavigationCrudJobRole(),                    // People Navigation Provider
     JobRoleRepositoryFactory.getRepository(),       // People Repository Provider
-    ModelMapperFactoryJobRole.createSummaryMapper(),          // Map Java Object to Typescript People Object
+    new ModelFactoryJobRoleSummary(),               // Map Java Object to Typescript People Object
     new FilterJobRoleService(),                     // Filter People list (user text search)
     (data: JobRoleSummaryModel) => `${data.name}`,  // Format of text for cell line 1 (header)
     (data: JobRoleSummaryModel) => ``,              // Format of text for cell line 2 (body)

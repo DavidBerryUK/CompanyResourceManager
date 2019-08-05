@@ -1,6 +1,7 @@
+import ObjectMapper                             from '@/services/mapper/ObjectMapper';
+import { IModelFactory }                        from './../../modelFactories/interfaces/IModelFactory';
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
-import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { IRepositoryReadItem }                  from './interfaces/IRepositoryReadItem';
 import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
@@ -20,7 +21,7 @@ export default class BaseApiRepositoryReadItem<T> implements IRepositoryReadItem
      */
     public getById(
         url: string,
-        convertor: IModelGenericMapper<T>): ApiResponse<T> {
+        modelFactory: IModelFactory<T>): ApiResponse<T> {
         const contract = new ApiResponseContract<T>();
 
         axios
@@ -32,7 +33,7 @@ export default class BaseApiRepositoryReadItem<T> implements IRepositoryReadItem
                     // console.log(response.data);
 
                     if (response.data.entity) {
-                        const model = convertor.mapToEntity(response.data.entity);
+                        const model =  ObjectMapper.MapItem(response.data.entity, modelFactory);
                         contract.publishSuccess(model);
 
                     } else {

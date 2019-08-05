@@ -1,11 +1,12 @@
-import { IModelGenericMapper } from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IListFilterArchiveFlag }               from '@/repositories/models/listFilter/interfaces/IListFilterInterfaces';
 import { IListFilterByText }                    from '@/services/filters/interfaces/FilterInterfaces';
+import { IModelFactory }                        from './../../repositories/modelFactories/interfaces/IModelFactory';
 import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
+import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 
 type ILineTextForDataItem = (data: IApiModel )  => string;
 
@@ -15,7 +16,6 @@ export default class NavigationListConfig<S extends IApiModel> {
     public filterListService: IListFilterByText<S>;
     public navigationHandler: INavigationCrud;
     public repository: GenericApiRepository<S, any, any>;
-    public objectMapper: IModelGenericMapper<S>;
     public summaryEntityName: string;
     // the currently selected person
     public selectedItem: S;
@@ -32,7 +32,7 @@ export default class NavigationListConfig<S extends IApiModel> {
         title: string,
         navigationHandler: INavigationCrud,
         repository: GenericApiRepository<S, any, any>,
-        objectMapper: IModelGenericMapper<S>,
+        modelFactory: IModelFactory<S>,
         filterListService: IListFilterByText<S>,
         line1TextFunction: ((data: S ) => string  ),
         line2TextFunction: ((data: S ) => string  ),
@@ -43,9 +43,8 @@ export default class NavigationListConfig<S extends IApiModel> {
         this.filterListService = filterListService;
         this.repository = repository;
         this.navigationHandler = navigationHandler;
-        this.objectMapper = objectMapper;
-        this.selectedItem = this.objectMapper.mapToEntity({});
-        this.dataList.items = this.objectMapper.mapToArray([]);
+        this.selectedItem =  modelFactory.create();
+        this.dataList.items = ObjectMapper.MapArray([], modelFactory);
         this.summaryEntityName = this.selectedItem.entityName;
         this.line1TextFunction = line1TextFunction;
         this.line2TextFunction = line2TextFunction;

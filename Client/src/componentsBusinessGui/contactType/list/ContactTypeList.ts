@@ -4,7 +4,7 @@ import Component                                from 'vue-class-component';
 import ContactTypeRepositoryFactory             from '@/repositories/factory/ContactTypeRepositoryFactory';
 import ContactTypeSummaryModel                  from '@/repositories/models/contactType/ContactTypeSummaryModel';
 import FilterContractTypeService                from '@/services/filters/ContactTypeFilterService/FilterContactTypeService';
-import ModelMapperFactoryContactType            from '@/repositories/modelMappers/ModelMapperFactoryContactType';
+import ModelFactoryContactTypeSummary           from '@/repositories/modelFactories/ModelFactoryContactTypeSummary';
 import NavigationCrudContactType                from '@/routeNavigation/NavigationCrudContactType';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
@@ -33,8 +33,8 @@ export default class ContactTypeList extends BasePage implements IComponentMetaD
     'Contact Type',                                     // Title
     new NavigationCrudContactType(),                    // Skill Navigation Provider
     ContactTypeRepositoryFactory.getRepository(),       // Skill Repository Provider
-    ModelMapperFactoryContactType.createSummaryMapper(),          // Map Java Object to Typescript Skill Object
-    new FilterContractTypeService(),                     // Filter Skill list (user text search)
+    new ModelFactoryContactTypeSummary(),               // Map Java Object to Typescript Skill Object
+    new FilterContractTypeService(),                    // Filter Skill list (user text search)
     (data: ContactTypeSummaryModel) => `${data.name}`,  // Format of text for cell line 1 (header)
     (data: ContactTypeSummaryModel) => ``,              // Format of text for cell line 2 (body)
     (data: ContactTypeSummaryModel) => ``,              // Format of text for cell line 3 (footer)

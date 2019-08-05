@@ -1,10 +1,11 @@
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract}                   from '../../contracts/ApiResponseContract';
-import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
+import { IModelFactory }                        from '@/repositories/modelFactories/interfaces/IModelFactory';
 import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
 import BaseApiConfig                            from './ApiBaseConfig';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
+import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 
 /**
  * Post message to api endpoint and accept collection
@@ -26,7 +27,7 @@ export default class ApiBasePostWithCollectionResult {
     public static post<T, B>(
         baseUrl: string,
         bodyModel: B,
-        convertor?: IModelGenericMapper<T>,
+        modelFactory: IModelFactory<T>,
     ): ApiResponse<GenericCollectionModel<T>> {
 
         const contract = new ApiResponseContract<GenericCollectionModel<T>>();
@@ -46,12 +47,7 @@ export default class ApiBasePostWithCollectionResult {
                     model.success = response.data.success;
                     model.errorMessage = response.data.errorMessage;
 
-                    if (convertor) {
-                        model.items = convertor.mapToArray(response.data.items);
-                    } else {
-                        model.items = response.data.items;
-                    }
-
+                    model.items = ObjectMapper.MapArray(response.data.items, modelFactory);
 
                     contract.publishSuccess(model);
                 }

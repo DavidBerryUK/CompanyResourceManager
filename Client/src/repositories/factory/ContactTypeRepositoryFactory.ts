@@ -2,7 +2,8 @@ import ContactTypeExtendedModel                 from '@/repositories/models/cont
 import ContactTypeSummaryModel                  from '@/repositories/models/contactType/ContactTypeSummaryModel';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelMapperFactoryContactType            from '@/repositories/modelMappers/ModelMapperFactoryContactType';
+import ModelFactoryContactTypeExtended          from '@/repositories/modelFactories/ModelFactoryContactTypeExtended';
+import ModelFactoryContactTypeSummary           from '../modelFactories/ModelFactoryContactTypeSummary';
 
 export default class ContactTypeRepositoryFactory {
 
@@ -13,8 +14,8 @@ export default class ContactTypeRepositoryFactory {
     public static getRepository(): GenericApiRepository<ContactTypeSummaryModel, ContactTypeExtendedModel, ListFilterWithArchiveFlag> {
         const repository = new GenericApiRepository<ContactTypeSummaryModel, ContactTypeExtendedModel, ListFilterWithArchiveFlag>(
             'api/contact/type',
-            ModelMapperFactoryContactType.createSummaryMapper(),
-            ModelMapperFactoryContactType.createExtendedMapper());
+            new ModelFactoryContactTypeSummary(),
+            new ModelFactoryContactTypeExtended());
         return repository;
     }
 }

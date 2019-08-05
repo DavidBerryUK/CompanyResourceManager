@@ -4,7 +4,7 @@ import AssetTypeSummmaryModel                   from '@/repositories/models/asse
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterAssetTypeService                   from '@/services/filters/assetTypeFilterService/FilterAssetTypeService';
-import ModelMapperFactoryAssetType              from '@/repositories/modelMappers/ModelMapperFactoryAssetType';
+import ModelFactoryAssetTypeSummary             from '@/repositories/modelFactories/ModelFactoryAssetTypeSummary';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
@@ -32,7 +32,7 @@ export default class AssetTypeList extends BasePage implements IComponentMetaDat
   'Asset Types',                                              // Title
   new NavigationCrudAssetType(),                              // People Navigation Provider
   AssetTypeRepositoryFactory.getRepository(),                 // People Repository Provider
-  ModelMapperFactoryAssetType.createSummaryMapper(),         // Map Java Object to Typescript People Object
+  new ModelFactoryAssetTypeSummary(),                         // Map Java Object to Typescript People Object
   new FilterAssetTypeService(),                               // Filter People list (user text search)
   (data: AssetTypeSummmaryModel) => `${data.name}`,           // Format of text for cell line 1 (header)
   (data: AssetTypeSummmaryModel) => ``,                       // Format of text for cell line 2 (body)

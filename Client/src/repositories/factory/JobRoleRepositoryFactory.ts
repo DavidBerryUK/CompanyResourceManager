@@ -2,7 +2,8 @@ import GenericApiRepository                     from '@/repositories/apiBase/Gen
 import JobRoleExtendedModel                     from '@/repositories/models/jobRole/JobRoleExtendedModel';
 import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelMapperFactoryJobRole                from '@/repositories/modelMappers/ModelMapperFactoryJobRole';
+import ModelFactoryJobRoleExtended              from '@/repositories/modelFactories/ModelFactoryJobRoleExtended';
+import ModelFactoryJobRoleSummary               from '../modelFactories/ModelFactoryJobRoleSummary';
 
 export default class JobRoleRepositoryFactory {
 
@@ -13,8 +14,8 @@ export default class JobRoleRepositoryFactory {
     public static getRepository(): GenericApiRepository<JobRoleSummaryModel, JobRoleExtendedModel, ListFilterWithArchiveFlag> {
         const repository = new GenericApiRepository<JobRoleSummaryModel, JobRoleExtendedModel, ListFilterWithArchiveFlag>(
             'api/jobrole',
-            ModelMapperFactoryJobRole.createSummaryMapper(),
-            ModelMapperFactoryJobRole.createExtendedMapper());
+            new ModelFactoryJobRoleSummary(),
+            new ModelFactoryJobRoleExtended());
         return repository;
     }
 }

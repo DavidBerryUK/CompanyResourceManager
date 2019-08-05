@@ -1,8 +1,8 @@
+import { IModelFactory }                        from '@/repositories/modelFactories/interfaces/IModelFactory';
 import { ApiResponse }                          from '../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../helpers/SuccessCallbackHelper';
 import { IApiModel }                            from '../models/interfaces/IApiModel';
-import { IModelGenericMapper }                  from '../modelMappers/interfaces/IModelGenericMapper';
 import { ISuccessCallback }                     from '../helpers/SuccessCallbackHelper';
 import ApiBaseEntityGetById                     from './lowlevel/BaseApiRepositoryReadItem';
 import BaseApiRepositoryCreateItem              from './lowlevel/BaseApiRepositoryCreateItem';
@@ -37,12 +37,12 @@ export default class ApiBase {
      */
     public basePutWithNoModel<T>(
         baseUrl: string,
-        convertor: IModelGenericMapper<T>,
+        modelFactory: IModelFactory<T>,
         successType: EnumSuccessType,
         successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
         const service = new BaseApiRepositoryUpdateItem<T>();
-        return service.put(baseUrl, null, convertor, successType, successCallback);
+        return service.put(baseUrl, null, modelFactory, successType, successCallback);
     }
 
     /**
@@ -60,7 +60,7 @@ export default class ApiBase {
     public baseSave<T extends IApiModel>(
         baseUrl: string,
         model: T,
-        convertor: IModelGenericMapper<T>,
+        modelFactory: IModelFactory<T>,
         successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
         const contract = new ApiResponseContract<T>();
@@ -71,7 +71,7 @@ export default class ApiBase {
             model.entityKey === '' ||
             model.entityKey === '00000000-0000-0000-0000-000000000000') {
             const servicePost = new BaseApiRepositoryCreateItem<T>();
-            return servicePost.post(baseUrl, model, convertor, EnumSuccessType.CreatedOk, successCallback);
+            return servicePost.post(baseUrl, model, modelFactory, EnumSuccessType.CreatedOk, successCallback);
         }
 
         // the entity already has a primary key - perform a PUT to update
@@ -80,7 +80,7 @@ export default class ApiBase {
         return servicePut.put(
             `${baseUrl}/${model.entityKey}`,
             model,
-            convertor,
+            modelFactory,
             EnumSuccessType.UpdatedOk,
             successCallback);
     }
@@ -96,9 +96,9 @@ export default class ApiBase {
      */
     public baseGetById<T>(
         url: string,
-        convertor: IModelGenericMapper<T>): ApiResponse<T> {
+        modelFactory: IModelFactory<T>): ApiResponse<T> {
         const service = new  ApiBaseEntityGetById<T>();
-        return service.getById(url, convertor);
+        return service.getById(url, modelFactory);
     }
 
     /**
@@ -111,9 +111,10 @@ export default class ApiBase {
      */
     public baseGetAll<T>(
         baseUrl: string,
-        convertor?: IModelGenericMapper<T>): ApiResponse<GenericCollectionModel<T>> {
+        modelFactory: IModelFactory<T>)
+        : ApiResponse<GenericCollectionModel<T>> {
 
         const service = new BaseApiRepositoryReadList<T>();
-        return service.getAll(baseUrl, convertor);
+        return service.getAll(baseUrl, modelFactory);
     }
 }

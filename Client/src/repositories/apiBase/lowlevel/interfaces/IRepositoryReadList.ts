@@ -1,8 +1,10 @@
 import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
-import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
+import { IModelFactory }                        from '@/repositories/modelFactories/interfaces/IModelFactory';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 
 export interface IRepositoryReadList<T> {
-    getAll(baseUrl: string, convertor?: IModelGenericMapper<T> )
+    getAll(
+        baseUrl: string,
+        modelFactory?: IModelFactory<T> )
         : ApiResponse<GenericCollectionModel<T>>;
 }

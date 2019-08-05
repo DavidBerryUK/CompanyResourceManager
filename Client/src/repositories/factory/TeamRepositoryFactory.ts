@@ -1,6 +1,7 @@
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelMapperFactoryTeam                   from '../modelMappers/ModelMapperFactoryTeam';
+import ModelFactoryTeamExtended                 from '@/repositories/modelFactories/ModelFactoryTeamExtended';
+import ModelFactoryTeamSummary                  from '../modelFactories/ModelFactoryTeamSummary';
 import TeamExtendedModel                        from '../models/team/TeamExtendedModel';
 import TeamSummaryModel                         from '../models/team/TeamSummaryModel';
 
@@ -13,8 +14,8 @@ export default class TeamRepositoryFactory {
     public static getRepository(): GenericApiRepository<TeamSummaryModel, TeamExtendedModel, ListFilterWithArchiveFlag> {
         const repository = new GenericApiRepository<TeamSummaryModel, TeamExtendedModel, ListFilterWithArchiveFlag>(
             'api/team',
-            ModelMapperFactoryTeam.createSummaryMapper(),
-            ModelMapperFactoryTeam.createExtendedMapper());
+            new ModelFactoryTeamSummary(),
+            new ModelFactoryTeamExtended());
         return repository;
     }
 }

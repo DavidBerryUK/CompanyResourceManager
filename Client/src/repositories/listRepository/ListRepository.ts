@@ -7,7 +7,7 @@ import BaseApiConfig                            from '@/repositories/apiBase/low
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/listItem/ListItemModel';
 import ListRepositoryEnum                       from './ListRepositoryEnum';
-import ModelMapperFactoryListItem               from '@/repositories/modelMappers/ModelMapperFactoryListItem';
+import ModelFactoryListItem                     from '../modelFactories/ModelFactoryListItem';
 
 export default class ListRepository extends ApiBase {
 
@@ -38,7 +38,7 @@ export default class ListRepository extends ApiBase {
      * Get List
      */
     public get(): ApiResponse<GenericCollectionModel<ListItemModel>> {
-      const data = this.baseGetAll(this.createGetUrl(), ModelMapperFactoryListItem.createMapper());
+      const data = this.baseGetAll(this.createGetUrl(), new ModelFactoryListItem());
       return data;
     }
 
@@ -47,7 +47,7 @@ export default class ListRepository extends ApiBase {
             const url = this.createUpdateUrl(item.entityKey, item.selected);
             const response = this.basePutWithNoModel (
                 url,
-                ModelMapperFactoryListItem.createMapper(),
+                new ModelFactoryListItem(),
                 EnumSuccessType.UpdatedOk,
                 (model, successType) => {});
             return response;

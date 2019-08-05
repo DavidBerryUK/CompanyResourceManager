@@ -1,11 +1,12 @@
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
-import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
+import { IModelFactory }                        from '@/repositories/modelFactories/interfaces/IModelFactory';
 import { IRepositoryReadList }                  from './interfaces/IRepositoryReadList';
 import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
 import BaseApiConfig                            from './ApiBaseConfig';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
+import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 
 export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList<T> {
 
@@ -18,7 +19,10 @@ export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList
      * @returns {ApiResponse<GenericCollectionModel<T>>}
      * @memberof ApiBaseGetAll
      */
-    public getAll(baseUrl: string, convertor?: IModelGenericMapper<T>): ApiResponse<GenericCollectionModel<T>> {
+    public getAll(
+        baseUrl: string,
+        modelFactory: IModelFactory<T>)
+        : ApiResponse<GenericCollectionModel<T>> {
 
         const contract = new ApiResponseContract<GenericCollectionModel<T>>();
         const model = new GenericCollectionModel<T>();
@@ -29,11 +33,7 @@ export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList
                 model.success = response.data.success;
                 model.errorMessage = response.data.errorMessage;
 
-                if (convertor) {
-                    model.items = convertor.mapToArray(response.data.items);
-                } else {
-                    model.items = response.data.items;
-                }
+                model.items = ObjectMapper.MapArray(response.data.items, modelFactory);
 
                 contract.publishSuccess(model);
             })

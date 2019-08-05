@@ -1,6 +1,7 @@
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelMapperFactoryPerson                 from '@/repositories/modelMappers/ModelMapperFactoryPerson';
+import ModelFactoryPersonExtended               from '@/repositories/modelFactories/ModelFactoryPersonExtended';
+import ModelFactoryPersonSummary                from '@/repositories/modelFactories/ModelFactoryPersonSummary';
 import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 
@@ -13,8 +14,8 @@ export default class PersonRepositoryFactory {
     public static getRepository(): GenericApiRepository<PersonSummaryModel, PersonExtendedModel, ListFilterWithArchiveFlag> {
         const repository = new GenericApiRepository<PersonSummaryModel, PersonExtendedModel, ListFilterWithArchiveFlag>(
             'api/person',
-            ModelMapperFactoryPerson.createSummaryMapper(),
-            ModelMapperFactoryPerson.createExtendedMapper());
+            new ModelFactoryPersonSummary(),
+            new ModelFactoryPersonExtended());
         return repository;
     }
 }

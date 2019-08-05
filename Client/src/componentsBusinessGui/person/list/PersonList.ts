@@ -2,7 +2,7 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterPersonSummaryService               from '@/services/filters/personFilterService/FilterPersonSummaryService';
-import ModelMapperFactoryPerson                 from '@/repositories/modelMappers/ModelMapperFactoryPerson';
+import ModelFactoryPersonSummary                from '@/repositories/modelFactories/ModelFactoryPersonSummary';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
@@ -34,7 +34,7 @@ export default class PersonList extends BasePage implements IComponentMetaData {
     'Person',                                                         // Title
     new NavigationCrudPerson(),                                       // People Navigation Provider
     PersonRepositoryFactory.getRepository(),                          // People Repository Provider
-    ModelMapperFactoryPerson.createSummaryMapper(),                  // Map Java Object to Typescript People Object
+    new ModelFactoryPersonSummary(),                                   // Map Java Object to Typescript People Object
     new FilterPersonSummaryService(),                                 // Filter People list (user text search)
     (data: PersonSummaryModel) => `${data.forename} ${data.surname}`, // Format of text for cell line 1 (header)
     (data: PersonSummaryModel) => `${data.jobRoleName}`,              // Format of text for cell line 2 (body)

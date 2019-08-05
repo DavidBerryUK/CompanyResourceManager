@@ -1,13 +1,14 @@
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '../../helpers/SuccessCallbackHelper';
-import { IModelGenericMapper }                  from '@/repositories/modelMappers/interfaces/IModelGenericMapper';
+import { IModelFactory }                        from './../../modelFactories/interfaces/IModelFactory';
 import { IRepositoryUpdateItem }                from './interfaces/IRepositoryUpdateItem';
 import { ISuccessCallback }                     from '../../helpers/SuccessCallbackHelper';
 import { ValidationMessage }                    from '../../contracts/ApiResponseContract';
 import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
 import BaseApiConfig                            from './ApiBaseConfig';
+import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 
 export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdateItem<T> {
     /**
@@ -25,7 +26,7 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
      */
     public put(  baseUrl: string,
                  model: T | null,
-                 convertor: IModelGenericMapper<T>,
+                 modelFactory: IModelFactory<T>,
                  successType: EnumSuccessType,
                  successCallback: ISuccessCallback<T>): ApiResponse<T> {
 
@@ -49,7 +50,7 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
                     }
 
                     if (response.data.entity) {
-                        const mappedModel = convertor.mapToEntity(response.data.entity);
+                        const mappedModel = ObjectMapper.MapItem(response.data.entity, modelFactory);
                         successCallback( mappedModel, successType);
                         contract.publishSuccess(mappedModel);
                     } else {
