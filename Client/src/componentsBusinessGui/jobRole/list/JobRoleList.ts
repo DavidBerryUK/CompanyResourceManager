@@ -10,7 +10,7 @@ import NavigationListComponent                  from '@/componentsCommonGui/navi
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
 
 /**
- * Presents a list of Job Rols to the user that can be filtered
+ * Presents a list of Job Role to the user that can be filtered
  * by record status (current,deleted or all)
  *
  * when a asset type is selected its details will be displayed

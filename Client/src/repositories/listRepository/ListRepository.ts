@@ -30,7 +30,7 @@ export default class ListRepository extends ApiBase {
         this.baseUrl = `${BaseApiConfig.baseEndpoint}`;
 
         // Ensure the combination of parameters provided are valid
-        // before performing any further procesing
+        // before performing any further processing
         this.validateListParameters(this.listEntityName, this.referenceEntityName, this.mode);
     }
 
@@ -96,7 +96,7 @@ export default class ListRepository extends ApiBase {
         }
 
         if (this.referenceEntityName !== '' && this.referenceId === '') {
-            throw new Error('If a reference entity is provided, a reference id must also be provied');
+            throw new Error('If a reference entity is provided, a reference id must also be provided');
         }
     }
 }

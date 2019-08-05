@@ -8,7 +8,7 @@ import TeamSummaryModel                         from '../models/team/TeamSummary
 export default class TeamRepositoryFactory {
 
     //
-    // create a Team Respository using the generic base repository class
+    // create a Team Repository using the generic base repository class
     //  this repository supports all the basic CRUD operations as well
     //  as providing a filtered object list ( providing the server supports the functionality )
     public static getRepository(): GenericApiRepository<TeamSummaryModel, TeamExtendedModel, ListFilterWithArchiveFlag> {

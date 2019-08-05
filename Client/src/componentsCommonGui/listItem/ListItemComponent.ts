@@ -1,11 +1,12 @@
-import { Component, Watch }                            from 'vue-property-decorator';
-import { EnumListCompomentTitle }               from './ListItemComponentEnums';
+import { Component }                            from 'vue-property-decorator';
 import { EnumListComponentStyle }               from './ListItemComponentEnums';
+import { EnumListComponentTitle }               from './ListItemComponentEnums';
 import { EnumListComponentValueDisplay }        from './ListItemComponentEnums';
 import { EnumListTextFilter }                   from './ListItemComponentEnums';
 import { EnumRepositoryDataSource }             from '@/repositories/listRepository/ListRepositoryEnum';
 import { EnumRepositoryListMode }               from '@/repositories/listRepository/ListRepositoryEnum';
 import { Prop }                                 from 'vue-property-decorator';
+import { Watch }                                from 'vue-property-decorator';
 import FilterListItemService                    from '@/services/filters/listItemFilterService/FilterListItemService';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemCollectionModel                  from '@/repositories/models/listItem/ListItemCollectionModel';
@@ -30,8 +31,8 @@ export default class ListItemComponent extends Vue {
   @Prop({default: EnumListComponentValueDisplay.none})
   public valueDisplay!: EnumListComponentValueDisplay;
 
-  @Prop({default: EnumListCompomentTitle.listHeader})
-  public titleStyle!: EnumListCompomentTitle;
+  @Prop({default: EnumListComponentTitle.listHeader})
+  public titleStyle!: EnumListComponentTitle;
 
   @Prop()
   public title!: string;
@@ -47,48 +48,48 @@ export default class ListItemComponent extends Vue {
    * load data directly from api
    */
   @Prop({default: EnumRepositoryDataSource.None})
-  public repoDataSource!: EnumRepositoryDataSource;
+  public repositoryDataSource!: EnumRepositoryDataSource;
 
   /**
    * Optional Repository Parameter - component can
    * load data directly from api
    */
   @Prop({default: EnumRepositoryListMode.Default})
-  public repoListMode!: EnumRepositoryListMode;
+  public repositoryListMode!: EnumRepositoryListMode;
 
   /**
    * Optional Repository Parameter - component can
    * load data directly from api
    */
   @Prop({default: ''})
-  public repoReferenceId!: string;
+  public repositoryReferenceId!: string;
 
   public isLoading: boolean = false;
 
   public listFilterText: string = '';
 
-  private repoListData: ListItemCollectionModel = new ListItemCollectionModel();
+  private repositoryListData: ListItemCollectionModel = new ListItemCollectionModel();
 
   private filterListItemService = new FilterListItemService();
 
-  private useRepoData: boolean = false;
+  private useRepositoryData: boolean = false;
 
   private listRepository!: ListRepository;
 
   private get listData(): Array<ListItemModel> {
-    if ( this.useRepoData ) {
-      return this.repoListData.all;
+    if ( this.useRepositoryData ) {
+      return this.repositoryListData.all;
     }
     return this.list;
   }
 
-  @Watch('repoReferenceId')
-  public repoReferenceIdUpdated() {
+  @Watch('repositoryReferenceId')
+  public repositoryReferenceIdUpdated() {
     this.getData();
   }
 
   public mounted() {
-    if ( this.repoDataSource !== EnumRepositoryDataSource.None ) {
+    if ( this.repositoryDataSource !== EnumRepositoryDataSource.None ) {
       this.getData();
     }
   }
@@ -103,7 +104,7 @@ export default class ListItemComponent extends Vue {
         console.log(`[ListItemComponent:itemUpdateValue] - response - success `);
         console.log(data);
       }).onFailed((error: string) => {
-        console.log(`[ListItemComponent:itemUpdateValue] - reponse failed ${error}`);
+        console.log(`[ListItemComponent:itemUpdateValue] - response failed ${error}`);
       }).then(() => {
         console.log(`[ListItemComponent:itemUpdateValue] - response - then `);
       });
@@ -113,14 +114,14 @@ export default class ListItemComponent extends Vue {
     if ( this.showTextFilter === EnumListTextFilter.inHeader) {
       return true;
     }
-    return this.titleStyle === EnumListCompomentTitle.listHeader;
+    return this.titleStyle === EnumListComponentTitle.listHeader;
   }
 
   public get isHeaderStyleSimple(): boolean {
     if ( this.showTextFilter === EnumListTextFilter.inHeader) {
       return false;
     }
-    return this.titleStyle === EnumListCompomentTitle.simple;
+    return this.titleStyle === EnumListComponentTitle.simple;
   }
 
   public get isHeaderHtmlList(): boolean {
@@ -189,7 +190,7 @@ export default class ListItemComponent extends Vue {
   }
 
   private getData() {
-    if (this.repoReferenceId === '') {
+    if (this.repositoryReferenceId === '') {
       this.isLoading = false;
       return;
     }
@@ -197,14 +198,14 @@ export default class ListItemComponent extends Vue {
     this.isLoading = true;
 
     this.listRepository = new ListRepository(
-      this.repoDataSource,
-      this.repoListMode,
-      this.repoReferenceId);
+      this.repositoryDataSource,
+      this.repositoryListMode,
+      this.repositoryReferenceId);
 
     this.listRepository.get()
     .onSuccess((list: GenericCollectionModel<ListItemModel>) => {
-        this.useRepoData = true;
-        this.repoListData = new ListItemCollectionModel(list.items);
+        this.useRepositoryData = true;
+        this.repositoryListData = new ListItemCollectionModel(list.items);
     })
     .then(() => {
       this.isLoading = false;

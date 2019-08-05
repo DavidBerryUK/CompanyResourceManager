@@ -8,7 +8,7 @@ import SecurityGroupSummaryModel                from '@/repositories/models/secu
 export default class SecurityGroupRepositoryFactory {
 
     //
-    // create a Security Group Respository using the generic base repository class
+    // create a Security Group Repository using the generic base repository class
     //  this repository supports all the basic CRUD operations as well
     //  as providing a filtered object list ( providing the server supports the functionality )
     public static getRepository(): GenericApiRepository<SecurityGroupSummaryModel, SecurityGroupExtendedModel, ListFilterWithArchiveFlag> {
@@ -16,6 +16,7 @@ export default class SecurityGroupRepositoryFactory {
             'api/security/group',
             new ModelFactorySecurityGroupSummary(),
             new ModelFactorySecurityGroupExtended());
+
         return repository;
     }
 }

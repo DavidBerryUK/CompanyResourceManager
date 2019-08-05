@@ -1,10 +1,10 @@
 import { IModelFactory }                        from './interfaces/IModelFactory';
-import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
+import AssetTypeSummaryModel                    from '@/repositories/models/assetType/AssetTypeSummaryModel';
 
 export default class ModelFactoryAssetTypeSummary implements
-    IModelFactory<AssetTypeSummmaryModel> {
+    IModelFactory<AssetTypeSummaryModel> {
 
-    public create(): AssetTypeSummmaryModel {
-        return new AssetTypeSummmaryModel();
+    public create(): AssetTypeSummaryModel {
+        return new AssetTypeSummaryModel();
     }
 }

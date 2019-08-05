@@ -1,8 +1,6 @@
 export interface IComponentMetaData {
-
     componentName: string;
     componentDescription: string;
-
 }
 
 export default class ComponentMetaDataInterfaceGuards {
