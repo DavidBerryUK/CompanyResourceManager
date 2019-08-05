@@ -85,7 +85,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(contactType));
             }
 
-            var data = await _contactTypeCrudService.UpdateAsync(contactTypeId, contactType);
+            var data = await _contactTypeCrudService.UpdateExtendedAsync(contactTypeId, contactType);
             return Ok(data);
         }
 

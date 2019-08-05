@@ -11,8 +11,8 @@ INSERT INTO @ItemsToDrop ( Name)
 VALUES 
 
 (	'Contact'							),
-(	'ContactGroup'						),
 (	'ContactType'						),
+(	'ContactGroup'						),
 (	'JobApplicant'						),
 (	'WorkflowInstanceEvent'				),
 (	'WorkflowInstance'					),

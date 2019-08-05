@@ -88,7 +88,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(securityGroup));
             }
 
-            var data = await _securityGroupCrudService.UpdateAsync(securityGroupId, securityGroup);
+            var data = await _securityGroupCrudService.UpdateExtendedAsync(securityGroupId, securityGroup);
             return Ok(data);
         }
 

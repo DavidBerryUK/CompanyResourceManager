@@ -109,7 +109,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(skill));
             }
 
-            var data = await _skillCrudService.UpdateAsync(skillId, skill);
+            var data = await _skillCrudService.UpdateExtendedAsync(skillId, skill);
             return Ok(data);
         }
 

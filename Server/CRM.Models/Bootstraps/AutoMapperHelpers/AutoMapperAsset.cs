@@ -2,8 +2,8 @@
 using CRM.Models.Bootstraps.Interfaces;
 using CRM.Models.Database.Assets;
 using CRM.Models.Rest.Asset;
-using System.Diagnostics.CodeAnalysis;
 using CRM.Models.Rest.Lists;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {

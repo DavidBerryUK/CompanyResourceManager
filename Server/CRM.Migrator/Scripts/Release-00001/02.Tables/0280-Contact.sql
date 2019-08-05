@@ -20,3 +20,15 @@ CREATE TABLE [dbo].[Contact](
 ) ON [PRIMARY] 
 
 GO
+
+ALTER TABLE Contact
+ADD  CONSTRAINT FK_Contact_ContactType
+	FOREIGN KEY
+	(
+		ContactTypeId
+	)
+	REFERENCES ContactType 
+	(
+		ContactTypeId
+	)
+GO

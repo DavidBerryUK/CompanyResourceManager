@@ -28,9 +28,10 @@ namespace CRM.Database.DatabaseMapper.Contacts
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.PreferredContactId)
-                    .IsRequired();
+                    .IsRequired(false);
 
                 entity.Property(e => e.Notes)
+                    .IsRequired(false)
                     .HasMaxLength(500);
 
                 entity.Property(e => e.IsActive)

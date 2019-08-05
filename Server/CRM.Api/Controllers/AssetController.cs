@@ -74,7 +74,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(assetSummary));
             }
 
-            var data = await _assetCrudService.UpdateAsync(assetId, assetSummary);
+            var data = await _assetCrudService.UpdateExtendedAsync(assetId, assetSummary);
             return Ok(data);
         }
 

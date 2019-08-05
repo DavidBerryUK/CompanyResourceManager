@@ -38,13 +38,13 @@ ALTER TABLE JobApplicant ADD CONSTRAINT
 GO
 
 
-ALTER TABLE JobApplicant  ADD CONSTRAINT 
-	FK_JobApplicant_ContactGroup FOREIGN KEY
-	(
-		ContactGroupId
-	)
-	REFERENCES ContactGroup
-	(
-		ContactGroupId
-	)
-GO
+--ALTER TABLE JobApplicant  ADD CONSTRAINT 
+--	FK_JobApplicant_ContactGroup FOREIGN KEY
+--	(
+--		JobApplicantId
+--	)
+--	REFERENCES ContactGroup
+--	(
+--		ContactGroupId
+--	)
+--GO

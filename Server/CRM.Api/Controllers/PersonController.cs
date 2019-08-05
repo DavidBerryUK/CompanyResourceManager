@@ -75,7 +75,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(person));
             }
 
-            var data = await _personCrudService.UpdateAsync(personId, person);
+            var data = await _personCrudService.UpdateExtendedAsync(personId, person);
             return Ok(data);
         }
 

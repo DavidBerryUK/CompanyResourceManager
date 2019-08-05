@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
-using CRM.Models.Rest.Lists;
-using System.Diagnostics.CodeAnalysis;
 using CRM.Models.Database.Contacts;
 using CRM.Models.Rest.Contacts;
+using CRM.Models.Rest.Lists;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {

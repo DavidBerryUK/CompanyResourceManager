@@ -3,7 +3,7 @@ import AssetTypeSummaryModel                    from '@/repositories/models/asse
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
 import ModelFactoryAssetTypeExtended            from '@/repositories/modelFactories/ModelFactoryAssetTypeExtended';
-import ModelFactoryAssetTypeSummary             from '../modelFactories/ModelFactoryAssetTypeSummary';
+import ModelFactoryAssetTypeSummary             from '@/repositories/modelFactories/ModelFactoryAssetTypeSummary';
 
 export default class AssetTypeRepositoryFactory {
 

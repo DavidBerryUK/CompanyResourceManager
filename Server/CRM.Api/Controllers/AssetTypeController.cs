@@ -88,7 +88,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(assetType));
             }
 
-            var data = await _assetTypeCrudService.UpdateAsync(assetTypeId, assetType);
+            var data = await _assetTypeCrudService.UpdateExtendedAsync(assetTypeId, assetType);
             return Ok(data);
         }
 

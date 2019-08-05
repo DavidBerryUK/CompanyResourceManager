@@ -11,7 +11,7 @@ namespace CRM.Models.Database.Contacts
     {
         public Guid ContactGroupId { get; set; }
 
-        public Guid PreferredContactId { get; set; }
+        public Guid? PreferredContactId { get; set; }
 
         public string Notes { get; set; }
 

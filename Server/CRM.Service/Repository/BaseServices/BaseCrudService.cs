@@ -125,7 +125,7 @@ namespace CRM.Service.Repository.BaseServices
             return data;
         }
 
-        public async Task<BaseItemResponse<TExtended>> UpdateAsync(
+        public async Task<BaseItemResponse<TExtended>> UpdateExtendedAsync(
             TPrimaryKey id,
             TExtended model)
         {
@@ -135,6 +135,19 @@ namespace CRM.Service.Repository.BaseServices
                     id,
                     model,
                     QueryExtendedInclude,
+                    QueryEqualsPrimaryKey);
+
+            return data;
+        }
+
+        public async Task<BaseItemResponse<TSummary>> UpdateSummaryAsync(TPrimaryKey id, TSummary model)
+        {
+            var data = await Update<TEntity, TSummary, TPrimaryKey>
+                .UpdateAsync(
+                    _dbContext,
+                    id,
+                    model,
+                    QuerySummaryInclude,
                     QueryEqualsPrimaryKey);
 
             return data;

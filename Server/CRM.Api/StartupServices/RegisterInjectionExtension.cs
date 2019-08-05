@@ -57,6 +57,7 @@ namespace CRM.Api.StartupServices
 
             // Contacts
             services.AddTransient<IContactTypeCrudService, ContactTypeCrudService>();
+            services.AddTransient<IContactGroupCrudService, ContactGroupCrudService>();
 
             //
             services.AddTransient(typeof(IDirectSqlServices<>), typeof(DirectSqlServices<>));

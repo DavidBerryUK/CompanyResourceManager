@@ -10,7 +10,7 @@ GO
 CREATE TABLE [dbo].[ContactGroup](
 	[ContactGroupId]		[UNIQUEIDENTIFIER]	NOT NULL,
 	[PreferredContactId]	[UNIQUEIDENTIFIER]	NULL,	
-	[Notes]					[NVARCHAR](500)		NOT NULL,	
+	[Notes]					[NVARCHAR](500)		NULL,	
 	[IsActive]				[BIT]				NOT NULL,
  CONSTRAINT [PK_ContactGroup] PRIMARY KEY CLUSTERED 
 (
@@ -32,14 +32,5 @@ ADD  CONSTRAINT FK_Contact_ContactGroup
 	)
 GO
 
-ALTER TABLE Contact
-ADD  CONSTRAINT FK_Contact_ContactType
-	FOREIGN KEY
-	(
-		ContactGroupId
-	)
-	REFERENCES ContactType 
-	(
-		ContactTypeId
-	)
-GO
+
+

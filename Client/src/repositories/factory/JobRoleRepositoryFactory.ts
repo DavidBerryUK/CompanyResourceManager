@@ -3,7 +3,7 @@ import JobRoleExtendedModel                     from '@/repositories/models/jobR
 import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
 import ModelFactoryJobRoleExtended              from '@/repositories/modelFactories/ModelFactoryJobRoleExtended';
-import ModelFactoryJobRoleSummary               from '../modelFactories/ModelFactoryJobRoleSummary';
+import ModelFactoryJobRoleSummary               from '@/repositories/modelFactories/ModelFactoryJobRoleSummary';
 
 export default class JobRoleRepositoryFactory {
 

@@ -114,7 +114,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(jobRole));
             }
 
-            var data = await _jobRoleCrudService.UpdateAsync(jobRoleId, jobRole);
+            var data = await _jobRoleCrudService.UpdateExtendedAsync(jobRoleId, jobRole);
             return Ok(data);
         }
 

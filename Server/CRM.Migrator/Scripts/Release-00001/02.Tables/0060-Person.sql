@@ -13,7 +13,6 @@ CREATE TABLE [dbo].[Person] (
 	[Forename]			[nvarchar](200)		NOT NULL,
 	[Surname]			[nvarchar](200)		NOT NULL,
 	[Email]				[nvarchar](500)		NULL,
-	[ContactGroupId]	[uniqueidentifier]	NULL,
 	[IsActive]			[bit]				NOT NULL,
 
  CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED 
@@ -36,15 +35,4 @@ ALTER TABLE dbo.Person ADD CONSTRAINT
 	ON UPDATE  NO ACTION 
 	ON DELETE  NO ACTION 
 
-GO
-
-ALTER TABLE Person  ADD CONSTRAINT 
-	FK_Person_ContactGroup FOREIGN KEY
-	(
-		[ContactGroupId]
-	)
-	REFERENCES ContactGroup
-	(
-		ContactGroupId
-	)
 GO

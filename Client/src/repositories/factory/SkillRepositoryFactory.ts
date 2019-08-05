@@ -1,7 +1,7 @@
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
 import ModelFactorySkillExtended                from '@/repositories/modelFactories/ModelFactorySkillExtended';
-import ModelFactorySkillSummary                 from '../modelFactories/ModelFactorySkillSummary';
+import ModelFactorySkillSummary                 from '@/repositories/modelFactories/ModelFactorySkillSummary';
 import SkillExtendedModel                       from '@/repositories/models/skill/SkillExtendedModel';
 import SkillSummaryModel                        from '@/repositories/models/skill/SkillSummaryModel';
 

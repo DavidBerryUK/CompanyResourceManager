@@ -30,7 +30,9 @@ namespace CRM.Service.Repository.BaseServices.Interface
 
         Task<BaseItemResponse<TSummary>> UpdateActiveStatusAsync(TPrimaryKey id, bool isActive);
 
-        Task<BaseItemResponse<TExtended>> UpdateAsync(TPrimaryKey id, TExtended model);
+        Task<BaseItemResponse<TExtended>> UpdateExtendedAsync(TPrimaryKey id, TExtended model);
+
+        Task<BaseItemResponse<TSummary>> UpdateSummaryAsync(TPrimaryKey id, TSummary model);
 
         Task<BaseItemResponse<TExtended>> CreateAsync(TExtended model);
 
