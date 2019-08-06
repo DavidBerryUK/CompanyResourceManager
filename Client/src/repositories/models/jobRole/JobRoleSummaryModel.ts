@@ -2,6 +2,8 @@ import { IApiModel }                            from '../interfaces/IApiModel';
 
 export default class JobRoleSummaryModel implements IApiModel {
 
+    public static className = 'JobRoleSummaryModel';
+
     public jobRoleId: string;
     public name: string;
     public isActive: boolean;
@@ -13,7 +15,7 @@ export default class JobRoleSummaryModel implements IApiModel {
     }
 
     public get entityName(): string {
-        return 'JobRole';
+        return JobRoleSummaryModel.className;
     }
 
     public get entityKey(): string {

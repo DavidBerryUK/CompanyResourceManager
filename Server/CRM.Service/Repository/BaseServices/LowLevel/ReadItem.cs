@@ -28,7 +28,7 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
 
             if (data == null)
             {
-                response.ErrorMessage = $"{nameof(TEntity)} {id} not found";
+                response.ErrorMessage = $"{typeof(TEntity).Name} {id} not found";
             }
 
             response.Entity = Mapper.Map<TRestModel>(data);

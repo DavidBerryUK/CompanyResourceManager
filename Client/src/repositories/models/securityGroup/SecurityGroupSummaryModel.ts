@@ -2,6 +2,8 @@ import { IApiModel }                            from '../interfaces/IApiModel';
 
 export default class SecurityGroupSummaryModel implements IApiModel {
 
+    public static className = 'SecurityGroupSummaryModel';
+
     public securityGroupId: string;
     public name: string;
     public description: string;
@@ -15,7 +17,7 @@ export default class SecurityGroupSummaryModel implements IApiModel {
     }
 
     public get entityName(): string {
-        return 'Security Group';
+        return SecurityGroupSummaryModel.className;
     }
 
     public get entityKey(): string {

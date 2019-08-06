@@ -2,6 +2,8 @@ import { IApiModel }                            from '../interfaces/IApiModel';
 
 export default class ContactTypeSummaryModel implements IApiModel {
 
+    public static className = 'ContactTypeSummaryModel';
+
     public contactTypeId: string;
     public name: string;
     public isActive: boolean;
@@ -13,7 +15,7 @@ export default class ContactTypeSummaryModel implements IApiModel {
     }
 
     public get entityName(): string {
-        return 'ContactType';
+        return ContactTypeSummaryModel.className;
     }
 
     public get entityKey(): string {

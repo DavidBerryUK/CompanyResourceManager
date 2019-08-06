@@ -2,6 +2,8 @@ import { IApiModel }                            from '@/repositories/models/inte
 
 export default class ListItemModel implements IApiModel {
 
+    public static className: string = 'ListItemModel';
+
     public id: string;
     public name: string;
     public selected: boolean | undefined;
@@ -13,7 +15,7 @@ export default class ListItemModel implements IApiModel {
     }
 
     get entityName(): string {
-        return 'item';
+        return ListItemModel.className;
     }
 
     get entityKey(): string {

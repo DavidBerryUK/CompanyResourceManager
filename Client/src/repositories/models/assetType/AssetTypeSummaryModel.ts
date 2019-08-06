@@ -2,6 +2,8 @@ import { IApiModel }                            from '../interfaces/IApiModel';
 
 export default class AssetTypeSummmaryModel implements IApiModel {
 
+    public static className = 'AssetTypeSummmaryModel';
+
     public assetTypeId: string;
     public name: string;
     public hasAssetBadge: boolean;
@@ -17,7 +19,7 @@ export default class AssetTypeSummmaryModel implements IApiModel {
     }
 
     public get entityName(): string {
-        return 'AssetType';
+        return AssetTypeSummmaryModel.className;
     }
 
     public get entityKey(): string {

@@ -2,4 +2,10 @@ import AssetTypeSummmaryModel                   from '@/repositories/models/asse
 
 export default class AssetTypeExtendedModel extends AssetTypeSummmaryModel {
 
+    public static className = 'AssetTypeExtendedModel';
+
+    public get entityName(): string {
+        return AssetTypeExtendedModel.className;
+    }
+
 }

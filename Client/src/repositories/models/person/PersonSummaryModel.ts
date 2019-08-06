@@ -2,6 +2,8 @@ import { IApiModel }                            from '../interfaces/IApiModel';
 
 export default class PersonSummaryModel implements IApiModel {
 
+    public static className = 'PersonSummaryModel';
+
     public personId: string;
     public forename: string;
     public surname: string;
@@ -20,15 +22,18 @@ export default class PersonSummaryModel implements IApiModel {
         this.isActive = false;
     }
 
-    get entityName(): string {
-        return 'Person Summary';
+    public get entityName(): string {
+        return PersonSummaryModel.className;
     }
+
     get entityKey(): string {
         return this.personId;
     }
+
     get entityValue(): string {
         return `${this.forename} ${this.surname}`;
     }
+
     get entitySortValue(): any {
         return `${this.forename}-${this.surname}`;
     }

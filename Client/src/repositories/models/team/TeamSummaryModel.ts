@@ -2,6 +2,8 @@ import { IApiModel }                            from '../interfaces/IApiModel';
 
 export default class TeamSummaryModel implements IApiModel {
 
+    public static className = 'TeamSummaryModel';
+
     public teamId: string;
     public name: string;
     public description: string;
@@ -15,7 +17,7 @@ export default class TeamSummaryModel implements IApiModel {
     }
 
     public get entityName(): string {
-        return 'Team';
+        return TeamSummaryModel.className;
     }
 
     public get entityKey(): string {

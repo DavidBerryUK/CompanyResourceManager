@@ -5,7 +5,7 @@
 
   <v-layout row>
     <v-flex xs-6 pr-2>
-
+      <crm-contact-group :contactGroupId='contactGroupId'></crm-contact-group>
 
 
     </v-flex>

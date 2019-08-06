@@ -2,6 +2,8 @@ import { IApiModel }                            from '../interfaces/IApiModel';
 
 export default class SkillSummaryModel implements IApiModel {
 
+    public static className = 'SkillSummaryModel';
+
     public skillId: string;
     public name: string;
     public description: string;
@@ -15,7 +17,7 @@ export default class SkillSummaryModel implements IApiModel {
     }
 
     public get entityName(): string {
-        return 'Skill';
+        return SkillSummaryModel.className;
     }
 
     public get entityKey(): string {

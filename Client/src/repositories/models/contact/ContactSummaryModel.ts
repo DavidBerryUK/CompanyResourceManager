@@ -2,6 +2,8 @@ import { IApiModel }                            from '@/repositories/models/inte
 
 export default class ContactSummaryModel implements IApiModel {
 
+    public static className = 'ContactSummaryModel';
+
     public contactId: string;
     public contactGroupId: string;
     public contactTypeId: string;
@@ -17,7 +19,7 @@ export default class ContactSummaryModel implements IApiModel {
     }
 
     public get entityName(): string {
-        return 'Contact';
+        return ContactSummaryModel.className;
     }
 
     public get entityKey(): string {

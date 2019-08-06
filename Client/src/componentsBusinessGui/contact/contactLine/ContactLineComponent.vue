@@ -2,5 +2,5 @@
  
 </template>
 
-<script  lang='ts'  src='./ContractLineComponent.ts'>
+<script  lang='ts'  src='./ContactLineComponent.ts'>
 </script>

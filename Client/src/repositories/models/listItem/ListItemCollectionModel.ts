@@ -12,10 +12,16 @@ import ListItemModel                            from '@/repositories/models/list
  */
 export default class ListItemCollectionModel {
 
+    public static className = 'ListItemCollectionModel';
+
     private items: Array<ListItemModel> = new Array<ListItemModel>();
 
     constructor(items: Array<ListItemModel> = new Array<ListItemModel>()) {
         this.items = items;
+    }
+
+    public get entityName(): string {
+        return ListItemCollectionModel.className;
     }
 
     public get all(): Array<ListItemModel> {

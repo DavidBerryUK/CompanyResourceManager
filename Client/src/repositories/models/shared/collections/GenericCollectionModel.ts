@@ -12,6 +12,8 @@ import Vue                                      from 'vue';
  */
 export default class GenericCollectionModel<T> {
 
+    public static className = 'GenericCollectionModel';
+
     /**
      * when used as the response model from calling an api, this is used
      * to indicate if the server operation was a success

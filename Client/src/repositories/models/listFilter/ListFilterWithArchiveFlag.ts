@@ -4,7 +4,13 @@ import { IListFilterArchiveFlag }               from './interfaces/IListFilterIn
 
 export default class ListFilterWithArchiveFlag implements IListFilter, IListFilterArchiveFlag {
 
+    public static className = 'ListFilterWithArchiveFlag';
+
     public recordActiveStatusFilter: EnumRecordStatusFilter = EnumRecordStatusFilter.Active;
+
+    public get entityName(): string {
+        return ListFilterWithArchiveFlag.className;
+    }
 
     public get isFilterSet(): boolean {
         if ( this.recordActiveStatusFilter !== EnumRecordStatusFilter.Active) {

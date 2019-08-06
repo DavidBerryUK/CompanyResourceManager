@@ -2,6 +2,8 @@ import { IApiModel }                            from '@/repositories/models/inte
 
 export default class AssetSummaryModel implements IApiModel {
 
+    public static className = 'AssetSummaryModel';
+
     public assetId: string;
     public assetTypeId: string;
     public name: string;
@@ -17,7 +19,7 @@ export default class AssetSummaryModel implements IApiModel {
     }
 
     public get entityName(): string {
-        return 'Asset';
+        return AssetSummaryModel.className;
     }
 
     public get entityKey(): string {

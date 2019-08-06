@@ -12,7 +12,7 @@ export default class ContactGroupRepositoryFactory {
     //  this repository supports getting of a contact group, but not updating it
     public static getRepository(): GenericApiRepository<ContactGroupSummaryModel, ContactGroupExtendedModel, ListFilterWithArchiveFlag> {
         const repository = new GenericApiRepository<ContactGroupSummaryModel, ContactGroupExtendedModel, ListFilterWithArchiveFlag>(
-            'api/skill',
+            'api/contact/group',
             new ModelFactoryContactGroupSummary(),
             new ModelFactoryContactGroupExtended());
         return repository;
