@@ -35,9 +35,9 @@
         <v-flex xs-4 pr-2>
           <crm-list-items
             title="Teams"
-            :repoDataSource="EnumRepositoryDataSource.TeamPerson"
-            :repoListMode="EnumRepositoryListMode.All"
-            :repoReferenceId="entityModel.id"
+            :repositoryDataSource="EnumRepositoryDataSource.TeamPerson"
+            :repositoryListMode="EnumRepositoryListMode.All"
+            :repositoryReferenceId="entityModel.id"
             :listStyle="EnumListComponentStyle.list"
             :valueDisplay="EnumListComponentValueDisplay.checkbox"            
             :showTextFilter="EnumListTextFilter.inHeader"
@@ -48,9 +48,9 @@
         <v-flex xs-4 pr-2>
           <crm-list-items
             title="Skills"
-            :repoDataSource="EnumRepositoryDataSource.SkillPerson"
-            :repoListMode="EnumRepositoryListMode.All"
-            :repoReferenceId="entityModel.id"
+            :repositoryDataSource="EnumRepositoryDataSource.SkillPerson"
+            :repositoryListMode="EnumRepositoryListMode.All"
+            :repositoryReferenceId="entityModel.id"
             :listStyle="EnumListComponentStyle.list"
             :valueDisplay="EnumListComponentValueDisplay.checkbox"            
             :showTextFilter="EnumListTextFilter.inHeader"
@@ -61,9 +61,9 @@
         <v-flex xs-4>
           <crm-list-items
             title="Security"
-            :repoDataSource="EnumRepositoryDataSource.SecurityGroupPerson"
-            :repoListMode="EnumRepositoryListMode.All"
-            :repoReferenceId="entityModel.id"
+            :repositoryDataSource="EnumRepositoryDataSource.SecurityGroupPerson"
+            :repositoryListMode="EnumRepositoryListMode.All"
+            :repositoryReferenceId="entityModel.id"
             :listStyle="EnumListComponentStyle.list"
             :valueDisplay="EnumListComponentValueDisplay.checkbox"            
             :showTextFilter="EnumListTextFilter.inHeader"

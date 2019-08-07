@@ -8,7 +8,6 @@ import { ValidationMessage }                    from '../../contracts/ApiRespons
 import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
 import BaseApiConfig                            from './ApiBaseConfig';
-import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 
 export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdateItem<T> {
     /**
@@ -50,7 +49,8 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
                     }
 
                     if (response.data.entity) {
-                        const mappedModel = ObjectMapper.MapItem(response.data.entity, modelFactory);
+                        // const mappedModel = ObjectMapper.MapItem(response.data.entity, modelFactory);
+                        const mappedModel = modelFactory.createFrom(response.data);
                         successCallback( mappedModel, successType);
                         contract.publishSuccess(mappedModel);
                     } else {

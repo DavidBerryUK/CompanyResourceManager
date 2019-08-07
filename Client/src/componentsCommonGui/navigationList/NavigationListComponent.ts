@@ -11,6 +11,7 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 import ListFilterDialogState                    from '@/componentsCommonGui/listFilterDialog/ListFilterDialogState';
 import ListFiltersDialog                        from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog.vue';
 import ListFiltersDialogCode                    from '@/componentsCommonGui/listFilterDialog/ListFiltersDialog';
+import Loader                                   from '@/componentsCommonGui/loader/Loader';
 import NavigationListConfig                     from './NavigationListConfig';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import ThemeSettings                            from '@/componentsCommonGui/theme/ThemeSettings';
@@ -19,6 +20,7 @@ import Vue                                      from 'vue';
 @Component({
   components: {
     FilterButton,
+    Loader,
   }})
 export default class NavigationListComponent extends Vue  implements IComponentMetaData {
 

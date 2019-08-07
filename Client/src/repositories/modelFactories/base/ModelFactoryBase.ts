@@ -1,11 +1,44 @@
+import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IModelFactory }                        from '@/repositories/modelFactories/interfaces/IModelFactory';
 
-export default abstract class ModelFactoryBase<T> implements IModelFactory<T> {
+export default abstract class ModelFactoryBase<T extends IApiModel> implements IModelFactory<T> {
 
     public abstract create(): T;
 
     public createFrom(obj: any): T {
         const result = this.MapItem(obj);
+        return result;
+    }
+
+    public createArray(): Array<T> {
+        const data: Array<T> = new Array<T>();
+        return data;
+    }
+    public createArrayFrom(obj: any): Array<T> {
+        const result = this.mapArray(obj);
+        return result;
+    }
+
+    public mapArray(source: any): Array<T> {
+
+        if (source === undefined) {
+            throw new Error('Source object can not be undefined');
+        }
+
+        if (source === null) {
+            throw new Error('Source object can not be null');
+        }
+
+        if (!Array.isArray(source)) {
+            throw new Error('Source object is not an array');
+        }
+
+        const result = this.createArray();
+
+        source.forEach((item) => {
+            result.push(this.MapItem(item));
+        });
+
         return result;
     }
 

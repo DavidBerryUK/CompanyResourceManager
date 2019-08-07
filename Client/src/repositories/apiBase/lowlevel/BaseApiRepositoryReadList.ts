@@ -6,7 +6,6 @@ import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
 import BaseApiConfig                            from './ApiBaseConfig';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
-import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 
 export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList<T> {
 
@@ -33,7 +32,8 @@ export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList
                 model.success = response.data.success;
                 model.errorMessage = response.data.errorMessage;
 
-                model.items = ObjectMapper.MapArray(response.data.items, modelFactory);
+                // model.items = ObjectMapper.MapArray(response.data.items, modelFactory);
+                model.items = modelFactory.createArrayFrom(response.data.items);
 
                 contract.publishSuccess(model);
             })

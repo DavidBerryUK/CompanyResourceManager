@@ -5,7 +5,6 @@ import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
 import BaseApiConfig                            from './ApiBaseConfig';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
-import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 
 /**
  * Post message to api endpoint and accept collection
@@ -47,7 +46,8 @@ export default class ApiBasePostWithCollectionResult {
                     model.success = response.data.success;
                     model.errorMessage = response.data.errorMessage;
 
-                    model.items = ObjectMapper.MapArray(response.data.items, modelFactory);
+                    // model.items = ObjectMapper.MapArray(response.data.items, modelFactory);
+                    model.items = modelFactory.createArrayFrom(response.data.items);
 
                     contract.publishSuccess(model);
                 }

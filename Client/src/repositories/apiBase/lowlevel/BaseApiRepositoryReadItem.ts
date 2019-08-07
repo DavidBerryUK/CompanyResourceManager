@@ -1,4 +1,3 @@
-import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 import { IModelFactory }                        from './../../modelFactories/interfaces/IModelFactory';
 import { ApiResponse }                          from '../../contracts/ApiResponseContract';
 import { ApiResponseContract }                  from '../../contracts/ApiResponseContract';
@@ -33,7 +32,8 @@ export default class BaseApiRepositoryReadItem<T> implements IRepositoryReadItem
                     // console.log(response.data);
 
                     if (response.data.entity) {
-                        const model =  ObjectMapper.MapItem(response.data.entity, modelFactory);
+                        // const model =  ObjectMapper.MapItem(response.data.entity, modelFactory);
+                        const model = modelFactory.createFrom(response.data.entity);
                         contract.publishSuccess(model);
 
                     } else {

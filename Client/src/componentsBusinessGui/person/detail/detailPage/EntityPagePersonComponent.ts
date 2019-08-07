@@ -1,5 +1,5 @@
-import { EnumListComponentTitle }               from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListComponentStyle }               from '@/componentsCommonGui/listItem/ListItemComponentEnums';
+import { EnumListComponentTitle }               from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListComponentValueDisplay }        from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumListTextFilter }                   from '@/componentsCommonGui/listItem/ListItemComponentEnums';
 import { EnumRepositoryDataSource }             from '@/repositories/listRepository/ListRepositoryEnum';
@@ -15,6 +15,7 @@ import EntitySegmentPersonView                  from '../segmentView/EntitySegme
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
+import ListItemComponent                        from '@/componentsCommonGui/listItem/ListItemComponent';
 import ListItemModel                            from '@/repositories/models/listitem/ListItemModel';
 import ModelFactoryPersonExtended               from '@/repositories/modelFactories/ModelFactoryPersonExtended';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
@@ -28,13 +29,14 @@ import PersonRepositoryFactory                  from '@/repositories/factory/Per
     EntitySegmentPersonEdit,
     EntitySegmentPersonView,
     EntitySegmentViewEditControllerComponent,
+    ListItemComponent,
   },
 })
 export default class EntityPagePersonComponent
   extends EntityPageBaseComponent<PersonExtendedModel, EntityPageModelWithReferences<PersonExtendedModel>>
   implements IRouteBeforeNavigationCheck {
 
-  public EnumListComponentTitle = EnumListComponentTitle;
+  public EnumListCompomentTitle = EnumListComponentTitle;
   public EnumListComponentStyle = EnumListComponentStyle;
   public EnumListComponentValueDisplay = EnumListComponentValueDisplay;
   public EnumListTextFilter = EnumListTextFilter;

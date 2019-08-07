@@ -38,8 +38,9 @@ export default class ListRepository extends ApiBase {
      * Get List
      */
     public get(): ApiResponse<GenericCollectionModel<ListItemModel>> {
-      const data = this.baseGetAll(this.createGetUrl(), new ModelFactoryListItem());
-      return data;
+        const url = this.createGetUrl();
+        const data = this.baseGetAll(url, new ModelFactoryListItem());
+        return data;
     }
 
     public updateItem(item: ListItemModel): ApiResponse<ListItemModel> {

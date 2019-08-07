@@ -190,6 +190,7 @@ export default class ListItemComponent extends Vue {
   }
 
   private getData() {
+
     if (this.repositoryReferenceId === '') {
       this.isLoading = false;
       return;

@@ -6,7 +6,6 @@ import { INavigationCrud }                      from '@/routeNavigation/interfac
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 
 type ILineTextForDataItem = (data: IApiModel )  => string;
 
@@ -44,7 +43,7 @@ export default class NavigationListConfig<S extends IApiModel> {
         this.repository = repository;
         this.navigationHandler = navigationHandler;
         this.selectedItem =  modelFactory.create();
-        this.dataList.items = ObjectMapper.MapArray([], modelFactory);
+        this.dataList.items = modelFactory.createArray();
         this.summaryEntityName = this.selectedItem.entityName;
         this.line1TextFunction = line1TextFunction;
         this.line2TextFunction = line2TextFunction;

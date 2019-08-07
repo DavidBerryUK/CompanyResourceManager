@@ -8,7 +8,6 @@ import { ValidationMessage }                    from '../../contracts/ApiRespons
 import ApiBaseError                             from './ApiBaseError';
 import axios                                    from 'axios';
 import BaseApiConfig                            from './ApiBaseConfig';
-import ObjectMapper                             from '@/services/mapper/ObjectMapper';
 
 export default class BaseApiRepositoryCreateItem<T> implements IRepositoryCreateItem<T> {
 
@@ -53,7 +52,8 @@ export default class BaseApiRepositoryCreateItem<T> implements IRepositoryCreate
                     }
 
                     if (response.data.entity) {
-                        const model = ObjectMapper.MapItem<T>( response.data.entity, modelFactory);
+                        // const model = ObjectMapper.MapItem<T>( response.data.entity, modelFactory);
+                        const model = modelFactory.createFrom(response.data.entity);
                         successCallback(model, successNotificationType);
                         contract.publishSuccess(model);
                     } else {
