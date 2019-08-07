@@ -2,8 +2,8 @@ import ContactTypeExtendedModel                 from '@/repositories/models/cont
 import ContactTypeSummaryModel                  from '@/repositories/models/contactType/ContactTypeSummaryModel';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelFactoryContactTypeExtended          from '@/repositories/modelFactories/ModelFactoryContactTypeExtended';
-import ModelFactoryContactTypeSummary           from '@/repositories/modelFactories/ModelFactoryContactTypeSummary';
+import ModelFactoryContactTypeExtended          from '@/repositories/modelFactories/contact/ModelFactoryContactTypeExtended';
+import ModelFactoryContactTypeSummary           from '@/repositories/modelFactories/contact/ModelFactoryContactTypeSummary';
 
 export default class ContactTypeRepositoryFactory {
 

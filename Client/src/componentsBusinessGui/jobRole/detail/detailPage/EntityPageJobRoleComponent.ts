@@ -8,7 +8,7 @@ import EntitySegmentJobRoleViewComponent        from '../segmentView/EntitySegme
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
 import JobRoleExtendedModel                     from '@/repositories/models/jobRole/JobRoleExtendedModel';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
-import ModelFactoryJobRoleExtended              from '@/repositories/modelFactories/ModelFactoryJobRoleExtended';
+import ModelFactoryJobRoleExtended              from '@/repositories/modelFactories/jobRole/ModelFactoryJobRoleExtended';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
 
 @Component({

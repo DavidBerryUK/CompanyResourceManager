@@ -8,7 +8,7 @@ import EntityPageModelWithReferences            from '@/componentsEntityLayouts/
 import EntitySegmentAssetTypeEditComponent      from '../segmentEdit/EntitySegmentAssetTypeEditComponent';
 import EntitySegmentAssetTypeViewComponent      from '../segmentView/EntitySegmentAssetTypeViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
-import ModelFactoryAssetTypeExtended            from '@/repositories/modelFactories/ModelFactoryAssetTypeExtended';
+import ModelFactoryAssetTypeExtended            from '@/repositories/modelFactories/asset/ModelFactoryAssetTypeExtended';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 
 @Component({

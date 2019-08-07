@@ -2,7 +2,7 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterSkillService                       from '@/services/filters/SkillFilterService/FilterSkillService';
-import ModelFactorySkillExtended                from '@/repositories/modelFactories/ModelFactorySkillExtended';
+import ModelFactorySkillExtended                from '@/repositories/modelFactories/skill/ModelFactorySkillExtended';
 import NavigationCrudSkill                      from '@/routeNavigation/NavigationCrudSkill';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';

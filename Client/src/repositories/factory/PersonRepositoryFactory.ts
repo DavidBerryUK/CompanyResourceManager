@@ -1,7 +1,7 @@
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelFactoryPersonExtended               from '@/repositories/modelFactories/ModelFactoryPersonExtended';
-import ModelFactoryPersonSummary                from '@/repositories/modelFactories/ModelFactoryPersonSummary';
+import ModelFactoryPersonExtended               from '@/repositories/modelFactories/person/ModelFactoryPersonExtended';
+import ModelFactoryPersonSummary                from '@/repositories/modelFactories/person/ModelFactoryPersonSummary';
 import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 

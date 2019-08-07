@@ -1,6 +1,6 @@
-import { IModelFactory }                        from './interfaces/IModelFactory';
+import { IModelFactory }                        from '../interfaces/IModelFactory';
 import JobRoleExtendedModel                     from '@/repositories/models/jobRole/JobRoleExtendedModel';
-import ModelFactoryBase                         from './base/ModelFactoryBase';
+import ModelFactoryBase                         from '../base/ModelFactoryBase';
 
 export default class ModelFactoryJobRoleExtended
     extends ModelFactoryBase<JobRoleExtendedModel>

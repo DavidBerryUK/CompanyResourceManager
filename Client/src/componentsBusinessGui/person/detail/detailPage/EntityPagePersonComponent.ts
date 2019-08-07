@@ -17,7 +17,7 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import ListItemComponent                        from '@/componentsCommonGui/listItem/ListItemComponent';
 import ListItemModel                            from '@/repositories/models/listitem/ListItemModel';
-import ModelFactoryPersonExtended               from '@/repositories/modelFactories/ModelFactoryPersonExtended';
+import ModelFactoryPersonExtended               from '@/repositories/modelFactories/person/ModelFactoryPersonExtended';
 import NavigationCrudPerson                     from '@/routeNavigation/NavigationCrudPerson';
 import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
 import PersonRepositoryFactory                  from '@/repositories/factory/PersonRepositoryFactory';

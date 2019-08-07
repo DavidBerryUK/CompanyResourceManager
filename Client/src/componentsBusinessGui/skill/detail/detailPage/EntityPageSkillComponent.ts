@@ -6,7 +6,7 @@ import EntityPageModelWithReferences            from '@/componentsEntityLayouts/
 import EntitySegmentSkillEditComponent          from '../segmentEdit/EntitySegmentSkillEditComponent';
 import EntitySegmentSkillViewComponent          from '../segmentView/EntitySegmentSkillViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
-import ModelFactorySkillExtended                from '@/repositories/modelFactories/ModelFactorySkillExtended';
+import ModelFactorySkillExtended                from '@/repositories/modelFactories/skill/ModelFactorySkillExtended';
 import NavigationCrudSkill                      from '@/routeNavigation/NavigationCrudSkill';
 import SkillExtendedModel                       from '@/repositories/models/skill/SkillExtendedModel';
 import SkillRepositoryFactory                   from '@/repositories/factory/SkillRepositoryFactory';

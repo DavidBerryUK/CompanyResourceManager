@@ -1,6 +1,6 @@
-import { IModelFactory }                        from './interfaces/IModelFactory';
+import { IModelFactory }                        from '../interfaces/IModelFactory';
 import AssetTypeExtendedModel                   from '@/repositories/models/assetType/AssetTypeExtendedModel';
-import ModelFactoryBase                         from './base/ModelFactoryBase';
+import ModelFactoryBase                         from '../base/ModelFactoryBase';
 
 export default class ModelFactoryAssetTypeExtended
     extends ModelFactoryBase<AssetTypeExtendedModel>

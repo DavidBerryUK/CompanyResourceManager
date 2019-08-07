@@ -12,7 +12,7 @@ import EntitySegmentAssetViewComponent          from '../segmentView/EntitySegme
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/listitem/ListItemModel';
-import ModelFactoryAssetExtended                from '@/repositories/modelFactories/ModelFactoryAssetExtended';
+import ModelFactoryAssetExtended                from '@/repositories/modelFactories/asset/ModelFactoryAssetExtended';
 import NavigationCrudAsset                      from '@/routeNavigation/NavigationCrudAsset';
 
 @Component({

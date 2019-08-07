@@ -57,7 +57,7 @@ export default abstract class ModelFactoryBase<T extends IApiModel> implements I
         // tslint:disable-next-line:forin
         for (const key in result) {
             const value = source[key];
-            if (value !== undefined) {
+            if (value !== undefined && !Array.isArray(value)) {
                 result[key] = value;
             }
         }

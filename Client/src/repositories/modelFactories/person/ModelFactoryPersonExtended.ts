@@ -1,6 +1,6 @@
-import { IModelFactory }                        from './interfaces/IModelFactory';
+import { IModelFactory }                        from '../interfaces/IModelFactory';
 import PersonExtendedModel                      from '@/repositories/models/person/PersonExtendedModel';
-import ModelFactoryBase                         from './base/ModelFactoryBase';
+import ModelFactoryBase                         from '../base/ModelFactoryBase';
 
 
 export default class ModelFactoryPersonExtended

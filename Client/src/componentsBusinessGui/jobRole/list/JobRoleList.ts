@@ -4,7 +4,7 @@ import Component                                from 'vue-class-component';
 import FilterJobRoleService                     from '@/services/filters/JobRoleFilterService/FilterJobRoleService';
 import JobRoleRepositoryFactory                 from '@/repositories/factory/JobRoleRepositoryFactory';
 import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
-import ModelFactoryJobRoleSummary               from '@/repositories/modelFactories/ModelFactoryJobRoleSummary';
+import ModelFactoryJobRoleSummary               from '@/repositories/modelFactories/jobRole/ModelFactoryJobRoleSummary';
 import NavigationCrudJobRole                    from '@/routeNavigation/NavigationCrudJobRole';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';

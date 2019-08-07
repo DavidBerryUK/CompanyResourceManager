@@ -49,7 +49,6 @@ export default class BaseApiRepositoryUpdateItem<T> implements IRepositoryUpdate
                     }
 
                     if (response.data.entity) {
-                        // const mappedModel = ObjectMapper.MapItem(response.data.entity, modelFactory);
                         const mappedModel = modelFactory.createFrom(response.data);
                         successCallback( mappedModel, successType);
                         contract.publishSuccess(mappedModel);

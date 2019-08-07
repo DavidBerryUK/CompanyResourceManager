@@ -31,8 +31,6 @@ export default class BaseApiRepositoryReadList<T> implements IRepositoryReadList
             .then((response) => {
                 model.success = response.data.success;
                 model.errorMessage = response.data.errorMessage;
-
-                // model.items = ObjectMapper.MapArray(response.data.items, modelFactory);
                 model.items = modelFactory.createArrayFrom(response.data.items);
 
                 contract.publishSuccess(model);

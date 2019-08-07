@@ -45,8 +45,6 @@ export default class ApiBasePostWithCollectionResult {
                     //
                     model.success = response.data.success;
                     model.errorMessage = response.data.errorMessage;
-
-                    // model.items = ObjectMapper.MapArray(response.data.items, modelFactory);
                     model.items = modelFactory.createArrayFrom(response.data.items);
 
                     contract.publishSuccess(model);

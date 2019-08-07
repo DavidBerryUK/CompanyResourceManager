@@ -2,8 +2,8 @@ import AssetExtendedModel                       from '@/repositories/models/asse
 import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelFactoryAssetExtended                from '@/repositories/modelFactories/ModelFactoryAssetExtended';
-import ModelFactoryAssetSummary                 from '@/repositories/modelFactories/ModelFactoryAssetSummary';
+import ModelFactoryAssetExtended                from '@/repositories/modelFactories/asset/ModelFactoryAssetExtended';
+import ModelFactoryAssetSummary                 from '@/repositories/modelFactories/asset/ModelFactoryAssetSummary';
 
 export default class AssetRepositoryFactory {
 

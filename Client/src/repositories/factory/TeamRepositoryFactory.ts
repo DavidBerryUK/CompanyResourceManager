@@ -1,7 +1,7 @@
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelFactoryTeamExtended                 from '@/repositories/modelFactories/ModelFactoryTeamExtended';
-import ModelFactoryTeamSummary                  from '@/repositories/modelFactories/ModelFactoryTeamSummary';
+import ModelFactoryTeamExtended                 from '@/repositories/modelFactories/team/ModelFactoryTeamExtended';
+import ModelFactoryTeamSummary                  from '@/repositories/modelFactories/team/ModelFactoryTeamSummary';
 import TeamExtendedModel                        from '@/repositories/models/team/TeamExtendedModel';
 import TeamSummaryModel                         from '@/repositories/models/team/TeamSummaryModel';
 

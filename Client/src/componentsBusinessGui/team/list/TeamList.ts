@@ -2,7 +2,7 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterTeamService                        from '@/services/filters/TeamFilterService/FilterTeamService';
-import ModelFactoryTeamSummary                  from '@/repositories/modelFactories/ModelFactoryTeamSummary';
+import ModelFactoryTeamSummary                  from '@/repositories/modelFactories/team/ModelFactoryTeamSummary';
 import NavigationCrudTeam                       from '@/routeNavigation/NavigationCrudTeam';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';

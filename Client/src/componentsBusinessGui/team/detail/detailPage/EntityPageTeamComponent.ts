@@ -6,7 +6,7 @@ import EntityPageModelWithReferences            from '@/componentsEntityLayouts/
 import EntitySegmentTeamEditComponent           from '../segmentEdit/EntitySegmentTeamEditComponent';
 import EntitySegmentTeamViewComponent           from '../segmentView/EntitySegmentTeamViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
-import ModelFactoryTeamExtended                 from '@/repositories/modelFactories/ModelFactoryTeamExtended';
+import ModelFactoryTeamExtended                 from '@/repositories/modelFactories/team/ModelFactoryTeamExtended';
 import NavigationCrudTeam                       from '@/routeNavigation/NavigationCrudTeam';
 import TeamExtendedModel                        from '@/repositories/models/team/TeamExtendedModel';
 import TeamRepositoryFactory                    from '@/repositories/factory/TeamRepositoryFactory';

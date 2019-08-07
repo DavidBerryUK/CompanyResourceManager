@@ -4,7 +4,7 @@ import Component                                from 'vue-class-component';
 import ContactTypeRepositoryFactory             from '@/repositories/factory/ContactTypeRepositoryFactory';
 import ContactTypeSummaryModel                  from '@/repositories/models/contactType/ContactTypeSummaryModel';
 import FilterContractTypeService                from '@/services/filters/ContactTypeFilterService/FilterContactTypeService';
-import ModelFactoryContactTypeSummary           from '@/repositories/modelFactories/ModelFactoryContactTypeSummary';
+import ModelFactoryContactTypeSummary           from '@/repositories/modelFactories/contact/ModelFactoryContactTypeSummary';
 import NavigationCrudContactType                from '@/routeNavigation/NavigationCrudContactType';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';

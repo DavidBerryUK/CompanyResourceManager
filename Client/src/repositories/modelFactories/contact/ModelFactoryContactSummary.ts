@@ -1,6 +1,6 @@
-import { IModelFactory }                        from './interfaces/IModelFactory';
+import { IModelFactory }                        from '../interfaces/IModelFactory';
 import ContactSummaryModel                      from '@/repositories/models/contact/ContactSummaryModel';
-import ModelFactoryBase                         from './base/ModelFactoryBase';
+import ModelFactoryBase                         from '../base/ModelFactoryBase';
 
 export default class ModelFactoryContactSummary
     extends ModelFactoryBase<ContactSummaryModel>

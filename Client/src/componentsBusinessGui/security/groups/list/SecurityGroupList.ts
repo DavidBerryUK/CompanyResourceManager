@@ -3,7 +3,7 @@ import { IComponentMetaData }                   from '@/components/interfaces/Co
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterSecurityGroupService               from '@/services/filters/SecurityFilters/FilterSecurityGroupService';
-import ModelFactorySecurityGroupSummary         from '@/repositories/modelFactories/ModelFactorySecurityGroupSummary';
+import ModelFactorySecurityGroupSummary         from '@/repositories/modelFactories/securityGroup/ModelFactorySecurityGroupSummary';
 import NavigationCrudSecurityGroup              from '@/routeNavigation/NavigationCrudSecurityGroup';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';

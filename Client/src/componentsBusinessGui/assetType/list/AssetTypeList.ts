@@ -4,7 +4,7 @@ import AssetTypeSummaryModel                   from '@/repositories/models/asset
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterAssetTypeService                   from '@/services/filters/assetTypeFilterService/FilterAssetTypeService';
-import ModelFactoryAssetTypeSummary             from '@/repositories/modelFactories/ModelFactoryAssetTypeSummary';
+import ModelFactoryAssetTypeSummary             from '@/repositories/modelFactories/asset/ModelFactoryAssetTypeSummary';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';

@@ -1,5 +1,5 @@
-import ModelFactoryPersonExtended               from '@/repositories/modelFactories/ModelFactoryPersonExtended';
-import ModelFactoryPersonSummary                from '@/repositories/modelFactories/ModelFactoryPersonSummary';
+import ModelFactoryPersonExtended               from '@/repositories/modelFactories/person/ModelFactoryPersonExtended';
+import ModelFactoryPersonSummary                from '@/repositories/modelFactories/person/ModelFactoryPersonSummary';
 import PersonSummaryModel                       from '@/repositories/models/person/PersonSummaryModel';
 
 // describe('Object Mapper Tests', () => {

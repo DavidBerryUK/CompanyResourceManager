@@ -8,7 +8,7 @@ import ApiBasePostWithCollectionResult          from '@/repositories/apiBase/low
 import BaseApiConfig                            from '@/repositories/apiBase/lowlevel/ApiBaseConfig';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/ListItem/ListItemModel';
-import ModelFactoryListItem                     from '../modelFactories/ModelFactoryListItem';
+import ModelFactoryListItem                     from '../modelFactories/listItem/ModelFactoryListItem';
 import NotificationFactory                      from '@/services/notifications/NotificationFactory';
 import SuccessCallbackHelper                    from '@/repositories/helpers/SuccessCallbackHelper';
 

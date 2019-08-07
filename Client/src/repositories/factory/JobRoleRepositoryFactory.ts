@@ -2,8 +2,8 @@ import GenericApiRepository                     from '@/repositories/apiBase/Gen
 import JobRoleExtendedModel                     from '@/repositories/models/jobRole/JobRoleExtendedModel';
 import JobRoleSummaryModel                      from '@/repositories/models/jobRole/JobRoleSummaryModel';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelFactoryJobRoleExtended              from '@/repositories/modelFactories/ModelFactoryJobRoleExtended';
-import ModelFactoryJobRoleSummary               from '@/repositories/modelFactories/ModelFactoryJobRoleSummary';
+import ModelFactoryJobRoleExtended              from '@/repositories/modelFactories/jobRole/ModelFactoryJobRoleExtended';
+import ModelFactoryJobRoleSummary               from '@/repositories/modelFactories/jobRole/ModelFactoryJobRoleSummary';
 
 export default class JobRoleRepositoryFactory {
 

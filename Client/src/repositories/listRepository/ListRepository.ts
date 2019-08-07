@@ -7,7 +7,7 @@ import BaseApiConfig                            from '@/repositories/apiBase/low
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/listItem/ListItemModel';
 import ListRepositoryEnum                       from './ListRepositoryEnum';
-import ModelFactoryListItem                     from '../modelFactories/ModelFactoryListItem';
+import ModelFactoryListItem                     from '../modelFactories/listItem/ModelFactoryListItem';
 
 export default class ListRepository extends ApiBase {
 

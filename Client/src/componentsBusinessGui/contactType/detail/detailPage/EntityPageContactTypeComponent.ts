@@ -8,7 +8,7 @@ import EntityPageModelWithReferences            from '@/componentsEntityLayouts/
 import EntitySegmentContactTypeEditComponent    from '../segmentEdit/EntitySegmentContactTypeEditComponent';
 import EntitySegmentContactTypeViewComponent    from '../segmentView/EntitySegmentContactTypeViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
-import ModelFactoryContactTypeExtended          from '@/repositories/modelFactories/ModelFactoryContactTypeExtended';
+import ModelFactoryContactTypeExtended          from '@/repositories/modelFactories/contact/ModelFactoryContactTypeExtended';
 import NavigationCrudContactType                from '@/routeNavigation/NavigationCrudContactType';
 
 

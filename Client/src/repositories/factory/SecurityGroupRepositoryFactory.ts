@@ -1,7 +1,7 @@
 import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
-import ModelFactorySecurityGroupExtended        from '@/repositories/modelFactories/ModelFactorySecurityGroupExtended';
-import ModelFactorySecurityGroupSummary         from '@/repositories/modelFactories/ModelFactorySecurityGroupSummary';
+import ModelFactorySecurityGroupExtended        from '@/repositories/modelFactories/securityGroup/ModelFactorySecurityGroupExtended';
+import ModelFactorySecurityGroupSummary         from '@/repositories/modelFactories/securityGroup/ModelFactorySecurityGroupSummary';
 import SecurityGroupExtendedModel               from '@/repositories/models/securityGroup/SecurityGroupExtendedModel';
 import SecurityGroupSummaryModel                from '@/repositories/models/securityGroup/SecurityGroupSummaryModel';
 
