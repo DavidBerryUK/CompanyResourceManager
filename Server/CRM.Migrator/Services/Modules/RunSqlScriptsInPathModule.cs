@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using CRM.Migrator.Models.AuditModels;
 using CRM.Migrator.Models.Configuration;
 using CRM.Migrator.Models.ScriptModels;
 using CRM.Migrator.Services.Database;
+using CRM.Migrator.Services.Modules.Interfaces;
 using Microsoft.Extensions.Options;
 
 namespace CRM.Migrator.Services.Modules
 {
-    public interface IRunSqlScriptsInPathModule
-    {
-        List<string> Run(Task task);
-    }
+    
 
     public class RunSqlScriptsInPathModule : IRunSqlScriptsInPathModule
     {
@@ -24,15 +23,20 @@ namespace CRM.Migrator.Services.Modules
             _applicationSettings = applicationSettings;
         }
 
-        public List<string> Run(Task task)
+        public List<string> Run(Task taskData)
         {
             var errorList = new List<string>();
-            var connectionString = _applicationSettings.Value.GetConnectionString(task.ConnectionStringName);
-            var baseDirectory = Environment.CurrentDirectory;
+            var connectionString = _applicationSettings.Value.GetConnectionString(taskData.ConnectionStringName);
 
-            var scanDirectory = Path.Combine(baseDirectory, task.Path);
+            var baseDirectory = new DirectoryInfo(Environment.CurrentDirectory);
+            while (!baseDirectory.Name.EndsWith("CRM.Migrator"))
+            {
+                baseDirectory = baseDirectory.Parent;
+            }
 
-            Console.WriteLine("Run Scripts In Directory:" + task.Path);
+            var scanDirectory = Path.Combine(baseDirectory.FullName, taskData.Path);
+
+            Console.WriteLine("Run Scripts In Directory:" + taskData.Path);
 
             if (!Directory.Exists(scanDirectory))
             {
@@ -41,7 +45,7 @@ namespace CRM.Migrator.Services.Modules
                 ScriptTableRepository.Add(new ScriptAudit
                     {
                         Success = false,
-                        FullName = task.Name,
+                        FullName = taskData.Name,
                         Error = $"Directory does not exist '{scanDirectory}'"
                     },
                     auditSchema,
@@ -61,7 +65,7 @@ namespace CRM.Migrator.Services.Modules
                 try
                 {
 
-                    Console.WriteLine("Running Script:" + fileInfo.Name);
+                    Console.WriteLine("Running ScriptData:" + fileInfo.Name);
 
                     var databaseHelper = new DatabaseHelper(connectionString);
                     var fileContent = File.ReadAllText(fileInfo.FullName);
@@ -106,5 +110,7 @@ namespace CRM.Migrator.Services.Modules
                 PrintExceptionMessages(ex.InnerException);
             }
         }
+
+       
     }
 }

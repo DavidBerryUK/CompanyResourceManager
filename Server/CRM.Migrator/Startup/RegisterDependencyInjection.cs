@@ -30,6 +30,7 @@ namespace CRM.Migrator.Startup
             serviceCollection.AddTransient<ILoadScriptModule, LoadScriptModule>();
             serviceCollection.AddTransient<IRunSqlScriptsInPathModule, RunSqlScriptsInPathModule>();
             serviceCollection.AddTransient<IRunScriptsModule, RunScriptsModule>();
+            serviceCollection.AddTransient<IRenumberFilesScriptsModule, RenumberFilesScriptsModule>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 

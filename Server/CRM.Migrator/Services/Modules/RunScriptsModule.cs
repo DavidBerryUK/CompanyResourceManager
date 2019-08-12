@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CRM.Migrator.Services.Modules.Interfaces;
 
 namespace CRM.Migrator.Services.Modules
@@ -7,17 +8,21 @@ namespace CRM.Migrator.Services.Modules
     public class RunScriptsModule : IRunScriptsModule
     {
         private readonly IRunSqlScriptsInPathModule _runSqlScriptsInPathModule;
+        private readonly IRenumberFilesScriptsModule _renumberFilesScriptsModule;
 
-        public RunScriptsModule(IRunSqlScriptsInPathModule runSqlScriptsInPathModule)
+        public RunScriptsModule(
+            IRunSqlScriptsInPathModule runSqlScriptsInPathModule, 
+            IRenumberFilesScriptsModule renumberFilesScriptsModule)
         {
             _runSqlScriptsInPathModule = runSqlScriptsInPathModule;
+            _renumberFilesScriptsModule = renumberFilesScriptsModule;
         }
 
         public List<string> RunScripts(Models.ScriptModels.Script script)
         {
             var errorList = new List<string>();
 
-            foreach (var task in script.Tasks)
+            foreach (var task in script.Tasks.Where(o=> o.IsEnabled))
             {
                 switch (task.Command.ToLower())
                 {
@@ -25,8 +30,12 @@ namespace CRM.Migrator.Services.Modules
                         errorList.AddRange(_runSqlScriptsInPathModule.Run(task));
                         break;
 
+                    case "renumberfiles":
+                        errorList.AddRange(_renumberFilesScriptsModule.RenameScripts(task));
+                        break;
+
                     default:
-                        throw new ArgumentException("unknown script command:" + task.Command);
+                        throw new ArgumentException("unknown scriptData command:" + task.Command);
 
                 }
             }

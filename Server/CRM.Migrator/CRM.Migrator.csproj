@@ -35,7 +35,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Scripts\Release-00001\01.Cleardown\010-CleardownTables.sql">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Scripts\Release-00001\02.Tables\0270-ContactType.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

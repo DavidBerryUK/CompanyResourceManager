@@ -32,15 +32,15 @@ namespace CRM.Migrator.Services.ScriptAuditor
 
             var sql = "";
 
-            sql = sql + $"CREATE TABLE [{schemaName}].[ScriptAudit](";
-            sql = sql + "	[ScriptId] [int] IDENTITY(1,1) NOT NULL,";
-            sql = sql + "	[FullName] [nvarchar](500) NOT NULL,";
-            sql = sql + "	[Name] [nvarchar](500) NOT NULL,";
-            sql = sql + "	[Success] [bit] NOT NULL,";
-            sql = sql + "	[Error] [nvarchar](max) NULL,";
-            sql = sql + "	[ExecuteDateTime] [datetime] NULL,";
-            sql = sql + " CONSTRAINT [PK_ScriptAudit] ";
-            sql = sql + " PRIMARY KEY CLUSTERED (	[ScriptId] ASC) )";
+            sql += $"CREATE TABLE [{schemaName}].[ScriptAudit](";
+            sql += "	[ScriptId] [int] IDENTITY(1,1) NOT NULL,";
+            sql += "	[FullName] [nvarchar](500) NOT NULL,";
+            sql += "	[Name] [nvarchar](500) NOT NULL,";
+            sql += "	[Success] [bit] NOT NULL,";
+            sql += "	[Error] [nvarchar](max) NULL,";
+            sql += "	[ExecuteDateTime] [datetime] NULL,";
+            sql += " CONSTRAINT [PK_ScriptAudit] ";
+            sql += " PRIMARY KEY CLUSTERED (	[ScriptId] ASC) )";
 
             databaseHelper.ExecuteSql(sql);
         }

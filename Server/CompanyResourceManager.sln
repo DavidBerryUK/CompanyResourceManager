@@ -24,7 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HelpfulSql", "HelpfulSql", 
 		Fix Could not obtain information about Windows NT group user.sql = Fix Could not obtain information about Windows NT group user.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.Services.UnitTests", "CRM.Services.UnitTests\CRM.Services.UnitTests.csproj", "{A3FE55D2-8B09-4A97-9FD9-D2B6CAC25BFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.Services.UnitTests", "CRM.Services.UnitTests\CRM.Services.UnitTests.csproj", "{A3FE55D2-8B09-4A97-9FD9-D2B6CAC25BFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseBuilder", "DatabaseBuilder", "{498B7C6E-AF14-4915-85EC-7361374CFA79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{AED419AD-3C42-4E2F-BB56-D17ECD1FA599} = {498B7C6E-AF14-4915-85EC-7361374CFA79}
 		{B3EBCAA3-399D-434A-A9C2-59D22801CA9D} = {A7D69FA0-B5F5-40BC-9AA7-D09329129DF2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

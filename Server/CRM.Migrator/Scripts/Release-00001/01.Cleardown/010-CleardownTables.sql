@@ -12,6 +12,7 @@ VALUES
 
 (	'Contact'							),
 (	'ContactType'						),
+(	'ContactValidation'					),
 (	'ContactGroup'						),
 (	'JobApplicant'						),
 (	'WorkflowInstanceEvent'				),
