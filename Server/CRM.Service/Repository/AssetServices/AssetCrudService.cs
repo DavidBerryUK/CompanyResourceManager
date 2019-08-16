@@ -9,9 +9,9 @@ using System.Linq;
 
 namespace CRM.Service.Repository.AssetServices
 {
-    public class AssetCrudService : BaseCrudService<Asset, AssetSummary, AssetExtended, Guid>, IAssetCrudService
+    public class AssetExtendedCrudService : BaseExtendedCrudService<Asset, AssetSummary, AssetExtended, Guid>, IAssetCrudService
     {
-        public AssetCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public AssetExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {
         }
 

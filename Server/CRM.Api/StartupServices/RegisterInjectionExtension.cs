@@ -31,29 +31,29 @@ namespace CRM.Api.StartupServices
 
             //  Person
             services.AddTransient<IPersonSimpleQueryService, PersonSimpleQueryService>();
-            services.AddTransient<IPersonCrudService, PersonCrudService>();
+            services.AddTransient<IPersonCrudService, PersonExtendedCrudService>();
 
             //  Job Role
-            services.AddTransient<IJobRoleCrudService, JobRoleCrudService>();
+            services.AddTransient<IJobRoleCrudService, JobRoleExtendedCrudService>();
 
             //  Skills
-            services.AddTransient<ISkillCrudService, SkillCrudService>();
+            services.AddTransient<ISkillCrudService, SkillExtendedCrudService>();
             services.AddTransient<ISkillListService, SkillListService>();
 
             //  Security Groups
-            services.AddTransient<ISecurityGroupCrudService, SecurityGroupCrudService>();
+            services.AddTransient<ISecurityGroupCrudService, SecurityGroupExtendedCrudService>();
             services.AddTransient<ISecurityGroupListService, SecurityGroupListService>();
 
             //  Teams
-            services.AddTransient<ITeamCrudService, TeamCrudService>();
+            services.AddTransient<ITeamCrudService, TeamExtendedCrudService>();
             services.AddTransient<ITeamListService,TeamListService>();
 
             //  Assets Types
-            services.AddTransient<IAssetCrudService, AssetCrudService>();
+            services.AddTransient<IAssetCrudService, AssetExtendedCrudService>();
 
             // Assets
-            services.AddTransient<IAssetCrudService, AssetCrudService>();
-            services.AddTransient<IAssetTypeCrudService, AssetTypeCrudService>();
+            services.AddTransient<IAssetCrudService, AssetExtendedCrudService>();
+            services.AddTransient<IAssetTypeCrudService, AssetTypeExtendedCrudService>();
 
             // Contacts
             services.AddTransient<IContactTypeCrudService, ContactTypeCrudService>();

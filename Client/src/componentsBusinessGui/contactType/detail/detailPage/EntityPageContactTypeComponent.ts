@@ -1,14 +1,14 @@
 import { IRouteBeforeNavigationCheck }          from '@/router/interfaces/NavigationCheckInterfaces';
 import Component                                from 'vue-class-component';
-import ContactTypeExtendedModel                 from '@/repositories/models/contactType/ContactTypeExtendedModel';
 import ContactTypeRepositoryFactory             from '@/repositories/factory/ContactTypeRepositoryFactory';
+import ContactTypeSummaryModel                  from '@/repositories/models/contactType/ContactTypeSummaryModel';
 import EntityLayoutPageTemplateComponent        from '@/componentsEntityLayouts/entityLayoutPageTemplate/EntityLayoutPageTemplateComponent';
 import EntityPageBaseComponent                  from '../../../../componentsEntityLayouts/entityPageBase/EntityPageBaseComponent';
 import EntityPageModelWithReferences            from '@/componentsEntityLayouts/models/EntityPageModelWithReferences';
 import EntitySegmentContactTypeEditComponent    from '../segmentEdit/EntitySegmentContactTypeEditComponent';
 import EntitySegmentContactTypeViewComponent    from '../segmentView/EntitySegmentContactTypeViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
-import ModelFactoryContactTypeExtended          from '@/repositories/modelFactories/contact/ModelFactoryContactTypeExtended';
+import ModelFactoryContactTypeSummary           from '@/repositories/modelFactories/contact/ModelFactoryContactTypeSummary';
 import NavigationCrudContactType                from '@/routeNavigation/NavigationCrudContactType';
 
 
@@ -21,14 +21,14 @@ import NavigationCrudContactType                from '@/routeNavigation/Navigati
   },
 })
 export default class EntityPageContactTypeComponent
-  extends EntityPageBaseComponent<ContactTypeExtendedModel, EntityPageModelWithReferences<ContactTypeExtendedModel>>
+  extends EntityPageBaseComponent<ContactTypeSummaryModel, EntityPageModelWithReferences<ContactTypeSummaryModel>>
   implements IRouteBeforeNavigationCheck {
 
   constructor() {
     super(
       new EntityPageModelWithReferences(),
       ContactTypeRepositoryFactory.getRepository(),
-      new ModelFactoryContactTypeExtended(),
+      new ModelFactoryContactTypeSummary(),
       new NavigationCrudContactType());
 
     this.entityModel.headerTitle = 'Contact Types';

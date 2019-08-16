@@ -5,7 +5,7 @@ using System;
 
 namespace CRM.Service.Repository.TeamServices.Interfaces
 {
-    public interface ITeamCrudService : IBaseCrudService<Team ,TeamSummary, TeamExtended, Guid>
+    public interface ITeamCrudService : IBaseExtendedCrudService<Team ,TeamSummary, TeamExtended, Guid>
     {
     }
 }

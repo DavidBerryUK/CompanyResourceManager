@@ -1,5 +1,5 @@
 import { ApiResponse }                          from '@/repositories/contracts/ApiResponseContract';
-import { ApiResponseContract }                  from './../contracts/ApiResponseContract';
+import { ApiResponseContract }                  from '../contracts/ApiResponseContract';
 import { EnumSuccessType }                      from '@/repositories/helpers/SuccessCallbackHelper';
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
 import { IModelFactory }                        from '../modelFactories/interfaces/IModelFactory';
@@ -16,10 +16,10 @@ import SuccessCallbackHelper                    from '@/repositories/helpers/Suc
 // * activate             - restore a record from being archived
 // * deactivate           - archive a record
 // * getActiveList        - get a list of active records, key value only
-// * getAllAsSummary      - get a list of all records ( summary model version )
-// * getById              - get single record ( extended model version )
-// * getFilteredList      - get a list of filtered records ( summary model version )
-// * save                 - save a record ( extended model version )
+// * getAllAsSummary      - get a list of all records
+// * getById              - get single record
+// * getFilteredList      - get a list of filtered records
+// * save                 - save a record
 //
 // This calls lower level functions on the ApiBase class, which in turn
 // calls very low level classes for each of the functions above.
@@ -31,32 +31,26 @@ import SuccessCallbackHelper                    from '@/repositories/helpers/Suc
 /// S = Summary Entity model
 /// E = Extended Entity model        :IApiModel
 /// F = List Filter Model
-export default class GenericApiRepository<S extends IApiModel, E extends S, F> extends ApiBase {
+export default class GenericApiSingleRepository<T extends IApiModel, F> extends ApiBase {
 
   public entityName: string;
 
   private baseUrl: string = '';
-  private objectSummaryModelFactory: IModelFactory<S>;
-  private objectExtendedModelFactory: IModelFactory<E>;
+  private objectModelFactory: IModelFactory<T>;
+
 
 
   public constructor(
     endpoint: string,
-    objectSummaryModelFactory: IModelFactory<S>,
-    objectExtendedModelFactory: IModelFactory<E>) {
+    objectModelFactory: IModelFactory<T>) {
     super();
 
-    if ( objectSummaryModelFactory === null || objectSummaryModelFactory === undefined ) {
-      throw new Error('Can not create GenericApiRepository without an Summary Object Factory');
+    if ( objectModelFactory === null || objectModelFactory === undefined ) {
+      throw new Error('Can not create GenericApiExtendedRepository without an Summary Object Factory');
     }
 
-    if ( objectExtendedModelFactory === null || objectExtendedModelFactory === undefined ) {
-      throw new Error('Can not create GenericApiRepository without an Extended Object Factory');
-    }
-
-    this.objectSummaryModelFactory = objectSummaryModelFactory;
-    this.objectExtendedModelFactory = objectExtendedModelFactory;
-    this.entityName = this.objectExtendedModelFactory.create().entityName;
+    this.objectModelFactory = objectModelFactory;
+    this.entityName = this.objectModelFactory.create().entityName;
     this.baseUrl = `${BaseApiConfig.baseEndpoint}${endpoint}`;
   }
 
@@ -64,22 +58,22 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   // get a list of all items
   //
   public getAllAsSummary():
-    ApiResponse<GenericCollectionModel<S>> {
-    return this.baseGetAll<S>(
+    ApiResponse<GenericCollectionModel<T>> {
+    return this.baseGetAll<T>(
       this.baseUrl,
-      this.objectExtendedModelFactory);
+      this.objectModelFactory);
   }
 
   //
   // get a list of filtered items
   //
   public getFilteredList(filter: F):
-    ApiResponse<GenericCollectionModel<S>> {
+    ApiResponse<GenericCollectionModel<T>> {
 
     return ApiBasePostWithCollectionResult.post(
       `${this.baseUrl}/filtered`,
       filter,
-      this.objectSummaryModelFactory);
+      this.objectModelFactory);
 
   }
 
@@ -95,42 +89,42 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
   /// get item by item id
   /// will return null if no itemh is found
   ///
-  public getById(id: string): ApiResponse<E> {
+  public getById(id: string): ApiResponse<T> {
 
     if (  id === '00000000-0000-0000-0000-000000000000' ||
           id === 'new') {
 
-      const data = this.objectExtendedModelFactory.create();
-      const contract = new ApiResponseContract<E>();
+      const data = this.objectModelFactory.create();
+      const contract = new ApiResponseContract<T>();
       contract.publishSuccess(data);
       return contract.responder;
     }
 
     return this.baseGetById(
       this.baseUrl + '/' + id,
-      this.objectExtendedModelFactory);
+      this.objectModelFactory);
 
   }
 
   //
   // save item details
   //
-  public save(model: E): ApiResponse<E> {
+  public save(model: T): ApiResponse<T> {
 
     return this.baseSave(
       this.baseUrl,
       model,
-      this.objectExtendedModelFactory,
+      this.objectModelFactory,
       (returnedModel, successType) => {
         this.publishModelSavedNotification(this.entityName, returnedModel, successType);
       });
 
   }
 
-  public deactivate(id: string): ApiResponse<S> {
+  public deactivate(id: string): ApiResponse<T> {
     return this.basePutWithNoModel(
       `${this.baseUrl}/${id}/deactivate`,
-      this.objectSummaryModelFactory,
+      this.objectModelFactory,
       EnumSuccessType.DeActivatedOk,
       (model, successType) => {
         this.publishModelSavedNotification(this.entityName, model, successType);
@@ -138,10 +132,10 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
 
   }
 
-  public activate(id: string): ApiResponse<S> {
+  public activate(id: string): ApiResponse<T> {
     return this.basePutWithNoModel(
       `${this.baseUrl}/${id}/activate`,
-      this.objectSummaryModelFactory,
+      this.objectModelFactory,
       EnumSuccessType.ActivatedOk,
       (model, successType) => {
         this.publishModelSavedNotification(this.entityName, model, successType);
@@ -159,7 +153,7 @@ export default class GenericApiRepository<S extends IApiModel, E extends S, F> e
    */
   private publishModelSavedNotification(
     entityName: string,
-    model: S | E,
+    model: T,
     successType: EnumSuccessType) {
     const notificationHandler = NotificationFactory.instance.getNotificationInstance(entityName);
 

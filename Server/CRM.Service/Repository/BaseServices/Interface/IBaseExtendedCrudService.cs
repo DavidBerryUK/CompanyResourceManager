@@ -7,25 +7,34 @@ using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices.Interface
 {
-    public interface IBaseCrudService<TEntity, TRestModel,  TPrimaryKey> 
+    public interface IBaseExtendedCrudService<TEntity, TSummary, TExtended,  TPrimaryKey> 
         where TEntity : class, IDatabaseEntity<TPrimaryKey> 
-        where TRestModel : class, new()
+        where TSummary : class, new() 
+        where TExtended : class, new()
     {
         /// <summary>
         /// Get a list of all entities
         /// </summary>
         /// <returns></returns>
-        Task<BaseCollectionResponse<TRestModel>> GetAllAsync();
+        Task<BaseCollectionResponse<TSummary>> GetAllAsSummaryAsync();
 
-        Task<BaseCollectionResponse<TRestModel>> GetFilteredAsync(FilteredArchiveRequest filter);
+        Task<BaseCollectionResponse<TExtended>> GetAllAsExtendedAsync();
 
-        Task<BaseItemResponse<TRestModel>> GetItemAsync(TPrimaryKey id);
+        Task<BaseCollectionResponse<TSummary>> GetFilteredAsSummaryAsync(FilteredArchiveRequest filter);
 
-        Task<BaseItemResponse<TRestModel>> UpdateActiveStatusAsync(TPrimaryKey id, bool isActive);
+        Task<BaseCollectionResponse<TExtended>> GetFilteredAsExtendedAsync(FilteredArchiveRequest filter);
 
-        Task<BaseItemResponse<TRestModel>> UpdateAsync(TPrimaryKey id, TRestModel model);
+        Task<BaseItemResponse<TSummary>> GetItemAsSummaryAsync(TPrimaryKey id);
 
-        Task<BaseItemResponse<TRestModel>> CreateAsync(TRestModel model);
+        Task<BaseItemResponse<TExtended>> GetItemAsExtendedAsync(TPrimaryKey id);
+
+        Task<BaseItemResponse<TSummary>> UpdateActiveStatusAsync(TPrimaryKey id, bool isActive);
+
+        Task<BaseItemResponse<TExtended>> UpdateExtendedAsync(TPrimaryKey id, TExtended model);
+
+        Task<BaseItemResponse<TSummary>> UpdateSummaryAsync(TPrimaryKey id, TSummary model);
+
+        Task<BaseItemResponse<TExtended>> CreateAsync(TExtended model);
 
         Task<BaseCollectionResponse<ListItem>> GetActiveAsListItemsAsync();
 

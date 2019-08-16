@@ -15,7 +15,6 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
             // Map database to rest objects
             //
             cfg.CreateMap<ContactType, ContactTypeSummary>();
-            cfg.CreateMap<ContactType, ContactTypeExtended>();
 
             // Map to List Item
             //
@@ -25,7 +24,7 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
 
             // Map rest objects back to database entity objects
             //
-            cfg.CreateMap<ContactTypeExtended, ContactType>();
+            cfg.CreateMap<ContactTypeSummary, ContactType>();
         }
     }
 }

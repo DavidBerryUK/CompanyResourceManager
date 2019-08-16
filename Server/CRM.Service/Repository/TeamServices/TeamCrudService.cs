@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace CRM.Service.Repository.TeamServices
 {
-    public class TeamCrudService : BaseCrudService<Team, TeamSummary, TeamExtended, Guid>, ITeamCrudService
+    public class TeamExtendedCrudService : BaseExtendedCrudService<Team, TeamSummary, TeamExtended, Guid>, ITeamCrudService
     {
-        public TeamCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public TeamExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {
         }
 

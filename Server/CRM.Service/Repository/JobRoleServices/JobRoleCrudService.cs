@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace CRM.Service.Repository.JobRoleServices
 {
-    public class JobRoleCrudService  : BaseCrudService<JobRole, JobRoleSummary, JobRoleExtended, Guid> ,IJobRoleCrudService
+    public class JobRoleExtendedCrudService  : BaseExtendedCrudService<JobRole, JobRoleSummary, JobRoleExtended, Guid> ,IJobRoleCrudService
     {
-        public JobRoleCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public JobRoleExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {
         }
 

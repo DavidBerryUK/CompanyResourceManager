@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CRM.Models.Rest.Contacts
 {
@@ -14,6 +15,8 @@ namespace CRM.Models.Rest.Contacts
         public string Notes { get; set; }
 
         public bool IsActive { get; set; }
+
+        public List<ContactSummary> Contacts { get; set; }
 
     }
 }

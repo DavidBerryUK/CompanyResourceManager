@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace CRM.Service.Repository.ContractServices
 {
-    public class ContactTypeCrudService : BaseCrudService<ContactType, ContactTypeSummary, ContactTypeExtended, Guid>, IContactTypeCrudService
+    public class ContactTypeCrudService : BaseCrudService<ContactType, ContactTypeSummary, Guid>, IContactTypeCrudService
     {
         public ContactTypeCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {

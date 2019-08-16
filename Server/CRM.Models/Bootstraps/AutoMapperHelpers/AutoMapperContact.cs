@@ -13,13 +13,10 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<Contact, ContactSummary>();
-            cfg.CreateMap<Contact, ContactExtended>()
+            cfg.CreateMap<Contact, ContactSummary>()
                 .ForMember(dest => dest.ContactTypeName, opt => opt.MapFrom(source => source.NavContactType.Name));
 
-
             cfg.CreateMap<ContactSummary, Contact>();
-            cfg.CreateMap<ContactExtended, Contact>();
         }
     }
 }

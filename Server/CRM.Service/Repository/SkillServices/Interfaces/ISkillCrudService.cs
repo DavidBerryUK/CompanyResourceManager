@@ -5,7 +5,7 @@ using System;
 
 namespace CRM.Service.Repository.SkillServices.Interfaces
 {
-    public interface ISkillCrudService : IBaseCrudService<Skill ,SkillSummary, SkillExtended, Guid>
+    public interface ISkillCrudService : IBaseExtendedCrudService<Skill ,SkillSummary, SkillExtended, Guid>
     {
     }
 }

@@ -5,7 +5,7 @@ using System;
 
 namespace CRM.Service.Repository.SecurityServices.Interfaces
 {
-    public interface ISecurityGroupCrudService : IBaseCrudService<SecurityGroup ,SecurityGroupSummary, SecurityGroupExtended, Guid>
+    public interface ISecurityGroupCrudService : IBaseExtendedCrudService<SecurityGroup ,SecurityGroupSummary, SecurityGroupExtended, Guid>
     {
     }
 }

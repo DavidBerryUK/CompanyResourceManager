@@ -13,7 +13,7 @@ import { Watch }                                from 'vue-property-decorator';
 import CommonAppDialogController                from '@/componentsCommonGui/dialogs/commonAppDialog/CommonAppDialogController';
 import ContractListener                         from '@/repositories/contracts/ContractListener';
 import EntityPageModel                          from '../models/EntityPageModel';
-import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
+import GenericApiExtendedRepository                     from '@/repositories/apiBase/GenericApiExtendedRepository';
 import IsActiveDataInterfaceGuards              from '@/repositories/models/interfaces/IDataIsActive';
 import Vue                                      from 'vue';
 
@@ -29,7 +29,7 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
     public entityModel!: T;
     public backupOfEntityModel?: E;
 
-    public repository: GenericApiRepository<any, E, any>;
+    public repository: GenericApiExtendedRepository<any, E, any>;
     public crudNavigator!: INavigationCrud;
 
     // IComponentMetaData
@@ -41,7 +41,7 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
 
     constructor(
         entityPageModel: T,
-        repository: GenericApiRepository<any, E, any>,
+        repository: GenericApiExtendedRepository<any, E, any>,
         modelFactory: IModelFactory<E>,
         crudNavigator: INavigationCrud) {
         super();

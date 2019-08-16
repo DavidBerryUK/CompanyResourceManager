@@ -1,12 +1,11 @@
-﻿using CRM.Models.Rest.Generic;
+﻿using CRM.Models.Rest.Contacts;
+using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
-using CRM.Models.Rest.Contacts;
-using CRM.Service.Repository.PersonServices.Interfaces;
+using CRM.Service.Repository.ContractServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CRM.Service.Repository.ContractServices.Interfaces;
 
 
 namespace CRM.Api.Controllers
@@ -34,7 +33,7 @@ namespace CRM.Api.Controllers
             //
             // Validate Input Parameters
             //
-            var data = await _contactTypeCrudService.GetAllAsSummaryAsync();
+            var data = await _contactTypeCrudService.GetAllAsync();
             return Ok(data);
         }
 
@@ -49,12 +48,12 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(filter));
             }
 
-            var data = await _contactTypeCrudService.GetFilteredAsSummaryAsync(filter);
+            var data = await _contactTypeCrudService.GetFilteredAsync(filter);
             return Ok(data);
         }
 
         [HttpGet("{contactTypeId}")]
-        public async Task<ActionResult<ContactTypeExtended>> GetById(Guid contactTypeId)
+        public async Task<ActionResult<ContactTypeSummary>> GetById(Guid contactTypeId)
         {
             //
             // Validate Input Parameters
@@ -64,13 +63,13 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(contactTypeId)} can not be blank");
             }
 
-            var data = await _contactTypeCrudService.GetItemAsExtendedAsync(contactTypeId);
+            var data = await _contactTypeCrudService.GetItemAsync(contactTypeId);
             return Ok(data);
         }
 
 
         [HttpPut("{contactTypeId}")]
-        public async Task<ActionResult<ContactTypeExtended>> Update(Guid contactTypeId, [FromBody] ContactTypeExtended contactType)
+        public async Task<ActionResult<ContactTypeSummary>> Update(Guid contactTypeId, [FromBody] ContactTypeSummary contactType)
         {
             //
             // Validate Input Parameters
@@ -85,12 +84,12 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(contactType));
             }
 
-            var data = await _contactTypeCrudService.UpdateExtendedAsync(contactTypeId, contactType);
+            var data = await _contactTypeCrudService.UpdateAsync(contactTypeId, contactType);
             return Ok(data);
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<ContactTypeExtended>> Create([FromBody] ContactTypeExtended contactType)
+        public async Task<ActionResult<ContactTypeSummary>> Create([FromBody] ContactTypeSummary contactType)
         {
             //
             // Validate Input Parameters

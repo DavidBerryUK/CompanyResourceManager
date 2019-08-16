@@ -12,15 +12,16 @@ using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices
 {
-    public abstract class BaseCrudService<TEntity, TRestModel, TPrimaryKey>
-        : IBaseCrudService<TEntity, TRestModel,  TPrimaryKey>
+    public abstract class BaseExtendedCrudService<TEntity, TSummary, TExtended, TPrimaryKey>
+        : IBaseExtendedCrudService<TEntity, TSummary, TExtended, TPrimaryKey>
         where TEntity : class, IDatabaseEntity<TPrimaryKey>
-        where TRestModel : class, new()
+        where TSummary : class, new()
+        where TExtended : class, new()
         where TPrimaryKey : new()
     {
         private readonly CrmDatabaseContext _dbContext;
 
-        protected BaseCrudService(CrmDatabaseContext dbContext)
+        protected BaseExtendedCrudService(CrmDatabaseContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -29,9 +30,9 @@ namespace CRM.Service.Repository.BaseServices
         /// Get a list of all entities
         /// </summary>
         /// <returns></returns>
-        public async Task<BaseCollectionResponse<TRestModel>> GetAllAsync()
+        public async Task<BaseCollectionResponse<TSummary>> GetAllAsSummaryAsync()
         {
-            var data = await ReadCollection<TEntity, TRestModel, TPrimaryKey>
+            var data = await ReadCollection<TEntity, TSummary, TPrimaryKey>
                 .GetAsync(
                 _dbContext,
                 QuerySummaryInclude,
@@ -40,9 +41,20 @@ namespace CRM.Service.Repository.BaseServices
             return data;
         }
 
-        public async Task<BaseCollectionResponse<TRestModel>> GetFilteredAsync(FilteredArchiveRequest filter)
+        public async Task<BaseCollectionResponse<TExtended>> GetAllAsExtendedAsync()
         {
-            var data = await ReadCollection<TEntity, TRestModel, TPrimaryKey>
+            var data = await ReadCollection<TEntity, TExtended, TPrimaryKey>
+                .GetAsync(
+                    _dbContext,
+                    QueryExtendedInclude,
+                    QueryOrder);
+
+            return data;
+        }
+
+        public async Task<BaseCollectionResponse<TSummary>> GetFilteredAsSummaryAsync(FilteredArchiveRequest filter)
+        {
+            var data = await ReadCollection<TEntity, TSummary, TPrimaryKey>
                 .GetAsync(
                     _dbContext,
                     QuerySummaryInclude,
@@ -52,9 +64,21 @@ namespace CRM.Service.Repository.BaseServices
             return data;
         }
 
-        public async Task<BaseItemResponse<TRestModel>> GetItemAsync(TPrimaryKey id)
+        public async Task<BaseCollectionResponse<TExtended>> GetFilteredAsExtendedAsync(FilteredArchiveRequest filter)
         {
-            var data = await ReadItem<TEntity, TRestModel, TPrimaryKey>
+            var data = await ReadCollection<TEntity, TExtended, TPrimaryKey>
+                .GetAsync(
+                    _dbContext,
+                    QueryExtendedInclude,
+                    QueryOrder,
+                    (query) => QueryFilterIsActiveStatus(query, filter.RecordActiveStatusFilter));
+
+            return data;
+        }
+
+        public async Task<BaseItemResponse<TSummary>> GetItemAsSummaryAsync(TPrimaryKey id)
+        {
+            var data = await ReadItem<TEntity, TSummary, TPrimaryKey>
                 .GetAsync(
                     _dbContext,
                     id,
@@ -76,9 +100,21 @@ namespace CRM.Service.Repository.BaseServices
             return data;
         }
 
-        public async Task<BaseItemResponse<TRestModel>> UpdateActiveStatusAsync(TPrimaryKey id, bool isActive)
+        public async Task<BaseItemResponse<TExtended>> GetItemAsExtendedAsync(TPrimaryKey id)
         {
-            var data = await UpdateStatus<TEntity, TRestModel, TPrimaryKey>
+            var data = await ReadItem<TEntity, TExtended, TPrimaryKey>
+                .GetAsync(
+                    _dbContext,
+                    id,
+                    QueryExtendedInclude,
+                    QueryEqualsPrimaryKey);
+
+            return data;
+        }
+
+        public async Task<BaseItemResponse<TSummary>> UpdateActiveStatusAsync(TPrimaryKey id, bool isActive)
+        {
+            var data = await UpdateStatus<TEntity, TSummary, TPrimaryKey>
                 .UpdateAsync(
                     _dbContext,
                     id,
@@ -89,11 +125,11 @@ namespace CRM.Service.Repository.BaseServices
             return data;
         }
 
-        public async Task<BaseItemResponse<TRestModel>> UpdateAsync(
+        public async Task<BaseItemResponse<TExtended>> UpdateExtendedAsync(
             TPrimaryKey id,
-            TRestModel model)
+            TExtended model)
         {
-            var data = await Update<TEntity, TRestModel, TPrimaryKey>
+            var data = await Update<TEntity, TExtended, TPrimaryKey>
                 .UpdateAsync(
                     _dbContext,
                     id,
@@ -104,9 +140,22 @@ namespace CRM.Service.Repository.BaseServices
             return data;
         }
 
-        public async Task<BaseItemResponse<TRestModel>> CreateAsync(TRestModel model)
+        public async Task<BaseItemResponse<TSummary>> UpdateSummaryAsync(TPrimaryKey id, TSummary model)
         {
-            var data = await Create<TEntity, TRestModel, TPrimaryKey>
+            var data = await Update<TEntity, TSummary, TPrimaryKey>
+                .UpdateAsync(
+                    _dbContext,
+                    id,
+                    model,
+                    QuerySummaryInclude,
+                    QueryEqualsPrimaryKey);
+
+            return data;
+        }
+
+        public async Task<BaseItemResponse<TExtended>> CreateAsync(TExtended model)
+        {
+            var data = await Create<TEntity, TExtended, TPrimaryKey>
                     .CreateAsync(
                         _dbContext,
                         model,

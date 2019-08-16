@@ -9,9 +9,9 @@ using System.Linq;
 
 namespace CRM.Service.Repository.PersonServices
 {
-    public class PersonCrudService  : BaseCrudService<Person, PersonSummary, PersonExtended, Guid> ,IPersonCrudService
+    public class PersonExtendedCrudService  : BaseExtendedCrudService<Person, PersonSummary, PersonExtended, Guid> ,IPersonCrudService
     {
-        public PersonCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public PersonExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {
         }
 

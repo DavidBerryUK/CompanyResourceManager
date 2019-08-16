@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace CRM.Service.Repository.ContractServices
 {
-    public class ContactGroupCrudService : BaseCrudService<ContactGroup, ContactGroupSummary, ContactGroupExtended, Guid>, IContactGroupCrudService
+    public class ContactGroupCrudService : BaseCrudService<ContactGroup,  ContactGroupSummary, Guid>, IContactGroupCrudService
     {
         public ContactGroupCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {

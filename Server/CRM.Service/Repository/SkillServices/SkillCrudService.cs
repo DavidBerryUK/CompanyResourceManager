@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace CRM.Service.Repository.SkillServices
 {
-    public class SkillCrudService : BaseCrudService<Skill, SkillSummary, SkillExtended, Guid>, ISkillCrudService
+    public class SkillExtendedCrudService : BaseExtendedCrudService<Skill, SkillSummary, SkillExtended, Guid>, ISkillCrudService
     {
-        public SkillCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public SkillExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {
         }
 

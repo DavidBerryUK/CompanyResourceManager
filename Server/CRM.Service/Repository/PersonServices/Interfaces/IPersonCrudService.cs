@@ -5,7 +5,7 @@ using System;
 
 namespace CRM.Service.Repository.PersonServices.Interfaces
 {
-    public interface IPersonCrudService : IBaseCrudService<Person,PersonSummary, PersonExtended, Guid>
+    public interface IPersonCrudService : IBaseExtendedCrudService<Person,PersonSummary, PersonExtended, Guid>
     {
     }
 }

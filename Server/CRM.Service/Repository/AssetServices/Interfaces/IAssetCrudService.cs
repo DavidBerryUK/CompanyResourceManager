@@ -5,7 +5,7 @@ using System;
 
 namespace CRM.Service.Repository.AssetServices.Interfaces
 {
-    public interface IAssetCrudService : IBaseCrudService<Asset ,AssetSummary, AssetExtended, Guid>
+    public interface IAssetCrudService : IBaseExtendedCrudService<Asset ,AssetSummary, AssetExtended, Guid>
     {
     }
 }

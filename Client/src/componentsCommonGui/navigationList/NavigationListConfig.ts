@@ -3,7 +3,7 @@ import { IListFilterArchiveFlag }               from '@/repositories/models/list
 import { IListFilterByText }                    from '@/services/filters/interfaces/FilterInterfaces';
 import { IModelFactory }                        from './../../repositories/modelFactories/interfaces/IModelFactory';
 import { INavigationCrud }                      from '@/routeNavigation/interfaces/INavigationCrud';
-import GenericApiRepository                     from '@/repositories/apiBase/GenericApiRepository';
+import GenericApiExtendedRepository                     from '@/repositories/apiBase/GenericApiExtendedRepository';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListFilterWithArchiveFlag                from '@/repositories/models/listFilter/ListFilterWithArchiveFlag';
 
@@ -14,7 +14,7 @@ export default class NavigationListConfig<S extends IApiModel> {
     public title: string;
     public filterListService: IListFilterByText<S>;
     public navigationHandler: INavigationCrud;
-    public repository: GenericApiRepository<S, any, any>;
+    public repository: GenericApiExtendedRepository<S, any, any>;
     public summaryEntityName: string;
     // the currently selected person
     public selectedItem: S;
@@ -30,7 +30,7 @@ export default class NavigationListConfig<S extends IApiModel> {
     constructor(
         title: string,
         navigationHandler: INavigationCrud,
-        repository: GenericApiRepository<S, any, any>,
+        repository: GenericApiExtendedRepository<S, any, any>,
         modelFactory: IModelFactory<S>,
         filterListService: IListFilterByText<S>,
         line1TextFunction: ((data: S ) => string  ),

@@ -1,8 +1,8 @@
 import { Prop }                                 from 'vue-property-decorator';
 import { Watch }                                from 'vue-property-decorator';
 import Component                                from 'vue-class-component';
-import ContactGroupExtendedModel                from '@/repositories/models/contactGroup/ContactGroupExtendedModel';
 import ContactGroupRepositoryFactory            from '@/repositories/factory/ContactGroupRepositoryFactory';
+import ContactGroupSummaryModel                 from '@/repositories/models/contactGroup/ContactGroupSummaryModel';
 import ContactLineComponent                     from '../contactLine/ContactLineComponent';
 import ContactTypeRepositoryFactory             from '@/repositories/factory/ContactTypeRepositoryFactory';
 import ContractListener                         from '@/repositories/contracts/ContractListener';
@@ -19,7 +19,7 @@ export default class ContactGroupComponent extends Vue {
 
   @Prop() public contactGroupId!: string;
 
-  public contactGroup: ContactGroupExtendedModel = new ContactGroupExtendedModel();
+  public contactGroup: ContactGroupSummaryModel = new ContactGroupSummaryModel();
   public contactTypes: Array<ListItemModel> = new Array<ListItemModel>();
 
   private isLoading: boolean = true;
@@ -48,7 +48,7 @@ export default class ContactGroupComponent extends Vue {
             });
 
     contactGroupRepository.getById(this.contactGroupId)
-    .onSuccess((model: ContactGroupExtendedModel) => {
+    .onSuccess((model: ContactGroupSummaryModel) => {
       this.contactGroup = model;
     })
     .contractListener(listener);

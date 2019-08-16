@@ -14,8 +14,7 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<ContactGroup, ContactGroupSummary>();
-            cfg.CreateMap<ContactGroup, ContactGroupExtended>()
+            cfg.CreateMap<ContactGroup, ContactGroupSummary>()
                 .ForMember(
                     dest => dest.Contacts,
                     map => map.MapFrom(

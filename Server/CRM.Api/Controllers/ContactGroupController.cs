@@ -27,7 +27,7 @@ namespace CRM.Api.Controllers
         
 
         [HttpGet("{contactGroupId}")]
-        public async Task<ActionResult<ContactGroupExtended>> GetById(Guid contactGroupId)
+        public async Task<ActionResult<ContactTypeSummary>> GetById(Guid contactGroupId)
         {
             //
             // Validate Input Parameters
@@ -37,13 +37,13 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(contactGroupId)} can not be blank");
             }
 
-            var data = await _contactGroupCrudService.GetItemAsExtendedAsync(contactGroupId);
+            var data = await _contactGroupCrudService.GetItemAsync(contactGroupId);
             return Ok(data);
         }
 
 
         [HttpPut("{contactGroupId}")]
-        public async Task<ActionResult<ContactGroupExtended>> Update(Guid contactGroupId, [FromBody] ContactGroupSummary contactGroup)
+        public async Task<ActionResult<ContactTypeSummary>> Update(Guid contactGroupId, [FromBody] ContactGroupSummary contactGroup)
         {
             //
             // Validate Input Parameters
@@ -58,7 +58,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(contactGroup));
             }
 
-            var data = await _contactGroupCrudService.UpdateSummaryAsync(contactGroupId, contactGroup);
+            var data = await _contactGroupCrudService.UpdateAsync(contactGroupId, contactGroup);
             return Ok(data);
         }
 

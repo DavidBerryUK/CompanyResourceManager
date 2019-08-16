@@ -1,4 +1,5 @@
 import { IApiModel }                            from '@/repositories/models/interfaces/IApiModel';
+import ContactSummaryModel                      from '@/repositories/models/contact/ContactSummaryModel';
 
 export default class ContactGroupSummaryModel implements IApiModel {
 
@@ -8,6 +9,8 @@ export default class ContactGroupSummaryModel implements IApiModel {
     public preferredContactId: string;
     public notes: string;
     public isActive: boolean;
+
+    public contacts: Array<ContactSummaryModel> = new Array<ContactSummaryModel>();
 
     constructor() {
         this.contactGroupId = '00000000-0000-0000-0000-000000000000';

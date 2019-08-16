@@ -5,7 +5,7 @@ using System;
 
 namespace CRM.Service.Repository.JobRoleServices.Interfaces
 {
-    public interface IJobRoleCrudService : IBaseCrudService<JobRole, JobRoleSummary, JobRoleExtended, Guid>
+    public interface IJobRoleCrudService : IBaseExtendedCrudService<JobRole, JobRoleSummary, JobRoleExtended, Guid>
     {
     }
 }

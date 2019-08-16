@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace CRM.Service.Repository.SecurityServices
 {
-    public class SecurityGroupCrudService : BaseCrudService<SecurityGroup, SecurityGroupSummary, SecurityGroupExtended, Guid>, ISecurityGroupCrudService
+    public class SecurityGroupExtendedCrudService : BaseExtendedCrudService<SecurityGroup, SecurityGroupSummary, SecurityGroupExtended, Guid>, ISecurityGroupCrudService
     {
-        public SecurityGroupCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public SecurityGroupExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {
         }
 
