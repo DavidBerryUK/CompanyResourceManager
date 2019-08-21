@@ -175,12 +175,23 @@ export default class EntityPageBaseComponent<E extends IApiModel, T extends Enti
                         // reset the model change tracker, this will
                         // disable the save button
 
+                        console.log('Saved data ');
+                        console.log(data);
+
                         if (data !== null) {
+
                             this.entityModel.entity = data as E;
+                            console.log('this.entityModel.entity');
+                            console.log(this.entityModel.entity);
+                            console.log(`this.entityModel.id: this ${this.entityModel.id}`);
+                            console.log(`this.entityModel.entity.entityKey: this ${this.entityModel.entity.entityKey}`);
+
                             // stop the framework asking if it's ok to swap screens.
                             this.entityModel.resetTracker();
                             this.entityModel.isEditing = false;
                             this.crudNavigator.gotoViewPage(this, this.entityModel.entity.entityKey);
+                        } else {
+                            console.log('null data');
                         }
                     })
 
