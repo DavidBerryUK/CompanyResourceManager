@@ -1,10 +1,10 @@
-import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
-import Component                                from 'vue-class-component';
 import { IApiModel }                            from '../../repositories/models/interfaces/IApiModel';
 import { Prop }                                 from 'vue-property-decorator';
-import EntityPageModel                          from '../models/EntityPageModel';
-import Vue                                      from 'vue';
+import Component                                from 'vue-class-component';
 import EntityLayoutPageHeaderComponent          from '../entityLayoutPageHeader/EntityLayoutPageHeaderComponent';
+import EntityPageModel                          from '../models/EntityPageModel';
+import LabelDataReadOnly                        from '@/componentsCommonGui/labelDataReadOnly/LabelDataReadOnly.vue';
+import Vue                                      from 'vue';
 
 @Component({
     components: {

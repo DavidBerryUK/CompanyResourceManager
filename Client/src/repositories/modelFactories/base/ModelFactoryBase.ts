@@ -53,14 +53,7 @@ export default abstract class ModelFactoryBase<T extends IApiModel> implements I
         }
 
         const result = this.create();
-        console.log('mapping item in model factory');
-        console.log('source');
-        console.log(source);
-        console.log('new object');
-        console.log(result);
-
         if ( source.entity !== undefined ) {
-            console.log('response has entity field, using that for mapping');
             source = source.entity;
         }
 
@@ -70,7 +63,6 @@ export default abstract class ModelFactoryBase<T extends IApiModel> implements I
             const value = source[key];
 
             if (value !== undefined && !Array.isArray(value)) {
-                console.log(`mapped key:${key}:${value}`);
                 result[key] = value;
             }
         }
