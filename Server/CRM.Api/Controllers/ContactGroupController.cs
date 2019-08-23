@@ -27,7 +27,7 @@ namespace CRM.Api.Controllers
         
 
         [HttpGet("{contactGroupId}")]
-        public async Task<ActionResult<ContactTypeSummary>> GetById(Guid contactGroupId)
+        public async Task<ActionResult<ContactGroupSummary>> GetById(Guid contactGroupId)
         {
             //
             // Validate Input Parameters
@@ -43,7 +43,7 @@ namespace CRM.Api.Controllers
 
 
         [HttpPut("{contactGroupId}")]
-        public async Task<ActionResult<ContactTypeSummary>> Update(Guid contactGroupId, [FromBody] ContactGroupSummary contactGroup)
+        public async Task<ActionResult<ContactGroupSummary>> Update(Guid contactGroupId, [FromBody] ContactGroupSummary contactGroup)
         {
             //
             // Validate Input Parameters

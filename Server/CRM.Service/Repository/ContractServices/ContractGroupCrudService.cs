@@ -15,7 +15,7 @@ namespace CRM.Service.Repository.ContractServices
         {
         }
 
-        public override IQueryable<ContactGroup> QueryExtendedInclude(IQueryable<ContactGroup> query)
+        public override IQueryable<ContactGroup> QuerySummaryInclude(IQueryable<ContactGroup> query)
         {
             return query
                 .Include(inc => inc.NavContacts)

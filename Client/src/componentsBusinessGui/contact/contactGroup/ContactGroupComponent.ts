@@ -50,6 +50,8 @@ export default class ContactGroupComponent extends Vue {
     contactGroupRepository.getById(this.contactGroupId)
     .onSuccess((model: ContactGroupSummaryModel) => {
       this.contactGroup = model;
+      console.log('have now got the contacts');
+      console.log(model);
     })
     .contractListener(listener);
 
