@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using CRM.Service.Repository.BaseServices.Sql;
 
 namespace CRM.Service.Repository.BaseServices
 {

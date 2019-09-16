@@ -9,6 +9,8 @@ namespace CRM.Models.Rest.Contacts
     {
         public Guid ContactId { get; set; }
 
+        public Guid ContactGroupId { get; set; }
+
         public Guid ContactTypeId { get; set; }
 
         public string ContactTypeName { get; set; }

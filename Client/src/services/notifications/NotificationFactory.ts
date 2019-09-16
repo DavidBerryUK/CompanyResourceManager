@@ -5,6 +5,7 @@ import AssetExtendedModel                       from '@/repositories/models/asse
 import AssetSummaryModel                        from '@/repositories/models/asset/AssetSummaryModel';
 import AssetTypeExtendedModel                   from '@/repositories/models/assetType/AssetTypeExtendedModel';
 import AssetTypeSummmaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
+import ContactSummaryModel                      from '@/repositories/models/contact/ContactSummaryModel';
 import ContactTypeSummaryModel                  from '@/repositories/models/contactType/ContactTypeSummaryModel';
 import GenericNotifications                     from './GenericNotifications';
 import JobRoleExtendedModel                     from '@/repositories/models/jobRole/JobRoleExtendedModel';
@@ -37,20 +38,21 @@ export default class NotificationFactory {
         if (this.factoryInstance == null) {
             this.factoryInstance = new NotificationFactory();
 
-            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetSummaryModel>(new AssetSummaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetExtendedModel>(new AssetExtendedModel().entityName));
-            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetTypeSummmaryModel>(new AssetTypeSummmaryModel().entityName));
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetSummaryModel>(new AssetSummaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetTypeExtendedModel>(new AssetTypeExtendedModel().entityName));
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetTypeSummmaryModel>(new AssetTypeSummmaryModel().entityName));
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<ContactSummaryModel>(new ContactSummaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<ContactTypeSummaryModel>(new ContactTypeSummaryModel().entityName));
-            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<JobRoleSummaryModel>(new JobRoleSummaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<JobRoleExtendedModel>(new JobRoleExtendedModel().entityName));
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<JobRoleSummaryModel>(new JobRoleSummaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<PersonExtendedModel>(new PersonExtendedModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<PersonSummaryModel>(new PersonSummaryModel().entityName));
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<SecurityGroupExtendedModel>(new SecurityGroupExtendedModel().entityName));
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<SecurityGroupSummaryModel>(new SecurityGroupSummaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<SkillExtendedModel>(new SkillExtendedModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<TeamExtendedModel>(new TeamExtendedModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<TeamSummaryModel>(new TeamSummaryModel().entityName));
-            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<SecurityGroupSummaryModel>(new SecurityGroupSummaryModel().entityName));
-            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<SecurityGroupExtendedModel>(new SecurityGroupExtendedModel().entityName));
         }
         return this.factoryInstance;
     }

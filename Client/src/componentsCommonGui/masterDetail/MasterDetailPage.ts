@@ -29,46 +29,45 @@ export default class MasterDetailPage extends Vue {
     }
 
     public beforeRouteEnter(from: any, to: any, next: any) {
-      //  console.log('Navigation Detail:beforeRouter     Enter');
-      //  console.log('----------------------------------------');
        if (this) {
-         this.doAllTheChecking(next);
+         this.checkIfCanNavigateAwayFromPage(next);
        } else {
          next();
        }
      }
 
      public beforeRouteUpdate(from: any, to: any, next: any) {
-       // console.log("Navigation Detail:beforeRouter     Update");
-       // console.log("------------------------------------");
-         this.doAllTheChecking(next);
+         this.checkIfCanNavigateAwayFromPage(next);
      }
 
      public beforeRouteLeave(from: any, to: any, next: any) {
-       // console.log("Navigation Detail:beforeRouter   Leave");
-       // console.log("------------------------------------");
        if (this) {
-         this.doAllTheChecking(next);
+         this.checkIfCanNavigateAwayFromPage(next);
        } else {
          next();
        }
      }
 
-     private doAllTheChecking(next: any) {
+
+     private checkIfCanNavigateAwayFromPage(next: any) {
        console.log('MasterDetailPage - do All the Checking');
 
        let doNeedToAskForPermission = false;
 
-       // console.log("checking children in the view: count=" + this.$children.length);
-       this.$children.forEach((child: Vue) => {
+       if ( !this.recursivelyCheckIfCanNavigateAwayFromCurrentView(this) ) {
+         doNeedToAskForPermission = true;
+       }
 
-          if ( NavigationCheckInterfaceGuards.doesSupportIRouteBeforeNavigationCheck(child)) {
-            const canClose = child.canCloseComponentBeforeNavigation();
-            if (canClose === false) {
-              doNeedToAskForPermission = true;
-            }
-         }
-       });
+      //  // Check each component to see if can navigate away from the page
+      //  this.$children.forEach((child: Vue) => {
+
+      //     if ( NavigationCheckInterfaceGuards.doesSupportIRouteBeforeNavigationCheck(child)) {
+      //       const canClose = child.canCloseComponentBeforeNavigation();
+      //       if (canClose === false) {
+      //         doNeedToAskForPermission = true;
+      //       }
+      //    }
+      //  });
 
        if (doNeedToAskForPermission) {
 
@@ -86,5 +85,28 @@ export default class MasterDetailPage extends Vue {
        } else {
          next();
        }
+     }
+
+     /**
+      * Recursively check all components to see if they support the IRouteBeforeNavigationCheck
+      * interface, and if so, can they be navigated away from
+      * @param instance - a vue instance
+      */
+     private recursivelyCheckIfCanNavigateAwayFromCurrentView(instance: Vue): boolean {
+
+      if ( NavigationCheckInterfaceGuards.doesSupportIRouteBeforeNavigationCheck(instance)) {
+        const canClose = instance.canCloseComponentBeforeNavigation();
+        if (canClose === false) {
+          return false;
+        }
+     }
+
+      instance.$children.forEach((child: Vue) => {
+        if ( !this.recursivelyCheckIfCanNavigateAwayFromCurrentView(child)) {
+          return false;
+        }
+      });
+
+      return true;
      }
   }

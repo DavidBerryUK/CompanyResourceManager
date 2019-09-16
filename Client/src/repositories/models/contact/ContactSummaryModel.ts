@@ -12,8 +12,8 @@ export default class ContactSummaryModel implements IApiModel {
 
     constructor() {
         this.contactId = '00000000-0000-0000-0000-000000000000';
-        this.contactGroupId = '';
-        this.contactTypeId = '';
+        this.contactGroupId = '00000000-0000-0000-0000-000000000000';
+        this.contactTypeId = '00000000-0000-0000-0000-000000000000';
         this.isActive = true;
         this.value = '';
     }

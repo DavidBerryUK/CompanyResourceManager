@@ -1,3 +1,4 @@
+import { IRouteBeforeNavigationCheck }        from '@/router/interfaces/NavigationCheckInterfaces';
 import { Prop }                                 from 'vue-property-decorator';
 import { Watch }                                from 'vue-property-decorator';
 import Component                                from 'vue-class-component';
@@ -10,12 +11,13 @@ import GenericCollectionModel                   from '@/repositories/models/shar
 import ListItemModel                            from '@/repositories/models/ListItem/ListItemModel';
 import Vue                                      from 'vue';
 
+
 @Component({
   components: {
     ContactLineComponent,
   },
 })
-export default class ContactGroupComponent extends Vue {
+export default class ContactGroupComponent extends Vue implements IRouteBeforeNavigationCheck {
 
   @Prop() public contactGroupId!: string;
 
@@ -26,7 +28,17 @@ export default class ContactGroupComponent extends Vue {
 
   public mounted() {
     this.getData();
- }
+  }
+
+  /**
+   * Support the IRouteBeforeNavigationCheck,
+   * this funciton is called when the user attempts to navigate away from the page,
+   * returning false will cause result in a dialog being displayed asking
+   * the user to confirm that they with to navigate away from the current page
+   */
+  public canCloseComponentBeforeNavigation(): boolean {
+    return true;
+  }
 
   @Watch('contactGroupId')
   private watchContactGroupId() {
@@ -43,23 +55,23 @@ export default class ContactGroupComponent extends Vue {
     this.isLoading = true;
 
     listener.monitor()
-            .onAllResponded(() => {
-                this.isLoading = false;
-            });
+      .onAllResponded(() => {
+        this.isLoading = false;
+      });
 
     contactGroupRepository.getById(this.contactGroupId)
-    .onSuccess((model: ContactGroupSummaryModel) => {
-      this.contactGroup = model;
-      console.log('have now got the contacts');
-      console.log(model);
-    })
-    .contractListener(listener);
+      .onSuccess((model: ContactGroupSummaryModel) => {
+        this.contactGroup = model;
+        console.log('have now got the contacts');
+        console.log(model);
+      })
+      .contractListener(listener);
 
     contactTypeRepository.getActiveList()
-    .onSuccess((contactTypeCollection: GenericCollectionModel<ListItemModel>) => {
-      this.contactTypes = contactTypeCollection.items;
-    })
-    .contractListener(listener);
+      .onSuccess((contactTypeCollection: GenericCollectionModel<ListItemModel>) => {
+        this.contactTypes = contactTypeCollection.items;
+      })
+      .contractListener(listener);
 
   }
 }

@@ -1,7 +1,7 @@
 ﻿using CRM.Models.Database.Interfaces;
 using CRM.Service.Repository.BaseServices.Models;
 
-namespace CRM.Service.Repository.BaseServices
+namespace CRM.Service.Repository.BaseServices.Sql
 {
     public class ListServiceSqlGenerator<TReferenceEntity, TLinkEntity, TPrimaryKey>
         where TReferenceEntity : class, IDatabaseEntity<TPrimaryKey>

@@ -26,6 +26,14 @@
           ></v-text-field>
         </v-flex>
 
+        <v-flex xs2 pr-2>
+          {{state.description}}
+        </v-flex>
+
+        <v-flex xs2 pr-2>
+          {{changeTracker.hasObjectChanged}}
+        </v-flex>
+
   </v-layout>
 </template>
 

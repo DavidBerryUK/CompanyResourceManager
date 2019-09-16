@@ -1,12 +1,12 @@
-﻿using CRM.Database.Context;
+﻿using System;
+using System.Linq;
+using CRM.Database.Context;
 using CRM.Models.Database.Contacts;
 using CRM.Models.Rest.Contacts;
 using CRM.Service.Repository.BaseServices;
-using CRM.Service.Repository.ContractServices.Interfaces;
-using System;
-using System.Linq;
+using CRM.Service.Repository.ContactServices.Interfaces;
 
-namespace CRM.Service.Repository.ContractServices
+namespace CRM.Service.Repository.ContactServices
 {
     public class ContactTypeCrudService : BaseCrudService<ContactType, ContactTypeSummary, Guid>, IContactTypeCrudService
     {

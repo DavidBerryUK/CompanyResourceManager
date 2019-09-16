@@ -1,14 +1,14 @@
-﻿using CRM.Database.Context;
+﻿using System;
+using System.Threading.Tasks;
+using CRM.Database.Context;
 using CRM.Models.Database.Security;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.BaseServices.DirectSql;
 using CRM.Service.Repository.SecurityServices.Interfaces;
-using System;
-using System.Threading.Tasks;
 
-namespace CRM.Service.Repository.TeamServices
+namespace CRM.Service.Repository.SecurityServices
 {
     public class SecurityGroupListService : BaseListService<SecurityGroup,SecurityGroupPerson,Guid>, ISecurityGroupListService
     {
