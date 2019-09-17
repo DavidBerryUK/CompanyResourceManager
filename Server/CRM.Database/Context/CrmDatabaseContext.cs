@@ -54,5 +54,6 @@ namespace CRM.Database.Context
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<ContactType> ContactTypes { get; set; }
         public virtual DbSet<ContactGroup> ContactGroups { get; set; }
+        public virtual DbSet<ContactValidation> ContactValidations { get; set; }
     }
 }

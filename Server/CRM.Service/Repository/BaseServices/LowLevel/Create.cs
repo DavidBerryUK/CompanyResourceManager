@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CRM.Service.Repository.BaseServices.LowLevel
 {
     internal static class Create<TEntity, TRestModel, TPrimaryKey>
-            where TEntity : class, IDatabaseEntity<TPrimaryKey>
+            where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
             where TRestModel : class, new()
     {
         public static async Task<BaseItemResponse<TRestModel>> CreateAsync(
@@ -21,7 +21,12 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
         {
             var entity = Mapper.Map<TEntity>(model);
             entity.PrimaryKey = primaryKey;
-            entity.IsActive = true;
+
+            if (entity is IDatabaseEntityPrimaryKeyIsActive<TPrimaryKey> entityWithIsAction)
+            {
+                entityWithIsAction.IsActive = true;
+            }
+            
             await dbContext.AddAsync(entity);
             await dbContext.SaveChangesAsync();
 

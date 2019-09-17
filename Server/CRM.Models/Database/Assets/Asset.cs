@@ -7,7 +7,7 @@ namespace CRM.Models.Database.Assets
     /// <summary>
     /// Database Entity Object
     /// </summary>
-    public class Asset : IDatabaseEntity<Guid>
+    public class Asset : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
         public Guid AssetId { get; set; }
 
@@ -29,12 +29,12 @@ namespace CRM.Models.Database.Assets
 
         public ICollection<PersonAsset> NavPersonAssets { get; set; }
 
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
             get => this.AssetId;
             set => this.AssetId = value;
         }
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

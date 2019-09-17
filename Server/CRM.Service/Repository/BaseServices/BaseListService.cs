@@ -17,7 +17,7 @@ namespace CRM.Service.Repository.BaseServices
 {
     public class BaseListService<TReferenceEntity, TLinkEntity, TPrimaryKey>
         : IBaseListService<TReferenceEntity, TLinkEntity, TPrimaryKey>
-        where TReferenceEntity : class, IDatabaseEntity<TPrimaryKey>
+        where TReferenceEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
         where TLinkEntity : class, IDatabaseLinkEntity<TPrimaryKey>
     {
         private readonly IDirectSqlServices<TPrimaryKey> _directSqlServices;

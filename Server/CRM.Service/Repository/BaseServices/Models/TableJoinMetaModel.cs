@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 namespace CRM.Service.Repository.BaseServices.Models
 {
     internal class TableJoinMetaModel<TReferenceEntity, TLinkEntity, TPrimaryKey>
-        where TReferenceEntity : class, IDatabaseEntity<TPrimaryKey>
+        where TReferenceEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
         where TLinkEntity : class, IDatabaseLinkEntity<TPrimaryKey>
     {
         public TableJoinMetaModel (

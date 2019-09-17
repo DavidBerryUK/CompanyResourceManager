@@ -14,7 +14,7 @@ namespace CRM.Service.Repository.BaseServices
 {
     public abstract class BaseExtendedCrudService<TEntity, TSummary, TExtended, TPrimaryKey>
         : IBaseExtendedCrudService<TEntity, TSummary, TExtended, TPrimaryKey>
-        where TEntity : class, IDatabaseEntity<TPrimaryKey>
+        where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
         where TSummary : class, new()
         where TExtended : class, new()
         where TPrimaryKey : new()
@@ -208,14 +208,19 @@ namespace CRM.Service.Repository.BaseServices
 
         private static IQueryable<TEntity> QueryFilterIsActiveStatus(IQueryable<TEntity> query, EnumRecordActiveStatus isActiveStatus)
         {
+            if (!(query is IQueryable<IDatabaseEntityPrimaryKeyIsActive<TPrimaryKey>> queryWithActiveStatus))
+            {
+                return query;
+            }
+
             switch (isActiveStatus)
             {
                 case EnumRecordActiveStatus.Active:
-                    query = query.Where(o => o.IsActive).AsQueryable();
+                    queryWithActiveStatus = queryWithActiveStatus.Where(o => o.IsActive).AsQueryable();
                     break;
 
                 case EnumRecordActiveStatus.InActive:
-                    query = query.Where(o => o.IsActive == false).AsQueryable();
+                    queryWithActiveStatus = queryWithActiveStatus.Where(o => o.IsActive == false).AsQueryable();
                     break;
 
                 case EnumRecordActiveStatus.All:
@@ -225,8 +230,8 @@ namespace CRM.Service.Repository.BaseServices
                     throw new ArgumentOutOfRangeException();
             }
 
-            return query;
-        }
+            return queryWithActiveStatus as IQueryable<TEntity>;
+        } 
 
     }
 }

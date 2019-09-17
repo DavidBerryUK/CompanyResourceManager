@@ -21,6 +21,8 @@ namespace CRM.Models.Database.Teams
 
         public Team NavTeam { get; set; }
 
+
+        // IDatabaseLinkEntity
         public (Guid first, Guid second) GetKey => (first:PersonId, second:TeamId);
     }
 }

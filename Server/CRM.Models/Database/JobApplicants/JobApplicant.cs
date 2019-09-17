@@ -4,7 +4,7 @@ using CRM.Models.Database.Workflow;
 
 namespace CRM.Models.Database.JobApplicants
 {
-    public class JobApplicant : IDatabaseEntity<Guid>
+    public class JobApplicant : IDatabaseEntityPrimaryKey<Guid>
     {
         public Guid JobApplicantId { get; set; }
 
@@ -22,15 +22,14 @@ namespace CRM.Models.Database.JobApplicants
 
         public WorkflowInstance NavWorkflowInstance { get; set; }
 
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
             get => this.JobApplicantId;
             set => this.JobApplicantId = value;
         }
-        public bool IsActive { get; set; }
 
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
 
 
     }

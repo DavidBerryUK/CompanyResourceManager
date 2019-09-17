@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace CRM.Service.Repository.BaseServices.LowLevel
 {
     internal static class ReadCollection<TEntity, TRestModel, TPrimaryKey>
-        where TEntity : class, IDatabaseEntity<TPrimaryKey>
+        where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
         where TRestModel : class
     {
         public static async Task<BaseCollectionResponse<TRestModel>> GetAsync(

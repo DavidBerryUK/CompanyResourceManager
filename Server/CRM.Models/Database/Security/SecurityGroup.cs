@@ -7,7 +7,7 @@ namespace CRM.Models.Database.Security
     /// <summary>
     /// Database Entity Object
     /// </summary>
-    public class SecurityGroup : IDatabaseEntity<Guid>
+    public class SecurityGroup : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
         public Guid SecurityGroupId { get; set; }
 
@@ -27,12 +27,12 @@ namespace CRM.Models.Database.Security
 
         public ICollection<SecurityGroupSecurityPermission> NavSecurityGroupSecurityPermission { get; set; }
 
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
             get => this.SecurityGroupId;
             set => this.SecurityGroupId = value;
         }
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

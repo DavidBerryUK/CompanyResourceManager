@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace CRM.Service.Repository.BaseServices.LowLevel
 {
     internal static class UpdateStatus<TEntity, TRestModel, TPrimaryKey>
-            where TEntity : class, IDatabaseEntity<TPrimaryKey>
+            where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey> 
             where TRestModel : class, new()
     {
         public static async Task<BaseItemResponse<TRestModel>> UpdateAsync(
@@ -33,7 +33,9 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
             }
             else
             {
-                data.IsActive = isActive;
+                if (data is IDatabaseEntityPrimaryKeyIsActive<TPrimaryKey> dataIsActive) {
+                    dataIsActive.IsActive = isActive;
+                }
                 await dbContext.SaveChangesAsync();
                 response.Entity = Mapper.Map<TRestModel>(data);
             }

@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace CRM.Database.DatabaseMapper.Contacts
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public class MapTableContactType : IDatabaseTableMapperConfig
+    public class MapTableContactValidation : IDatabaseTableMapperConfig
     {
         public void Map(ModelBuilder modelBuilder)
         {
@@ -18,31 +18,28 @@ namespace CRM.Database.DatabaseMapper.Contacts
                 throw new ArgumentNullException(nameof(modelBuilder));
             }
 
-            modelBuilder.Entity<Models.Database.Contacts.ContactType>(entity =>
+            modelBuilder.Entity<Models.Database.Contacts.ContactValidation>(entity =>
             {
-                entity.ToTable("ContactType");
+                entity.ToTable("ContactValidation");
 
-                entity.HasKey(e => e.ContactTypeId);
+                entity.HasKey(e => e.ContactValidationId);
 
-                entity.Property(e => e.ContactTypeId)
+                entity.Property(e => e.ContactValidationId)
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.ContactTypeId)
-                    .IsRequired();
-                
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(20);
 
-                entity.Property(e => e.IsActive)
+                entity.Property(e => e.RegEx)
+                    .HasMaxLength(500);
+                
+                entity.Property(e => e.IsDefault)
                     .IsRequired();
 
-                entity.Property(e => e.ContactValidationId)
-                    .IsRequired();
-
-                entity.HasMany(many => many.NavContacts)
-                    .WithOne(one => one.NavContactType)
-                    .HasForeignKey(foreignKey => foreignKey.ContactTypeId);
+                entity.HasMany(many => many.NavContactTypes)
+                    .WithOne(one => one.NavContactValidation)
+                    .HasForeignKey(foreignKey => foreignKey.ContactValidationId);
 
                 entity.Ignore(o => o.PrimaryKey);
             });

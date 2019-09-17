@@ -4,7 +4,7 @@ using CRM.Service.Repository.BaseServices.Models;
 namespace CRM.Service.Repository.BaseServices.Sql
 {
     public class ListServiceSqlGenerator<TReferenceEntity, TLinkEntity, TPrimaryKey>
-        where TReferenceEntity : class, IDatabaseEntity<TPrimaryKey>
+        where TReferenceEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
         where TLinkEntity : class, IDatabaseLinkEntity<TPrimaryKey>
     {
         internal static string CreateSqlListSelectedOnly(TableJoinMetaModel<TReferenceEntity,TLinkEntity,TPrimaryKey> meta)

@@ -8,7 +8,7 @@ namespace CRM.Models.Database.Teams
     /// <summary>
     /// Database Entity Object
     /// </summary>
-    public class Team : IDatabaseEntity<Guid>
+    public class Team : IDatabaseEntityPrimaryKey<Guid>
     {
         public Guid TeamId { get; set; }
 
@@ -26,12 +26,12 @@ namespace CRM.Models.Database.Teams
 
         public ICollection<SecurityGroupTeam> NavSecurityGroupTeams { get; set; }
 
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
             get => this.TeamId;
             set => this.TeamId = value;
         }
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

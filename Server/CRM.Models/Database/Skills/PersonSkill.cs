@@ -21,6 +21,7 @@ namespace CRM.Models.Database.Skills
 
         public Skill NavSkill { get; set; }
 
+        // IDatabaseLinkEntity<Guid>
         public (Guid first, Guid second) GetKey => (first: PersonId, second: SkillId);
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace CRM.Service.Repository.BaseServices.LowLevel
 {
     internal static class ReadItem<TEntity, TRestModel, TPrimaryKey>
-        where TEntity : class, IDatabaseEntity<TPrimaryKey>
+        where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
         where TRestModel : class, new()
     {
         public static async Task<BaseItemResponse<TRestModel>> GetAsync(

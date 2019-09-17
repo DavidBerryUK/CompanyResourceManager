@@ -2,14 +2,18 @@ import { IRouteBeforeNavigationCheck }          from '@/router/interfaces/Naviga
 import Component                                from 'vue-class-component';
 import ContactTypeRepositoryFactory             from '@/repositories/factory/ContactTypeRepositoryFactory';
 import ContactTypeSummaryModel                  from '@/repositories/models/contactType/ContactTypeSummaryModel';
+import ContractListener                         from '@/repositories/contracts/ContractListener';
 import EntityLayoutPageTemplateComponent        from '@/componentsEntityLayouts/entityLayoutPageTemplate/EntityLayoutPageTemplateComponent';
-import EntityPageBaseComponent                  from '../../../../componentsEntityLayouts/entityPageBase/EntityPageBaseComponent';
+import EntityPageBaseComponent                  from '@/componentsEntityLayouts/entityPageBase/EntityPageBaseComponent';
 import EntityPageModelWithReferences            from '@/componentsEntityLayouts/models/EntityPageModelWithReferences';
 import EntitySegmentContactTypeEditComponent    from '../segmentEdit/EntitySegmentContactTypeEditComponent';
 import EntitySegmentContactTypeViewComponent    from '../segmentView/EntitySegmentContactTypeViewComponent';
 import EntitySegmentViewEditControllerComponent from '@/componentsEntityLayouts/EntitySegmentViewEditController/EntitySegmentViewEditControllerComponent';
 import ModelFactoryContactTypeSummary           from '@/repositories/modelFactories/contact/ModelFactoryContactTypeSummary';
 import NavigationCrudContactType                from '@/routeNavigation/NavigationCrudContactType';
+import ContactValidationRepositoryFactory       from '@/repositories/factory/ContactValidationRepositoryFactory';
+import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
+import ListItemModel                            from '@/repositories/models/ListItem/ListItemModel';
 
 
 @Component({
@@ -41,6 +45,20 @@ export default class EntityPageContactTypeComponent
 
   public onEditBegins() {
     super.onEditBegins();
+  }
+
+    // load additional data,
+  //
+  public retrieveSecondaryData(contractListener: ContractListener) {
+    // Load Job Role List
+    //
+    const jobRoleRepository = ContactValidationRepositoryFactory.getRepository();
+    jobRoleRepository
+      .getActiveList()
+      .onSuccess((list: GenericCollectionModel<ListItemModel>) => {
+        this.entityModel.jobRolesList = list.items;
+      })
+      .contractListener(contractListener);
   }
 
   public onSave() {

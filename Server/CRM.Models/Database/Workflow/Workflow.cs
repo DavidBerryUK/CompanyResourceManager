@@ -4,7 +4,7 @@ using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Workflow
 {
-    public class Workflow : IDatabaseEntity<Guid>
+    public class Workflow : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
         public Guid WorkflowId { get; set; }
 
@@ -26,12 +26,12 @@ namespace CRM.Models.Database.Workflow
 
         public ICollection<WorkflowNode> NavWorkflowNodes { get; set; }
 
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
             get => this.WorkflowId;
             set => this.WorkflowId = value;
         }
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

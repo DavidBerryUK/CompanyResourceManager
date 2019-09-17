@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CRM.Service.Repository.BaseServices.Interface
 {
     public interface IBaseCrudService<TEntity, TRestModel,  TPrimaryKey> 
-        where TEntity : class, IDatabaseEntity<TPrimaryKey> 
+        where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey> 
         where TRestModel : class, new()
     {
         /// <summary>

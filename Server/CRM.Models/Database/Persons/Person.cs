@@ -13,7 +13,7 @@ namespace CRM.Models.Database.Persons
     /// <summary>
     /// Database Entity Object
     /// </summary>
-    public class Person : IDatabaseEntity<Guid>
+    public class Person : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
         public Guid PersonId { get; set; }
 
@@ -46,12 +46,12 @@ namespace CRM.Models.Database.Persons
         public ICollection<WorkflowInstance> NavWorkflowInstancesCreated { get; set; }
 
 
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
             get => this.PersonId;
             set => this.PersonId = value;
         }
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

@@ -8,7 +8,7 @@ namespace CRM.Models.Database.JobRoles
     /// <summary>
     /// Database Entity Object
     /// </summary>
-    public class JobRole : IDatabaseEntity<Guid>
+    public class JobRole : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
         public Guid JobRoleId { get; set; }
 
@@ -22,12 +22,12 @@ namespace CRM.Models.Database.JobRoles
 
         public ICollection<Person> NavPerson { get; set; }
 
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
             get => this.JobRoleId;
             set => this.JobRoleId = value;
         }
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

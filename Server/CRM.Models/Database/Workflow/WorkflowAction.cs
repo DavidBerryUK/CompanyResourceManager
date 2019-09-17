@@ -1,8 +1,9 @@
 ﻿using System;
+using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Workflow
 {
-    public class WorkflowAction
+    public class WorkflowAction : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
         public Guid WorkflowActionId { get; set; }
 
@@ -21,5 +22,14 @@ namespace CRM.Models.Database.Workflow
         //
 
         public WorkflowNode NavWorkFlowNode { get; set; }
+
+
+        // Interface IDatabaseEntityPrimaryKey
+        public Guid PrimaryKey
+        {
+            get => this.WorkflowActionId;
+            set => this.WorkflowActionId = value;
+        }
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

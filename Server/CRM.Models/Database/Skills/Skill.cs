@@ -7,7 +7,7 @@ namespace CRM.Models.Database.Skills
     /// <summary>
     /// Database Entity Object
     /// </summary>
-    public class Skill : IDatabaseEntity<Guid>
+    public class Skill : IDatabaseEntityPrimaryKey<Guid>
     {
         public Guid SkillId { get; set; }
 
@@ -23,12 +23,12 @@ namespace CRM.Models.Database.Skills
 
         public ICollection<PersonSkill>  NavPersonSkills { get; set; }
 
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
             get => this.SkillId;
             set => this.SkillId = value;
         }
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

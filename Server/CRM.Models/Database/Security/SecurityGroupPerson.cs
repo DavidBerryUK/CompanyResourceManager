@@ -21,6 +21,7 @@ namespace CRM.Models.Database.Security
 
         public SecurityGroup NavSecurityGroup { get; set; }
 
+        // IDatabaseLinkEntity
         public (Guid first, Guid second) GetKey => (first: PersonId, second: SecurityGroupId);
     }
 }

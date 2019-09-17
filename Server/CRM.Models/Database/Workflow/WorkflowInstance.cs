@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using CRM.Models.Database.Interfaces;
 using CRM.Models.Database.JobApplicants;
 using CRM.Models.Database.Persons;
 
 namespace CRM.Models.Database.Workflow
 {
-    public class WorkflowInstance
+    public class WorkflowInstance : IDatabaseEntityPrimaryKey<Guid>
     {
         public Guid WorkflowInstanceId { get; set; }
 
@@ -33,5 +34,12 @@ namespace CRM.Models.Database.Workflow
         //
         public JobApplicant NavJobApplicant { get; set; }
 
+        // Interface IDatabaseEntityPrimaryKey
+        public Guid PrimaryKey
+        {
+            get => this.WorkflowInstanceId;
+            set => this.WorkflowInstanceId = value;
+        }
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

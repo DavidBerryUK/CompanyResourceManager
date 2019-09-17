@@ -1,9 +1,10 @@
 ﻿using System;
+using CRM.Models.Database.Interfaces;
 using CRM.Models.Database.Persons;
 
 namespace CRM.Models.Database.Workflow
 {
-    public class WorkflowInstanceEvent
+    public class WorkflowInstanceEvent : IDatabaseEntityPrimaryKey<Guid>
     {
         public Guid WorkflowInstanceEventId { get; set; }
 
@@ -22,5 +23,13 @@ namespace CRM.Models.Database.Workflow
         public WorkflowInstance NavWorkflowInstance { get; set; }
 
         public Person NavPerson { get; set; }
+
+        // Interface IDatabaseEntityPrimaryKey
+        public Guid PrimaryKey
+        {
+            get => this.WorkflowInstanceEventId;
+            set => this.WorkflowInstanceEventId = value;
+        }
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

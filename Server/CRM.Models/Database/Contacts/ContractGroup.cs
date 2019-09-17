@@ -7,7 +7,7 @@ namespace CRM.Models.Database.Contacts
     /// <summary>
     /// Database Entity Object
     /// </summary>
-    public class ContactGroup : IDatabaseEntity<Guid>
+    public class ContactGroup : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
         public Guid ContactGroupId { get; set; }
 
@@ -22,12 +22,12 @@ namespace CRM.Models.Database.Contacts
         //
         public ICollection<Contact> NavContacts { get; set; }
 
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
             get => this.ContactGroupId;
             set => this.ContactGroupId = value;
         }
-        // Interface IDatabaseEntity
+        // Interface IDatabaseEntityPrimaryKey
     }
 }

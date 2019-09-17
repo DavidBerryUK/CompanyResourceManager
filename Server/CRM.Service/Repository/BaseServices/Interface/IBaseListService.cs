@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace CRM.Service.Repository.BaseServices.Interface
 {
     public interface IBaseListService<TReferenceEntity, TLinkEntity, TPrimaryKey>
-        where TReferenceEntity : class, IDatabaseEntity<TPrimaryKey> 
+        where TReferenceEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey> 
         where TLinkEntity : class, IDatabaseLinkEntity<TPrimaryKey>
     {
 
