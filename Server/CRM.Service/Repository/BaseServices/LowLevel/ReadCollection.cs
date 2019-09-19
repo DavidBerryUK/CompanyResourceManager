@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices.LowLevel
 {
@@ -24,20 +24,11 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
 
             var query = dbContext.Set<TEntity>().AsQueryable();
 
-            if (queryInclude != null)
-            {
-                query = queryInclude(query);
-            }
+            if (queryInclude != null) query = queryInclude(query);
 
-            if (queryFilter != null)
-            {
-                query = queryFilter(query);
-            }
+            if (queryFilter != null) query = queryFilter(query);
 
-            if (querySort != null)
-            {
-                query = querySort(query);
-            }
+            if (querySort != null) query = querySort(query);
 
             var data = await query.ToListAsync();
 

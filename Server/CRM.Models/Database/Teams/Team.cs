@@ -1,12 +1,12 @@
-﻿using CRM.Models.Database.Security;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using CRM.Models.Database.Interfaces;
+using CRM.Models.Database.Security;
 
 namespace CRM.Models.Database.Teams
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class Team : IDatabaseEntityPrimaryKey<Guid>
     {
@@ -29,9 +29,10 @@ namespace CRM.Models.Database.Teams
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.TeamId;
-            set => this.TeamId = value;
+            get => TeamId;
+            set => TeamId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

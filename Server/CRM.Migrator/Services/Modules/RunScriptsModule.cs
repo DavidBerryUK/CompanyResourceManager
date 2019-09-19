@@ -7,11 +7,11 @@ namespace CRM.Migrator.Services.Modules
 {
     public class RunScriptsModule : IRunScriptsModule
     {
-        private readonly IRunSqlScriptsInPathModule _runSqlScriptsInPathModule;
         private readonly IRenumberFilesScriptsModule _renumberFilesScriptsModule;
+        private readonly IRunSqlScriptsInPathModule _runSqlScriptsInPathModule;
 
         public RunScriptsModule(
-            IRunSqlScriptsInPathModule runSqlScriptsInPathModule, 
+            IRunSqlScriptsInPathModule runSqlScriptsInPathModule,
             IRenumberFilesScriptsModule renumberFilesScriptsModule)
         {
             _runSqlScriptsInPathModule = runSqlScriptsInPathModule;
@@ -22,8 +22,7 @@ namespace CRM.Migrator.Services.Modules
         {
             var errorList = new List<string>();
 
-            foreach (var task in script.Tasks.Where(o=> o.IsEnabled))
-            {
+            foreach (var task in script.Tasks.Where(o => o.IsEnabled))
                 switch (task.Command.ToLower())
                 {
                     case "runsqlscriptsinpath":
@@ -36,9 +35,7 @@ namespace CRM.Migrator.Services.Modules
 
                     default:
                         throw new ArgumentException("unknown scriptData command:" + task.Command);
-
                 }
-            }
 
             return errorList;
         }

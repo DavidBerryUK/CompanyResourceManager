@@ -1,11 +1,11 @@
-﻿using CRM.Models.Database.Interfaces;
+﻿using System;
+using CRM.Models.Database.Interfaces;
 using CRM.Models.Database.Persons;
-using System;
 
 namespace CRM.Models.Database.Teams
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class PersonTeam : IDatabaseLinkEntity<Guid>
     {
@@ -23,6 +23,6 @@ namespace CRM.Models.Database.Teams
 
 
         // IDatabaseLinkEntity
-        public (Guid first, Guid second) GetKey => (first:PersonId, second:TeamId);
+        public (Guid first, Guid second) GetKey => (first: PersonId, second: TeamId);
     }
 }

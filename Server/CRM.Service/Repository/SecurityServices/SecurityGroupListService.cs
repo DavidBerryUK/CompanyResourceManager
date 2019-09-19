@@ -10,12 +10,12 @@ using CRM.Service.Repository.SecurityServices.Interfaces;
 
 namespace CRM.Service.Repository.SecurityServices
 {
-    public class SecurityGroupListService : BaseListService<SecurityGroup,SecurityGroupPerson,Guid>, ISecurityGroupListService
+    public class SecurityGroupListService : BaseListService<SecurityGroup, SecurityGroupPerson, Guid>,
+        ISecurityGroupListService
     {
-
-        public SecurityGroupListService(IDirectSqlServices<Guid> directSqlServices, CrmDatabaseContext dbContext) : base(dbContext, directSqlServices)
+        public SecurityGroupListService(IDirectSqlServices<Guid> directSqlServices, CrmDatabaseContext dbContext) :
+            base(dbContext, directSqlServices)
         {
-
         }
 
         public async Task<BaseCollectionResponse<ListItem>> GetAllWithSelectionForPerson(Guid personId)
@@ -66,9 +66,6 @@ namespace CRM.Service.Repository.SecurityServices
                 personId,
                 selected
             );
-
-            return;
         }
-
     }
 }

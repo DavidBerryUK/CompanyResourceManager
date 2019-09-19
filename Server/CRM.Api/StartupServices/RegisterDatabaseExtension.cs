@@ -1,7 +1,7 @@
-﻿using CRM.Database.Context;
+﻿using System;
+using CRM.Database.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace CRM.Api.StartupServices
 {

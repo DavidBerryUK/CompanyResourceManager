@@ -1,16 +1,16 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics.CodeAnalysis;
+using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
 using CRM.Models.Database.Persons;
 using CRM.Models.Rest.Lists;
 using CRM.Models.Rest.Person;
-using System.Diagnostics.CodeAnalysis;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    internal  class AutoMapperPerson : IAutoMapperConfig
+    internal class AutoMapperPerson : IAutoMapperConfig
     {
-        public  void Map(IMapperConfigurationExpression cfg)
+        public void Map(IMapperConfigurationExpression cfg)
         {
             // Map database to rest objects
             //
@@ -24,7 +24,7 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
             //
             cfg.CreateMap<Person, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.PersonId))
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(source => $"{source.Forename} {source.Surname}") );
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(source => $"{source.Forename} {source.Surname}"));
 
             // Map rest objects back to database entity objects
             //

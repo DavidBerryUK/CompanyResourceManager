@@ -9,7 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Service.Repository.ContactServices
 {
-    public class ContactGroupCrudService : BaseCrudService<ContactGroup,  ContactGroupSummary, Guid>, IContactGroupCrudService
+    public class ContactGroupCrudService : BaseCrudService<ContactGroup, ContactGroupSummary, Guid>,
+        IContactGroupCrudService
     {
         public ContactGroupCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {
@@ -19,7 +20,7 @@ namespace CRM.Service.Repository.ContactServices
         {
             return query
                 .Include(inc => inc.NavContacts)
-                .ThenInclude(inc=> inc.NavContactType);
+                .ThenInclude(inc => inc.NavContactType);
         }
 
         public override Guid CreateNewPrimaryKey()

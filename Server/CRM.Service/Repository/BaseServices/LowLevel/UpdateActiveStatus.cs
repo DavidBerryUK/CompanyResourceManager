@@ -1,17 +1,17 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices.LowLevel
 {
     internal static class UpdateStatus<TEntity, TRestModel, TPrimaryKey>
-            where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey> 
-            where TRestModel : class, new()
+        where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
+        where TRestModel : class, new()
     {
         public static async Task<BaseItemResponse<TRestModel>> UpdateAsync(
             CrmDatabaseContext dbContext,
@@ -33,9 +33,8 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
             }
             else
             {
-                if (data is IDatabaseEntityPrimaryKeyIsActive<TPrimaryKey> dataIsActive) {
+                if (data is IDatabaseEntityPrimaryKeyIsActive<TPrimaryKey> dataIsActive)
                     dataIsActive.IsActive = isActive;
-                }
                 await dbContext.SaveChangesAsync();
                 response.Entity = Mapper.Map<TRestModel>(data);
             }
@@ -43,5 +42,4 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
             return response;
         }
     }
-
 }

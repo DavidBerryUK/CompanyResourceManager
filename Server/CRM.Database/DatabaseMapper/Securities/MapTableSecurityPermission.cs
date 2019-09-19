@@ -1,8 +1,8 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using CRM.Database.DatabaseMapper.Interfaces;
 using CRM.Models.Database.Security;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace CRM.Database.DatabaseMapper.Securities
 {
@@ -50,7 +50,6 @@ namespace CRM.Database.DatabaseMapper.Securities
                     .WithOne(one => one.NavSecurityPermission)
                     .HasForeignKey(foreignKey => foreignKey.SecurityPermissionId);
             });
-
         }
     }
 }

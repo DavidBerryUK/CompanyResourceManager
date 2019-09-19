@@ -5,7 +5,7 @@ using CRM.Models.Database.Interfaces;
 namespace CRM.Models.Database.Skills
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class Skill : IDatabaseEntityPrimaryKey<Guid>
     {
@@ -21,14 +21,15 @@ namespace CRM.Models.Database.Skills
         // Navigation to related Records
         //
 
-        public ICollection<PersonSkill>  NavPersonSkills { get; set; }
+        public ICollection<PersonSkill> NavPersonSkills { get; set; }
 
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.SkillId;
-            set => this.SkillId = value;
+            get => SkillId;
+            set => SkillId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

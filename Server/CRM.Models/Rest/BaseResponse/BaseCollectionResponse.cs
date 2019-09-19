@@ -6,6 +6,12 @@ namespace CRM.Models.Rest.BaseResponse
     {
         private string _errorMessage;
 
+        public BaseCollectionResponse()
+        {
+            Success = true;
+            Items = new List<T>();
+        }
+
         public bool Success { get; set; }
 
         public string ErrorMessages
@@ -15,16 +21,9 @@ namespace CRM.Models.Rest.BaseResponse
             {
                 Success = false;
                 _errorMessage = value;
-
             }
         }
 
         public List<T> Items { get; set; }
-
-        public BaseCollectionResponse()
-        {
-            Success = true;
-            Items = new List<T>();
-        }
     }
 }

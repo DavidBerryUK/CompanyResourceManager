@@ -5,7 +5,7 @@ using CRM.Models.Database.Interfaces;
 namespace CRM.Models.Database.Security
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class SecurityGroup : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
@@ -14,8 +14,6 @@ namespace CRM.Models.Database.Security
         public string Name { get; set; }
 
         public string Description { get; set; }
-
-        public bool IsActive { get; set; }
 
         //
         // Navigation to related Records
@@ -27,12 +25,15 @@ namespace CRM.Models.Database.Security
 
         public ICollection<SecurityGroupSecurityPermission> NavSecurityGroupSecurityPermission { get; set; }
 
+        public bool IsActive { get; set; }
+
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.SecurityGroupId;
-            set => this.SecurityGroupId = value;
+            get => SecurityGroupId;
+            set => SecurityGroupId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

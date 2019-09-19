@@ -9,7 +9,7 @@ namespace CRM.Migrator.Services.Database
         public DatabaseHelper(string connectionString)
         {
             _connectionString = connectionString;
-        }        
+        }
 
         public bool DoesSchemaExist(string schema)
         {
@@ -17,23 +17,18 @@ namespace CRM.Migrator.Services.Database
             var count = ExecuteScalar(sql);
 
             // ReSharper disable once ConvertIfStatementToReturnStatement
-            if (count > 0)
-            {
-                return true;
-            }
+            if (count > 0) return true;
             return false;
         }
 
-        public bool DoesTableExist (string schema, string tableName)
+        public bool DoesTableExist(string schema, string tableName)
         {
-            var sql = $"SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{schema}' and TABLE_NAME = '{tableName}'";
+            var sql =
+                $"SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{schema}' and TABLE_NAME = '{tableName}'";
             var count = ExecuteScalar(sql);
 
             // ReSharper disable once ConvertIfStatementToReturnStatement
-            if (count > 0)
-            {
-                return true;
-            }
+            if (count > 0) return true;
             return false;
         }
 
@@ -51,7 +46,7 @@ namespace CRM.Migrator.Services.Database
                 using (var command = new SqlCommand(sql, connection))
                 {
                     connection.Open();
-                    var response =  command.ExecuteScalar();
+                    var response = command.ExecuteScalar();
                     return (int) response;
                 }
             }
@@ -71,4 +66,3 @@ namespace CRM.Migrator.Services.Database
         }
     }
 }
-

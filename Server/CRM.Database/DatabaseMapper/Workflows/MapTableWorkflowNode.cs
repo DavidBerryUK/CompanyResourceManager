@@ -1,7 +1,7 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
+﻿using System;
+using CRM.Database.DatabaseMapper.Interfaces;
 using CRM.Models.Database.Workflow;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace CRM.Database.DatabaseMapper.Workflows
 {
@@ -48,7 +48,6 @@ namespace CRM.Database.DatabaseMapper.Workflows
                 entity.HasMany(many => many.NavWorkflowActions)
                     .WithOne(one => one.NavWorkFlowNode)
                     .HasForeignKey(key => key.WorkflowNodeId);
-
             });
         }
     }

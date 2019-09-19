@@ -1,9 +1,8 @@
-﻿using CRM.Models.Rest.Contacts;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using CRM.Models.Rest.Contacts;
 using CRM.Service.Repository.ContactServices.Interfaces;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.Api.Controllers
 {
@@ -20,8 +19,7 @@ namespace CRM.Api.Controllers
             // Validate Input Parameters
             //
             _contactCrudService = contactCrudService
-                ?? throw new ArgumentNullException(nameof(_contactCrudService));
-
+                                  ?? throw new ArgumentNullException(nameof(_contactCrudService));
         }
 
 
@@ -42,7 +40,8 @@ namespace CRM.Api.Controllers
 
 
         [HttpPut("{contactItemId}")]
-        public async Task<ActionResult<ContactSummary>> Update(Guid contactItemId, [FromBody] ContactSummary contactItem)
+        public async Task<ActionResult<ContactSummary>> Update(Guid contactItemId,
+            [FromBody] ContactSummary contactItem)
         {
             //
             // Validate Input Parameters
@@ -60,6 +59,5 @@ namespace CRM.Api.Controllers
             var data = await _contactCrudService.UpdateAsync(contactItemId, contactItem);
             return Ok(data);
         }
-
     }
 }

@@ -5,7 +5,7 @@ using CRM.Models.Database.Interfaces;
 namespace CRM.Models.Database.Assets
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class Asset : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
@@ -19,8 +19,6 @@ namespace CRM.Models.Database.Assets
 
         public string BadgeNo { get; set; }
 
-        public bool IsActive { get; set; }
-
         //
         // Navigation to related Records
         //
@@ -29,12 +27,15 @@ namespace CRM.Models.Database.Assets
 
         public ICollection<PersonAsset> NavPersonAssets { get; set; }
 
+        public bool IsActive { get; set; }
+
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.AssetId;
-            set => this.AssetId = value;
+            get => AssetId;
+            set => AssetId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

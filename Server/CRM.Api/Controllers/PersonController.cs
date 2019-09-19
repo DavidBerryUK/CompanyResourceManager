@@ -1,10 +1,10 @@
-﻿using CRM.Models.Rest.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Person;
 using CRM.Service.Repository.PersonServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {
@@ -13,10 +13,11 @@ namespace CRM.Api.Controllers
     public class PersonController : Controller
     {
         private readonly IPersonCrudService _personCrudService;
+
         public PersonController(IPersonCrudService personCrudService)
         {
             _personCrudService = personCrudService
-                ?? throw new ArgumentNullException(nameof(personCrudService));
+                                 ?? throw new ArgumentNullException(nameof(personCrudService));
         }
 
         [HttpGet("")]
@@ -105,7 +106,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException("personId can not be blank");
             }
 
-            var data = await _personCrudService.UpdateActiveStatusAsync(personId,false);
+            var data = await _personCrudService.UpdateActiveStatusAsync(personId, false);
             return Ok(data);
         }
 

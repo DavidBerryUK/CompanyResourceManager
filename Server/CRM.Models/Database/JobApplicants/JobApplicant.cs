@@ -25,12 +25,10 @@ namespace CRM.Models.Database.JobApplicants
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.JobApplicantId;
-            set => this.JobApplicantId = value;
+            get => JobApplicantId;
+            set => JobApplicantId = value;
         }
 
         // Interface IDatabaseEntityPrimaryKey
-
-
     }
 }

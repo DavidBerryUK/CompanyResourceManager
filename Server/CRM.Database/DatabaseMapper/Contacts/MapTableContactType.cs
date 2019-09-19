@@ -1,7 +1,8 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using CRM.Database.DatabaseMapper.Interfaces;
+using CRM.Models.Database.Contacts;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Database.DatabaseMapper.Contacts
 {
@@ -18,7 +19,7 @@ namespace CRM.Database.DatabaseMapper.Contacts
                 throw new ArgumentNullException(nameof(modelBuilder));
             }
 
-            modelBuilder.Entity<Models.Database.Contacts.ContactType>(entity =>
+            modelBuilder.Entity<ContactType>(entity =>
             {
                 entity.ToTable("ContactType");
 
@@ -29,7 +30,7 @@ namespace CRM.Database.DatabaseMapper.Contacts
 
                 entity.Property(e => e.ContactTypeId)
                     .IsRequired();
-                
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(20);

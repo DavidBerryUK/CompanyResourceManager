@@ -18,17 +18,12 @@ namespace CRM.Migrator.Services.ScriptAuditor
             var databaseHelper = _databaseHelperFactory.Get(connectionName);
 
             if (databaseHelper.DoesTableExist(schemaName, "ScriptAudit") == false)
-            {
                 CreateScriptAuditTable(databaseHelper, schemaName);
-            }
         }
 
         private static void CreateScriptAuditTable(DatabaseHelper databaseHelper, string schemaName)
         {
-            if (databaseHelper.DoesSchemaExist(schemaName) == false)
-            {
-                CreateSchema(databaseHelper, schemaName);
-            }
+            if (databaseHelper.DoesSchemaExist(schemaName) == false) CreateSchema(databaseHelper, schemaName);
 
             var sql = "";
 

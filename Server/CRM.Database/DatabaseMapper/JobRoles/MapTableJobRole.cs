@@ -1,7 +1,8 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using CRM.Database.DatabaseMapper.Interfaces;
+using CRM.Models.Database.JobRoles;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Database.DatabaseMapper.JobRoles
 {
@@ -19,7 +20,7 @@ namespace CRM.Database.DatabaseMapper.JobRoles
                 throw new ArgumentNullException(nameof(modelBuilder));
             }
 
-            modelBuilder.Entity<Models.Database.JobRoles.JobRole>(entity =>
+            modelBuilder.Entity<JobRole>(entity =>
             {
                 entity.ToTable("JobRole");
 

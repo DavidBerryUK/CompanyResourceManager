@@ -8,7 +8,7 @@ namespace CRM.Migrator.Services.Database
     {
         private readonly IOptions<ApplicationSettings> _configuration;
 
-        public DatabaseHelperFactory( IOptions<ApplicationSettings> configuration)
+        public DatabaseHelperFactory(IOptions<ApplicationSettings> configuration)
         {
             _configuration = configuration;
         }

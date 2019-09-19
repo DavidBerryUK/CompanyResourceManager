@@ -7,12 +7,13 @@ namespace CRM.Service.Repository.BaseServices.Sql
         where TReferenceEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
         where TLinkEntity : class, IDatabaseLinkEntity<TPrimaryKey>
     {
-        internal static string CreateSqlListSelectedOnly(TableJoinMetaModel<TReferenceEntity,TLinkEntity,TPrimaryKey> meta)
+        internal static string CreateSqlListSelectedOnly(
+            TableJoinMetaModel<TReferenceEntity, TLinkEntity, TPrimaryKey> meta)
         {
             var sql = "" +
                       $"SELECT  {meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName}	AS [id], " +
                       $"	    {meta.ReferenceTableName}.{meta.ReferenceTableTextPropertyName} AS [name], " +
-                      $"		CAST (1 AS BIT) [selected] " +
+                      "\t\tCAST (1 AS BIT) [selected] " +
                       $"FROM	{meta.ReferenceTableName} " +
                       $"LEFT OUTER JOIN	{meta.LinkTableName} " +
                       $"ON		{meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName} = {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} " +
@@ -23,12 +24,13 @@ namespace CRM.Service.Repository.BaseServices.Sql
             return sql;
         }
 
-        internal static string CreateSqlListInSelectedOnly(TableJoinMetaModel<TReferenceEntity, TLinkEntity, TPrimaryKey> meta)
+        internal static string CreateSqlListInSelectedOnly(
+            TableJoinMetaModel<TReferenceEntity, TLinkEntity, TPrimaryKey> meta)
         {
             var sql = "" +
                       $"SELECT  {meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName}	AS [id], " +
                       $"	    {meta.ReferenceTableName}.{meta.ReferenceTableTextPropertyName} AS [name], " +
-                      $"		CAST (0 AS BIT) [selected] " +
+                      "\t\tCAST (0 AS BIT) [selected] " +
                       $"FROM	{meta.ReferenceTableName} " +
                       $"LEFT OUTER JOIN	{meta.LinkTableName} " +
                       $"ON		{meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName} = {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} " +
@@ -39,15 +41,16 @@ namespace CRM.Service.Repository.BaseServices.Sql
             return sql;
         }
 
-        internal static string CreateSqlListWithSelectStatus(TableJoinMetaModel<TReferenceEntity, TLinkEntity, TPrimaryKey> meta)
+        internal static string CreateSqlListWithSelectStatus(
+            TableJoinMetaModel<TReferenceEntity, TLinkEntity, TPrimaryKey> meta)
         {
             var sql = "" +
                       $"SELECT  {meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName}	AS [id], " +
                       $"	    {meta.ReferenceTableName}.{meta.ReferenceTableTextPropertyName} AS [name], " +
-                      $"		CASE " +
+                      "\t\tCASE " +
                       $"			WHEN {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} IS NULL THEN CAST(0 as BIT) " +
-                      $"			ELSE CAST(1 as BIT) " +
-                      $"		END AS  [selected] " +
+                      "\t\t\tELSE CAST(1 as BIT) " +
+                      "\t\tEND AS  [selected] " +
                       $"FROM	{meta.ReferenceTableName} " +
                       $"LEFT OUTER JOIN	{meta.LinkTableName} " +
                       $"ON		{meta.ReferenceTableName}.{meta.ReferenceTableKeyPropertyName} = {meta.LinkTableName}.{meta.LinkTableJoinPropertyName} " +
@@ -58,7 +61,8 @@ namespace CRM.Service.Repository.BaseServices.Sql
         }
 
 
-        internal static string CreateSqlToDeleteListItem(TableJoinMetaModel<TReferenceEntity, TLinkEntity, TPrimaryKey> meta)
+        internal static string CreateSqlToDeleteListItem(
+            TableJoinMetaModel<TReferenceEntity, TLinkEntity, TPrimaryKey> meta)
         {
             var sql = "DELETE " +
                       $"FROM    {meta.LinkTableName} " +
@@ -68,19 +72,20 @@ namespace CRM.Service.Repository.BaseServices.Sql
             return sql;
         }
 
-        internal static string CreateSqlToInsertListItem(TableJoinMetaModel<TReferenceEntity, TLinkEntity, TPrimaryKey> meta)
+        internal static string CreateSqlToInsertListItem(
+            TableJoinMetaModel<TReferenceEntity, TLinkEntity, TPrimaryKey> meta)
         {
             var sql =
-                $"IF NOT EXISTS ( " +
+                "IF NOT EXISTS ( " +
                 $" SELECT * FROM {meta.LinkTableName} " +
                 $"  WHERE {meta.LinkTableJoinKey1PropertyName} = @Key1 " +
                 $"  AND   {meta.LinkTableJoinKey2PropertyName} = @Key2 " +
-                $") " +
-                $"BEGIN " +
+                ") " +
+                "BEGIN " +
                 $"  INSERT INTO {meta.LinkTableName} " +
                 $"  ({meta.LinkTableJoinKey1PropertyName}, {meta.LinkTableJoinKey2PropertyName} ) " +
-                $"  VALUES ( @Key1, @Key2 ) " +
-                $"END ";
+                "  VALUES ( @Key1, @Key2 ) " +
+                "END ";
 
             return sql;
         }

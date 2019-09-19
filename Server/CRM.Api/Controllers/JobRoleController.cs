@@ -1,12 +1,12 @@
-﻿using CRM.Models.Rest.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.JobRole;
 using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.JobRoleServices.Interfaces;
 using CRM.Service.Repository.PersonServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {
@@ -26,7 +26,7 @@ namespace CRM.Api.Controllers
             // Validate Input Parameters
             //
             _jobRoleCrudService = jobRoleCrudService
-                                 ?? throw new ArgumentNullException(nameof(jobRoleCrudService));
+                                  ?? throw new ArgumentNullException(nameof(jobRoleCrudService));
 
             _personSimpleQueryService = personSimpleQueryService
                                         ?? throw new ArgumentNullException(nameof(personSimpleQueryService));
@@ -53,7 +53,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(jobRoleId)} can not be blank");
             }
 
-            var data = await _personSimpleQueryService.GetWithFilterAsync(jobRoleId: jobRoleId);
+            var data = await _personSimpleQueryService.GetWithFilterAsync(jobRoleId);
             return Ok(data);
         }
 
@@ -162,6 +162,5 @@ namespace CRM.Api.Controllers
             var data = await _jobRoleCrudService.UpdateActiveStatusAsync(jobRoleId, true);
             return Ok(data);
         }
-
     }
 }

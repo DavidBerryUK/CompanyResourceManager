@@ -37,9 +37,10 @@ namespace CRM.Models.Database.Workflow
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.WorkflowInstanceId;
-            set => this.WorkflowInstanceId = value;
+            get => WorkflowInstanceId;
+            set => WorkflowInstanceId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

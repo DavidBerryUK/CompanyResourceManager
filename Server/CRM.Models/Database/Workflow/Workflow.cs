@@ -14,8 +14,6 @@ namespace CRM.Models.Database.Workflow
 
         public string Description { get; set; }
 
-        public bool IsActive { get; set; }
-
         //
         // Navigation to related Records
         //
@@ -26,12 +24,15 @@ namespace CRM.Models.Database.Workflow
 
         public ICollection<WorkflowNode> NavWorkflowNodes { get; set; }
 
+        public bool IsActive { get; set; }
+
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.WorkflowId;
-            set => this.WorkflowId = value;
+            get => WorkflowId;
+            set => WorkflowId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

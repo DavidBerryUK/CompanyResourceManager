@@ -1,4 +1,7 @@
-﻿using CRM.Database.Context;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
@@ -6,14 +9,11 @@ using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.BaseServices.Interface;
 using CRM.Service.Repository.BaseServices.LowLevel;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices
 {
     public abstract class BaseCrudService<TEntity, TRestModel, TPrimaryKey>
-        : IBaseCrudService<TEntity, TRestModel,  TPrimaryKey>
+        : IBaseCrudService<TEntity, TRestModel, TPrimaryKey>
         where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
         where TRestModel : class, new()
         where TPrimaryKey : new()
@@ -26,16 +26,16 @@ namespace CRM.Service.Repository.BaseServices
         }
 
         /// <summary>
-        /// Get a list of all entities
+        ///     Get a list of all entities
         /// </summary>
         /// <returns></returns>
         public async Task<BaseCollectionResponse<TRestModel>> GetAllAsync()
         {
             var data = await ReadCollection<TEntity, TRestModel, TPrimaryKey>
                 .GetAsync(
-                _dbContext,
-                QuerySummaryInclude,
-                QueryOrder);
+                    _dbContext,
+                    QuerySummaryInclude,
+                    QueryOrder);
 
             return data;
         }
@@ -47,7 +47,7 @@ namespace CRM.Service.Repository.BaseServices
                     _dbContext,
                     QuerySummaryInclude,
                     QueryOrder,
-                    (query) => QueryFilterIsActiveStatus(query, filter.RecordActiveStatusFilter));
+                    query => QueryFilterIsActiveStatus(query, filter.RecordActiveStatusFilter));
 
             return data;
         }
@@ -71,7 +71,7 @@ namespace CRM.Service.Repository.BaseServices
                     _dbContext,
                     null,
                     QueryOrder,
-                    (query) => QueryFilterIsActiveStatus(query, EnumRecordActiveStatus.Active));
+                    query => QueryFilterIsActiveStatus(query, EnumRecordActiveStatus.Active));
 
             return data;
         }
@@ -107,10 +107,10 @@ namespace CRM.Service.Repository.BaseServices
         public async Task<BaseItemResponse<TRestModel>> CreateAsync(TRestModel model)
         {
             var data = await Create<TEntity, TRestModel, TPrimaryKey>
-                    .CreateAsync(
-                        _dbContext,
-                        model,
-                        CreateNewPrimaryKey(),
+                .CreateAsync(
+                    _dbContext,
+                    model,
+                    CreateNewPrimaryKey(),
                     QueryExtendedInclude,
                     QueryEqualsPrimaryKey);
 
@@ -123,7 +123,7 @@ namespace CRM.Service.Repository.BaseServices
         }
 
         /// <summary>
-        /// Define the order of summary fetch
+        ///     Define the order of summary fetch
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
@@ -133,7 +133,7 @@ namespace CRM.Service.Repository.BaseServices
         }
 
         /// <summary>
-        /// Define additional records to read
+        ///     Define additional records to read
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
@@ -143,7 +143,7 @@ namespace CRM.Service.Repository.BaseServices
         }
 
         /// <summary>
-        /// Define additional records to read
+        ///     Define additional records to read
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
@@ -158,19 +158,17 @@ namespace CRM.Service.Repository.BaseServices
         }
 
         private static IQueryable<TEntity> QueryFilterIsActiveStatus(
-            IQueryable<TEntity> query, 
+            IQueryable<TEntity> query,
             EnumRecordActiveStatus isActiveStatus)
         {
             if (!(query is IQueryable<IDatabaseEntityPrimaryKeyIsActive<TPrimaryKey>> queryWithActiveStatus))
-            {
                 return query;
-            }
 
             switch (isActiveStatus)
             {
                 case EnumRecordActiveStatus.Active:
                     queryWithActiveStatus = queryWithActiveStatus.Where(o => o.IsActive).AsQueryable();
-                        break;
+                    break;
 
                 case EnumRecordActiveStatus.InActive:
                     queryWithActiveStatus = queryWithActiveStatus.Where(o => o.IsActive == false).AsQueryable();

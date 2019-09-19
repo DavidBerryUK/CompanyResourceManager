@@ -1,10 +1,10 @@
-﻿using CRM.Models.Database.Interfaces;
-using System;
+﻿using System;
+using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Contacts
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class Contact : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
@@ -16,21 +16,22 @@ namespace CRM.Models.Database.Contacts
 
         public string Value { get; set; }
 
-        public bool IsActive { get; set; }
-
         //
         // Navigation to related Records
         //
         public ContactType NavContactType { get; set; }
         public ContactGroup NavContactGroup { get; set; }
 
+        public bool IsActive { get; set; }
+
 
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.ContactId;
-            set => this.ContactId = value;
+            get => ContactId;
+            set => ContactId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

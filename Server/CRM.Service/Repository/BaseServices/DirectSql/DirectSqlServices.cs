@@ -1,10 +1,10 @@
-﻿using CRM.Database.Context;
-using CRM.Models.Rest.Lists;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using CRM.Database.Context;
+using CRM.Models.Rest.Lists;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Service.Repository.BaseServices.DirectSql
 {
@@ -28,10 +28,7 @@ namespace CRM.Service.Repository.BaseServices.DirectSql
                 await DbContext.Database.OpenConnectionAsync();
                 using (var reader = await command.ExecuteReaderAsync())
                 {
-                    while (await reader.ReadAsync())
-                    {
-                        data.Add(GetLineItemFromReader(reader));
-                    }
+                    while (await reader.ReadAsync()) data.Add(GetLineItemFromReader(reader));
                 }
 
                 DbContext.Database.CloseConnection();

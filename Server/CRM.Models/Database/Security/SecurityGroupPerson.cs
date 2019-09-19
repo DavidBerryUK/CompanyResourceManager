@@ -1,11 +1,11 @@
-﻿using CRM.Models.Database.Persons;
-using System;
+﻿using System;
 using CRM.Models.Database.Interfaces;
+using CRM.Models.Database.Persons;
 
 namespace CRM.Models.Database.Security
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class SecurityGroupPerson : IDatabaseLinkEntity<Guid>
     {

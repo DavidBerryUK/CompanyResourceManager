@@ -3,8 +3,8 @@
 namespace CRM.Models.Rest.Team
 {
     /// <summary>
-    /// Summary records are returned for lists with primary information,
-    ///   note that drop down lists use the ListItem class
+    ///     Summary records are returned for lists with primary information,
+    ///     note that drop down lists use the ListItem class
     /// </summary>
     public class TeamSummary
     {
@@ -15,6 +15,5 @@ namespace CRM.Models.Rest.Team
         public string Description { get; set; }
 
         public bool IsActive { get; set; }
-
     }
 }

@@ -5,7 +5,7 @@ using CRM.Service.Repository.BaseServices.Interface;
 
 namespace CRM.Service.Repository.ContactServices.Interfaces
 {
-    public interface IContactTypeCrudService : IBaseCrudService<ContactType , ContactTypeSummary, Guid>
+    public interface IContactTypeCrudService : IBaseCrudService<ContactType, ContactTypeSummary, Guid>
     {
     }
 }

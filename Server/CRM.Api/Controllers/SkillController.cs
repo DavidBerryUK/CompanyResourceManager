@@ -1,12 +1,12 @@
-﻿using CRM.Models.Rest.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
 using CRM.Models.Rest.Skill;
 using CRM.Service.Repository.PersonServices.Interfaces;
 using CRM.Service.Repository.SkillServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {
@@ -14,27 +14,27 @@ namespace CRM.Api.Controllers
     [Route("api/skill")]
     public class SkillController : Controller
     {
+        private readonly IPersonSimpleQueryService _personSimpleQueryService;
         private readonly ISkillCrudService _skillCrudService;
         private readonly ISkillListService _skillListService;
-        private readonly IPersonSimpleQueryService _personSimpleQueryService;
 
 
         public SkillController(
             ISkillCrudService skillCrudService,
-            IPersonSimpleQueryService personSimpleQueryService, 
+            IPersonSimpleQueryService personSimpleQueryService,
             ISkillListService skillListService)
         {
             //
             // Validate Input Parameters
             //
             _skillCrudService = skillCrudService
-                ?? throw new ArgumentNullException(nameof(skillCrudService));
+                                ?? throw new ArgumentNullException(nameof(skillCrudService));
 
-            _personSimpleQueryService = personSimpleQueryService 
-                ?? throw new ArgumentNullException(nameof(personSimpleQueryService));
+            _personSimpleQueryService = personSimpleQueryService
+                                        ?? throw new ArgumentNullException(nameof(personSimpleQueryService));
 
             _skillListService = skillListService
-                ?? throw new ArgumentNullException(nameof(skillListService));
+                                ?? throw new ArgumentNullException(nameof(skillListService));
         }
 
         [HttpGet("")]
@@ -139,7 +139,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(skillId)} can not be blank");
             }
 
-            var data = await _skillCrudService.UpdateActiveStatusAsync(skillId,false);
+            var data = await _skillCrudService.UpdateActiveStatusAsync(skillId, false);
             return Ok(data);
         }
 
@@ -175,7 +175,6 @@ namespace CRM.Api.Controllers
         [HttpGet("list/person/{personId}/selected")]
         public async Task<ActionResult<List<ListItem>>> ListSelected(Guid personId)
         {
-
             var data = await _skillListService.GetSelectedForPerson(personId);
             return Ok(data);
         }

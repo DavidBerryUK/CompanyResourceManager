@@ -3,9 +3,9 @@
 namespace CRM.Models.Rest.Contacts
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
-    public class ContactSummary 
+    public class ContactSummary
     {
         public Guid ContactId { get; set; }
 
@@ -18,6 +18,5 @@ namespace CRM.Models.Rest.Contacts
         public string Value { get; set; }
 
         public bool IsActive { get; set; }
-
     }
 }

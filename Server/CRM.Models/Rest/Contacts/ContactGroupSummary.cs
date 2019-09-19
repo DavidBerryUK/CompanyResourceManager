@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace CRM.Models.Rest.Contacts
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class ContactGroupSummary
     {
@@ -17,6 +17,5 @@ namespace CRM.Models.Rest.Contacts
         public bool IsActive { get; set; }
 
         public List<ContactSummary> Contacts { get; set; }
-
     }
 }

@@ -1,12 +1,10 @@
-﻿using CRM.Models.Rest.Contacts;
-using CRM.Models.Rest.Generic;
-using CRM.Models.Rest.Lists;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CRM.Models.Rest.Contacts;
+using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.ContactServices.Interfaces;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.Api.Controllers
 {
@@ -23,8 +21,7 @@ namespace CRM.Api.Controllers
             // Validate Input Parameters
             //
             _contactValidationCrudService = contactValidationCrudService
-                ?? throw new ArgumentNullException(nameof(contactValidationCrudService));
-
+                                            ?? throw new ArgumentNullException(nameof(contactValidationCrudService));
         }
 
         [HttpGet("")]

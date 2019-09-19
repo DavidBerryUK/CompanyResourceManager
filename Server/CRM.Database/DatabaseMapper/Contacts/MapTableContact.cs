@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using CRM.Database.DatabaseMapper.Interfaces;
+using CRM.Models.Database.Contacts;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Database.DatabaseMapper.Contacts
@@ -18,7 +19,7 @@ namespace CRM.Database.DatabaseMapper.Contacts
                 throw new ArgumentNullException(nameof(modelBuilder));
             }
 
-            modelBuilder.Entity<Models.Database.Contacts.Contact>(entity =>
+            modelBuilder.Entity<Contact>(entity =>
             {
                 entity.ToTable("Contact");
 

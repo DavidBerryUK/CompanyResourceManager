@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices.LowLevel
 {
@@ -26,10 +26,7 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
             query = queryEqualsPrimaryKey(query, id);
             var data = await query.FirstOrDefaultAsync();
 
-            if (data == null)
-            {
-                response.ErrorMessage = $"{typeof(TEntity).Name} {id} not found";
-            }
+            if (data == null) response.ErrorMessage = $"{typeof(TEntity).Name} {id} not found";
 
             response.Entity = Mapper.Map<TRestModel>(data);
 

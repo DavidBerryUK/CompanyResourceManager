@@ -1,12 +1,12 @@
-﻿using CRM.Models.Rest.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
 using CRM.Models.Rest.Skill;
 using CRM.Models.Rest.Team;
 using CRM.Service.Repository.TeamServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {
@@ -18,17 +18,17 @@ namespace CRM.Api.Controllers
         private readonly ITeamListService _teamListService;
 
         public TeamController(
-            ITeamCrudService teamCrudService, 
+            ITeamCrudService teamCrudService,
             ITeamListService teamListService)
         {
             //
             // Validate Input Parameters
             //
             _teamCrudService = teamCrudService
-                    ?? throw new ArgumentNullException(nameof(teamCrudService));
+                               ?? throw new ArgumentNullException(nameof(teamCrudService));
 
             _teamListService = teamListService
-                    ?? throw new ArgumentNullException(nameof(teamListService));
+                               ?? throw new ArgumentNullException(nameof(teamListService));
         }
 
         [HttpGet("")]
@@ -118,7 +118,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(teamId)} can not be blank");
             }
 
-            var data = await _teamCrudService.UpdateActiveStatusAsync(teamId,false);
+            var data = await _teamCrudService.UpdateActiveStatusAsync(teamId, false);
             return Ok(data);
         }
 
@@ -146,7 +146,7 @@ namespace CRM.Api.Controllers
 
         [HttpGet("list/person/{personId}/all")]
         public async Task<ActionResult<List<ListItem>>> ListAllWithSelection(Guid personId)
-        { 
+        {
             var data = await _teamListService.GetAllWithSelectionForPerson(personId);
             return Ok(data);
         }
@@ -154,7 +154,6 @@ namespace CRM.Api.Controllers
         [HttpGet("list/person/{personId}/selected")]
         public async Task<ActionResult<List<ListItem>>> ListSelected(Guid personId)
         {
-
             var data = await _teamListService.GetSelectedForPerson(personId);
             return Ok(data);
         }

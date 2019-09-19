@@ -2,9 +2,6 @@
 {
     public class ValidationMessage
     {
-        public string Field { get; set; }
-        public string Message { get; set; }
-
         public ValidationMessage(string message)
         {
             Message = message;
@@ -15,5 +12,8 @@
             Field = field;
             Message = message;
         }
+
+        public string Field { get; set; }
+        public string Message { get; set; }
     }
 }

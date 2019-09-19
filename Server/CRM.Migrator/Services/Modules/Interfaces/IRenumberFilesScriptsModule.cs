@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using CRM.Migrator.Models.ScriptModels;
 
 namespace CRM.Migrator.Services.Modules.Interfaces
 {
     public interface IRenumberFilesScriptsModule
     {
-        List<string> RenameScripts(Models.ScriptModels.Task task);
+        List<string> RenameScripts(Task task);
     }
 }

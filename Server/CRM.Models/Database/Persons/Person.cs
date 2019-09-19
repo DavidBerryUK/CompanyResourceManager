@@ -1,17 +1,17 @@
-﻿using CRM.Models.Database.Assets;
+﻿using System;
+using System.Collections.Generic;
+using CRM.Models.Database.Assets;
+using CRM.Models.Database.Interfaces;
 using CRM.Models.Database.JobRoles;
 using CRM.Models.Database.Security;
 using CRM.Models.Database.Skills;
 using CRM.Models.Database.Teams;
-using System;
-using System.Collections.Generic;
-using CRM.Models.Database.Interfaces;
 using CRM.Models.Database.Workflow;
 
 namespace CRM.Models.Database.Persons
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class Person : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
@@ -24,8 +24,6 @@ namespace CRM.Models.Database.Persons
         public string Surname { get; set; }
 
         public string Email { get; set; }
-
-        public bool IsActive { get; set; }
 
         public JobRole NavJobRole { get; set; }
 
@@ -45,13 +43,16 @@ namespace CRM.Models.Database.Persons
 
         public ICollection<WorkflowInstance> NavWorkflowInstancesCreated { get; set; }
 
+        public bool IsActive { get; set; }
+
 
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.PersonId;
-            set => this.PersonId = value;
+            get => PersonId;
+            set => PersonId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

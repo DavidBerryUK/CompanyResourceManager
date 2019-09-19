@@ -1,7 +1,8 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using CRM.Database.DatabaseMapper.Interfaces;
+using CRM.Models.Database.Assets;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Database.DatabaseMapper.Assets
 {
@@ -18,7 +19,7 @@ namespace CRM.Database.DatabaseMapper.Assets
                 throw new ArgumentNullException(nameof(modelBuilder));
             }
 
-            modelBuilder.Entity<Models.Database.Assets.Asset>(entity =>
+            modelBuilder.Entity<Asset>(entity =>
             {
                 entity.ToTable("Asset");
 
@@ -29,7 +30,7 @@ namespace CRM.Database.DatabaseMapper.Assets
 
                 entity.Property(e => e.AssetTypeId)
                     .IsRequired();
-                
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);

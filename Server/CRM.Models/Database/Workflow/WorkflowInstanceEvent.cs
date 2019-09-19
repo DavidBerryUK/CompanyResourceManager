@@ -27,9 +27,10 @@ namespace CRM.Models.Database.Workflow
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.WorkflowInstanceEventId;
-            set => this.WorkflowInstanceEventId = value;
+            get => WorkflowInstanceEventId;
+            set => WorkflowInstanceEventId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

@@ -1,9 +1,8 @@
-﻿using CRM.Models.Rest.Contacts;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using CRM.Models.Rest.Contacts;
 using CRM.Service.Repository.ContactServices.Interfaces;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.Api.Controllers
 {
@@ -20,11 +19,9 @@ namespace CRM.Api.Controllers
             // Validate Input Parameters
             //
             _contactGroupCrudService = contactGroupCrudService
-                ?? throw new ArgumentNullException(nameof(_contactGroupCrudService));
-
+                                       ?? throw new ArgumentNullException(nameof(_contactGroupCrudService));
         }
 
-        
 
         [HttpGet("{contactGroupId}")]
         public async Task<ActionResult<ContactGroupSummary>> GetById(Guid contactGroupId)
@@ -43,7 +40,8 @@ namespace CRM.Api.Controllers
 
 
         [HttpPut("{contactGroupId}")]
-        public async Task<ActionResult<ContactGroupSummary>> Update(Guid contactGroupId, [FromBody] ContactGroupSummary contactGroup)
+        public async Task<ActionResult<ContactGroupSummary>> Update(Guid contactGroupId,
+            [FromBody] ContactGroupSummary contactGroup)
         {
             //
             // Validate Input Parameters
@@ -61,6 +59,5 @@ namespace CRM.Api.Controllers
             var data = await _contactGroupCrudService.UpdateAsync(contactGroupId, contactGroup);
             return Ok(data);
         }
-
     }
 }

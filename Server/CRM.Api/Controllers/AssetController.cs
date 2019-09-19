@@ -1,10 +1,10 @@
-﻿using CRM.Models.Rest.Asset;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CRM.Models.Rest.Asset;
 using CRM.Models.Rest.Generic;
 using CRM.Service.Repository.AssetServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {
@@ -96,7 +96,7 @@ namespace CRM.Api.Controllers
         [HttpPut("{assetId}/deactivate")]
         public async Task<ActionResult<AssetSummary>> Deactivate(Guid assetId)
         {
-            var data = await _assetCrudService.UpdateActiveStatusAsync(assetId,false);
+            var data = await _assetCrudService.UpdateActiveStatusAsync(assetId, false);
             return Ok(data);
         }
 

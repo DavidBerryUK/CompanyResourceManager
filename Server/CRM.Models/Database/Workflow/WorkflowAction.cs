@@ -15,21 +15,22 @@ namespace CRM.Models.Database.Workflow
 
         public int DisplayOrder { get; set; }
 
-        public bool IsActive { get; set; }
-
         //
         // Navigation to related Records
         //
 
         public WorkflowNode NavWorkFlowNode { get; set; }
 
+        public bool IsActive { get; set; }
+
 
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.WorkflowActionId;
-            set => this.WorkflowActionId = value;
+            get => WorkflowActionId;
+            set => WorkflowActionId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

@@ -7,6 +7,5 @@ namespace CRM.Service.Repository.ContactServices.Interfaces
 {
     public interface IContactValidationCrudService : IBaseCrudService<ContactValidation, ContactValidationSummary, Guid>
     {
-    
     }
 }

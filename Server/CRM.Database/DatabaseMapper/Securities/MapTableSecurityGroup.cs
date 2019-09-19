@@ -1,8 +1,8 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using CRM.Database.DatabaseMapper.Interfaces;
 using CRM.Models.Database.Security;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace CRM.Database.DatabaseMapper.Securities
 {
@@ -49,8 +49,8 @@ namespace CRM.Database.DatabaseMapper.Securities
                     .HasForeignKey(foreignKey => foreignKey.SecurityGroupId);
 
                 entity.HasMany(many => many.NavSecurityGroupSecurityPermission)
-                  .WithOne(one => one.NavSecurityGroup)
-                  .HasForeignKey(foreignKey => foreignKey.SecurityGroupId);
+                    .WithOne(one => one.NavSecurityGroup)
+                    .HasForeignKey(foreignKey => foreignKey.SecurityGroupId);
 
                 entity.Ignore(o => o.PrimaryKey);
             });

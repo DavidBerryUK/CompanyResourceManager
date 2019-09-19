@@ -1,10 +1,10 @@
-﻿using CRM.Models.Database.Teams;
-using System;
+﻿using System;
+using CRM.Models.Database.Teams;
 
 namespace CRM.Models.Database.Security
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class SecurityGroupTeam
     {

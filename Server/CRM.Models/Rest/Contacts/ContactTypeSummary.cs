@@ -3,7 +3,7 @@
 namespace CRM.Models.Rest.Contacts
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class ContactTypeSummary
     {

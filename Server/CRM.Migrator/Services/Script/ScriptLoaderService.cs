@@ -5,12 +5,12 @@ namespace CRM.Migrator.Services.Script
 {
     public class ScriptLoaderService : IScriptLoaderService
     {
-        private Models.ScriptModels.Script _scriptData;
         private readonly ILoadScriptModule _loadScriptModule;
         private readonly IRunScriptsModule _runScriptsModule;
+        private Models.ScriptModels.Script _scriptData;
 
         public ScriptLoaderService(
-            ILoadScriptModule loadScriptModule, 
+            ILoadScriptModule loadScriptModule,
             IRunScriptsModule runScriptsModule)
         {
             _loadScriptModule = loadScriptModule;
@@ -19,12 +19,12 @@ namespace CRM.Migrator.Services.Script
 
         public void LoadScript(string scriptPath)
         {
-            _scriptData = _loadScriptModule.LoadScript(scriptPath);   
+            _scriptData = _loadScriptModule.LoadScript(scriptPath);
         }
 
         public void RunScript()
         {
-            var errorList  = _runScriptsModule.RunScripts(_scriptData);
+            var errorList = _runScriptsModule.RunScripts(_scriptData);
 
             //if (errorList.Count > 0)
             //{

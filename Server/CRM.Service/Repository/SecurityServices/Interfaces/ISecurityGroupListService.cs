@@ -1,9 +1,9 @@
-﻿using CRM.Models.Database.Security;
+﻿using System;
+using System.Threading.Tasks;
+using CRM.Models.Database.Security;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.BaseServices.Interface;
-using System;
-using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.SecurityServices.Interfaces
 {

@@ -1,11 +1,10 @@
-using CRM.Api.Controllers;
-using FluentAssertions;
-using Moq;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using CRM.Api.Controllers;
 using CRM.Service.Repository.PersonServices.Interfaces;
+using FluentAssertions;
+using Moq;
 using Xunit;
-
 
 namespace CRM.Api.UnitTests.PersonControllers
 {
@@ -13,24 +12,8 @@ namespace CRM.Api.UnitTests.PersonControllers
     public class PersonControlConstructorUnitTests
     {
         [Fact]
-        public void CreateConstructorSuccess()
-        {
-            var mockPersonCrudService = new Mock<IPersonCrudService>();
-            
-
-            Action act = () =>
-            {
-                var controller = new PersonController(mockPersonCrudService.Object);
-            };
-
-            act.Should().NotThrow<Exception>();
-        }
-
-        [Fact]
         public void CreateConstructorMissingGetPersonService()
         {
-            
-
             Action act = () =>
             {
                 var controller = new PersonController(null);
@@ -40,7 +23,20 @@ namespace CRM.Api.UnitTests.PersonControllers
                 .And
                 .ParamName
                 .Should().Be("personGetService");
-                
+        }
+
+        [Fact]
+        public void CreateConstructorSuccess()
+        {
+            var mockPersonCrudService = new Mock<IPersonCrudService>();
+
+
+            Action act = () =>
+            {
+                var controller = new PersonController(mockPersonCrudService.Object);
+            };
+
+            act.Should().NotThrow<Exception>();
         }
     }
 }

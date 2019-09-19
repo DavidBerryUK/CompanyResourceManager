@@ -12,24 +12,8 @@ namespace CRM.Api.UnitTests.AssetControllers
     public class AssetControlConstructorUnitTests
     {
         [Fact]
-        public void CreateConstructorSuccess()
-        {
-            var mockAssetCrudService = new Mock<IAssetCrudService>();
-            
-
-            Action act = () =>
-            {
-                var controller = new AssetController(mockAssetCrudService.Object);
-            };
-
-            act.Should().NotThrow<Exception>();
-        }
-
-        [Fact]
         public void CreateConstructorMissingGetAssetService()
         {
-           
-
             Action act = () =>
             {
                 var controller = new AssetController(null);
@@ -39,7 +23,20 @@ namespace CRM.Api.UnitTests.AssetControllers
                 .And
                 .ParamName
                 .Should().Be("assetGetService");
-                
+        }
+
+        [Fact]
+        public void CreateConstructorSuccess()
+        {
+            var mockAssetCrudService = new Mock<IAssetCrudService>();
+
+
+            Action act = () =>
+            {
+                var controller = new AssetController(mockAssetCrudService.Object);
+            };
+
+            act.Should().NotThrow<Exception>();
         }
     }
 }

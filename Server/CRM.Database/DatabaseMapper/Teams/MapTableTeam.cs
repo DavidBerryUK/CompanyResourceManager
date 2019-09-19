@@ -1,7 +1,8 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using CRM.Database.DatabaseMapper.Interfaces;
+using CRM.Models.Database.Teams;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Database.DatabaseMapper.Teams
 {
@@ -18,7 +19,7 @@ namespace CRM.Database.DatabaseMapper.Teams
                 throw new ArgumentNullException(nameof(modelBuilder));
             }
 
-            modelBuilder.Entity<Models.Database.Teams.Team>(entity =>
+            modelBuilder.Entity<Team>(entity =>
             {
                 entity.ToTable("Team");
 
@@ -44,8 +45,8 @@ namespace CRM.Database.DatabaseMapper.Teams
                     .HasForeignKey(foreignKey => foreignKey.TeamId);
 
                 entity.HasMany(many => many.NavSecurityGroupTeams)
-                   .WithOne(one => one.NavTeam)
-                   .HasForeignKey(foreignKey => foreignKey.TeamId);
+                    .WithOne(one => one.NavTeam)
+                    .HasForeignKey(foreignKey => foreignKey.TeamId);
 
                 entity.Ignore(o => o.PrimaryKey);
             });

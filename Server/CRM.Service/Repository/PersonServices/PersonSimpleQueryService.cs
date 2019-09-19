@@ -21,10 +21,9 @@ namespace CRM.Service.Repository.PersonServices
                                   ?? throw new ArgumentNullException(nameof(crmDatabaseContext));
         }
 
-        public async Task<BaseCollectionResponse<PersonSummary>> GetWithFilterAsync(Guid? jobRoleId = null, Guid? skillId = null)
+        public async Task<BaseCollectionResponse<PersonSummary>> GetWithFilterAsync(Guid? jobRoleId = null,
+            Guid? skillId = null)
         {
-            
-
             var response = new BaseCollectionResponse<PersonSummary>();
 
             var query = _crmDatabaseContext
@@ -34,14 +33,10 @@ namespace CRM.Service.Repository.PersonServices
                 .AsQueryable();
 
             if (jobRoleId.HasValue && jobRoleId.Value != Guid.Empty)
-            {
                 query = query.Where(o => o.JobRoleId == jobRoleId.Value);
-            }
 
             if (skillId.HasValue && skillId.Value != Guid.Empty)
-            {
                 query = query.Where(o => o.NavPersonSkills.Any(skill => skill.SkillId == skillId.Value));
-            }
 
             query = query.OrderBy(order => order.Surname)
                 .ThenBy(order => order.Forename);
@@ -52,7 +47,5 @@ namespace CRM.Service.Repository.PersonServices
 
             return response;
         }
-
-        
     }
 }

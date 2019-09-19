@@ -8,10 +8,7 @@
         {
             _databaseHelper = new DatabaseHelper(connectionName);
 
-            if (_databaseHelper.DoesDatabaseExist(databaseName) == false)
-            {
-                CreateDatabase(databaseName);
-            }
+            if (_databaseHelper.DoesDatabaseExist(databaseName) == false) CreateDatabase(databaseName);
         }
 
         private void CreateDatabase(string databaseName)

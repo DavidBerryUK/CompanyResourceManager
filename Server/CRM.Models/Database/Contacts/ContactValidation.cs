@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Contacts
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class ContactValidation : IDatabaseEntityPrimaryKey<Guid>
     {
@@ -23,9 +22,10 @@ namespace CRM.Models.Database.Contacts
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.ContactValidationId;
-            set => this.ContactValidationId = value;
+            get => ContactValidationId;
+            set => ContactValidationId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

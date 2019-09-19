@@ -8,13 +8,13 @@ namespace CRM.Migrator.Services.Migration
 {
     internal class MigrationService : IMigrationService
     {
-        private readonly ISetupAuditTableService _setupAuditTableService;
         private readonly IOptions<ApplicationSettings> _configuration;
         private readonly IScriptLoaderService _scriptLoaderService;
+        private readonly ISetupAuditTableService _setupAuditTableService;
 
         public MigrationService(
-            ISetupAuditTableService setupAuditTableService, 
-            IOptions<ApplicationSettings> configuration, 
+            ISetupAuditTableService setupAuditTableService,
+            IOptions<ApplicationSettings> configuration,
             IScriptLoaderService scriptLoaderService)
         {
             _setupAuditTableService = setupAuditTableService;
@@ -24,9 +24,9 @@ namespace CRM.Migrator.Services.Migration
 
         public void RunMigration(string deploymentScriptName)
         {
-             _setupAuditTableService.SetupAuditTable(
-                 _configuration.Value.Audit.DatabaseConnection, 
-                 _configuration.Value.Audit.DatabaseSchema);
+            _setupAuditTableService.SetupAuditTable(
+                _configuration.Value.Audit.DatabaseConnection,
+                _configuration.Value.Audit.DatabaseSchema);
 
             _scriptLoaderService.LoadScript(deploymentScriptName);
             _scriptLoaderService.RunScript();

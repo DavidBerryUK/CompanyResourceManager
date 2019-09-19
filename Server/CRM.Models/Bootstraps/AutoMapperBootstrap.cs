@@ -8,7 +8,8 @@ namespace CRM.Models.Bootstraps
     {
         public void ConfigureAutoMapperTransformations(IMapperConfigurationExpression cfg)
         {
-            var mappers = new ClassListFactory().CreateListOfClassesWithInterface<IAutoMapperConfig>(GetType().Assembly);
+            var mappers =
+                new ClassListFactory().CreateListOfClassesWithInterface<IAutoMapperConfig>(GetType().Assembly);
             mappers.ForEach(o => o.Map(cfg));
         }
     }

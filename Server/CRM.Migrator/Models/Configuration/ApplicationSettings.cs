@@ -16,10 +16,7 @@ namespace CRM.Migrator.Models.Configuration
                 o.Name.Equals(connectionStringName, StringComparison.InvariantCultureIgnoreCase));
 
             // ReSharper disable once ConvertIfStatementToReturnStatement
-            if (connectionStringConfig == null)
-            {
-                return "";
-            }
+            if (connectionStringConfig == null) return "";
 
             return connectionStringConfig.ConnectionString;
         }

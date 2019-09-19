@@ -1,4 +1,5 @@
-﻿using CRM.Database.DatabaseMapper.Interfaces;
+﻿using System;
+using CRM.Database.DatabaseMapper.Interfaces;
 using CRM.Models.Database.Assets;
 using CRM.Models.Database.Contacts;
 using CRM.Models.Database.JobApplicants;
@@ -9,7 +10,6 @@ using CRM.Models.Database.Skills;
 using CRM.Models.Database.Teams;
 using CRM.Utilities.Reflection;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace CRM.Database.Context
 {
@@ -17,23 +17,11 @@ namespace CRM.Database.Context
     {
         public CrmDatabaseContext(DbContextOptions options)
             : base(options)
-        { }
+        {
+        }
 
         public CrmDatabaseContext()
-        { }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //
-            // Validate Parameters
-            //
-            if (modelBuilder == null)
-            {
-                throw new ArgumentNullException(nameof(modelBuilder));
-            }
-
-            var mappers = new ClassListFactory().CreateListOfClassesWithInterface<IDatabaseTableMapperConfig>(GetType().Assembly);
-            mappers.ForEach(o => o.Map(modelBuilder));
         }
 
         public virtual DbSet<Asset> Assets { get; set; }
@@ -55,5 +43,20 @@ namespace CRM.Database.Context
         public virtual DbSet<ContactType> ContactTypes { get; set; }
         public virtual DbSet<ContactGroup> ContactGroups { get; set; }
         public virtual DbSet<ContactValidation> ContactValidations { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //
+            // Validate Parameters
+            //
+            if (modelBuilder == null)
+            {
+                throw new ArgumentNullException(nameof(modelBuilder));
+            }
+
+            var mappers =
+                new ClassListFactory().CreateListOfClassesWithInterface<IDatabaseTableMapperConfig>(GetType().Assembly);
+            mappers.ForEach(o => o.Map(modelBuilder));
+        }
     }
 }

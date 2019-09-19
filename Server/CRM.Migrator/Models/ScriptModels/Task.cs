@@ -12,7 +12,7 @@
         {
             get
             {
-                switch (this.Enabled.ToLower().Trim())
+                switch (Enabled.ToLower().Trim())
                 {
                     case "y":
                     case "yes":
@@ -21,6 +21,7 @@
                     case "1":
                         return true;
                 }
+
                 return false;
             }
         }

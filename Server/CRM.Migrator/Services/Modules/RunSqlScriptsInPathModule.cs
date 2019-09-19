@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 using CRM.Migrator.Models.AuditModels;
 using CRM.Migrator.Models.Configuration;
 using CRM.Migrator.Models.ScriptModels;
@@ -12,8 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace CRM.Migrator.Services.Modules
 {
-    
-
     public class RunSqlScriptsInPathModule : IRunSqlScriptsInPathModule
     {
         private readonly IOptions<ApplicationSettings> _applicationSettings;
@@ -29,10 +26,7 @@ namespace CRM.Migrator.Services.Modules
             var connectionString = _applicationSettings.Value.GetConnectionString(taskData.ConnectionStringName);
 
             var baseDirectory = new DirectoryInfo(Environment.CurrentDirectory);
-            while (!baseDirectory.Name.EndsWith("CRM.Migrator"))
-            {
-                baseDirectory = baseDirectory.Parent;
-            }
+            while (!baseDirectory.Name.EndsWith("CRM.Migrator")) baseDirectory = baseDirectory.Parent;
 
             var scanDirectory = Path.Combine(baseDirectory.FullName, taskData.Path);
 
@@ -55,27 +49,23 @@ namespace CRM.Migrator.Services.Modules
                 return errorList;
             }
 
-            var files = Directory.GetFiles(scanDirectory, "*.sql").OrderBy(o=> o);
+            var files = Directory.GetFiles(scanDirectory, "*.sql").OrderBy(o => o);
 
             foreach (var file in files)
             {
                 var fileInfo = new FileInfo(file);
-                var audit = new ScriptAudit() {FullName = fileInfo.FullName, Name = fileInfo.Name};
+                var audit = new ScriptAudit {FullName = fileInfo.FullName, Name = fileInfo.Name};
 
                 try
                 {
-
                     Console.WriteLine("Running ScriptData:" + fileInfo.Name);
 
                     var databaseHelper = new DatabaseHelper(connectionString);
                     var fileContent = File.ReadAllText(fileInfo.FullName);
                     var queries = fileContent.Split(new[] {"GO"}, StringSplitOptions.RemoveEmptyEntries);
                     foreach (var query in queries)
-                    {
                         //Console.WriteLine(query);
                         databaseHelper.ExecuteSql(query);
-                    }
-
                 }
                 catch (Exception ex)
                 {
@@ -89,7 +79,7 @@ namespace CRM.Migrator.Services.Modules
                     errorList.Add("SCRIPT:" + file + Environment.NewLine + ex.Message);
                 }
                 finally
-                { 
+                {
                     var auditSchema = _applicationSettings.Value.Audit.DatabaseSchema;
                     ScriptTableRepository.Add(audit, auditSchema, connectionString);
                 }
@@ -98,19 +88,14 @@ namespace CRM.Migrator.Services.Modules
             Console.WriteLine("");
 
             return errorList;
-
         }
 
         private static void PrintExceptionMessages(Exception ex)
         {
             Console.WriteLine(ex.Message);
             if (ex.InnerException != null)
-            {
                 // ReSharper disable once TailRecursiveCall
                 PrintExceptionMessages(ex.InnerException);
-            }
         }
-
-       
     }
 }

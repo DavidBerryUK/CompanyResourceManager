@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore;
 namespace CRM.Service.Repository.BaseServices.LowLevel
 {
     internal static class Update<TEntity, TRestModel, TPrimaryKey>
-            where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
-            where TRestModel : class, new()
+        where TEntity : class, IDatabaseEntityPrimaryKey<TPrimaryKey>
+        where TRestModel : class, new()
     {
         public static async Task<BaseItemResponse<TRestModel>> UpdateAsync(
             CrmDatabaseContext dbContext,
@@ -32,16 +32,14 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
                 response.ErrorMessage = $"{nameof(TEntity)} {id} not found";
                 return response;
             }
-            else
-            {
-                Mapper.Map(  model, data);
-                await dbContext.SaveChangesAsync();
-            }
+
+            Mapper.Map(model, data);
+            await dbContext.SaveChangesAsync();
 
             return await ReadItem<TEntity, TRestModel, TPrimaryKey>
                 .GetAsync(
-                    dbContext, 
-                    id, 
+                    dbContext,
+                    id,
                     queryInclude,
                     queryEqualsPrimaryKey);
         }

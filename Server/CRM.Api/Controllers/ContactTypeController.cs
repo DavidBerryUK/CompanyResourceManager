@@ -1,12 +1,11 @@
-﻿using CRM.Models.Rest.Contacts;
-using CRM.Models.Rest.Generic;
-using CRM.Models.Rest.Lists;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CRM.Models.Rest.Contacts;
+using CRM.Models.Rest.Generic;
+using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.ContactServices.Interfaces;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace CRM.Api.Controllers
 {
@@ -23,8 +22,7 @@ namespace CRM.Api.Controllers
             // Validate Input Parameters
             //
             _contactTypeCrudService = contactTypeCrudService
-                ?? throw new ArgumentNullException(nameof(contactTypeCrudService));
-
+                                      ?? throw new ArgumentNullException(nameof(contactTypeCrudService));
         }
 
         [HttpGet("")]
@@ -69,7 +67,8 @@ namespace CRM.Api.Controllers
 
 
         [HttpPut("{contactTypeId}")]
-        public async Task<ActionResult<ContactTypeSummary>> Update(Guid contactTypeId, [FromBody] ContactTypeSummary contactType)
+        public async Task<ActionResult<ContactTypeSummary>> Update(Guid contactTypeId,
+            [FromBody] ContactTypeSummary contactType)
         {
             //
             // Validate Input Parameters

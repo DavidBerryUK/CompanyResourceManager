@@ -1,4 +1,5 @@
-﻿using CRM.Service.Repository.AssetServices;
+﻿using System;
+using CRM.Service.Repository.AssetServices;
 using CRM.Service.Repository.AssetServices.Interfaces;
 using CRM.Service.Repository.AssetTypeServices;
 using CRM.Service.Repository.AssetTypeServices.Interfaces;
@@ -16,7 +17,6 @@ using CRM.Service.Repository.SkillServices.Interfaces;
 using CRM.Service.Repository.TeamServices;
 using CRM.Service.Repository.TeamServices.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace CRM.Api.StartupServices
 {
@@ -46,7 +46,7 @@ namespace CRM.Api.StartupServices
 
             //  Teams
             services.AddTransient<ITeamCrudService, TeamExtendedCrudService>();
-            services.AddTransient<ITeamListService,TeamListService>();
+            services.AddTransient<ITeamListService, TeamListService>();
 
             //  Assets Types
             services.AddTransient<IAssetCrudService, AssetExtendedCrudService>();
@@ -63,7 +63,6 @@ namespace CRM.Api.StartupServices
 
             //
             services.AddTransient(typeof(IDirectSqlServices<>), typeof(DirectSqlServices<>));
-            
         }
     }
 }

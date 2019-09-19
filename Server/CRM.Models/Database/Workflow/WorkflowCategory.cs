@@ -12,20 +12,21 @@ namespace CRM.Models.Database.Workflow
 
         public string Description { get; set; }
 
-        public bool IsActive { get; set; }
-
         //
         // Navigation to related Records
         //
 
         public ICollection<Workflow> NavWorkflows { get; set; }
 
+        public bool IsActive { get; set; }
+
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.WorkflowCategoryId;
-            set => this.WorkflowCategoryId = value;
+            get => WorkflowCategoryId;
+            set => WorkflowCategoryId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

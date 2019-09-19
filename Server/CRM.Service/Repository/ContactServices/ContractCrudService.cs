@@ -7,7 +7,7 @@ using CRM.Service.Repository.ContactServices.Interfaces;
 
 namespace CRM.Service.Repository.ContactServices
 {
-    public class ContactCrudService : BaseCrudService<Contact,  ContactSummary, Guid>, IContactCrudService
+    public class ContactCrudService : BaseCrudService<Contact, ContactSummary, Guid>, IContactCrudService
     {
         public ContactCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {

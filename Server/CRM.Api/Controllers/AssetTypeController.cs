@@ -1,11 +1,11 @@
-﻿using CRM.Models.Rest.AssetType;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CRM.Models.Rest.AssetType;
 using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.AssetTypeServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {
@@ -13,7 +13,6 @@ namespace CRM.Api.Controllers
     [Route("api/assettype")]
     public class AssetTypeController : Controller
     {
-        
         private readonly IAssetTypeCrudService _assetTypeCrudService;
 
 
@@ -24,7 +23,7 @@ namespace CRM.Api.Controllers
             // Validate Input Parameters
             //
             _assetTypeCrudService = assetTypeCrudService
-                                   ?? throw new ArgumentNullException(nameof(assetTypeCrudService));
+                                    ?? throw new ArgumentNullException(nameof(assetTypeCrudService));
         }
 
         [HttpGet("")]
@@ -73,7 +72,8 @@ namespace CRM.Api.Controllers
 
 
         [HttpPut("{assetTypeId}")]
-        public async Task<ActionResult<AssetTypeExtended>> Update(Guid assetTypeId, [FromBody] AssetTypeExtended assetType)
+        public async Task<ActionResult<AssetTypeExtended>> Update(Guid assetTypeId,
+            [FromBody] AssetTypeExtended assetType)
         {
             //
             // Validate Input Parameters
@@ -118,7 +118,7 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(assetTypeId)} can not be blank");
             }
 
-            var data = await _assetTypeCrudService.UpdateActiveStatusAsync(assetTypeId,false);
+            var data = await _assetTypeCrudService.UpdateActiveStatusAsync(assetTypeId, false);
             return Ok(data);
         }
 
@@ -133,9 +133,8 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(assetTypeId)} can not be blank");
             }
 
-            var data = await _assetTypeCrudService.UpdateActiveStatusAsync(assetTypeId,true);
+            var data = await _assetTypeCrudService.UpdateActiveStatusAsync(assetTypeId, true);
             return Ok(data);
         }
-
     }
 }

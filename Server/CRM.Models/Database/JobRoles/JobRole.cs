@@ -1,12 +1,12 @@
-﻿using CRM.Models.Database.Persons;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using CRM.Models.Database.Interfaces;
+using CRM.Models.Database.Persons;
 
 namespace CRM.Models.Database.JobRoles
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class JobRole : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
@@ -14,20 +14,21 @@ namespace CRM.Models.Database.JobRoles
 
         public string Name { get; set; }
 
-        public bool IsActive { get; set; }
-
         //
         // Navigation to related Records
         //
 
         public ICollection<Person> NavPerson { get; set; }
 
+        public bool IsActive { get; set; }
+
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.JobRoleId;
-            set => this.JobRoleId = value;
+            get => JobRoleId;
+            set => JobRoleId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

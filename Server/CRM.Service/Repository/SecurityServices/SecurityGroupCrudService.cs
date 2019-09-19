@@ -1,14 +1,16 @@
-﻿using CRM.Database.Context;
+﻿using System;
+using System.Linq;
+using CRM.Database.Context;
 using CRM.Models.Database.Security;
 using CRM.Models.Rest.Security;
 using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.SecurityServices.Interfaces;
-using System;
-using System.Linq;
 
 namespace CRM.Service.Repository.SecurityServices
 {
-    public class SecurityGroupExtendedCrudService : BaseExtendedCrudService<SecurityGroup, SecurityGroupSummary, SecurityGroupExtended, Guid>, ISecurityGroupCrudService
+    public class SecurityGroupExtendedCrudService :
+        BaseExtendedCrudService<SecurityGroup, SecurityGroupSummary, SecurityGroupExtended, Guid>,
+        ISecurityGroupCrudService
     {
         public SecurityGroupExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
         {

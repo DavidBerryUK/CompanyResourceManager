@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CRM.Migrator.Models.AuditModels;
 using CRM.Migrator.Models.ScriptModels;
-using CRM.Migrator.Services.Database;
 using CRM.Migrator.Services.Modules.Interfaces;
 
 namespace CRM.Migrator.Services.Modules
@@ -14,12 +12,9 @@ namespace CRM.Migrator.Services.Modules
         public List<string> RenameScripts(Task task)
         {
             var errorList = new List<string>();
-            
+
             var baseDirectory = new DirectoryInfo(Environment.CurrentDirectory);
-            while (!baseDirectory.Name.EndsWith("CRM.Migrator"))
-            {
-                baseDirectory = baseDirectory.Parent;
-            }
+            while (!baseDirectory.Name.EndsWith("CRM.Migrator")) baseDirectory = baseDirectory.Parent;
 
             var scanDirectory = Path.Combine(baseDirectory.FullName, task.Path);
 
@@ -32,7 +27,7 @@ namespace CRM.Migrator.Services.Modules
             }
 
             var files = Directory.GetFiles(scanDirectory, "*.sql").OrderBy(o => o);
-            
+
             var fileNumberIncrement = 50;
             var fileNumber = fileNumberIncrement;
             var fileNumberDigits = 6;
@@ -41,12 +36,12 @@ namespace CRM.Migrator.Services.Modules
             {
                 var fileInfo = new FileInfo(file);
                 var oldFileName = fileInfo.Name;
-                var fileNumberPrefix = fileNumber.ToString().PadLeft(fileNumberDigits,'0');
+                var fileNumberPrefix = fileNumber.ToString().PadLeft(fileNumberDigits, '0');
                 var newFileName = fileNumberPrefix + "-" + StringPrefixNumberFromFileName(oldFileName);
                 Console.WriteLine($"Rename {oldFileName}  to  {newFileName}");
                 fileNumber = fileNumber + fileNumberIncrement;
 
-                fileInfo.MoveTo( fileInfo.DirectoryName  +  "\\" + newFileName);
+                fileInfo.MoveTo(fileInfo.DirectoryName + "\\" + newFileName);
             }
 
             Console.WriteLine("");
@@ -59,13 +54,8 @@ namespace CRM.Migrator.Services.Modules
             var characters = filename.ToCharArray();
 
             for (var i = 0; i < characters.Length; i++)
-            {
-                
-                if ( !char.IsDigit(characters[i]) && characters[i] != '-' )
-                {
+                if (!char.IsDigit(characters[i]) && characters[i] != '-')
                     return filename.Substring(i);
-                }
-            }
 
             return "";
         }
@@ -74,10 +64,8 @@ namespace CRM.Migrator.Services.Modules
         {
             Console.WriteLine(ex.Message);
             if (ex.InnerException != null)
-            {
                 // ReSharper disable once TailRecursiveCall
                 PrintExceptionMessages(ex.InnerException);
-            }
         }
     }
 }

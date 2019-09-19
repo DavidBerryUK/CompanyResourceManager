@@ -1,11 +1,11 @@
-﻿using CRM.Models.Database.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Contacts
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class ContactType : IDatabaseEntityPrimaryKeyIsActive<Guid>
     {
@@ -15,8 +15,6 @@ namespace CRM.Models.Database.Contacts
 
         public Guid ContactValidationId { get; set; }
 
-        public bool IsActive { get; set; }
-
 
         //
         // Navigation to related Records
@@ -25,12 +23,15 @@ namespace CRM.Models.Database.Contacts
 
         public ContactValidation NavContactValidation { get; set; }
 
+        public bool IsActive { get; set; }
+
         // Interface IDatabaseEntityPrimaryKey
         public Guid PrimaryKey
         {
-            get => this.ContactTypeId;
-            set => this.ContactTypeId = value;
+            get => ContactTypeId;
+            set => ContactTypeId = value;
         }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

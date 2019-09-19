@@ -3,8 +3,8 @@
 namespace CRM.Models.Rest.Workflow
 {
     /// <summary>
-    /// Summary records are returned for lists with primary information,
-    ///   note that drop down lists use the ListItem class
+    ///     Summary records are returned for lists with primary information,
+    ///     note that drop down lists use the ListItem class
     /// </summary>
     public class WorkflowCategorySummary
     {
@@ -15,6 +15,5 @@ namespace CRM.Models.Rest.Workflow
         public string Description { get; set; }
 
         public bool IsActive { get; set; }
-
     }
 }

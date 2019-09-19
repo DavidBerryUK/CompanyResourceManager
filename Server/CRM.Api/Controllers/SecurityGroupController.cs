@@ -1,12 +1,12 @@
-﻿using CRM.Models.Rest.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
 using CRM.Models.Rest.Security;
 using CRM.Models.Rest.Skill;
 using CRM.Service.Repository.SecurityServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {
@@ -25,10 +25,10 @@ namespace CRM.Api.Controllers
             // Validate Input Parameters
             //
             _securityGroupCrudService = securityGroupCrudService
-                ?? throw new ArgumentNullException(nameof(securityGroupCrudService));
+                                        ?? throw new ArgumentNullException(nameof(securityGroupCrudService));
 
             _securityGroupListService = securityGroupListService
-                ?? throw new ArgumentNullException(nameof(securityGroupListService));
+                                        ?? throw new ArgumentNullException(nameof(securityGroupListService));
         }
 
         [HttpGet("")]
@@ -73,7 +73,8 @@ namespace CRM.Api.Controllers
 
 
         [HttpPut("{securityGroupId}")]
-        public async Task<ActionResult<SkillExtended>> Update(Guid securityGroupId, [FromBody] SecurityGroupExtended securityGroup)
+        public async Task<ActionResult<SkillExtended>> Update(Guid securityGroupId,
+            [FromBody] SecurityGroupExtended securityGroup)
         {
             //
             // Validate Input Parameters
@@ -129,9 +130,7 @@ namespace CRM.Api.Controllers
             // Validate Input Parameters
             //
             if (securityGroupId == Guid.Empty)
-            {
                 throw new ArgumentException($"{nameof(securityGroupId)} can not be blank");
-            }
 
             var data = await _securityGroupCrudService.UpdateActiveStatusAsync(securityGroupId, true);
             return Ok(data);
@@ -155,7 +154,6 @@ namespace CRM.Api.Controllers
         [HttpGet("list/person/{personId}/selected")]
         public async Task<ActionResult<List<ListItem>>> ListSelected(Guid personId)
         {
-
             var data = await _securityGroupListService.GetSelectedForPerson(personId);
             return Ok(data);
         }
@@ -168,7 +166,8 @@ namespace CRM.Api.Controllers
         }
 
         [HttpPut("list/{securityGroupId}/person/{personId}/{selected}")]
-        public async Task<ActionResult<List<ListItem>>> ListUnselected(Guid securityGroupId, Guid personId, bool selected)
+        public async Task<ActionResult<List<ListItem>>> ListUnselected(Guid securityGroupId, Guid personId,
+            bool selected)
         {
             await _securityGroupListService.Update(securityGroupId, personId, selected);
             return Ok();

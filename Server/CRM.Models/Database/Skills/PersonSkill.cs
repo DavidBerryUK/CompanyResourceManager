@@ -1,11 +1,11 @@
-﻿using CRM.Models.Database.Interfaces;
+﻿using System;
+using CRM.Models.Database.Interfaces;
 using CRM.Models.Database.Persons;
-using System;
 
 namespace CRM.Models.Database.Skills
 {
     /// <summary>
-    /// Database Entity Object
+    ///     Database Entity Object
     /// </summary>
     public class PersonSkill : IDatabaseLinkEntity<Guid>
     {
