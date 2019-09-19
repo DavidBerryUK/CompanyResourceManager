@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Security
 {
     /// <summary>
     ///     Database Entity Object
     /// </summary>
-    public class SecurityPermission
+    public class SecurityPermission: IDatabaseEntitySupportsActiveProperty
     {
         public Guid SecurityPermissionId { get; set; }
 

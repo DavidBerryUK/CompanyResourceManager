@@ -8,17 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Rest\BaseResponse\Validation\**" />
+    <Compile Remove="Rest\Lists\Validation\**" />
+    <EmbeddedResource Remove="Rest\BaseResponse\Validation\**" />
+    <EmbeddedResource Remove="Rest\Lists\Validation\**" />
+    <None Remove="Rest\BaseResponse\Validation\**" />
+    <None Remove="Rest\Lists\Validation\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="FluentValidation" Version="8.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CRM.Utilities\CRM.Utilities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Rest\BaseResponse\Validation\" />
-    <Folder Include="Rest\Lists\Validation\" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@ namespace CRM.Models.Database.Contacts
     /// <summary>
     ///     Database Entity Object
     /// </summary>
-    public class ContactGroup : IDatabaseEntityPrimaryKeyIsActive<Guid>
+    public class ContactGroup : IDatabaseEntityPrimaryKey<Guid>, IDatabaseEntitySupportsActiveProperty
     {
         public Guid ContactGroupId { get; set; }
 

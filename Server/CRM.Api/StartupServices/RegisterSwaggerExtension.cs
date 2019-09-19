@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 
 namespace CRM.Api.StartupServices
@@ -17,7 +18,6 @@ namespace CRM.Api.StartupServices
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info {Title = "Company Resource Manager API", Version = "v1"});
-                //   c.CustomSchemaIds(i => i.FullName);
             });
         }
 
@@ -29,7 +29,12 @@ namespace CRM.Api.StartupServices
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Company Resource Manager API"); });
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Company Resource Manager API");
+                options.DocExpansion(docExpansion: DocExpansion.None);
+
+            });
         }
     }
 }

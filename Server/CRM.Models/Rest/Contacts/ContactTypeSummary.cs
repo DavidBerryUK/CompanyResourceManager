@@ -11,6 +11,8 @@ namespace CRM.Models.Rest.Contacts
 
         public string Name { get; set; }
 
+        public Guid ContactValidationId { get; set; }
+
         public bool IsActive { get; set; }
     }
 }

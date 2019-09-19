@@ -7,7 +7,7 @@ namespace CRM.Models.Database.Security
     /// <summary>
     ///     Database Entity Object
     /// </summary>
-    public class SecurityGroup : IDatabaseEntityPrimaryKeyIsActive<Guid>
+    public class SecurityGroup : IDatabaseEntityPrimaryKey<Guid>, IDatabaseEntitySupportsActiveProperty
     {
         public Guid SecurityGroupId { get; set; }
 

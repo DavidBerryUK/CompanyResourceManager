@@ -30,6 +30,10 @@ namespace CRM.Models.Database.Workflow
             get => WorkflowInstanceEventId;
             set => WorkflowInstanceEventId = value;
         }
+        public bool IsActive {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
 
         // Interface IDatabaseEntityPrimaryKey
     }

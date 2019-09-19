@@ -3,7 +3,7 @@ using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Workflow
 {
-    public class WorkflowAction : IDatabaseEntityPrimaryKeyIsActive<Guid>
+    public class WorkflowAction : IDatabaseEntityPrimaryKey<Guid>, IDatabaseEntitySupportsActiveProperty
     {
         public Guid WorkflowActionId { get; set; }
 

@@ -13,7 +13,7 @@ namespace CRM.Models.Database.Persons
     /// <summary>
     ///     Database Entity Object
     /// </summary>
-    public class Person : IDatabaseEntityPrimaryKeyIsActive<Guid>
+    public class Person : IDatabaseEntityPrimaryKey<Guid>, IDatabaseEntitySupportsActiveProperty
     {
         public Guid PersonId { get; set; }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using CRM.Database.Context;
+﻿using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
@@ -9,6 +6,9 @@ using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.BaseServices.Interface;
 using CRM.Service.Repository.BaseServices.LowLevel;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices
 {
@@ -161,17 +161,23 @@ namespace CRM.Service.Repository.BaseServices
             IQueryable<TEntity> query,
             EnumRecordActiveStatus isActiveStatus)
         {
-            if (!(query is IQueryable<IDatabaseEntityPrimaryKeyIsActive<TPrimaryKey>> queryWithActiveStatus))
+
+
+            if (!(query is IQueryable<IDatabaseEntitySupportsActiveProperty>))
                 return query;
 
             switch (isActiveStatus)
             {
                 case EnumRecordActiveStatus.Active:
-                    queryWithActiveStatus = queryWithActiveStatus.Where(o => o.IsActive).AsQueryable();
+                    query = query
+                        .Where(o => o.IsActive)
+                        .AsQueryable();
                     break;
 
                 case EnumRecordActiveStatus.InActive:
-                    queryWithActiveStatus = queryWithActiveStatus.Where(o => o.IsActive == false).AsQueryable();
+                    query = query
+                        .Where(o => o.IsActive == false)
+                        .AsQueryable();
                     break;
 
                 case EnumRecordActiveStatus.All:
@@ -181,7 +187,7 @@ namespace CRM.Service.Repository.BaseServices
                     throw new ArgumentOutOfRangeException();
             }
 
-            return queryWithActiveStatus as IQueryable<TEntity>;
+            return query;
         }
     }
 }

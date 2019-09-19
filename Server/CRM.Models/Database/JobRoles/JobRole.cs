@@ -8,7 +8,7 @@ namespace CRM.Models.Database.JobRoles
     /// <summary>
     ///     Database Entity Object
     /// </summary>
-    public class JobRole : IDatabaseEntityPrimaryKeyIsActive<Guid>
+    public class JobRole : IDatabaseEntityPrimaryKey<Guid>, IDatabaseEntitySupportsActiveProperty
     {
         public Guid JobRoleId { get; set; }
 

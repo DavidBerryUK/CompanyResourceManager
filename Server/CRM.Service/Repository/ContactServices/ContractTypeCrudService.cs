@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using CRM.Database.Context;
+﻿using CRM.Database.Context;
 using CRM.Models.Database.Contacts;
 using CRM.Models.Rest.Contacts;
 using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.ContactServices.Interfaces;
+using System;
+using System.Linq;
 
 namespace CRM.Service.Repository.ContactServices
 {

@@ -7,7 +7,7 @@ namespace CRM.Models.Database.Assets
     /// <summary>
     ///     Database Entity Object
     /// </summary>
-    public class AssetType : IDatabaseEntityPrimaryKeyIsActive<Guid>
+    public class AssetType : IDatabaseEntityPrimaryKey<Guid>, IDatabaseEntitySupportsActiveProperty
     {
         public Guid AssetTypeId { get; set; }
 

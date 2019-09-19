@@ -8,7 +8,7 @@ namespace CRM.Models.Database.Teams
     /// <summary>
     ///     Database Entity Object
     /// </summary>
-    public class Team : IDatabaseEntityPrimaryKey<Guid>
+    public class Team : IDatabaseEntityPrimaryKey<Guid>, IDatabaseEntitySupportsActiveProperty
     {
         public Guid TeamId { get; set; }
 

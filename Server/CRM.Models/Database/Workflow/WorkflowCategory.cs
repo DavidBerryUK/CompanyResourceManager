@@ -4,7 +4,7 @@ using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Database.Workflow
 {
-    public class WorkflowCategory : IDatabaseEntityPrimaryKeyIsActive<Guid>
+    public class WorkflowCategory : IDatabaseEntityPrimaryKey<Guid>, IDatabaseEntitySupportsActiveProperty
     {
         public Guid WorkflowCategoryId { get; set; }
 

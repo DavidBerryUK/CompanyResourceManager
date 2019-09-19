@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices.LowLevel
 {
@@ -33,8 +33,11 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
             }
             else
             {
-                if (data is IDatabaseEntityPrimaryKeyIsActive<TPrimaryKey> dataIsActive)
-                    dataIsActive.IsActive = isActive;
+                if (data is IDatabaseEntitySupportsActiveProperty)
+                {
+                    data.IsActive = isActive;
+                }
+
                 await dbContext.SaveChangesAsync();
                 response.Entity = Mapper.Map<TRestModel>(data);
             }

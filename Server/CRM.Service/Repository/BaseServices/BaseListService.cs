@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
@@ -12,6 +8,10 @@ using CRM.Service.Repository.BaseServices.Interface;
 using CRM.Service.Repository.BaseServices.Models;
 using CRM.Service.Repository.BaseServices.Sql;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices
 {

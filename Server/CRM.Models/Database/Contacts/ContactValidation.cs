@@ -25,6 +25,11 @@ namespace CRM.Models.Database.Contacts
             get => ContactValidationId;
             set => ContactValidationId = value;
         }
+        public bool IsActive
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
 
         // Interface IDatabaseEntityPrimaryKey
     }

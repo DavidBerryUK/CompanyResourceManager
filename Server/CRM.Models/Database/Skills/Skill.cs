@@ -7,7 +7,7 @@ namespace CRM.Models.Database.Skills
     /// <summary>
     ///     Database Entity Object
     /// </summary>
-    public class Skill : IDatabaseEntityPrimaryKey<Guid>
+    public class Skill : IDatabaseEntityPrimaryKey<Guid>, IDatabaseEntitySupportsActiveProperty
     {
         public Guid SkillId { get; set; }
 

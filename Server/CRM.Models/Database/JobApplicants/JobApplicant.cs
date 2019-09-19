@@ -29,6 +29,12 @@ namespace CRM.Models.Database.JobApplicants
             set => JobApplicantId = value;
         }
 
+        public bool IsActive
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
         // Interface IDatabaseEntityPrimaryKey
     }
 }

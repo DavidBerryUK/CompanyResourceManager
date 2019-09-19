@@ -1,4 +1,5 @@
 ﻿using System;
+using CRM.Models.Database.Interfaces;
 
 namespace CRM.Models.Rest.Asset
 {

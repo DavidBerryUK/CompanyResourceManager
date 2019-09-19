@@ -18,7 +18,10 @@ namespace CRM.Utilities.Reflection
             var list = new List<T>();
 
             // ReSharper disable once LoopCanBeConvertedToQuery
-            foreach (var type in types) list.Add((T) Activator.CreateInstance(type));
+            foreach (var type in types)
+            {
+                list.Add((T) Activator.CreateInstance(type));
+            }
 
             return list;
         }

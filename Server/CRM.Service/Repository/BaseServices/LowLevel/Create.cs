@@ -22,8 +22,10 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
             var entity = Mapper.Map<TEntity>(model);
             entity.PrimaryKey = primaryKey;
 
-            if (entity is IDatabaseEntityPrimaryKeyIsActive<TPrimaryKey> entityWithIsAction)
-                entityWithIsAction.IsActive = true;
+            if (entity is IDatabaseEntitySupportsActiveProperty)
+            {
+                entity.IsActive = true;
+            }
 
             await dbContext.AddAsync(entity);
             await dbContext.SaveChangesAsync();
