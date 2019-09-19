@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CRM.Models.Rest.Generic;
+﻿using CRM.Models.Rest.Generic;
 using CRM.Models.Rest.Lists;
 using CRM.Models.Rest.Skill;
 using CRM.Models.Rest.Team;
 using CRM.Service.Repository.TeamServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {

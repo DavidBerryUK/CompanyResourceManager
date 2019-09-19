@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CRM.Models.Rest.Asset;
+﻿using CRM.Models.Rest.Asset;
 using CRM.Models.Rest.Generic;
 using CRM.Service.Repository.AssetServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {

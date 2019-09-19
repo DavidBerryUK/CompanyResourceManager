@@ -1,8 +1,8 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.Configuration;
 using CRM.Models.Bootstraps;
 using Microsoft.AspNetCore.Builder;
+using System;
 
 namespace CRM.Api.StartupServices
 {

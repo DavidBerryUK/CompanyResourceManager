@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using CRM.Database.Context;
+﻿using CRM.Database.Context;
 using CRM.Models.Database.Assets;
 using CRM.Models.Rest.Asset;
 using CRM.Service.Repository.AssetServices.Interfaces;
 using CRM.Service.Repository.BaseServices;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace CRM.Service.Repository.AssetServices
 {

@@ -1,5 +1,4 @@
-﻿using System;
-using CRM.Service.Repository.AssetServices;
+﻿using CRM.Service.Repository.AssetServices;
 using CRM.Service.Repository.AssetServices.Interfaces;
 using CRM.Service.Repository.AssetTypeServices;
 using CRM.Service.Repository.AssetTypeServices.Interfaces;
@@ -17,6 +16,7 @@ using CRM.Service.Repository.SkillServices.Interfaces;
 using CRM.Service.Repository.TeamServices;
 using CRM.Service.Repository.TeamServices.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace CRM.Api.StartupServices
 {

@@ -1,7 +1,7 @@
-﻿using System;
-using CRM.Database.DatabaseMapper.Interfaces;
+﻿using CRM.Database.DatabaseMapper.Interfaces;
 using CRM.Models.Database.Workflow;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace CRM.Database.DatabaseMapper.Workflows
 {

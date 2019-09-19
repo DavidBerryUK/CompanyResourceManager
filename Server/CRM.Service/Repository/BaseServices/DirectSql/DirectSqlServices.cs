@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using CRM.Database.Context;
+using CRM.Models.Rest.Lists;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using CRM.Database.Context;
-using CRM.Models.Rest.Lists;
-using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Service.Repository.BaseServices.DirectSql
 {

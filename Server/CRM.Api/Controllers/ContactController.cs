@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using CRM.Models.Rest.Contacts;
+﻿using CRM.Models.Rest.Contacts;
 using CRM.Service.Repository.ContactServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace CRM.Api.Controllers
 {

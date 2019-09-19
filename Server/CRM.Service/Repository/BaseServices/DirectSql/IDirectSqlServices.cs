@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using CRM.Models.Rest.Lists;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CRM.Models.Rest.Lists;
 
 namespace CRM.Service.Repository.BaseServices.DirectSql
 {
