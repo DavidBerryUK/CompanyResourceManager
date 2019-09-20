@@ -28,12 +28,13 @@ export default class ContactTypeList extends BasePage implements IComponentMetaD
 
    // Create the configuration for development of the component
   //
-  public listConfiguration: NavigationListConfig<ContactTypeSummaryModel> =
-    new NavigationListConfig<ContactTypeSummaryModel>(
+  public listConfiguration: NavigationListConfig<ContactTypeSummaryModel, ContactTypeSummaryModel> =
+    new NavigationListConfig<ContactTypeSummaryModel, ContactTypeSummaryModel>(
     'Contact Type',                                     // Title
     new NavigationCrudContactType(),                    // Skill Navigation Provider
     ContactTypeRepositoryFactory.getRepository(),       // Skill Repository Provider
-    new ModelFactoryContactTypeSummary(),               // Map Java Object to Typescript Skill Object
+    new ModelFactoryContactTypeSummary(),               // Map Java Object to Typescript  Object
+    new ModelFactoryContactTypeSummary(),               // Map Java Object to Typescript  Object
     new FilterContractTypeService(),                    // Filter Skill list (user text search)
     (data: ContactTypeSummaryModel) => `${data.name}`,  // Format of text for cell line 1 (header)
     (data: ContactTypeSummaryModel) => ``,              // Format of text for cell line 2 (body)

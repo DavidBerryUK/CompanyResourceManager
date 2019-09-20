@@ -1,4 +1,5 @@
-import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
+import SkillExtendedModel                       from '@/repositories/models/skill/SkillExtendedModel';
+import IComponentMetaData                       from '@/components/interfaces/ComponentMetaDataInterfaces';
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterSkillService                       from '@/services/filters/SkillFilterService/FilterSkillService';
@@ -29,12 +30,13 @@ export default class SkillList extends BasePage implements IComponentMetaData {
 
    // Create the configuration for development of the component
   //
-  public listConfiguration: NavigationListConfig<SkillSummaryModel> =
-    new NavigationListConfig<SkillSummaryModel>(
+  public listConfiguration: NavigationListConfig<SkillSummaryModel, SkillExtendedModel> =
+    new NavigationListConfig<SkillSummaryModel, SkillExtendedModel>(
     'Skills',                                     // Title
     new NavigationCrudSkill(),                    // Skill Navigation Provider
     SkillRepositoryFactory.getRepository(),       // Skill Repository Provider
     new ModelFactorySkillExtended(),              // Map Java Object to Typescript Skill Object
+    new ModelFactorySkillExtended(),
     new FilterSkillService(),                     // Filter Skill list (user text search)
     (data: SkillSummaryModel) => `${data.name}`,  // Format of text for cell line 1 (header)
     (data: SkillSummaryModel) => ``,              // Format of text for cell line 2 (body)

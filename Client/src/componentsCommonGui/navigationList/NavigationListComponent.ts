@@ -32,7 +32,7 @@ export default class NavigationListComponent extends Vue  implements IComponentM
   public componentDescription: string = 'BaseListPage';
   // IComponentMetaData
 
-  @Prop() public configuration!: NavigationListConfig<IApiModel>;
+  @Prop() public configuration!: NavigationListConfig<IApiModel, IApiModel>;
 
   public theme: ThemeSettings = new ThemeSettings();
   public isLoading: boolean = true;
@@ -156,7 +156,7 @@ export default class NavigationListComponent extends Vue  implements IComponentM
   // issues notification when a record has successfully updated via the
   // api
   private listenToModelUpdates() {
-    NotificationFactory.instance.getNotificationInstance<IApiModel>(this.configuration.summaryEntityName)
+    NotificationFactory.instance.getNotificationInstance<IApiModel>(this.configuration.extendedEntityName)
       .onItemCreated(this, (model: IApiModel) => {
         // console.log('[1] Navigation List Component - list to updates - item created');
         this.updateList(model, true);

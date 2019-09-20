@@ -1,9 +1,11 @@
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
+import AssetTypeExtendedModel                   from '@/repositories/models/assetType/AssetTypeExtendedModel';
 import AssetTypeRepositoryFactory               from '@/repositories/factory/AssetTypeRepositoryFactory';
-import AssetTypeSummaryModel                   from '@/repositories/models/assetType/AssetTypeSummaryModel';
+import AssetTypeSummaryModel                    from '@/repositories/models/assetType/AssetTypeSummaryModel';
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterAssetTypeService                   from '@/services/filters/assetTypeFilterService/FilterAssetTypeService';
+import ModelFactoryAssetTypeExtended            from '@/repositories/modelFactories/asset/ModelFactoryAssetTypeExtended';
 import ModelFactoryAssetTypeSummary             from '@/repositories/modelFactories/asset/ModelFactoryAssetTypeSummary';
 import NavigationCrudAssetType                  from '@/routeNavigation/NavigationCrudAssetType';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
@@ -27,13 +29,14 @@ export default class AssetTypeList extends BasePage implements IComponentMetaDat
   public componentDescription: string = 'Displays a list of asset types';
   // IComponentMetaData
 
-  public listConfiguration: NavigationListConfig<AssetTypeSummaryModel> =
-  new NavigationListConfig<AssetTypeSummaryModel>(
+  public listConfiguration: NavigationListConfig<AssetTypeSummaryModel, AssetTypeExtendedModel> =
+  new NavigationListConfig<AssetTypeSummaryModel, AssetTypeExtendedModel>(
   'Asset Types',                                              // Title
-  new NavigationCrudAssetType(),                              // People Navigation Provider
-  AssetTypeRepositoryFactory.getRepository(),                 // People Repository Provider
-  new ModelFactoryAssetTypeSummary(),                         // Map Java Object to Typescript People Object
-  new FilterAssetTypeService(),                               // Filter People list (user text search)
+  new NavigationCrudAssetType(),                              // AssetType Navigation Provider
+  AssetTypeRepositoryFactory.getRepository(),                 // AssetType Repository Provider
+  new ModelFactoryAssetTypeSummary(),                         // Map Java Object to Typescript AssetType Object
+  new ModelFactoryAssetTypeExtended(),
+  new FilterAssetTypeService(),                               // Filter AssetType list (user text search)
   (data: AssetTypeSummaryModel) => `${data.name}`,           // Format of text for cell line 1 (header)
   (data: AssetTypeSummaryModel) => ``,                       // Format of text for cell line 2 (body)
   (data: AssetTypeSummaryModel) => `${this.footerMessage(data)}`,  // Format of text for cell line 3 (footer)

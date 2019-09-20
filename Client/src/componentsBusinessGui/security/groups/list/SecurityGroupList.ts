@@ -1,12 +1,13 @@
-
 import { IComponentMetaData }                   from '@/components/interfaces/ComponentMetaDataInterfaces';
 import BasePage                                 from '@/componentsBusinessGui/base/BasePage';
 import Component                                from 'vue-class-component';
 import FilterSecurityGroupService               from '@/services/filters/SecurityFilters/FilterSecurityGroupService';
+import ModelFactorySecurityGroupExtended        from '@/repositories/modelFactories/securityGroup/ModelFactorySecurityGroupExtended';
 import ModelFactorySecurityGroupSummary         from '@/repositories/modelFactories/securityGroup/ModelFactorySecurityGroupSummary';
 import NavigationCrudSecurityGroup              from '@/routeNavigation/NavigationCrudSecurityGroup';
 import NavigationListComponent                  from '@/componentsCommonGui/navigationList/NavigationListComponent';
 import NavigationListConfig                     from '@/componentsCommonGui/navigationList/NavigationListConfig';
+import SecurityGroupExtendedModel               from '@/repositories/models/securityGroup/SecurityGroupExtendedModel';
 import SecurityGroupRepositoryFactory           from '@/repositories/factory/SecurityGroupRepositoryFactory';
 import SecurityGroupSummaryModel                from '@/repositories/models/securityGroup/SecurityGroupSummaryModel';
 
@@ -30,12 +31,13 @@ export default class SecurityGroupList extends BasePage implements IComponentMet
 
    // Create the configuration for development of the component
   //
-  public listConfiguration: NavigationListConfig<SecurityGroupSummaryModel> =
-    new NavigationListConfig<SecurityGroupSummaryModel>(
+  public listConfiguration: NavigationListConfig<SecurityGroupSummaryModel, SecurityGroupExtendedModel> =
+    new NavigationListConfig<SecurityGroupSummaryModel, SecurityGroupExtendedModel>(
     'Security Groups',                                          // Title
     new NavigationCrudSecurityGroup(),                          // Security Group Navigation Provider
     SecurityGroupRepositoryFactory.getRepository(),             // Security Group Repository Provider
     new ModelFactorySecurityGroupSummary(),                     // Map Java Object to Typescript Security Group Object
+    new ModelFactorySecurityGroupExtended(),
     new FilterSecurityGroupService(),                           // Filter Security Group list (user text search)
     (data: SecurityGroupSummaryModel) => `${data.name}`,        // Format of text for cell line 1 (header)
     (data: SecurityGroupSummaryModel) => `${data.description}`, // Format of text for cell line 2 (body)
