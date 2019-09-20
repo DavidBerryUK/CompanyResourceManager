@@ -31,7 +31,7 @@ namespace CRM.Api.Controllers
             //
             // Validate Input Parameters
             //
-            var data = await _contactTypeCrudService.GetAllAsync();
+            var data = await _contactTypeCrudService.GetAllAsSummaryAsync();
             return Ok(data);
         }
 
@@ -46,12 +46,12 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(filter));
             }
 
-            var data = await _contactTypeCrudService.GetFilteredAsync(filter);
+            var data = await _contactTypeCrudService.GetFilteredAsSummaryAsync(filter);
             return Ok(data);
         }
 
         [HttpGet("{contactTypeId}")]
-        public async Task<ActionResult<ContactTypeSummary>> GetById(Guid contactTypeId)
+        public async Task<ActionResult<ContactTypeExtended>> GetById(Guid contactTypeId)
         {
             //
             // Validate Input Parameters
@@ -61,14 +61,14 @@ namespace CRM.Api.Controllers
                 throw new ArgumentException($"{nameof(contactTypeId)} can not be blank");
             }
 
-            var data = await _contactTypeCrudService.GetItemAsync(contactTypeId);
+            var data = await _contactTypeCrudService.GetItemAsExtendedAsync(contactTypeId);
             return Ok(data);
         }
 
 
         [HttpPut("{contactTypeId}")]
-        public async Task<ActionResult<ContactTypeSummary>> Update(Guid contactTypeId,
-            [FromBody] ContactTypeSummary contactType)
+        public async Task<ActionResult<ContactTypeExtended>> Update(Guid contactTypeId,
+            [FromBody] ContactTypeExtended contactType)
         {
             //
             // Validate Input Parameters
@@ -83,12 +83,12 @@ namespace CRM.Api.Controllers
                 throw new ArgumentNullException(nameof(contactType));
             }
 
-            var data = await _contactTypeCrudService.UpdateAsync(contactTypeId, contactType);
+            var data = await _contactTypeCrudService.UpdateExtendedAsync(contactTypeId, contactType);
             return Ok(data);
         }
 
         [HttpPost("")]
-        public async Task<ActionResult<ContactTypeSummary>> Create([FromBody] ContactTypeSummary contactType)
+        public async Task<ActionResult<ContactTypeExtended>> Create([FromBody] ContactTypeExtended contactType)
         {
             //
             // Validate Input Parameters

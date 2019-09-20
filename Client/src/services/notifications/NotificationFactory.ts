@@ -18,6 +18,7 @@ import SecurityGroupSummaryModel                from '@/repositories/models/secu
 import SkillExtendedModel                       from '@/repositories/models/skill/SkillExtendedModel';
 import TeamExtendedModel                        from '@/repositories/models/team/TeamExtendedModel';
 import TeamSummaryModel                         from '@/repositories/models/team/TeamSummaryModel';
+import ContactTypeExtendedModel from '@/repositories/models/contactType/ContactTypeExtendedModel';
 
 export default class NotificationFactory {
 
@@ -43,6 +44,7 @@ export default class NotificationFactory {
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetTypeExtendedModel>(new AssetTypeExtendedModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<AssetTypeSummmaryModel>(new AssetTypeSummmaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<ContactSummaryModel>(new ContactSummaryModel().entityName));
+            this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<ContactTypeExtendedModel>(new ContactTypeExtendedModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<ContactTypeSummaryModel>(new ContactTypeSummaryModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<JobRoleExtendedModel>(new JobRoleExtendedModel().entityName));
             this.factoryInstance.createNotificationInstance(new ModelUpdateNotifications<JobRoleSummaryModel>(new JobRoleSummaryModel().entityName));

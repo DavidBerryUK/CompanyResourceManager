@@ -12,7 +12,7 @@ export default class ContactValidationRepositoryFactory {
     //  as providing a filtered object list ( providing the server supports the functionality )
     public static getRepository(): GenericApiExtendedRepository<ContactValidationSummaryModel, ContactValidationSummaryModel, ListFilter> {
         const repository = new GenericApiExtendedRepository<ContactValidationSummaryModel, ContactValidationSummaryModel, ListFilter>(
-            'api/contact/type',
+            'api/contact/validation',
             new ModelFactoryContactValidationSummary(),
             new ModelFactoryContactValidationSummary());
         return repository;

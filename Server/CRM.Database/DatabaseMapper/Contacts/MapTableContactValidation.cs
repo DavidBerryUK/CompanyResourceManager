@@ -3,6 +3,7 @@ using CRM.Models.Database.Contacts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace CRM.Database.DatabaseMapper.Contacts
 {
@@ -43,6 +44,7 @@ namespace CRM.Database.DatabaseMapper.Contacts
                     .HasForeignKey(foreignKey => foreignKey.ContactValidationId);
 
                 entity.Ignore(o => o.PrimaryKey);
+                entity.Ignore(o => o.IsActive);
             });
         }
     }

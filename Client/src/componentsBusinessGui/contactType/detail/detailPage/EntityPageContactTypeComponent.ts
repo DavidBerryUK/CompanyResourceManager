@@ -14,6 +14,8 @@ import NavigationCrudContactType                from '@/routeNavigation/Navigati
 import ContactValidationRepositoryFactory       from '@/repositories/factory/ContactValidationRepositoryFactory';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/ListItem/ListItemModel';
+import ContactTypeExtendedModel                 from '@/repositories/models/contactType/ContactTypeExtendedModel';
+import ModelFactoryContactTypeExtended from '@/repositories/modelFactories/contact/ModelFactoryContactTypeExtended';
 
 
 @Component({
@@ -25,14 +27,14 @@ import ListItemModel                            from '@/repositories/models/List
   },
 })
 export default class EntityPageContactTypeComponent
-  extends EntityPageBaseComponent<ContactTypeSummaryModel, EntityPageModelWithReferences<ContactTypeSummaryModel>>
+  extends EntityPageBaseComponent<ContactTypeExtendedModel, EntityPageModelWithReferences<ContactTypeExtendedModel>>
   implements IRouteBeforeNavigationCheck {
 
   constructor() {
     super(
       new EntityPageModelWithReferences(),
       ContactTypeRepositoryFactory.getRepository(),
-      new ModelFactoryContactTypeSummary(),
+      new ModelFactoryContactTypeExtended(),
       new NavigationCrudContactType());
 
     this.entityModel.headerTitle = 'Contact Types';
@@ -52,11 +54,11 @@ export default class EntityPageContactTypeComponent
   public retrieveSecondaryData(contractListener: ContractListener) {
     // Load Job Role List
     //
-    const jobRoleRepository = ContactValidationRepositoryFactory.getRepository();
-    jobRoleRepository
+    const contactValidationRepository = ContactValidationRepositoryFactory.getRepository();
+    contactValidationRepository
       .getActiveList()
       .onSuccess((list: GenericCollectionModel<ListItemModel>) => {
-        this.entityModel.jobRolesList = list.items;
+        this.entityModel.contactValidationList = list.items;
       })
       .contractListener(contractListener);
   }

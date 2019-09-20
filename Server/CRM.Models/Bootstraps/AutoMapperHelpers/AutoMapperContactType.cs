@@ -1,9 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Models.Bootstraps.Interfaces;
 using CRM.Models.Database.Contacts;
 using CRM.Models.Rest.Contacts;
 using CRM.Models.Rest.Lists;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CRM.Models.Bootstraps.AutoMapperHelpers
 {
@@ -15,6 +15,8 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
             // Map database to rest objects
             //
             cfg.CreateMap<ContactType, ContactTypeSummary>();
+            cfg.CreateMap<ContactType, ContactTypeExtended>()
+                .ForMember(dest => dest.ContactValidationName, opt => opt.MapFrom(source => source.NavContactValidation.Name));
 
             // Map to List Item
             //
@@ -25,6 +27,7 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
             // Map rest objects back to database entity objects
             //
             cfg.CreateMap<ContactTypeSummary, ContactType>();
+            cfg.CreateMap<ContactTypeExtended, ContactType>();
         }
     }
 }

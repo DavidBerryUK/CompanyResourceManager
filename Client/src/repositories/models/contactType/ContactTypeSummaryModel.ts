@@ -6,11 +6,13 @@ export default class ContactTypeSummaryModel implements IApiModel {
 
     public contactTypeId: string;
     public name: string;
+    public contactValidationId: string;
     public isActive: boolean;
 
     constructor() {
         this.contactTypeId = '00000000-0000-0000-0000-000000000000';
         this.name = '';
+        this.contactValidationId = '';
         this.isActive = false;
     }
 

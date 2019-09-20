@@ -15,7 +15,6 @@ namespace CRM.Models.Database.Contacts
 
         public Guid ContactValidationId { get; set; }
 
-
         //
         // Navigation to related Records
         //

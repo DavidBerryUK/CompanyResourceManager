@@ -6,5 +6,6 @@ export default class EntityPageModelWithReferences<T extends IApiModel> extends 
 
     public jobRolesList: Array<ListItemModel> = new Array<ListItemModel>();
     public AssetTypesList: Array<ListItemModel> = new Array<ListItemModel>();
+    public contactValidationList: Array<ListItemModel> = new Array<ListItemModel>();
 
 }
