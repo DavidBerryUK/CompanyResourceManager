@@ -17,7 +17,6 @@
     <!-- BODY -->
     <div slot="body">
 
-      <h2>IsLoading : {{entityModel.isLoading}}</h2>
       <!-- ASSET - VIEW EDIT MAIN DETAILS -->
       <crm-entity-segment-view-edit-controller 
           :entityModel="entityModel" 

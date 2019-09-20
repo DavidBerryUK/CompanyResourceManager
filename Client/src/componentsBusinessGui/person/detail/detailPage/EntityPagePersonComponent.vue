@@ -17,8 +17,7 @@
     <!-- BODY -->
     <div slot="body">
 
-      <h2>IsLoading : {{entityModel.isLoading}}</h2>
-      <!-- PERSON - VIEW EDIT MAIN DETAILS -->
+      <!-- VIEW / EDIT MAIN DETAILS -->
       <crm-entity-segment-view-edit-controller 
           :entityModel="entityModel" 
           title="Person Details" 
@@ -28,7 +27,7 @@
         <crm-entity-segment-person-view slot="view" :entityModel="entityModel" />
         <crm-entity-segment-person-edit slot="edit" :entityModel="entityModel" />
       </crm-entity-segment-view-edit-controller>
-      <!-- PERSON - VIEW EDIT MAIN DETAILS -->
+      <!-- VIEW / EDIT MAIN DETAILS -->
 
       <v-layout v-if="entityModel.isExistingRecord" row pt-2 pb-2>         
 

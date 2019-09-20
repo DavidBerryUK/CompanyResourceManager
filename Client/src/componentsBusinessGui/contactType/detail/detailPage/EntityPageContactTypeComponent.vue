@@ -17,8 +17,7 @@
     <!-- BODY -->
     <div slot="body">
 
-      <h2>IsLoading : {{entityModel.isLoading}}</h2>
-      <!-- Skill - VIEW EDIT MAIN DETAILS -->
+      <!-- VIEW / EDIT MAIN DETAILS -->
       <crm-entity-segment-view-edit-controller 
           :entityModel="entityModel" 
           title="Contact Type Details" 
@@ -28,7 +27,7 @@
         <crm-entity-segment-contacttype-view slot="view" :entityModel="entityModel" />
         <crm-entity-segment-contacttype-edit slot="edit" :entityModel="entityModel" />
       </crm-entity-segment-view-edit-controller>
-      <!-- SKILL - VIEW EDIT MAIN DETAILS -->
+      <!-- VIEW / EDIT MAIN DETAILS -->
       
     </div>
     <!-- BODY -->

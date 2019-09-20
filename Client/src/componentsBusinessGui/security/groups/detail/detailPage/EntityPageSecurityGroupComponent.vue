@@ -17,8 +17,7 @@
     <!-- BODY -->
     <div slot="body">
 
-      <h2>IsLoading : {{entityModel.isLoading}}</h2>
-      <!-- JOB ROLE - VIEW EDIT MAIN DETAILS -->
+      <!-- VIEW / EDIT MAIN DETAILS -->
       <crm-entity-segment-view-edit-controller 
           :entityModel="entityModel" 
           title="Security Group Details" 
@@ -28,7 +27,7 @@
         <crm-entity-segment-securitygroup-view slot="view" :entityModel="entityModel" />
         <crm-entity-segment-securitygroup-edit slot="edit" :entityModel="entityModel" />
       </crm-entity-segment-view-edit-controller>
-      <!-- JOB ROLE - VIEW EDIT MAIN DETAILS -->
+      <!-- VIEW / EDIT MAIN DETAILS -->
       
     </div>
     <!-- BODY -->
