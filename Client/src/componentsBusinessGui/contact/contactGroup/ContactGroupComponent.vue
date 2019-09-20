@@ -5,7 +5,8 @@
     <template value="true" v-for="(contact, index) in contactGroup.contacts">
       <crm-contact-line   :key="index" 
                           :contact="contact" 
-                          :contactTypes="contactTypes">
+                          :contactTypes="contactTypes"
+                          :contactValidations="contactValidations">
       </crm-contact-line>
     </template> 
   </div>

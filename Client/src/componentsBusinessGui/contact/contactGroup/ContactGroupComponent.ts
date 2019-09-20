@@ -1,4 +1,4 @@
-import { IRouteBeforeNavigationCheck }        from '@/router/interfaces/NavigationCheckInterfaces';
+import { IRouteBeforeNavigationCheck }          from '@/router/interfaces/NavigationCheckInterfaces';
 import { Prop }                                 from 'vue-property-decorator';
 import { Watch }                                from 'vue-property-decorator';
 import Component                                from 'vue-class-component';
@@ -6,11 +6,12 @@ import ContactGroupRepositoryFactory            from '@/repositories/factory/Con
 import ContactGroupSummaryModel                 from '@/repositories/models/contactGroup/ContactGroupSummaryModel';
 import ContactLineComponent                     from '../contactLine/ContactLineComponent';
 import ContactTypeRepositoryFactory             from '@/repositories/factory/ContactTypeRepositoryFactory';
+import ContactValidationRepositoryFactory       from '@/repositories/factory/ContactValidationRepositoryFactory';
+import ContactValidationSummaryModel            from '@/repositories/models/contactValidation/ContactValidationSummaryModel';
 import ContractListener                         from '@/repositories/contracts/ContractListener';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
 import ListItemModel                            from '@/repositories/models/ListItem/ListItemModel';
 import Vue                                      from 'vue';
-
 
 @Component({
   components: {
@@ -23,6 +24,7 @@ export default class ContactGroupComponent extends Vue implements IRouteBeforeNa
 
   public contactGroup: ContactGroupSummaryModel = new ContactGroupSummaryModel();
   public contactTypes: Array<ListItemModel> = new Array<ListItemModel>();
+  public contactValidations: Array<ContactValidationSummaryModel> = new Array<ContactValidationSummaryModel>();
 
   private isLoading: boolean = true;
 
@@ -50,6 +52,7 @@ export default class ContactGroupComponent extends Vue implements IRouteBeforeNa
 
     const contactGroupRepository = ContactGroupRepositoryFactory.getRepository();
     const contactTypeRepository = ContactTypeRepositoryFactory.getRepository();
+    const contactValidationRepository = ContactValidationRepositoryFactory.getRepository();
     const listener = new ContractListener();
 
     this.isLoading = true;
@@ -59,15 +62,24 @@ export default class ContactGroupComponent extends Vue implements IRouteBeforeNa
         this.isLoading = false;
       });
 
+    // get contracts already in the group
     contactGroupRepository.getById(this.contactGroupId)
       .onSuccess((model: ContactGroupSummaryModel) => {
         this.contactGroup = model;
       })
       .contractListener(listener);
 
+      // get a list of contact types
     contactTypeRepository.getActiveList()
       .onSuccess((contactTypeCollection: GenericCollectionModel<ListItemModel>) => {
         this.contactTypes = contactTypeCollection.items;
+      })
+      .contractListener(listener);
+
+      // get a list of contact validation types
+    contactValidationRepository.getAllAsSummary()
+      .onSuccess((contactValidationCollection: GenericCollectionModel<ContactValidationSummaryModel>) => {
+        this.contactValidations = contactValidationCollection.items;
       })
       .contractListener(listener);
 
