@@ -1,20 +1,19 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using AutoMapper;
-using CRM.Models.Bootstraps.Interfaces;
+﻿using AutoMapper;
 using CRM.Models.Database.Contacts;
 using CRM.Models.Rest.Contacts;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
-namespace CRM.Models.Bootstraps.AutoMapperHelpers
+namespace CRM.Api.AutoMapperRegistration
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    internal class AutoMapperContactGroup : IAutoMapperConfig
+    internal class AutoMapperContactGroup : Profile
     {
-        public void Map(Profile profile)
+        public AutoMapperContactGroup()
         {
             // Map database to rest objects
             //
-            profile.CreateMap<ContactGroup, ContactGroupSummary>()
+            CreateMap<ContactGroup, ContactGroupSummary>()
                 .ForMember(
                     dest => dest.Contacts,
                     map => map.MapFrom(

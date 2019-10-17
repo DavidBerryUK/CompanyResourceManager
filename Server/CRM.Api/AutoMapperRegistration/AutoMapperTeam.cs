@@ -1,31 +1,30 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using AutoMapper;
-using CRM.Models.Bootstraps.Interfaces;
+﻿using AutoMapper;
 using CRM.Models.Database.Teams;
 using CRM.Models.Rest.Lists;
 using CRM.Models.Rest.Team;
+using System.Diagnostics.CodeAnalysis;
 
-namespace CRM.Models.Bootstraps.AutoMapperHelpers
+namespace CRM.Api.AutoMapperRegistration
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    internal class AutoMapperTeam : IAutoMapperConfig
+    internal class AutoMapperTeam : Profile
     {
-        public void Map(Profile profile)
+        public AutoMapperTeam()
         {
             // Map database to rest objects
             //
-            profile.CreateMap<Team, TeamSummary>();
-            profile.CreateMap<Team, TeamExtended>();
+            CreateMap<Team, TeamSummary>();
+            CreateMap<Team, TeamExtended>();
 
             // Map to List Item
             //
-            profile.CreateMap<Team, ListItem>()
+            CreateMap<Team, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.TeamId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
 
             // Map rest objects back to database entity objects
             //
-            profile.CreateMap<TeamExtended, Team>();
+            CreateMap<TeamExtended, Team>();
         }
     }
 }

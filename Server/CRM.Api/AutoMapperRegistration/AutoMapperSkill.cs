@@ -1,31 +1,30 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using AutoMapper;
-using CRM.Models.Bootstraps.Interfaces;
+﻿using AutoMapper;
 using CRM.Models.Database.Skills;
 using CRM.Models.Rest.Lists;
 using CRM.Models.Rest.Skill;
+using System.Diagnostics.CodeAnalysis;
 
-namespace CRM.Models.Bootstraps.AutoMapperHelpers
+namespace CRM.Api.AutoMapperRegistration
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    internal class AutoMapperSkill : IAutoMapperConfig
+    internal class AutoMapperSkill : Profile
     {
-        public void Map(Profile profile)
+        public AutoMapperSkill()
         {
             // Map database to rest objects
             //
-            profile.CreateMap<Skill, SkillSummary>();
-            profile.CreateMap<Skill, SkillExtended>();
+            CreateMap<Skill, SkillSummary>();
+            CreateMap<Skill, SkillExtended>();
 
             // Map to List Item
             //
-            profile.CreateMap<Skill, ListItem>()
+            CreateMap<Skill, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.SkillId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
 
             // Map rest objects back to database entity objects
             //
-            profile.CreateMap<SkillExtended, Skill>();
+            CreateMap<SkillExtended, Skill>();
         }
     }
 }

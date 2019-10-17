@@ -1,21 +1,20 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using AutoMapper;
-using CRM.Models.Bootstraps.Interfaces;
+﻿using AutoMapper;
 using CRM.Models.Database.Assets;
 using CRM.Models.Rest.Asset;
 using CRM.Models.Rest.Lists;
+using System.Diagnostics.CodeAnalysis;
 
-namespace CRM.Models.Bootstraps.AutoMapperHelpers
+namespace CRM.Api.AutoMapperRegistration
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    internal class AutoMapperAsset : IAutoMapperConfig
+    internal class AutoMapperAsset : Profile
     {
-        public void Map(Profile profile)
+        public AutoMapperAsset()
         {
             // Map database to rest objects
             //
-            profile.CreateMap<Asset, AssetSummary>();
-            profile.CreateMap<Asset, AssetExtended>()
+            CreateMap<Asset, AssetSummary>();
+            CreateMap<Asset, AssetExtended>()
                 .ForMember(dest => dest.AssetId, opt => opt.MapFrom(source => source.AssetId))
                 .ForMember(dest => dest.AssetTypeId, opt => opt.MapFrom(source => source.AssetTypeId))
                 .ForMember(dest => dest.AssetTypeName, opt => opt.MapFrom(source => source.NavAssetType.Name))
@@ -27,13 +26,13 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
 
             // Map to List Item
             //
-            profile.CreateMap<Asset, ListItem>()
+            CreateMap<Asset, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.AssetTypeId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
 
             // Map rest objects back to database entity objects
             //
-            profile.CreateMap<AssetExtended, Asset>();
+            CreateMap<AssetExtended, Asset>();
         }
     }
 }
