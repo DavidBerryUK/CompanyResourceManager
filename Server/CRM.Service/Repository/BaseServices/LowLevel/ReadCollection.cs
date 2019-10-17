@@ -16,6 +16,7 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
     {
         public static async Task<BaseCollectionResponse<TRestModel>> GetAsync(
             CrmDatabaseContext dbContext,
+            IMapper mapper,
             Func<IQueryable<TEntity>, IQueryable<TEntity>> queryInclude = null,
             Func<IQueryable<TEntity>, IQueryable<TEntity>> querySort = null,
             Func<IQueryable<TEntity>, IQueryable<TEntity>> queryFilter = null)
@@ -41,7 +42,7 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
 
             var data = await query.ToListAsync();
 
-            response.Items = Mapper.Map<List<TRestModel>>(data);
+            response.Items = mapper.Map<List<TRestModel>>(data);
 
             return response;
         }

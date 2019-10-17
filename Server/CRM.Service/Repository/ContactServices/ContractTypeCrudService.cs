@@ -1,18 +1,19 @@
-﻿using CRM.Database.Context;
+﻿using AutoMapper;
+using CRM.Database.Context;
 using CRM.Models.Database.Contacts;
 using CRM.Models.Rest.Contacts;
 using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.ContactServices.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 namespace CRM.Service.Repository.ContactServices
 {
     public class ContactTypeCrudService : BaseExtendedCrudService<ContactType, ContactTypeSummary, ContactTypeExtended, Guid>,
         IContactTypeCrudService
     {
-        public ContactTypeCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public ContactTypeCrudService(CrmDatabaseContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

@@ -1,18 +1,19 @@
-﻿using System;
-using System.Linq;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Persons;
 using CRM.Models.Rest.Person;
 using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.PersonServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace CRM.Service.Repository.PersonServices
 {
     public class PersonExtendedCrudService : BaseExtendedCrudService<Person, PersonSummary, PersonExtended, Guid>,
         IPersonCrudService
     {
-        public PersonExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public PersonExtendedCrudService(CrmDatabaseContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

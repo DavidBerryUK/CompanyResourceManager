@@ -6,11 +6,11 @@ import ContactGroupRepositoryFactory            from '@/repositories/factory/Con
 import ContactGroupSummaryModel                 from '@/repositories/models/contactGroup/ContactGroupSummaryModel';
 import ContactLineComponent                     from '../contactLine/ContactLineComponent';
 import ContactTypeRepositoryFactory             from '@/repositories/factory/ContactTypeRepositoryFactory';
+import ContactTypeSummaryModel                  from '@/repositories/models/contactType/ContactTypeSummaryModel';
 import ContactValidationRepositoryFactory       from '@/repositories/factory/ContactValidationRepositoryFactory';
 import ContactValidationSummaryModel            from '@/repositories/models/contactValidation/ContactValidationSummaryModel';
 import ContractListener                         from '@/repositories/contracts/ContractListener';
 import GenericCollectionModel                   from '@/repositories/models/shared/collections/GenericCollectionModel';
-import ListItemModel                            from '@/repositories/models/ListItem/ListItemModel';
 import Vue                                      from 'vue';
 
 @Component({
@@ -23,7 +23,7 @@ export default class ContactGroupComponent extends Vue implements IRouteBeforeNa
   @Prop() public contactGroupId!: string;
 
   public contactGroup: ContactGroupSummaryModel = new ContactGroupSummaryModel();
-  public contactTypes: Array<ListItemModel> = new Array<ListItemModel>();
+  public contactTypes: Array<ContactTypeSummaryModel> = new Array<ContactTypeSummaryModel>();
   public contactValidations: Array<ContactValidationSummaryModel> = new Array<ContactValidationSummaryModel>();
 
   private isLoading: boolean = true;
@@ -70,8 +70,8 @@ export default class ContactGroupComponent extends Vue implements IRouteBeforeNa
       .contractListener(listener);
 
       // get a list of contact types
-    contactTypeRepository.getActiveList()
-      .onSuccess((contactTypeCollection: GenericCollectionModel<ListItemModel>) => {
+    contactTypeRepository.getAllAsSummary()
+      .onSuccess((contactTypeCollection: GenericCollectionModel<ContactTypeSummaryModel>) => {
         this.contactTypes = contactTypeCollection.items;
       })
       .contractListener(listener);

@@ -1,17 +1,18 @@
-﻿using System;
-using System.Linq;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Skills;
 using CRM.Models.Rest.Skill;
 using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.SkillServices.Interfaces;
+using System;
+using System.Linq;
 
 namespace CRM.Service.Repository.SkillServices
 {
     public class SkillExtendedCrudService : BaseExtendedCrudService<Skill, SkillSummary, SkillExtended, Guid>,
         ISkillCrudService
     {
-        public SkillExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public SkillExtendedCrudService(CrmDatabaseContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

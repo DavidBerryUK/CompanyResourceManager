@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using AutoMapper;
 using CRM.Api.StartupServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,10 +26,13 @@ namespace CRM.Api
                 throw new ArgumentNullException(nameof(services));
             }
 
+            //services.AddAutoMapper(Assembly.GetExecutingAssembly().GetType());
+            services.AddAutoMapper(typeof(Startup));
+            services.RegisterSwagger();
             services.RegisterInjection();
             services.RegisterDatabase();
             services.RegisterMvc();
-            services.RegisterSwagger();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,10 +48,10 @@ namespace CRM.Api
                 throw new ArgumentNullException(nameof(env));
             }
 
-            app.RegisterAutoMapper();
+            app.RegisterSwagger();
             app.RegisterDevelopmentMode(env);
             app.RegisterStrictTransportSecurity(env);
-            app.RegisterSwagger();
+            
             app.RegisterHttpRedirection(env);
             app.RegisterMvc();
         }

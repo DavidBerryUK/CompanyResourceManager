@@ -6,11 +6,13 @@ namespace CRM.Models.Bootstraps
 {
     public class AutoMapperBootstrap
     {
-        public void ConfigureAutoMapperTransformations(IMapperConfigurationExpression cfg)
+        public void ConfigureAutoMapperTransformations(Profile profile)
         {
             var mappers =
-                new ClassListFactory().CreateListOfClassesWithInterface<IAutoMapperConfig>(GetType().Assembly);
-            mappers.ForEach(o => o.Map(cfg));
+                new ClassListFactory()
+                    .CreateListOfClassesWithInterface<IAutoMapperConfig>(GetType().Assembly);
+
+            mappers.ForEach(o => o.Map(profile));
         }
     }
 }

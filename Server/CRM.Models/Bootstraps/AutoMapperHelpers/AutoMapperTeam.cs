@@ -10,22 +10,22 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal class AutoMapperTeam : IAutoMapperConfig
     {
-        public void Map(IMapperConfigurationExpression cfg)
+        public void Map(Profile profile)
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<Team, TeamSummary>();
-            cfg.CreateMap<Team, TeamExtended>();
+            profile.CreateMap<Team, TeamSummary>();
+            profile.CreateMap<Team, TeamExtended>();
 
             // Map to List Item
             //
-            cfg.CreateMap<Team, ListItem>()
+            profile.CreateMap<Team, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.TeamId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
 
             // Map rest objects back to database entity objects
             //
-            cfg.CreateMap<TeamExtended, Team>();
+            profile.CreateMap<TeamExtended, Team>();
         }
     }
 }

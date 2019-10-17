@@ -15,6 +15,7 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
     {
         public static async Task<BaseItemResponse<TRestModel>> GetAsync(
             CrmDatabaseContext dbContext,
+            IMapper mapper,
             TPrimaryKey id,
             Func<IQueryable<TEntity>, IQueryable<TEntity>> queryInclude,
             Func<IQueryable<TEntity>, TPrimaryKey, IQueryable<TEntity>> queryEqualsPrimaryKey)
@@ -31,7 +32,7 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
                 response.ErrorMessage = $"{typeof(TEntity).Name} {id} not found";
             }
 
-            response.Entity = Mapper.Map<TRestModel>(data);
+            response.Entity = mapper.Map<TRestModel>(data);
 
             return response;
         }

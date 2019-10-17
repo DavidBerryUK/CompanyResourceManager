@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.BaseServices.LowLevel
 {
@@ -14,12 +14,13 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
     {
         public static async Task<BaseItemResponse<TRestModel>> CreateAsync(
             CrmDatabaseContext dbContext,
+            IMapper mapper,
             TRestModel model,
             TPrimaryKey primaryKey,
             Func<IQueryable<TEntity>, IQueryable<TEntity>> queryInclude,
             Func<IQueryable<TEntity>, TPrimaryKey, IQueryable<TEntity>> queryEqualsPrimaryKey)
         {
-            var entity = Mapper.Map<TEntity>(model);
+            var entity = mapper.Map<TEntity>(model);
             entity.PrimaryKey = primaryKey;
 
             if (entity is IDatabaseEntitySupportsActiveProperty)
@@ -32,6 +33,7 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
 
             var response = await ReadItem<TEntity, TRestModel, TPrimaryKey>
                 .GetAsync(dbContext,
+                    mapper,
                     entity.PrimaryKey,
                     queryInclude,
                     queryEqualsPrimaryKey);

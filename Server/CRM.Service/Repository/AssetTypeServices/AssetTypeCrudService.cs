@@ -1,4 +1,5 @@
-﻿using CRM.Database.Context;
+﻿using AutoMapper;
+using CRM.Database.Context;
 using CRM.Models.Database.Assets;
 using CRM.Models.Rest.AssetType;
 using CRM.Service.Repository.AssetTypeServices.Interfaces;
@@ -11,7 +12,7 @@ namespace CRM.Service.Repository.AssetTypeServices
     public class AssetTypeExtendedCrudService :
         BaseExtendedCrudService<AssetType, AssetTypeSummary, AssetTypeExtended, Guid>, IAssetTypeCrudService
     {
-        public AssetTypeExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public AssetTypeExtendedCrudService(CrmDatabaseContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

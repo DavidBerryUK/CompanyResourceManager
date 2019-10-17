@@ -17,6 +17,8 @@ using CRM.Service.Repository.TeamServices;
 using CRM.Service.Repository.TeamServices.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Reflection;
+using AutoMapper;
 
 namespace CRM.Api.StartupServices
 {
@@ -28,6 +30,8 @@ namespace CRM.Api.StartupServices
             {
                 throw new ArgumentNullException(nameof(services));
             }
+
+       
 
             //  Person
             services.AddTransient<IPersonSimpleQueryService, PersonSimpleQueryService>();
@@ -50,7 +54,7 @@ namespace CRM.Api.StartupServices
 
             //  Assets Types
             services.AddTransient<IAssetCrudService, AssetExtendedCrudService>();
-
+            
             // Assets
             services.AddTransient<IAssetCrudService, AssetExtendedCrudService>();
             services.AddTransient<IAssetTypeCrudService, AssetTypeExtendedCrudService>();

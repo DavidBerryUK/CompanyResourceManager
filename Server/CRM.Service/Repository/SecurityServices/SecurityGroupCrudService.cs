@@ -1,10 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Security;
 using CRM.Models.Rest.Security;
 using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.SecurityServices.Interfaces;
+using System;
+using System.Linq;
 
 namespace CRM.Service.Repository.SecurityServices
 {
@@ -12,7 +13,9 @@ namespace CRM.Service.Repository.SecurityServices
         BaseExtendedCrudService<SecurityGroup, SecurityGroupSummary, SecurityGroupExtended, Guid>,
         ISecurityGroupCrudService
     {
-        public SecurityGroupExtendedCrudService(CrmDatabaseContext dbContext) : base(dbContext)
+        public SecurityGroupExtendedCrudService(
+            CrmDatabaseContext dbContext, 
+            IMapper mapper) : base(dbContext,mapper)
         {
         }
 

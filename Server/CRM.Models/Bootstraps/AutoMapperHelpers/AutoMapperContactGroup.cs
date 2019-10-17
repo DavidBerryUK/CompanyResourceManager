@@ -10,11 +10,11 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal class AutoMapperContactGroup : IAutoMapperConfig
     {
-        public void Map(IMapperConfigurationExpression cfg)
+        public void Map(Profile profile)
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<ContactGroup, ContactGroupSummary>()
+            profile.CreateMap<ContactGroup, ContactGroupSummary>()
                 .ForMember(
                     dest => dest.Contacts,
                     map => map.MapFrom(

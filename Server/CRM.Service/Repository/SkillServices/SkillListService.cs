@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Database.Skills;
 using CRM.Models.Rest.BaseResponse;
@@ -7,13 +6,21 @@ using CRM.Models.Rest.Lists;
 using CRM.Service.Repository.BaseServices;
 using CRM.Service.Repository.BaseServices.DirectSql;
 using CRM.Service.Repository.SkillServices.Interfaces;
+using System;
+using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.SkillServices
 {
     public class SkillListService : BaseListService<Skill, PersonSkill, Guid>, ISkillListService
     {
-        public SkillListService(IDirectSqlServices<Guid> directSqlServices, CrmDatabaseContext dbContext) : base(
-            dbContext, directSqlServices)
+        public SkillListService(
+            IDirectSqlServices<Guid> directSqlServices, 
+            IMapper mapper,
+            CrmDatabaseContext dbContext) :
+            base(
+                dbContext, 
+                mapper,
+                directSqlServices)
         {
         }
 

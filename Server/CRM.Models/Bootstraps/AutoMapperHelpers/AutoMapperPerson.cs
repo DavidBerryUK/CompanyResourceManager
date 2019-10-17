@@ -10,25 +10,25 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal class AutoMapperPerson : IAutoMapperConfig
     {
-        public void Map(IMapperConfigurationExpression cfg)
+        public void Map(Profile profile)
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<Person, PersonSummary>()
+            profile.CreateMap<Person, PersonSummary>()
                 .ForMember(dest => dest.JobRoleName, opt => opt.MapFrom(source => source.NavJobRole.Name));
 
-            cfg.CreateMap<Person, PersonExtended>()
+            profile.CreateMap<Person, PersonExtended>()
                 .ForMember(dest => dest.JobRoleName, opt => opt.MapFrom(source => source.NavJobRole.Name));
 
             // Map to List Item
             //
-            cfg.CreateMap<Person, ListItem>()
+            profile.CreateMap<Person, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.PersonId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => $"{source.Forename} {source.Surname}"));
 
             // Map rest objects back to database entity objects
             //
-            cfg.CreateMap<PersonExtended, Person>();
+            profile.CreateMap<PersonExtended, Person>();
         }
     }
 }

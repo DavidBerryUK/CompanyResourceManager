@@ -22,14 +22,17 @@ namespace CRM.Service.Repository.BaseServices
     {
         private readonly CrmDatabaseContext _crmDatabaseContext;
         private readonly IDirectSqlServices<TPrimaryKey> _directSqlServices;
+        private readonly IMapper _mapper;
 
         public BaseListService(
             CrmDatabaseContext crmDatabaseContext,
-            IDirectSqlServices<TPrimaryKey> directSqlServices
-        )
+            IMapper mapper,
+            IDirectSqlServices<TPrimaryKey> directSqlServices)
         {
             _directSqlServices = directSqlServices
                                  ?? throw new ArgumentNullException(nameof(directSqlServices));
+            _mapper = mapper
+                      ?? throw new ArgumentNullException(nameof(mapper));
 
             _crmDatabaseContext = crmDatabaseContext
                                   ?? throw new ArgumentNullException(nameof(crmDatabaseContext));
@@ -43,7 +46,7 @@ namespace CRM.Service.Repository.BaseServices
 
             var response = new BaseCollectionResponse<ListItem>
             {
-                Items = Mapper.Map<List<ListItem>>(data)
+                Items = _mapper.Map<List<ListItem>>(data)
             };
 
             return response;

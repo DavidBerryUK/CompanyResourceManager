@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
+using Microsoft.OpenApi.Models;
 
 namespace CRM.Api.StartupServices
 {
@@ -17,7 +18,7 @@ namespace CRM.Api.StartupServices
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info {Title = "Company Resource Manager API", Version = "v1"});
+                c.SwaggerDoc("v1",  new OpenApiInfo { Title = "Company Resource Manager API", Version = "v1" });
             });
         }
 

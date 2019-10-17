@@ -5,7 +5,7 @@
           <v-select
             :items="this.contactTypes"
             label="Contact Type"
-            item-value="id"
+            item-value="contactTypeId"
             item-text="name"
             required
             data-vv-name="Contact Type"
@@ -14,12 +14,12 @@
             v-model="contact.contactTypeId"
           ></v-select>
         </v-flex>
-
+        {{validationObject}}
         <v-flex xs4 pr-4>
           <v-text-field
             label="Value"
             v-model="contact.value"
-            v-validate="'required|min:2|max:200'"
+            v-validate='validationObject'
             data-vv-name="Value"
             required
             :error-messages="errors.collect('Value')"

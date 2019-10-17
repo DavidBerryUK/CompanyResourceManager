@@ -10,12 +10,12 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal class AutoMapperAsset : IAutoMapperConfig
     {
-        public void Map(IMapperConfigurationExpression cfg)
+        public void Map(Profile profile)
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<Asset, AssetSummary>();
-            cfg.CreateMap<Asset, AssetExtended>()
+            profile.CreateMap<Asset, AssetSummary>();
+            profile.CreateMap<Asset, AssetExtended>()
                 .ForMember(dest => dest.AssetId, opt => opt.MapFrom(source => source.AssetId))
                 .ForMember(dest => dest.AssetTypeId, opt => opt.MapFrom(source => source.AssetTypeId))
                 .ForMember(dest => dest.AssetTypeName, opt => opt.MapFrom(source => source.NavAssetType.Name))
@@ -27,13 +27,13 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
 
             // Map to List Item
             //
-            cfg.CreateMap<Asset, ListItem>()
+            profile.CreateMap<Asset, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.AssetTypeId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
 
             // Map rest objects back to database entity objects
             //
-            cfg.CreateMap<AssetExtended, Asset>();
+            profile.CreateMap<AssetExtended, Asset>();
         }
     }
 }

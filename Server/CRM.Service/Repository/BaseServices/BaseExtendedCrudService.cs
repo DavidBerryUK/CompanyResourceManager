@@ -1,4 +1,5 @@
-﻿using CRM.Database.Context;
+﻿using AutoMapper;
+using CRM.Database.Context;
 using CRM.Models.Database.Interfaces;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Enums;
@@ -20,10 +21,17 @@ namespace CRM.Service.Repository.BaseServices
         where TPrimaryKey : new()
     {
         private readonly CrmDatabaseContext _dbContext;
+        private readonly IMapper _mapper;
 
-        protected BaseExtendedCrudService(CrmDatabaseContext dbContext)
+        protected BaseExtendedCrudService(
+            CrmDatabaseContext dbContext,
+            IMapper mapper)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext
+                ?? throw new ArgumentNullException(nameof(dbContext));
+
+            _mapper = mapper
+                ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         /// <summary>
@@ -35,6 +43,7 @@ namespace CRM.Service.Repository.BaseServices
             var data = await ReadCollection<TEntity, TSummary, TPrimaryKey>
                 .GetAsync(
                     _dbContext,
+                    _mapper,
                     QuerySummaryInclude,
                     QueryOrder);
 
@@ -46,6 +55,7 @@ namespace CRM.Service.Repository.BaseServices
             var data = await ReadCollection<TEntity, TExtended, TPrimaryKey>
                 .GetAsync(
                     _dbContext,
+                    _mapper,
                     QueryExtendedInclude,
                     QueryOrder);
 
@@ -57,6 +67,7 @@ namespace CRM.Service.Repository.BaseServices
             var data = await ReadCollection<TEntity, TSummary, TPrimaryKey>
                 .GetAsync(
                     _dbContext,
+                    _mapper,
                     QuerySummaryInclude,
                     QueryOrder,
                     query => QueryFilterIsActiveStatus(query, filter.RecordActiveStatusFilter));
@@ -69,6 +80,7 @@ namespace CRM.Service.Repository.BaseServices
             var data = await ReadCollection<TEntity, TExtended, TPrimaryKey>
                 .GetAsync(
                     _dbContext,
+                    _mapper,
                     QueryExtendedInclude,
                     QueryOrder,
                     query => QueryFilterIsActiveStatus(query, filter.RecordActiveStatusFilter));
@@ -81,6 +93,7 @@ namespace CRM.Service.Repository.BaseServices
             var data = await ReadItem<TEntity, TSummary, TPrimaryKey>
                 .GetAsync(
                     _dbContext,
+                    _mapper,
                     id,
                     QuerySummaryInclude,
                     QueryEqualsPrimaryKey);
@@ -105,6 +118,7 @@ namespace CRM.Service.Repository.BaseServices
             var data = await ReadItem<TEntity, TExtended, TPrimaryKey>
                 .GetAsync(
                     _dbContext,
+                    _mapper,
                     id,
                     QueryExtendedInclude,
                     QueryEqualsPrimaryKey);
@@ -117,6 +131,7 @@ namespace CRM.Service.Repository.BaseServices
             var data = await UpdateStatus<TEntity, TSummary, TPrimaryKey>
                 .UpdateAsync(
                     _dbContext,
+                    _mapper,
                     id,
                     isActive,
                     QuerySummaryInclude,
@@ -132,6 +147,7 @@ namespace CRM.Service.Repository.BaseServices
             var data = await Update<TEntity, TExtended, TPrimaryKey>
                 .UpdateAsync(
                     _dbContext,
+                    _mapper,
                     id,
                     model,
                     QueryExtendedInclude,
@@ -145,6 +161,7 @@ namespace CRM.Service.Repository.BaseServices
             var data = await Update<TEntity, TSummary, TPrimaryKey>
                 .UpdateAsync(
                     _dbContext,
+                    _mapper,
                     id,
                     model,
                     QuerySummaryInclude,
@@ -158,6 +175,7 @@ namespace CRM.Service.Repository.BaseServices
             var data = await Create<TEntity, TExtended, TPrimaryKey>
                 .CreateAsync(
                     _dbContext,
+                    _mapper,
                     model,
                     CreateNewPrimaryKey(),
                     QueryExtendedInclude,

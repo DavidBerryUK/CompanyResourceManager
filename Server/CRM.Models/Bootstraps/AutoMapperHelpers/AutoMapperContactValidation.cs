@@ -10,21 +10,21 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal class AutoMapperContactValidation : IAutoMapperConfig
     {
-        public void Map(IMapperConfigurationExpression cfg)
+        public void Map(Profile profile)
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<ContactValidation, ContactValidationSummary>();
+            profile.CreateMap<ContactValidation, ContactValidationSummary>();
 
             // Map to List Item
             //
-            cfg.CreateMap<ContactValidation, ListItem>()
+            profile.CreateMap<ContactValidation, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.ContactValidationId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
 
             // Map rest objects back to database entity objects
             //
-            cfg.CreateMap<ContactValidationSummary, ContactValidation>();
+            profile.CreateMap<ContactValidationSummary, ContactValidation>();
         }
     }
 }

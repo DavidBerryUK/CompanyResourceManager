@@ -10,22 +10,22 @@ namespace CRM.Models.Bootstraps.AutoMapperHelpers
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal class AutoMapperSkill : IAutoMapperConfig
     {
-        public void Map(IMapperConfigurationExpression cfg)
+        public void Map(Profile profile)
         {
             // Map database to rest objects
             //
-            cfg.CreateMap<Skill, SkillSummary>();
-            cfg.CreateMap<Skill, SkillExtended>();
+            profile.CreateMap<Skill, SkillSummary>();
+            profile.CreateMap<Skill, SkillExtended>();
 
             // Map to List Item
             //
-            cfg.CreateMap<Skill, ListItem>()
+            profile.CreateMap<Skill, ListItem>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(source => source.SkillId))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(source => source.Name));
 
             // Map rest objects back to database entity objects
             //
-            cfg.CreateMap<SkillExtended, Skill>();
+            profile.CreateMap<SkillExtended, Skill>();
         }
     }
 }

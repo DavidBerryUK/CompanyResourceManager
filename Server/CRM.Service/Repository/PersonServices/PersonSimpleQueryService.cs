@@ -1,24 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CRM.Database.Context;
 using CRM.Models.Rest.BaseResponse;
 using CRM.Models.Rest.Person;
 using CRM.Service.Repository.PersonServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Service.Repository.PersonServices
 {
     public class PersonSimpleQueryService : IPersonSimpleQueryService
     {
         private readonly CrmDatabaseContext _crmDatabaseContext;
+        private readonly IMapper _mapper;
 
-        public PersonSimpleQueryService(CrmDatabaseContext crmDatabaseContext)
+        public PersonSimpleQueryService(
+            CrmDatabaseContext crmDatabaseContext, 
+            IMapper mapper)
         {
             _crmDatabaseContext = crmDatabaseContext
                                   ?? throw new ArgumentNullException(nameof(crmDatabaseContext));
+            _mapper = mapper
+                      ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<BaseCollectionResponse<PersonSummary>> GetWithFilterAsync(Guid? jobRoleId = null,
@@ -43,7 +48,7 @@ namespace CRM.Service.Repository.PersonServices
 
             var data = await query.ToListAsync();
 
-            response.Items = Mapper.Map<List<PersonSummary>>(data);
+            response.Items = _mapper.Map<List<PersonSummary>>(data);
 
             return response;
         }

@@ -15,6 +15,7 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
     {
         public static async Task<BaseItemResponse<TRestModel>> UpdateAsync(
             CrmDatabaseContext dbContext,
+            IMapper mapper,
             TPrimaryKey id,
             TRestModel model,
             Func<IQueryable<TEntity>, IQueryable<TEntity>> queryInclude,
@@ -33,12 +34,13 @@ namespace CRM.Service.Repository.BaseServices.LowLevel
                 return response;
             }
 
-            Mapper.Map(model, data);
+            mapper.Map(model, data);
             await dbContext.SaveChangesAsync();
 
             return await ReadItem<TEntity, TRestModel, TPrimaryKey>
                 .GetAsync(
                     dbContext,
+                    mapper,
                     id,
                     queryInclude,
                     queryEqualsPrimaryKey);
